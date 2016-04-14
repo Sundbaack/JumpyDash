@@ -2,13 +2,11 @@ package com.jumpydash.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.jumpydash.World;
+import com.jumpydash.JumpyDash;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 1280;
-		config.height = 720;
-		new LwjglApplication(new World(), config);
+		new LwjglApplication(new JumpyDash(), config);
 	}
 }
