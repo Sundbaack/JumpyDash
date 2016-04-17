@@ -22,11 +22,10 @@ public class Player extends Sprite {
         // Create our fixture and attach it to the body
         fixture = this.body.createFixture(fixtureDef);
 
-        impulse = this.body.getMass() * 10;
+        impulse = this.body.getMass() * 120;
     }
 
-    public void move() {
-        //Not working right now
+    public void jump() {
         getBody().applyLinearImpulse(new Vector2(0, getImpulse()), getBody().getWorldCenter(), true);
     }
 

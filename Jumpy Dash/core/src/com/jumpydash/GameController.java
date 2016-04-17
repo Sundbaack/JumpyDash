@@ -35,7 +35,7 @@ public class GameController extends ApplicationAdapter {
 		camera.setToOrtho(false, 1280, 720);
 
 		gameView = new GameView();
-		world = new World(new Vector2(0, -10), true); //Create a world object with a gravity vector
+		world = new World(new Vector2(0, -30), true); //Create a world object with a gravity vector
 
 		playerBodyDef = new BodyDef();
 		playerBodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -43,20 +43,23 @@ public class GameController extends ApplicationAdapter {
 		playerBody = world.createBody(playerBodyDef);
 
 		player = new Player(playerBody);
-		handleInput();
 	}
 
 	public void handleInput() {
 
 		// Jumping
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-			player.move();
+			player.jump();
 		}
 	}
 
 	@Override
 	public void render () {
-		world.step(1/60f, 6, 2);
+
+		handleInput();
+
+		world.step(1/60f, 6, 3);
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
