@@ -10,7 +10,7 @@ public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new JumpyDash(), config);
+        return new IOSApplication(new GameController(), config);
     }
 
     public static void main(String[] argv) {
