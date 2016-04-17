@@ -5,10 +5,12 @@ import com.uwsoft.editor.renderer.scripts.IScript;
 
 public class Player implements IScript {
 
+    private Entity entity;
+
     // Initialize
     @Override
     public void init(Entity entity) {
-
+        this.entity = entity;
     }
 
     // Updates the actor based on time.

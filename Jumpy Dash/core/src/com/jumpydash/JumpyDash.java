@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.uwsoft.editor.renderer.SceneLoader;
+import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 public class JumpyDash extends ApplicationAdapter {
 
@@ -18,6 +19,11 @@ public class JumpyDash extends ApplicationAdapter {
 		sceneLoader = new SceneLoader();
 		sceneLoader.loadScene("MainScene", viewport);
 
+		/* Apply the player class to the player tile from Overlap2d
+		ItemWrapper root = new ItemWrapper(sceneLoader.getRoot());
+		Player player = new Player();
+		root.getChild("player").addScript(player);
+		*/
 	}
 
 	@Override
