@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.uwsoft.editor.renderer.SceneLoader;
 
-public class World extends ApplicationAdapter {
+public class JumpyDash extends ApplicationAdapter {
 
 	private SceneLoader sceneLoader;
 	private Viewport viewport;
