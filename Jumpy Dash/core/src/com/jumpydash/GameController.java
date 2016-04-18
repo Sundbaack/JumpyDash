@@ -28,12 +28,17 @@ public class GameController extends ApplicationAdapter {
 	private Body platformBody;
 	private Texture platformTile;
 	private Platform platform;
+	private BodyDef coinBodyDef;
+	private Body coinBody;
+	private Texture coinTile;
+	private Coin coin;
 
 	@Override
 	public void create () {
 
 		platformTile = new Texture(Gdx.files.internal("platform.png"));
 		playerTile = new Texture(Gdx.files.internal("player.png"));
+		coinTile = new Texture(Gdx.files.internal("coin.png"));
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
@@ -58,6 +63,15 @@ public class GameController extends ApplicationAdapter {
 		platformBody = world.createBody(platformBodyDef);
 
 		platform = new Platform(platformBody);
+
+		// Coin body
+
+		coinBodyDef = new BodyDef();
+		coinBodyDef.type = BodyDef.BodyType.StaticBody;
+		coinBodyDef.position.set(20,20);
+		coinBody = world.createBody(coinBodyDef);
+
+		coin = new Coin(coinBody, 20);
 	}
 
 	public void handleInput() {
@@ -87,6 +101,7 @@ public class GameController extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(playerTile, player.getPosition().x, player.getPosition().y);
 		batch.draw(platformTile,platform.getPosition().x,platform.getPosition().y);
+		batch.draw(coinTile,coin.getPosition().x,platform.getPosition().y);
 		batch.end();
 
 	}
