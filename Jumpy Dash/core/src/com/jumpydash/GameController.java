@@ -42,7 +42,7 @@ public class GameController extends ApplicationAdapter {
 		gameView = new GameView();
 		world = new World(new Vector2(0, -100f), true); //Create a world object with a gravity vector
 
-
+		// Player body
 
 		playerBodyDef = new BodyDef();
 		playerBodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -51,16 +51,14 @@ public class GameController extends ApplicationAdapter {
 
 		player = new Player(playerBody);
 
+		// Platform body
+
 		platformBodyDef = new BodyDef();
 		platformBodyDef.type = BodyDef.BodyType.StaticBody;
 		platformBodyDef.position.set(200,100);
 		platformBody = world.createBody(platformBodyDef);
 
-
-
 		platform = new Platform(platformBody);
-
-
 
 	}
 
