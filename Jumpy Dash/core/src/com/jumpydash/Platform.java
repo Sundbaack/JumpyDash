@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
  * Created by Surface pro 3 on 2016-04-18.
  */
 
-public class Platform extends Sprite {
+public class Platform  {
 
     private Body body;
     private FixtureDef fixtureDef;
