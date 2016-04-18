@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class GameController extends ApplicationAdapter {
@@ -24,18 +25,24 @@ public class GameController extends ApplicationAdapter {
 	private Body playerBody;
 	private Player player;
 	private Texture playerTile;
+	private BodyDef platformBodyDef;
+	private Body platformBody;
+	private Texture platformTile;
+	private Platform platform;
 
 	@Override
 	public void create () {
 
+		platformTile = new Texture(Gdx.files.internal("platform.png"));
 		playerTile = new Texture(Gdx.files.internal("player.png"));
-
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 
 		gameView = new GameView();
-		world = new World(new Vector2(0, -30), true); //Create a world object with a gravity vector
+		world = new World(new Vector2(0, -100f), true); //Create a world object with a gravity vector
+
+
 
 		playerBodyDef = new BodyDef();
 		playerBodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -43,14 +50,29 @@ public class GameController extends ApplicationAdapter {
 		playerBody = world.createBody(playerBodyDef);
 
 		player = new Player(playerBody);
+
+		platformBodyDef = new BodyDef();
+		platformBodyDef.type = BodyDef.BodyType.StaticBody;
+		platformBodyDef.position.set(200,100);
+		platformBody = world.createBody(platformBodyDef);
+
+
+
+		platform = new Platform(platformBody);
+
+
+
 	}
 
 	public void handleInput() {
-
 		// Jumping
-		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			player.jump();
 		}
+	 /*	if(Gdx.input.isKeyPressed(Input.Keys.D)){
+			player.getBody().applyForce(new Vector2(5,0),new Vector2(player.getPosition()+5,0));
+		}
+		*/
 	}
 
 	@Override
@@ -68,7 +90,9 @@ public class GameController extends ApplicationAdapter {
 
 		batch.begin();
 		batch.draw(playerTile, player.getPosition().x, player.getPosition().y);
+		batch.draw(platformTile,platform.getPosition().x,platform.getPosition().y);
 		batch.end();
+
 	}
 
 	@Override
