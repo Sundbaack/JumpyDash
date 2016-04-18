@@ -75,7 +75,7 @@ public class GameController extends ApplicationAdapter {
 	public void render () {
 
 		handleInput();
-
+		//player.move();
 		world.step(1/60f, 6, 3);
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);

@@ -28,14 +28,8 @@ public class Player {
     public void jump() {
         getBody().applyLinearImpulse(new Vector2(0, getImpulse()), getBody().getWorldCenter(), true);
     }
-    public void move(String direction) {
-        if(direction.equalsIgnoreCase("D")){
-            getBody().applyLinearImpulse(new Vector2(getImpulse(), -80f), getBody().getWorldCenter(), true);
-        }
-        if(direction.equalsIgnoreCase("A")){
-            getBody().applyLinearImpulse(new Vector2(-getImpulse(), -80f), getBody().getWorldCenter(), true);
-        }
-
+    public void move() {
+        getBody().applyLinearImpulse(new Vector2(100f, 0), getBody().getWorldCenter(), true);
     }
 
 
