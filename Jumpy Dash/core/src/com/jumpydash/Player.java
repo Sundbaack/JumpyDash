@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Player extends Sprite {
+public class Player {
 
     private Body body;
     private FixtureDef fixtureDef;
@@ -28,6 +28,16 @@ public class Player extends Sprite {
     public void jump() {
         getBody().applyLinearImpulse(new Vector2(0, getImpulse()), getBody().getWorldCenter(), true);
     }
+    public void move(String direction) {
+        if(direction.equalsIgnoreCase("D")){
+            getBody().applyLinearImpulse(new Vector2(getImpulse(), -80f), getBody().getWorldCenter(), true);
+        }
+        if(direction.equalsIgnoreCase("A")){
+            getBody().applyLinearImpulse(new Vector2(-getImpulse(), -80f), getBody().getWorldCenter(), true);
+        }
+
+    }
+
 
     public float getImpulse() {
         return this.impulse;
