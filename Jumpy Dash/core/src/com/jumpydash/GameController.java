@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class GameController extends ApplicationAdapter {
@@ -59,7 +58,6 @@ public class GameController extends ApplicationAdapter {
 		platformBody = world.createBody(platformBodyDef);
 
 		platform = new Platform(platformBody);
-
 	}
 
 	public void handleInput() {
