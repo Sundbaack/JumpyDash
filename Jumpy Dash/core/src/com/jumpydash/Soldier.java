@@ -16,7 +16,6 @@ public class Soldier extends Enemy{
     }
 
     public void move() {
-        checkCollision();
         if(directionFlag){//checks in what direction the soldier should move
             this.getBody().applyForceToCenter(new Vector2(50f, 0), true);
         }
@@ -25,7 +24,7 @@ public class Soldier extends Enemy{
         }
     }
 
-    public void checkCollision(){
+    public void setCollision(){
         //fix tile check so that "turntile" will make soldier switch direction
         directionFlag = !directionFlag;
     }
