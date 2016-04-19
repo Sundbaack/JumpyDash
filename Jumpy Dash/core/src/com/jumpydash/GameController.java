@@ -60,7 +60,6 @@ public class GameController extends ApplicationAdapter {
 
 		player = new Player(playerBody);
 
-
 		// Platform body for Box2D
 
 		platformBodyDef = new BodyDef();
@@ -79,7 +78,6 @@ public class GameController extends ApplicationAdapter {
 
 		coin = new Coin(coinBody, 20);
 
-
 		//Soldier you know
 		soldierBodyDef = new BodyDef();
 		soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -87,7 +85,6 @@ public class GameController extends ApplicationAdapter {
 		soldierBody = world.createBody(soldierBodyDef);
 
 		soldier = new Soldier(soldierBody);
-		soldier.move();
 
 		world.setContactListener(new ContactListener() {
 			@Override
@@ -139,8 +136,9 @@ public class GameController extends ApplicationAdapter {
 	public void render () {
 
 		handleInput();
-
+		soldier.move();
 		//player.move();
+		
 		// Enable the camera to follow the player
 		if(player.getPosition().x > 500) {
 			camera.translate(new Vector2(2,0));
@@ -154,6 +152,8 @@ public class GameController extends ApplicationAdapter {
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 
+		camera.update();
+
 		batch.begin();
 		// Draw background
 		batch.draw(background,0,0,0,0,10000,720);
@@ -162,7 +162,6 @@ public class GameController extends ApplicationAdapter {
 		batch.draw(playerTile, player.getPosition().x, player.getPosition().y);
 		batch.draw(platformTile,platform.getPosition().x,platform.getPosition().y);
 		batch.draw(coinTile,coin.getPosition().x,platform.getPosition().y);
-		camera.update();
 		batch.end();
 	}
 
