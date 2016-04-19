@@ -26,7 +26,7 @@ public class Player {
         this.impulse = this.body.getMass() * 200;
     }
 
-    public void setJump(){
+    public void setJumpState(){
         jumpFlag = !jumpFlag;
     }
 

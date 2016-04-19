@@ -30,18 +30,18 @@ public class GameController extends ApplicationAdapter {
 	private Body coinBody;
 	private Texture coinTile;
 	private Coin coin;
-	private Texture texture;
-	private int sourceX;
+	private Texture background;
 
 	@Override
 	public void create () {
-		sourceX = 0;
+
 		platformTile = new Texture(Gdx.files.internal("platform.png"));
 		playerTile = new Texture(Gdx.files.internal("player.png"));
 		coinTile = new Texture(Gdx.files.internal("coin.png"));
-		texture = new Texture(Gdx.files.internal("background_1.png"));
-		texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+		background = new Texture(Gdx.files.internal("background_1.png"));
+		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		batch = new SpriteBatch();
+
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 
@@ -85,7 +85,7 @@ public class GameController extends ApplicationAdapter {
 						||
 						(contact.getFixtureA().getBody() == platform.getBody() &&
 								contact.getFixtureB().getBody() == player.getBody())) {
-						player.setJump();
+						player.setJumpState();
 				}
 			}
 
@@ -109,8 +109,8 @@ public class GameController extends ApplicationAdapter {
 	public void handleInput() {
 
 		// Jumping
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !player.getJumpState()) {
-			player.setJump();
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpState()) {
+			player.setJumpState();
 			player.jump();
 		}
 	}
@@ -120,8 +120,8 @@ public class GameController extends ApplicationAdapter {
 
 		handleInput();
 
-
-		player.move();
+		//player.move();
+		// Enable the camera to follow the player
 		if(player.getPosition().x > 500) {
 			camera.translate(new Vector2(2,0));
 		}
@@ -136,9 +136,7 @@ public class GameController extends ApplicationAdapter {
 
 		batch.begin();
 		// Draw background
-		batch.draw(texture,0,0,sourceX,0,10000,720);
-
-
+		batch.draw(background,0,0,0,0,10000,720);
 
 		// Draw objects
 		batch.draw(playerTile, player.getPosition().x, player.getPosition().y);
