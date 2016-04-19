@@ -19,12 +19,14 @@ public class Enemy {
 
         this.body = body;
 
-        // Create a fixture definition to apply our shape to
+        // Create a polygon and apply it to a fixture
+        PolygonShape polygon = new PolygonShape();
+        polygon.setAsBox(16, 16);
         fixtureDef = new FixtureDef();
-        fixtureDef.shape = new PolygonShape();
+        fixtureDef.shape = polygon;
 
-        // Create our fixture and attach it to the body
-        fixture = this.body.createFixture(fixtureDef);
+        // Attach fixture to the body
+        this.body.createFixture(fixtureDef);
     }
 
     public Body getBody() {
