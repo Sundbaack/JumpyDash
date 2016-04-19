@@ -28,6 +28,9 @@ public class GameController extends ApplicationAdapter {
 	private Platform platform;
 	private BodyDef coinBodyDef;
 	private Body coinBody;
+	private BodyDef soldierBodyDef;
+	private Body soldierBody;
+	private Soldier soldier;
 	private Texture coinTile;
 	private Coin coin;
 	private Texture texture;
@@ -76,6 +79,16 @@ public class GameController extends ApplicationAdapter {
 
 		coin = new Coin(coinBody, 20);
 
+
+		//Soldier you know
+		soldierBodyDef = new BodyDef();
+		soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
+		soldierBodyDef.position.set(25,25);
+		soldierBody = world.createBody(soldierBodyDef);
+
+		soldier = new Soldier(soldierBody);
+		soldier.move();
+
 		world.setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
@@ -86,6 +99,13 @@ public class GameController extends ApplicationAdapter {
 						(contact.getFixtureA().getBody() == platform.getBody() &&
 								contact.getFixtureB().getBody() == player.getBody())) {
 						player.setJump();
+				}
+				if ((contact.getFixtureA().getBody() == soldier.getBody() &&
+						contact.getFixtureB().getBody() == enemyTurnTile.getBody())
+						||
+						(contact.getFixtureA().getBody() == enemyTurnTile.getBody() &&
+								contact.getFixtureB().getBody() == soldier.getBody())) {
+					soldier.setCollision();
 				}
 			}
 
