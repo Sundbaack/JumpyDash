@@ -8,6 +8,7 @@ public class Player {
     private Body body;
     private FixtureDef fixtureDef;
     private float impulse;
+    private boolean jumpFlag = false;
 
     public Player(Body body) {
 
@@ -23,6 +24,14 @@ public class Player {
         this.body.createFixture(fixtureDef);
 
         this.impulse = this.body.getMass() * 200;
+    }
+
+    public void setJump(){
+        jumpFlag = !jumpFlag;
+    }
+
+    public boolean getJumpState(){
+        return jumpFlag;
     }
 
     public void jump() {
