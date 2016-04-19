@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
  */
 public class Soldier extends Enemy{
     private float impulse;
+    private boolean directionFlag = true;
 
     public Soldier(Body body) {
         super(body);
@@ -15,8 +16,18 @@ public class Soldier extends Enemy{
     }
 
     public void move() {
-        this.getBody().applyForceToCenter(1.0f, 0.0f, true);
+        checkCollision();
+        if(directionFlag){//checks in what direction the soldier should move
+            this.getBody().applyForceToCenter(new Vector2(50f, 0), true);
+        }
+        else{
+            this.getBody().applyForceToCenter(new Vector2(-50f, 0), true);
+        }
+    }
 
+    public void checkCollision(){
+        //fix tile check so that "turntile" will make soldier switch direction
+        directionFlag = !directionFlag;
     }
 
 }
