@@ -71,7 +71,6 @@ public class GameController extends ApplicationAdapter {
 
 		coin = new Coin(coinBody, 20);
 
-		/* Collision
 		world.setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
@@ -82,7 +81,7 @@ public class GameController extends ApplicationAdapter {
 						(contact.getFixtureA().getBody() == platform.getBody() &&
 								contact.getFixtureB().getBody() == player.getBody())) {
 
-					player.getBody().applyForceToCenter(0, 60, true);
+					//player.jump();
 				}
 			}
 
@@ -101,7 +100,6 @@ public class GameController extends ApplicationAdapter {
 
 			}
 		});
-		*/
 	}
 
 	public void handleInput() {

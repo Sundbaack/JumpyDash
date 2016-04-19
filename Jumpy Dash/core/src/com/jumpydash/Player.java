@@ -14,8 +14,10 @@ public class Player {
         this.body = body;
 
         // Create a fixture definition to apply our shape to
+        PolygonShape polygon = new PolygonShape();
+        polygon.setAsBox(16, 16);
         fixtureDef = new FixtureDef();
-        fixtureDef.shape = new PolygonShape();
+        fixtureDef.shape = polygon;
 
         // Create our fixture and attach it to the body
         this.body.createFixture(fixtureDef);
