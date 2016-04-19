@@ -23,7 +23,7 @@ public class Player {
         // Attach fixture to the body
         this.body.createFixture(fixtureDef);
 
-        this.impulse = this.body.getMass() * 200;
+        this.impulse = this.body.getMass() * 100;
     }
 
     public void setJumpState(){

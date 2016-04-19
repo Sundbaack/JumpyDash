@@ -55,7 +55,7 @@ public class GameController extends ApplicationAdapter {
 
 		playerBodyDef = new BodyDef();
 		playerBodyDef.type = BodyDef.BodyType.DynamicBody;
-		playerBodyDef.position.set(200, 200);
+		playerBodyDef.position.set(200, 400);
 		playerBody = world.createBody(playerBodyDef);
 
 		player = new Player(playerBody);
@@ -78,7 +78,7 @@ public class GameController extends ApplicationAdapter {
 
 		coin = new Coin(coinBody, 20);
 
-		//Soldier you know
+		// Soldier body for Box2D
 		soldierBodyDef = new BodyDef();
 		soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
 		soldierBodyDef.position.set(25,25);
@@ -97,13 +97,13 @@ public class GameController extends ApplicationAdapter {
 								contact.getFixtureB().getBody() == player.getBody())) {
 						player.setJumpState();
 				}
-				if ((contact.getFixtureA().getBody() == soldier.getBody() &&
+				/*if ((contact.getFixtureA().getBody() == soldier.getBody() &&
 						contact.getFixtureB().getBody() == enemyTurnTile.getBody())
 						||
 						(contact.getFixtureA().getBody() == enemyTurnTile.getBody() &&
 								contact.getFixtureB().getBody() == soldier.getBody())) {
 					soldier.setCollision();
-				}
+				}*/
 			}
 
 			@Override
@@ -136,7 +136,8 @@ public class GameController extends ApplicationAdapter {
 	public void render () {
 
 		handleInput();
-		soldier.move();
+
+		//soldier.move();
 		//player.move();
 		
 		// Enable the camera to follow the player
@@ -155,6 +156,7 @@ public class GameController extends ApplicationAdapter {
 		camera.update();
 
 		batch.begin();
+
 		// Draw background
 		batch.draw(background,0,0,0,0,10000,720);
 
@@ -162,12 +164,13 @@ public class GameController extends ApplicationAdapter {
 		batch.draw(playerTile, player.getPosition().x, player.getPosition().y);
 		batch.draw(platformTile,platform.getPosition().x,platform.getPosition().y);
 		batch.draw(coinTile,coin.getPosition().x,platform.getPosition().y);
+
 		batch.end();
 	}
 
 	@Override
 	public void dispose() {
-
+		coinTile.dispose();
 		batch.dispose();
 		playerTile.dispose();
 		platformTile.dispose();
