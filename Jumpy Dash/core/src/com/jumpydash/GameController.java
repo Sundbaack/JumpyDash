@@ -53,6 +53,7 @@ public class GameController extends ApplicationAdapter {
 
 		player = new Player(playerBody);
 
+
 		// Platform body for Box2D
 
 		platformBodyDef = new BodyDef();
@@ -80,6 +81,7 @@ public class GameController extends ApplicationAdapter {
 						||
 						(contact.getFixtureA().getBody() == platform.getBody() &&
 								contact.getFixtureB().getBody() == player.getBody())) {
+
 				}
 			}
 
@@ -112,7 +114,9 @@ public class GameController extends ApplicationAdapter {
 	public void render () {
 
 		handleInput();
-		//player.move();
+		player.move();
+
+		camera.position.set(player.getPosition().x,player.getPosition().y,0);
 
 		world.step(1/60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
