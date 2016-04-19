@@ -115,9 +115,10 @@ public class GameController extends ApplicationAdapter {
 
 		handleInput();
 		player.move();
-
-		camera.position.set(player.getPosition().x,player.getPosition().y,0);
-
+		if(player.getPosition().x > 500) {
+			camera.translate(new Vector2(2,0));
+		}
+		camera.update();
 		world.step(1/60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
