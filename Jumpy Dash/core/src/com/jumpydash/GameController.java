@@ -114,9 +114,8 @@ public class GameController extends ApplicationAdapter {
 	public void render () {
 
 		handleInput();
-		player.move();
 
-		camera.position.set(player.getPosition().x,player.getPosition().y,0);
+		camera.position.set(player.getPosition().x,0,0);
 
 		world.step(1/60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
