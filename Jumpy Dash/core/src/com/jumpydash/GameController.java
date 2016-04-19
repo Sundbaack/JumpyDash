@@ -8,9 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class GameController extends ApplicationAdapter {
 
@@ -46,7 +44,7 @@ public class GameController extends ApplicationAdapter {
 		gameView = new GameView();
 		world = new World(new Vector2(0, -100f), true); //Create a world object with a gravity vector
 
-		// Player body
+		// Player body Box2D
 
 		playerBodyDef = new BodyDef();
 		playerBodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -55,23 +53,55 @@ public class GameController extends ApplicationAdapter {
 
 		player = new Player(playerBody);
 
-		// Platform body
+		// Platform body for Box2D
 
 		platformBodyDef = new BodyDef();
 		platformBodyDef.type = BodyDef.BodyType.StaticBody;
-		platformBodyDef.position.set(200,100);
+		platformBodyDef.position.set(200, 100);
 		platformBody = world.createBody(platformBodyDef);
 
 		platform = new Platform(platformBody);
 
-		// Coin body
+		// Coin body for Box2D
 
 		coinBodyDef = new BodyDef();
 		coinBodyDef.type = BodyDef.BodyType.StaticBody;
-		coinBodyDef.position.set(20,20);
+		coinBodyDef.position.set(20, 20);
 		coinBody = world.createBody(coinBodyDef);
 
 		coin = new Coin(coinBody, 20);
+
+		/* Collision
+		world.setContactListener(new ContactListener() {
+			@Override
+			public void beginContact(Contact contact) {
+				// Check to see if the collision is between the the player and a platform
+				if ((contact.getFixtureA().getBody() == player.getBody() &&
+						contact.getFixtureB().getBody() == platform.getBody())
+						||
+						(contact.getFixtureA().getBody() == platform.getBody() &&
+								contact.getFixtureB().getBody() == player.getBody())) {
+
+					player.getBody().applyForceToCenter(0, 60, true);
+				}
+			}
+
+			@Override
+			public void endContact(Contact contact) {
+
+			}
+
+			@Override
+			public void preSolve(Contact contact, Manifold oldManifold) {
+
+			}
+
+			@Override
+			public void postSolve(Contact contact, ContactImpulse impulse) {
+
+			}
+		});
+		*/
 	}
 
 	public void handleInput() {
@@ -90,7 +120,8 @@ public class GameController extends ApplicationAdapter {
 
 		handleInput();
 		//player.move();
-		world.step(1/60f, 6, 3);
+
+		world.step(1/60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -103,11 +134,12 @@ public class GameController extends ApplicationAdapter {
 		batch.draw(platformTile,platform.getPosition().x,platform.getPosition().y);
 		batch.draw(coinTile,coin.getPosition().x,platform.getPosition().y);
 		batch.end();
-
 	}
 
 	@Override
 	public void dispose() {
-		gameView.dispose();
+		batch.dispose();
+		playerTile.dispose();
+		platformTile.dispose();
 	}
 }
