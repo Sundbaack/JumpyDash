@@ -7,19 +7,16 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 /**
- * Created by alexsundback on 2016-04-18.
+ * Created by alexsundback on 2016-04-19.
  */
-
-public class Coin implements Items {
+public class Ability implements Items {
 
     private Body body;
     private FixtureDef fixtureDef;
     private Fixture fixture;
-    public int valueCoin;
 
-    public Coin(Body body, int valueCoin){
+    public Ability(Body body){
         this.body = body;
-        this.valueCoin = valueCoin;
 
         // Create a fixture definition to apply our shape to
         fixtureDef = new FixtureDef();
@@ -37,7 +34,5 @@ public class Coin implements Items {
     public Vector2 getPosition() {
         return this.body.getPosition();
     }
-
-    public int getValueCoin() { return this.valueCoin; }
 
 }
