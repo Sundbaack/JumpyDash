@@ -80,8 +80,6 @@ public class GameController extends ApplicationAdapter {
 						||
 						(contact.getFixtureA().getBody() == platform.getBody() &&
 								contact.getFixtureB().getBody() == player.getBody())) {
-
-					//player.jump();
 				}
 			}
 
@@ -103,14 +101,11 @@ public class GameController extends ApplicationAdapter {
 	}
 
 	public void handleInput() {
+
 		// Jumping
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			player.jump();
 		}
-	 /*	if(Gdx.input.isKeyPressed(Input.Keys.D)){
-			player.getBody().applyForce(new Vector2(5,0),new Vector2(player.getPosition()+5,0));
-		}
-		*/
 	}
 
 	@Override
@@ -136,6 +131,7 @@ public class GameController extends ApplicationAdapter {
 
 	@Override
 	public void dispose() {
+
 		batch.dispose();
 		playerTile.dispose();
 		platformTile.dispose();

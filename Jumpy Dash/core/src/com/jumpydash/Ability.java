@@ -5,9 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-/**
- * Created by alexsundback on 2016-04-19.
- */
 public class Ability implements Items {
 
     private Body body;

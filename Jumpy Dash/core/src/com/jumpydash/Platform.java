@@ -5,10 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-/**
- * Created by Surface pro 3 on 2016-04-18.
- */
-
 public class Platform  {
 
     private Body body;
@@ -18,13 +14,13 @@ public class Platform  {
 
         this.body = body;
 
-        // Create a fixture definition to apply our shape to
+        // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
         polygon.setAsBox(16, 16);
         fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 
-        // Create our fixture and attach it to the body
+        // Attach fixture to the body
         this.body.createFixture(fixtureDef);
     }
 
