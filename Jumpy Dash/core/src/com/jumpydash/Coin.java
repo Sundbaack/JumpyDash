@@ -14,20 +14,20 @@ public class Coin implements Items {
 
     private Body body;
     private FixtureDef fixtureDef;
-    private Fixture fixture;
+
     public int valueCoin;
 
     public Coin(Body body, int valueCoin){
+
         this.body = body;
         this.valueCoin = valueCoin;
 
         // Create a fixture definition to apply our shape to
         fixtureDef = new FixtureDef();
-
         fixtureDef.shape = new PolygonShape();
 
         // Create our fixture and attach it to the body
-        fixture = this.body.createFixture(fixtureDef);
+        this.body.createFixture(fixtureDef);
     }
 
     public Body getBody() {
@@ -38,6 +38,6 @@ public class Coin implements Items {
         return this.body.getPosition();
     }
 
-    public int getValueCoin() { return this.valueCoin; }
+    public int getValue() { return this.valueCoin; }
 
 }
