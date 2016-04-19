@@ -31,14 +31,16 @@ public class GameController extends ApplicationAdapter {
 	private Texture coinTile;
 	private Coin coin;
 	private Texture texture;
+	private int sourceX;
 
 	@Override
 	public void create () {
-
+		sourceX = 0;
 		platformTile = new Texture(Gdx.files.internal("platform.png"));
 		playerTile = new Texture(Gdx.files.internal("player.png"));
 		coinTile = new Texture(Gdx.files.internal("coin.png"));
 		texture = new Texture(Gdx.files.internal("background_1.png"));
+		texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
@@ -117,6 +119,7 @@ public class GameController extends ApplicationAdapter {
 
 		handleInput();
 
+
 		player.move();
 		if(player.getPosition().x > 500) {
 			camera.translate(new Vector2(2,0));
@@ -132,13 +135,15 @@ public class GameController extends ApplicationAdapter {
 
 		batch.begin();
 		// Draw background
-		batch.draw(texture,0,0);
+		batch.draw(texture,0,0,sourceX,0,10000,720);
+
+
 
 		// Draw objects
 		batch.draw(playerTile, player.getPosition().x, player.getPosition().y);
 		batch.draw(platformTile,platform.getPosition().x,platform.getPosition().y);
 		batch.draw(coinTile,coin.getPosition().x,platform.getPosition().y);
-
+		camera.update();
 		batch.end();
 	}
 
