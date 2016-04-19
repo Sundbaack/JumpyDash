@@ -30,6 +30,7 @@ public class GameController extends ApplicationAdapter {
 	private Body coinBody;
 	private Texture coinTile;
 	private Coin coin;
+	private Texture texture;
 
 	@Override
 	public void create () {
@@ -37,6 +38,7 @@ public class GameController extends ApplicationAdapter {
 		platformTile = new Texture(Gdx.files.internal("platform.png"));
 		playerTile = new Texture(Gdx.files.internal("player.png"));
 		coinTile = new Texture(Gdx.files.internal("coin.png"));
+		texture = new Texture(Gdx.files.internal("background.png"));
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
@@ -120,7 +122,7 @@ public class GameController extends ApplicationAdapter {
 			camera.translate(new Vector2(2,0));
 		}
 
-		world.step(1/60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
+		world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -129,9 +131,14 @@ public class GameController extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
+		// Draw background
+		batch.draw(texture,0,0);
+
+		// Draw objects
 		batch.draw(playerTile, player.getPosition().x, player.getPosition().y);
 		batch.draw(platformTile,platform.getPosition().x,platform.getPosition().y);
 		batch.draw(coinTile,coin.getPosition().x,platform.getPosition().y);
+
 		batch.end();
 	}
 
