@@ -85,7 +85,7 @@ public class GameController extends ApplicationAdapter {
 						||
 						(contact.getFixtureA().getBody() == platform.getBody() &&
 								contact.getFixtureB().getBody() == player.getBody())) {
-
+						player.setJump();
 				}
 			}
 
@@ -109,7 +109,8 @@ public class GameController extends ApplicationAdapter {
 	public void handleInput() {
 
 		// Jumping
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !player.getJumpState()) {
+			player.setJump();
 			player.jump();
 		}
 	}
