@@ -38,7 +38,7 @@ public class GameController extends ApplicationAdapter {
 		platformTile = new Texture(Gdx.files.internal("platform.png"));
 		playerTile = new Texture(Gdx.files.internal("player.png"));
 		coinTile = new Texture(Gdx.files.internal("coin.png"));
-		texture = new Texture(Gdx.files.internal("background.png"));
+		texture = new Texture(Gdx.files.internal("background_1.png"));
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
