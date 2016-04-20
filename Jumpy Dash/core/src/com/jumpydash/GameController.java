@@ -34,6 +34,7 @@ public class GameController extends ApplicationAdapter {
 	private Texture coinTile;
 	private Coin coin;
 	private Texture background;
+	public static final float Pixels_To_Meters = 100f;
 
 	@Override
 	public void create () {
@@ -47,15 +48,16 @@ public class GameController extends ApplicationAdapter {
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
+		//camera.zoom = 3f;
 
 		gameView = new GameView();
-		world = new World(new Vector2(0, -100f), true); //Create a world object with a gravity vector
+		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
 		// Player body Box2D
 
 		playerBodyDef = new BodyDef();
 		playerBodyDef.type = BodyDef.BodyType.DynamicBody;
-		playerBodyDef.position.set(200, 400);
+		playerBodyDef.position.set(200/GameController.Pixels_To_Meters, 400/GameController.Pixels_To_Meters);
 		playerBody = world.createBody(playerBodyDef);
 
 		player = new Player(playerBody);
@@ -64,7 +66,7 @@ public class GameController extends ApplicationAdapter {
 
 		platformBodyDef = new BodyDef();
 		platformBodyDef.type = BodyDef.BodyType.StaticBody;
-		platformBodyDef.position.set(200, 100);
+		platformBodyDef.position.set(200/GameController.Pixels_To_Meters, 100/GameController.Pixels_To_Meters);
 		platformBody = world.createBody(platformBodyDef);
 
 		platform = new Platform(platformBody);
@@ -73,7 +75,7 @@ public class GameController extends ApplicationAdapter {
 
 		coinBodyDef = new BodyDef();
 		coinBodyDef.type = BodyDef.BodyType.StaticBody;
-		coinBodyDef.position.set(20, 20);
+		coinBodyDef.position.set(20/GameController.Pixels_To_Meters, 20/GameController.Pixels_To_Meters);
 		coinBody = world.createBody(coinBodyDef);
 
 		coin = new Coin(coinBody, 20);
@@ -81,10 +83,11 @@ public class GameController extends ApplicationAdapter {
 		// Soldier body for Box2D
 		soldierBodyDef = new BodyDef();
 		soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
-		soldierBodyDef.position.set(25,25);
+		soldierBodyDef.position.set(25/GameController.Pixels_To_Meters,25/GameController.Pixels_To_Meters);
 		soldierBody = world.createBody(soldierBodyDef);
 
 		soldier = new Soldier(soldierBody);
+
 
 		world.setContactListener(new ContactListener() {
 			@Override
@@ -138,15 +141,17 @@ public class GameController extends ApplicationAdapter {
 		handleInput();
 
 		//soldier.move();
-		//player.move();
-		
+
+
 		// Enable the camera to follow the player
-		if(player.getPosition().x > 500) {
-			camera.translate(new Vector2(2,0));
+		/*if(player.getPosition().x > 500/GameController.Pixels_To_Meters) {
+			camera.translate(new Vector2((1f/20)*GameController.Pixels_To_Meters,0));
 		}
+		*/
 
 		world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
+		player.move();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -161,9 +166,9 @@ public class GameController extends ApplicationAdapter {
 		batch.draw(background,0,0,0,0,10000,720);
 
 		// Draw objects
-		batch.draw(playerTile, player.getPosition().x, player.getPosition().y);
-		batch.draw(platformTile,platform.getPosition().x,platform.getPosition().y);
-		batch.draw(coinTile,coin.getPosition().x,platform.getPosition().y);
+		batch.draw(playerTile, player.getPosition().x*GameController.Pixels_To_Meters, player.getPosition().y*GameController.Pixels_To_Meters);
+		batch.draw(platformTile,platform.getPosition().x*GameController.Pixels_To_Meters,platform.getPosition().y*GameController.Pixels_To_Meters);
+		batch.draw(coinTile,coin.getPosition().x*GameController.Pixels_To_Meters,platform.getPosition().y*GameController.Pixels_To_Meters);
 
 		batch.end();
 	}

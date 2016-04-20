@@ -20,7 +20,7 @@ public class Coin implements Items {
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox(16, 16);
+        polygon.setAsBox(16/GameController.Pixels_To_Meters, 16/GameController.Pixels_To_Meters);
         fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 

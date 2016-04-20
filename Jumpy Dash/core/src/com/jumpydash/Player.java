@@ -14,16 +14,17 @@ public class Player {
 
         this.body = body;
 
+
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox(16, 16);
+        polygon.setAsBox(16/GameController.Pixels_To_Meters, 16/GameController.Pixels_To_Meters);
         fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 
         // Attach fixture to the body
         this.body.createFixture(fixtureDef);
 
-        this.impulse = this.body.getMass() * 100;
+        this.impulse = this.body.getMass() * 7f;
     }
 
     public void setJumpState(){
@@ -39,7 +40,7 @@ public class Player {
     }
 
     public void move() {
-        getBody().applyLinearImpulse(new Vector2(100f, 0), getBody().getWorldCenter(), true);
+        getBody().setLinearVelocity(new Vector2(5, 0));
     }
 
 

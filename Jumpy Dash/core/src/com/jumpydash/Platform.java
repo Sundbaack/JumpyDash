@@ -1,5 +1,6 @@
 package com.jumpydash;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -16,7 +17,7 @@ public class Platform  {
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox(16, 16);
+        polygon.setAsBox(1000/GameController.Pixels_To_Meters, 16/ GameController.Pixels_To_Meters);
         fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 
