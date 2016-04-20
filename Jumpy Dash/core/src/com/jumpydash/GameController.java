@@ -148,7 +148,7 @@ public class GameController extends ApplicationAdapter {
 
 			// Needs some more work
 			Vector3 position = camera.position;
-			position.x = camera.position.x + 500 / GameController.Pixels_To_Meters + (player.getPosition().x * GameController.Pixels_To_Meters - camera.position.x) * 0.1f;
+			position.x = camera.position.x + 1280 / GameController.Pixels_To_Meters + (player.getPosition().x * GameController.Pixels_To_Meters - camera.position.x) * 0.1f;
 			camera.position.set(position);
 			camera.update();
 		}
