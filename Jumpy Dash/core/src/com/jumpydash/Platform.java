@@ -17,7 +17,7 @@ public class Platform  {
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox(1000/GameController.Pixels_To_Meters, 16/ GameController.Pixels_To_Meters);
+        polygon.setAsBox(2000/GameController.Pixels_To_Meters, 16/ GameController.Pixels_To_Meters);
         fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 
