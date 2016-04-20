@@ -9,11 +9,12 @@ public class Player {
     private FixtureDef fixtureDef;
     private float impulse;
     private boolean jumpFlag = false;
+    private float maxSpeedX;
 
     public Player(Body body) {
 
         this.body = body;
-
+        maxSpeedX = 5.5f;
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
@@ -24,7 +25,7 @@ public class Player {
         // Attach fixture to the body
         this.body.createFixture(fixtureDef);
 
-        this.impulse = this.body.getMass() * 7f;
+        this.impulse = this.body.getMass() * 6f;
     }
 
     public void setJumpState(){
@@ -40,7 +41,13 @@ public class Player {
     }
 
     public void move() {
-        getBody().setLinearVelocity(new Vector2(5, 0));
+
+        Vector2 speed = this.body.getLinearVelocity();
+        float speedX = speed.x;
+
+        if (speedX < maxSpeedX) {
+            getBody().applyForceToCenter(new Vector2(6, 0), true);
+        }
     }
 
 

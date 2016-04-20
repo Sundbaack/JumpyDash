@@ -1,6 +1,7 @@
 package com.jumpydash;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class GameController extends ApplicationAdapter {
@@ -48,7 +50,6 @@ public class GameController extends ApplicationAdapter {
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
-		//camera.zoom = 3f;
 
 		gameView = new GameView();
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
@@ -142,14 +143,20 @@ public class GameController extends ApplicationAdapter {
 
 		//soldier.move();
 
+		camera.position.set(player.getPosition().x * GameController.Pixels_To_Meters + (1280 / 2), 720 / 2, 0);
 
 		// Enable the camera to follow the player
-		/*if(player.getPosition().x > 500/GameController.Pixels_To_Meters) {
-			camera.translate(new Vector2((1f/20)*GameController.Pixels_To_Meters,0));
-		}
-		*/
+		/*if(player.getPosition().x > 500 / GameController.Pixels_To_Meters) {
+			camera.position.set(player.getPosition().x * GameController.Pixels_To_Meters - 500 / GameController.Pixels_To_Meters, 720 / 2, 0);
 
-		world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
+			/*float lerp = 0.1f;
+			Vector3 position = camera.position;
+			position.x += ((player.getPosition().x * GameController.Pixels_To_Meters) - position.x) * lerp;
+
+		}*/
+
+
+			world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
 		player.move();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
