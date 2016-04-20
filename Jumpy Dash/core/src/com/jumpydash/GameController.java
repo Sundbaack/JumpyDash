@@ -143,29 +143,23 @@ public class GameController extends ApplicationAdapter {
 
 		//soldier.move();
 
-		camera.position.set(player.getPosition().x * GameController.Pixels_To_Meters + (1280 / 2), 720 / 2, 0);
-
 		// Enable the camera to follow the player
-		/*if(player.getPosition().x > 500 / GameController.Pixels_To_Meters) {
-			camera.position.set(player.getPosition().x * GameController.Pixels_To_Meters - 500 / GameController.Pixels_To_Meters, 720 / 2, 0);
+		if(player.getPosition().x > 500 / GameController.Pixels_To_Meters) {
 
-			/*float lerp = 0.1f;
+			// Needs some more work
 			Vector3 position = camera.position;
-			position.x += ((player.getPosition().x * GameController.Pixels_To_Meters) - position.x) * lerp;
+			position.x = camera.position.x + 500 / GameController.Pixels_To_Meters + (player.getPosition().x * GameController.Pixels_To_Meters - camera.position.x) * 0.1f;
+			camera.position.set(position);
+			camera.update();
+		}
 
-		}*/
-
-
-			world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
+		world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
 		player.move();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		camera.update();
 		batch.setProjectionMatrix(camera.combined);
-
-		camera.update();
 
 		batch.begin();
 
