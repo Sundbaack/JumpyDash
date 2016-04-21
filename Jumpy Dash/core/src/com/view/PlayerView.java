@@ -1,6 +1,5 @@
 package com.view;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,20 +8,16 @@ import com.model.Player;
 
 public class PlayerView {
 
-    private SpriteBatch batch;
     private Player player;
     private Texture playerTile;
 
-    public PlayerView(SpriteBatch batch, Player player) {
-        this.batch = batch;
+    public PlayerView(Player player) {
         this.player = player;
         playerTile = new Texture(Gdx.files.internal("player.png"));
     }
 
-    public void render() {
-        batch.begin();
-        batch.draw(playerTile, player.getPosition().x*GameController.PIXELS_TO_METERS, player.getPosition().y* GameController.PIXELS_TO_METERS);
-        batch.end();
+    public void render(SpriteBatch batch) {
+        batch.draw(playerTile, player.getPosition().x * GameController.PIXELS_TO_METERS, player.getPosition().y * GameController.PIXELS_TO_METERS);
     }
 
     public void dispose() {

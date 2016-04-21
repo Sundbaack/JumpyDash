@@ -45,9 +45,7 @@ public class GameController extends ApplicationAdapter {
 	@Override
 	public void create () {
 
-
 		platformTile = new Texture(Gdx.files.internal("platform.png"));
-		//playerTile = new Texture(Gdx.files.internal("player.png"));
 		coinTile = new Texture(Gdx.files.internal("coin.png"));
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -66,7 +64,7 @@ public class GameController extends ApplicationAdapter {
 		playerBody = world.createBody(playerBodyDef);
 
 		player = new Player(playerBody);
-		playerView = new PlayerView(batch, player);
+		playerView = new PlayerView(player);
 
 		// Platform body for Box2D
 
@@ -144,13 +142,11 @@ public class GameController extends ApplicationAdapter {
 	public void render () {
 
 		handleInput();
-		playerView.render();
 		//soldier.move();
 
 		// Enable the camera to follow the player
 		if(player.getPosition().x > 500 / GameController.PIXELS_TO_METERS) {
 
-			// Needs some more work
 			Vector3 position = camera.position;
 			position.x = camera.position.x + 1280 / GameController.PIXELS_TO_METERS + (player.getPosition().x * GameController.PIXELS_TO_METERS - camera.position.x) * 0.1f;
 			camera.position.set(position);
@@ -171,7 +167,7 @@ public class GameController extends ApplicationAdapter {
 		batch.draw(background,0,0,0,0,10000,720);
 
 		// Draw objects
-		//batch.draw(playerTile, player.getPosition().x*GameController.PIXELS_TO_METERS, player.getPosition().y*GameController.PIXELS_TO_METERS);
+		playerView.render(batch);
 		batch.draw(platformTile,platform.getPosition().x*GameController.PIXELS_TO_METERS,platform.getPosition().y*GameController.PIXELS_TO_METERS);
 		batch.draw(coinTile,coin.getPosition().x*GameController.PIXELS_TO_METERS,platform.getPosition().y*GameController.PIXELS_TO_METERS);
 
@@ -182,7 +178,7 @@ public class GameController extends ApplicationAdapter {
 	public void dispose() {
 		coinTile.dispose();
 		batch.dispose();
-		//playerTile.dispose();
+		playerView.dispose();
 		platformTile.dispose();
 	}
 }
