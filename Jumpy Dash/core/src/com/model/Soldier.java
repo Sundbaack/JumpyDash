@@ -25,8 +25,7 @@ public class Soldier extends Enemy {
         }
     }
 
-    public void setCollision(){
-        //fix tile check so that "turntile" will make soldier switch direction
+    public void setDirectionFlag(){
         directionFlag = !directionFlag;
     }
 
