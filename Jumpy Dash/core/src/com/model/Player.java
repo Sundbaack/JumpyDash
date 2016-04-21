@@ -11,6 +11,8 @@ public class Player {
     private float impulse;
     private boolean jumpFlag = false;
     private float maxSpeedX;
+    private int TileWidth = 32;
+    private int TileHeight = 32;
 
     public Player(Body body) {
 
@@ -19,7 +21,7 @@ public class Player {
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox(16/ GameController.PIXELS_TO_METERS, 16/GameController.PIXELS_TO_METERS);
+        polygon.setAsBox((TileWidth / 2) / GameController.PIXELS_TO_METERS, (TileHeight / 2) / GameController.PIXELS_TO_METERS);
         fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 

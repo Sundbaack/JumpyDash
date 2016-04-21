@@ -90,7 +90,6 @@ public class GameController extends ApplicationAdapter {
 
 		soldier = new Soldier(soldierBody);
 
-
 		world.setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
@@ -156,7 +155,7 @@ public class GameController extends ApplicationAdapter {
 
 		world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
-		player.move();
+		//player.move();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
