@@ -1,12 +1,13 @@
-package com.jumpydash;
+package com.model;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.model.Enemy;
 
 /**
  * Created by Johannes on 2016-04-18.
  */
-public class Soldier extends Enemy{
+public class Soldier extends Enemy {
     private float impulse;
     private boolean directionFlag = true;
 

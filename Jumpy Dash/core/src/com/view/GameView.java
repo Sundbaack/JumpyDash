@@ -1,4 +1,4 @@
-package com.jumpydash;
+package com.view;
 
 public class GameView {
 

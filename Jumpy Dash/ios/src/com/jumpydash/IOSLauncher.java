@@ -1,5 +1,6 @@
 package com.jumpydash;
 
+import com.controller.GameController;
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 
