@@ -14,12 +14,10 @@ import com.model.Coin;
 import com.model.Platform;
 import com.model.Player;
 import com.model.Soldier;
-import com.view.GameView;
 
 public class GameController extends ApplicationAdapter {
 
 	private World world;
-	private GameView gameView;
 
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
@@ -40,7 +38,7 @@ public class GameController extends ApplicationAdapter {
 	private Texture coinTile;
 	private Coin coin;
 	private Texture background;
-	public static final float Pixels_To_Meters = 100f;
+	public static final float PIXELS_TO_METERS = 100f;
 
 	@Override
 	public void create () {
@@ -55,14 +53,13 @@ public class GameController extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 
-		gameView = new GameView();
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
 		// Player body Box2D
 
 		playerBodyDef = new BodyDef();
 		playerBodyDef.type = BodyDef.BodyType.DynamicBody;
-		playerBodyDef.position.set(200/GameController.Pixels_To_Meters, 400/GameController.Pixels_To_Meters);
+		playerBodyDef.position.set(200/GameController.PIXELS_TO_METERS, 400/GameController.PIXELS_TO_METERS);
 		playerBody = world.createBody(playerBodyDef);
 
 		player = new Player(playerBody);
@@ -71,7 +68,7 @@ public class GameController extends ApplicationAdapter {
 
 		platformBodyDef = new BodyDef();
 		platformBodyDef.type = BodyDef.BodyType.StaticBody;
-		platformBodyDef.position.set(200/GameController.Pixels_To_Meters, 100/GameController.Pixels_To_Meters);
+		platformBodyDef.position.set(200/GameController.PIXELS_TO_METERS, 100/GameController.PIXELS_TO_METERS);
 		platformBody = world.createBody(platformBodyDef);
 
 		platform = new Platform(platformBody);
@@ -80,7 +77,7 @@ public class GameController extends ApplicationAdapter {
 
 		coinBodyDef = new BodyDef();
 		coinBodyDef.type = BodyDef.BodyType.StaticBody;
-		coinBodyDef.position.set(20/GameController.Pixels_To_Meters, 20/GameController.Pixels_To_Meters);
+		coinBodyDef.position.set(20/GameController.PIXELS_TO_METERS, 20/GameController.PIXELS_TO_METERS);
 		coinBody = world.createBody(coinBodyDef);
 
 		coin = new Coin(coinBody, 20);
@@ -88,7 +85,7 @@ public class GameController extends ApplicationAdapter {
 		// Soldier body for Box2D
 		soldierBodyDef = new BodyDef();
 		soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
-		soldierBodyDef.position.set(25/GameController.Pixels_To_Meters,25/GameController.Pixels_To_Meters);
+		soldierBodyDef.position.set(25/GameController.PIXELS_TO_METERS,25/GameController.PIXELS_TO_METERS);
 		soldierBody = world.createBody(soldierBodyDef);
 
 		soldier = new Soldier(soldierBody);
@@ -148,11 +145,11 @@ public class GameController extends ApplicationAdapter {
 		//soldier.move();
 
 		// Enable the camera to follow the player
-		if(player.getPosition().x > 500 / GameController.Pixels_To_Meters) {
+		if(player.getPosition().x > 500 / GameController.PIXELS_TO_METERS) {
 
 			// Needs some more work
 			Vector3 position = camera.position;
-			position.x = camera.position.x + 1280 / GameController.Pixels_To_Meters + (player.getPosition().x * GameController.Pixels_To_Meters - camera.position.x) * 0.1f;
+			position.x = camera.position.x + 1280 / GameController.PIXELS_TO_METERS + (player.getPosition().x * GameController.PIXELS_TO_METERS - camera.position.x) * 0.1f;
 			camera.position.set(position);
 			camera.update();
 		}
@@ -171,9 +168,9 @@ public class GameController extends ApplicationAdapter {
 		batch.draw(background,0,0,0,0,10000,720);
 
 		// Draw objects
-		batch.draw(playerTile, player.getPosition().x*GameController.Pixels_To_Meters, player.getPosition().y*GameController.Pixels_To_Meters);
-		batch.draw(platformTile,platform.getPosition().x*GameController.Pixels_To_Meters,platform.getPosition().y*GameController.Pixels_To_Meters);
-		batch.draw(coinTile,coin.getPosition().x*GameController.Pixels_To_Meters,platform.getPosition().y*GameController.Pixels_To_Meters);
+		batch.draw(playerTile, player.getPosition().x*GameController.PIXELS_TO_METERS, player.getPosition().y*GameController.PIXELS_TO_METERS);
+		batch.draw(platformTile,platform.getPosition().x*GameController.PIXELS_TO_METERS,platform.getPosition().y*GameController.PIXELS_TO_METERS);
+		batch.draw(coinTile,coin.getPosition().x*GameController.PIXELS_TO_METERS,platform.getPosition().y*GameController.PIXELS_TO_METERS);
 
 		batch.end();
 	}
