@@ -1,19 +1,19 @@
-package com.model;
+package org.chalmers.projectrolf.model;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.controller.GameController;
+import org.chalmers.projectrolf.controller.GameController;
 
-public class Item {
+public class Enemy {
 
     private Body body;
     private FixtureDef fixtureDef;
     private int TileWidth = 32;
     private int TileHeight = 32;
 
-    public Item(Body body) {
+    public Enemy(Body body) {
 
         this.body = body;
 
@@ -34,5 +34,4 @@ public class Item {
     public Vector2 getPosition() {
         return this.body.getPosition();
     }
-
 }

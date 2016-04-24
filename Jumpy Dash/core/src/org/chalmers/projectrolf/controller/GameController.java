@@ -1,4 +1,4 @@
-package com.controller;
+package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -10,11 +10,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import com.model.Coin;
-import com.model.Platform;
-import com.model.Player;
-import com.model.Soldier;
-import com.view.PlayerView;
+import org.chalmers.projectrolf.model.Coin;
+import org.chalmers.projectrolf.model.Platform;
+import org.chalmers.projectrolf.model.Player;
+import org.chalmers.projectrolf.model.Soldier;
+import org.chalmers.projectrolf.view.PlayerView;
 
 public class GameController extends ApplicationAdapter {
 

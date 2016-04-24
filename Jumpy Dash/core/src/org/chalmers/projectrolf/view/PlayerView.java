@@ -1,10 +1,10 @@
-package com.view;
+package org.chalmers.projectrolf.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.controller.GameController;
-import com.model.Player;
+import org.chalmers.projectrolf.controller.GameController;
+import org.chalmers.projectrolf.model.Player;
 
 public class PlayerView {
 
