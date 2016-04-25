@@ -12,10 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 
 import org.chalmers.projectrolf.model.*;
-import org.chalmers.projectrolf.view.ItemView;
-import org.chalmers.projectrolf.view.PlatformView;
-import org.chalmers.projectrolf.view.PlayerView;
-import org.chalmers.projectrolf.view.EnemyView;
+import org.chalmers.projectrolf.view.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,29 +34,9 @@ public class GameController extends ApplicationAdapter {
 	private List<Soldier> soldierList;
 	private List<Ability> abilityList;
 
-	private BodyDef playerBodyDef;
-	private Body playerBody;
 	private Player player;
 
-	private BodyDef platformBodyDef;
-	private Body platformBody;
-	private Platform platform;
-
-	private BodyDef coinBodyDef;
-	private Body coinBody;
-	private Coin coin;
-
-	private BodyDef soldierBodyDef;
-	private Body soldierBody;
-	private Soldier soldier;
-
-	private BodyDef abilityBodyDef;
-	private Body abilityBody;
-	private Ability ability;
-
 	public static final float PIXELS_TO_METERS = 100f;
-	public int mapWidth;
-	public int mapHeight;
 
 	@Override
 	public void create () {
@@ -72,7 +49,6 @@ public class GameController extends ApplicationAdapter {
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
 		char[][] Level1 = {
-				{'#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
@@ -80,11 +56,12 @@ public class GameController extends ApplicationAdapter {
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
-				{'.','.','.','P','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','P','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
-				{'.','.','.','#','#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','C','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','#','#','#','#','#','#','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
@@ -97,68 +74,7 @@ public class GameController extends ApplicationAdapter {
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'}
 		};
 
-		mapHeight = Level1.length;
-		mapWidth = Level1[0].length;
-
-		// Loop from top to bottom, left to right
-		// Create objects, place them in lists and set their positions
-		for (int y = 0; y < mapHeight; y++) {
-
-			for (int x = 0; x < mapWidth; x++) {
-
-				// Player
-				if (Level1[y][x] == 'P') {
-
-					// Player body Box2D
-					playerBodyDef = new BodyDef();
-					playerBodyDef.type = BodyDef.BodyType.DynamicBody;
-					playerBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
-					playerBody = world.createBody(playerBodyDef);
-
-					player = new Player(playerBody);
-				} else if (Level1[y][x] == '#') {
-
-					// Platform body for Box2D
-					platformBodyDef = new BodyDef();
-					platformBodyDef.type = BodyDef.BodyType.StaticBody;
-					platformBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
-					platformBody = world.createBody(platformBodyDef);
-
-					platform = new Platform(platformBody);
-					platformList.add(platform);
-				} else if (Level1[y][x] == 'C') {
-
-					// Coin body for Box2D
-					coinBodyDef = new BodyDef();
-					coinBodyDef.type = BodyDef.BodyType.StaticBody;
-					coinBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
-					coinBody = world.createBody(coinBodyDef);
-
-					coin = new Coin(coinBody, 20);
-					coinList.add(coin);
-				} else if (Level1[y][x] == 'S') {
-
-					// Soldier body Box2D
-					soldierBodyDef = new BodyDef();
-					soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
-					soldierBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
-					soldierBody = world.createBody(soldierBodyDef);
-
-					soldier = new Soldier(soldierBody);
-					soldierList.add(soldier);
-				} else if (Level1[y][x] == 'A') {
-
-					// Ability body Box2D
-					abilityBodyDef = new BodyDef();
-					abilityBodyDef.type = BodyDef.BodyType.DynamicBody;
-					abilityBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
-					abilityBody = world.createBody(abilityBodyDef);
-
-					ability = new Ability(abilityBody);
-					abilityList.add(ability);
-				}
-			}
-		}
+		loadMap(Level1);
 
 		platformView = new PlatformView(platformList);
 		enemyView  = new EnemyView(soldierList);
@@ -176,20 +92,15 @@ public class GameController extends ApplicationAdapter {
 			@Override
 			public void beginContact(Contact contact) {
 				// Check to see if the collision is between the the player and a platform
-				if ((contact.getFixtureA().getBody() == player.getBody() &&
-						contact.getFixtureB().getBody() == platform.getBody())
-						||
-						(contact.getFixtureA().getBody() == platform.getBody() &&
-								contact.getFixtureB().getBody() == player.getBody())) {
+				for (Platform p: platformList) {
+					if ((contact.getFixtureA().getBody() == player.getBody() &&
+							contact.getFixtureB().getBody() == p.getBody())
+							||
+							(contact.getFixtureA().getBody() == p.getBody() &&
+									contact.getFixtureB().getBody() == player.getBody())) {
 						player.setJumpState();
+					}
 				}
-				/*if ((contact.getFixtureA().getBody() == soldier.getBody() &&
-						contact.getFixtureB().getBody() == enemyTurnTile.getBody())
-						||
-						(contact.getFixtureA().getBody() == enemyTurnTile.getBody() &&
-								contact.getFixtureB().getBody() == soldier.getBody())) {
-					soldier.setCollision();
-				}*/
 			}
 
 			@Override
@@ -207,6 +118,72 @@ public class GameController extends ApplicationAdapter {
 
 			}
 		});
+	}
+
+	public void loadMap(char[][] Level) {
+
+		int mapHeight = Level.length;
+		int mapWidth = Level[0].length;
+
+		// Loop from top to bottom, left to right
+		// Create objects, place them in lists and set their positions
+		for (int y = 0; y < mapHeight; y++) {
+
+			for (int x = 0; x < mapWidth; x++) {
+
+				// Player
+				if (Level[y][x] == 'P') {
+
+					// Player body Box2D
+					BodyDef playerBodyDef = new BodyDef();
+					playerBodyDef.type = BodyDef.BodyType.DynamicBody;
+					playerBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					Body playerBody = world.createBody(playerBodyDef);
+
+					player = new Player(playerBody);
+				} else if (Level[y][x] == '#') {
+
+					// Platform body for Box2D
+					BodyDef platformBodyDef = new BodyDef();
+					platformBodyDef.type = BodyDef.BodyType.StaticBody;
+					platformBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					Body platformBody = world.createBody(platformBodyDef);
+
+					Platform platform = new Platform(platformBody);
+					platformList.add(platform);
+				} else if (Level[y][x] == 'C') {
+
+					// Coin body for Box2D
+					BodyDef coinBodyDef = new BodyDef();
+					coinBodyDef.type = BodyDef.BodyType.StaticBody;
+					coinBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					Body coinBody = world.createBody(coinBodyDef);
+
+					Coin coin = new Coin(coinBody, 20);
+					coinList.add(coin);
+				} else if (Level[y][x] == 'S') {
+
+					// Soldier body Box2D
+					BodyDef soldierBodyDef = new BodyDef();
+					soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
+					soldierBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					Body soldierBody = world.createBody(soldierBodyDef);
+
+					Soldier soldier = new Soldier(soldierBody);
+					soldierList.add(soldier);
+				} else if (Level[y][x] == 'A') {
+
+					// Ability body Box2D
+					BodyDef abilityBodyDef = new BodyDef();
+					abilityBodyDef.type = BodyDef.BodyType.DynamicBody;
+					abilityBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					Body abilityBody = world.createBody(abilityBodyDef);
+
+					Ability ability = new Ability(abilityBody);
+					abilityList.add(ability);
+				}
+			}
+		}
 	}
 
 	public void handleInput() {
@@ -243,7 +220,7 @@ public class GameController extends ApplicationAdapter {
 		batch.begin();
 
 		// Draw background
-		batch.draw(background, 0, 0, 0, 0, 10000, 720);
+		batch.draw(background, 0, 0, 0, 0, 10000, 736);
 
 		// Draw objects
 		playerView.render(batch);
