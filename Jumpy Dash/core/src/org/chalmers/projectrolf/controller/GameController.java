@@ -14,6 +14,8 @@ import org.chalmers.projectrolf.model.Coin;
 import org.chalmers.projectrolf.model.Platform;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.model.Soldier;
+import org.chalmers.projectrolf.view.CoinView;
+import org.chalmers.projectrolf.view.PlatformView;
 import org.chalmers.projectrolf.view.PlayerView;
 
 import java.util.ArrayList;
@@ -26,6 +28,9 @@ public class GameController extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private PlayerView playerView;
+	private CoinView coinView;
+	private PlatformView platformView;
+
 
 	private BodyDef playerBodyDef;
 	private Body playerBody;
@@ -35,6 +40,7 @@ public class GameController extends ApplicationAdapter {
 	private Body platformBody;
 	private Texture platformTile;
 	private Platform platform;
+
 	private BodyDef coinBodyDef;
 	private Body coinBody;
 	private BodyDef soldierBodyDef;
@@ -48,6 +54,7 @@ public class GameController extends ApplicationAdapter {
 	@Override
 	public void create () {
 
+<<<<<<< HEAD
 		List<char[]> Levels = new ArrayList<char[]>();
 
 		char[] Level1 =
@@ -78,6 +85,9 @@ public class GameController extends ApplicationAdapter {
 		Levels.add(Level1);
 		
 		platformTile = new Texture(Gdx.files.internal("platform.png"));
+=======
+
+>>>>>>> origin/develop
 		coinTile = new Texture(Gdx.files.internal("coin.png"));
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -106,6 +116,7 @@ public class GameController extends ApplicationAdapter {
 		platformBody = world.createBody(platformBodyDef);
 
 		platform = new Platform(platformBody);
+		platformView = new PlatformView(platform);
 
 		// Coin body for Box2D
 
@@ -196,12 +207,12 @@ public class GameController extends ApplicationAdapter {
 		batch.begin();
 
 		// Draw background
-		batch.draw(background,0,0,0,0,10000,720);
+		batch.draw(background, 0, 0, 0, 0, 10000, 720);
 
 		// Draw objects
 		playerView.render(batch);
-		batch.draw(platformTile,platform.getPosition().x*GameController.PIXELS_TO_METERS,platform.getPosition().y*GameController.PIXELS_TO_METERS);
-		batch.draw(coinTile,coin.getPosition().x*GameController.PIXELS_TO_METERS,platform.getPosition().y*GameController.PIXELS_TO_METERS);
+		coinView.render(batch);
+		platformView.render(batch);
 
 		batch.end();
 	}
@@ -212,5 +223,7 @@ public class GameController extends ApplicationAdapter {
 		batch.dispose();
 		playerView.dispose();
 		platformTile.dispose();
+		coinView.dispose();
+		platformView.dispose();
 	}
 }
