@@ -7,13 +7,12 @@ public class Soldier extends Enemy {
 
     private boolean directionFlag = true;
 
-    public Soldier(Body body) {
-        super(body);
-
+    public Soldier(Body body, int tileWidthHeight) {
+        super(body, tileWidthHeight);
     }
 
     public void move() {
-        //checks in what direction the soldier should move
+        // Checks in what direction the soldier should move
         if(directionFlag){
             this.getBody().applyForceToCenter(new Vector2(50f, 0), true);
         }

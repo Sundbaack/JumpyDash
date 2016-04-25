@@ -6,8 +6,9 @@ public class Coin extends Item {
 
     public int valueCoin;
 
-    public Coin(Body body, int valueCoin){
-        super(body);
+    public Coin(Body body, int valueCoin, int tileWidthHeight){
+
+        super(body, tileWidthHeight);
         this.valueCoin = valueCoin;
     }
 

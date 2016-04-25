@@ -7,22 +7,20 @@ import org.chalmers.projectrolf.controller.GameController;
 public class Player {
 
     private Body body;
-    private FixtureDef fixtureDef;
     private float impulse;
-    private boolean jumpFlag = false;
+    private boolean jumpFlag;
     private float maxSpeedX;
-    private int TileWidth = 32;
-    private int TileHeight = 32;
 
-    public Player(Body body) {
+    public Player(Body body, int tileWidthHeight) {
 
         this.body = body;
         maxSpeedX = 5.5f;
+        jumpFlag = false;
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox((TileWidth / 2) / GameController.PIXELS_TO_METERS, (TileHeight / 2) / GameController.PIXELS_TO_METERS);
-        fixtureDef = new FixtureDef();
+        polygon.setAsBox((tileWidthHeight / 2) / GameController.PIXELS_TO_METERS, (tileWidthHeight / 2) / GameController.PIXELS_TO_METERS);
+        FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 
         // Attach fixture to the body
@@ -52,7 +50,6 @@ public class Player {
             getBody().applyForceToCenter(new Vector2(6, 0), true);
         }
     }
-
 
     public float getImpulse() {
         return this.impulse;

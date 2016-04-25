@@ -9,18 +9,15 @@ import org.chalmers.projectrolf.controller.GameController;
 public class Enemy {
 
     private Body body;
-    private FixtureDef fixtureDef;
-    private int TileWidth = 32;
-    private int TileHeight = 32;
 
-    public Enemy(Body body) {
+    public Enemy(Body body, int tileWidthHeight) {
 
         this.body = body;
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox((TileWidth / 2) / GameController.PIXELS_TO_METERS, (TileHeight / 2) / GameController.PIXELS_TO_METERS);
-        fixtureDef = new FixtureDef();
+        polygon.setAsBox((tileWidthHeight / 2) / GameController.PIXELS_TO_METERS, (tileWidthHeight / 2) / GameController.PIXELS_TO_METERS);
+        FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 
         // Attach fixture to the body

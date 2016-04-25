@@ -124,6 +124,7 @@ public class GameController extends ApplicationAdapter {
 
 		int mapHeight = Level.length;
 		int mapWidth = Level[0].length;
+		int tileWidthHeight = 32;
 
 		// Loop from top to bottom, left to right
 		// Create objects, place them in lists and set their positions
@@ -137,49 +138,49 @@ public class GameController extends ApplicationAdapter {
 					// Player body Box2D
 					BodyDef playerBodyDef = new BodyDef();
 					playerBodyDef.type = BodyDef.BodyType.DynamicBody;
-					playerBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					playerBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body playerBody = world.createBody(playerBodyDef);
 
-					player = new Player(playerBody);
+					player = new Player(playerBody, tileWidthHeight);
 				} else if (Level[y][x] == '#') {
 
 					// Platform body for Box2D
 					BodyDef platformBodyDef = new BodyDef();
 					platformBodyDef.type = BodyDef.BodyType.StaticBody;
-					platformBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					platformBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body platformBody = world.createBody(platformBodyDef);
 
-					Platform platform = new Platform(platformBody);
+					Platform platform = new Platform(platformBody, tileWidthHeight);
 					platformList.add(platform);
 				} else if (Level[y][x] == 'C') {
 
 					// Coin body for Box2D
 					BodyDef coinBodyDef = new BodyDef();
 					coinBodyDef.type = BodyDef.BodyType.StaticBody;
-					coinBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					coinBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body coinBody = world.createBody(coinBodyDef);
 
-					Coin coin = new Coin(coinBody, 20);
+					Coin coin = new Coin(coinBody, 20, tileWidthHeight);
 					coinList.add(coin);
 				} else if (Level[y][x] == 'S') {
 
 					// Soldier body Box2D
 					BodyDef soldierBodyDef = new BodyDef();
 					soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
-					soldierBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					soldierBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body soldierBody = world.createBody(soldierBodyDef);
 
-					Soldier soldier = new Soldier(soldierBody);
+					Soldier soldier = new Soldier(soldierBody, tileWidthHeight);
 					soldierList.add(soldier);
 				} else if (Level[y][x] == 'A') {
 
 					// Ability body Box2D
 					BodyDef abilityBodyDef = new BodyDef();
 					abilityBodyDef.type = BodyDef.BodyType.DynamicBody;
-					abilityBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
+					abilityBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body abilityBody = world.createBody(abilityBodyDef);
 
-					Ability ability = new Ability(abilityBody);
+					Ability ability = new Ability(abilityBody, tileWidthHeight);
 					abilityList.add(ability);
 				}
 			}
