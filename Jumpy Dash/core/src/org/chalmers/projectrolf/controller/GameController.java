@@ -17,6 +17,9 @@ import org.chalmers.projectrolf.model.Soldier;
 import org.chalmers.projectrolf.view.ItemView;
 import org.chalmers.projectrolf.view.PlatformView;
 import org.chalmers.projectrolf.view.PlayerView;
+import org.chalmers.projectrolf.view.EnemyView;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GameController extends ApplicationAdapter {
@@ -28,6 +31,7 @@ public class GameController extends ApplicationAdapter {
 	private PlayerView playerView;
 	private ItemView itemView;
 	private PlatformView platformView;
+	private EnemyView enemyView;
 
 
 	private BodyDef playerBodyDef;
@@ -52,14 +56,44 @@ public class GameController extends ApplicationAdapter {
 	@Override
 	public void create () {
 
+		List<char[]> Levels = new ArrayList<char[]>();
 
-		coinTile = new Texture(Gdx.files.internal("coin.png"));
+		char[] Level1 =
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
+				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',};
+
+		Levels.add(Level1);
+		
+		platformTile = new Texture(Gdx.files.internal("platform.png"));
+
+
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		batch = new SpriteBatch();
 
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 1280, 720);
+		camera.setToOrtho(false, 1280, 736);
 
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
@@ -72,6 +106,16 @@ public class GameController extends ApplicationAdapter {
 
 		player = new Player(playerBody);
 		playerView = new PlayerView(player);
+
+		// Enemy body Box2D
+
+		soldierBodyDef = new BodyDef();
+		soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
+		soldierBodyDef.position.set(500/GameController.PIXELS_TO_METERS,400/GameController.PIXELS_TO_METERS);
+		soldierBody = world.createBody(soldierBodyDef);
+
+		soldier = new Soldier(soldierBody);
+		enemyView  = new EnemyView(soldier);
 
 		// Platform body for Box2D
 
@@ -91,6 +135,7 @@ public class GameController extends ApplicationAdapter {
 		coinBody = world.createBody(coinBodyDef);
 
 		coin = new Coin(coinBody, 20);
+		//itemView = new itemView();
 
 		// Soldier body for Box2D
 		soldierBodyDef = new BodyDef();
@@ -178,6 +223,9 @@ public class GameController extends ApplicationAdapter {
 		playerView.render(batch);
 		itemView.render(batch);
 		platformView.render(batch);
+		enemyView.render(batch);
+		
+
 
 		batch.end();
 	}
@@ -190,5 +238,6 @@ public class GameController extends ApplicationAdapter {
 		platformTile.dispose();
 		itemView.dispose();
 		platformView.dispose();
+		enemyView.dispose();
 	}
 }
