@@ -14,9 +14,10 @@ import org.chalmers.projectrolf.model.Coin;
 import org.chalmers.projectrolf.model.Platform;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.model.Soldier;
-import org.chalmers.projectrolf.view.CoinView;
+import org.chalmers.projectrolf.view.ItemView;
 import org.chalmers.projectrolf.view.PlatformView;
 import org.chalmers.projectrolf.view.PlayerView;
+
 
 public class GameController extends ApplicationAdapter {
 
@@ -25,7 +26,7 @@ public class GameController extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private PlayerView playerView;
-	private CoinView coinView;
+	private ItemView itemView;
 	private PlatformView platformView;
 
 
@@ -175,7 +176,7 @@ public class GameController extends ApplicationAdapter {
 
 		// Draw objects
 		playerView.render(batch);
-		coinView.render(batch);
+		itemView.render(batch);
 		platformView.render(batch);
 
 		batch.end();
@@ -187,7 +188,7 @@ public class GameController extends ApplicationAdapter {
 		batch.dispose();
 		playerView.dispose();
 		platformTile.dispose();
-		coinView.dispose();
+		itemView.dispose();
 		platformView.dispose();
 	}
 }
