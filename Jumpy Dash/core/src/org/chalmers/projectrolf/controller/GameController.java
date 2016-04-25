@@ -14,6 +14,7 @@ import org.chalmers.projectrolf.model.Coin;
 import org.chalmers.projectrolf.model.Platform;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.model.Soldier;
+import org.chalmers.projectrolf.view.PlatformView;
 import org.chalmers.projectrolf.view.PlayerView;
 
 public class GameController extends ApplicationAdapter {
@@ -23,6 +24,7 @@ public class GameController extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private PlayerView playerView;
+	private PlatformView platformView;
 
 	private BodyDef playerBodyDef;
 	private Body playerBody;
@@ -32,6 +34,7 @@ public class GameController extends ApplicationAdapter {
 	private Body platformBody;
 	private Texture platformTile;
 	private Platform platform;
+
 	private BodyDef coinBodyDef;
 	private Body coinBody;
 	private BodyDef soldierBodyDef;
@@ -45,7 +48,7 @@ public class GameController extends ApplicationAdapter {
 	@Override
 	public void create () {
 
-		platformTile = new Texture(Gdx.files.internal("platform.png"));
+
 		coinTile = new Texture(Gdx.files.internal("coin.png"));
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -74,6 +77,7 @@ public class GameController extends ApplicationAdapter {
 		platformBody = world.createBody(platformBodyDef);
 
 		platform = new Platform(platformBody);
+		platformView = new PlatformView(platform);
 
 		// Coin body for Box2D
 
@@ -164,11 +168,11 @@ public class GameController extends ApplicationAdapter {
 		batch.begin();
 
 		// Draw background
-		batch.draw(background,0,0,0,0,10000,720);
+		batch.draw(background, 0, 0, 0, 0, 10000, 720);
 
 		// Draw objects
 		playerView.render(batch);
-		batch.draw(platformTile,platform.getPosition().x*GameController.PIXELS_TO_METERS,platform.getPosition().y*GameController.PIXELS_TO_METERS);
+		platformView.render(batch);
 		batch.draw(coinTile,coin.getPosition().x*GameController.PIXELS_TO_METERS,platform.getPosition().y*GameController.PIXELS_TO_METERS);
 
 		batch.end();
@@ -179,6 +183,6 @@ public class GameController extends ApplicationAdapter {
 		coinTile.dispose();
 		batch.dispose();
 		playerView.dispose();
-		platformTile.dispose();
+		platformView.dispose();
 	}
 }
