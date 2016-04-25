@@ -54,7 +54,6 @@ public class GameController extends ApplicationAdapter {
 	@Override
 	public void create () {
 
-<<<<<<< HEAD
 		List<char[]> Levels = new ArrayList<char[]>();
 
 		char[] Level1 =
@@ -85,9 +84,7 @@ public class GameController extends ApplicationAdapter {
 		Levels.add(Level1);
 		
 		platformTile = new Texture(Gdx.files.internal("platform.png"));
-=======
 
->>>>>>> origin/develop
 		coinTile = new Texture(Gdx.files.internal("coin.png"));
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
