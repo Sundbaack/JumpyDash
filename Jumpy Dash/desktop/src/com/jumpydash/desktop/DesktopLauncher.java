@@ -7,7 +7,7 @@ import org.chalmers.projectrolf.controller.GameController;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.height = 720;
+		config.height = 736;
 		config.width = 1280;
 		new LwjglApplication(new GameController(), config);
 	}
