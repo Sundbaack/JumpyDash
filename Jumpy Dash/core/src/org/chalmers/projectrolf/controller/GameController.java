@@ -14,6 +14,7 @@ import org.chalmers.projectrolf.model.Coin;
 import org.chalmers.projectrolf.model.Platform;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.model.Soldier;
+import org.chalmers.projectrolf.view.EnemyView;
 import org.chalmers.projectrolf.view.PlatformView;
 import org.chalmers.projectrolf.view.PlayerView;
 
@@ -25,6 +26,7 @@ public class GameController extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private PlayerView playerView;
 	private PlatformView platformView;
+	private EnemyView enemyView;
 
 	private BodyDef playerBodyDef;
 	private Body playerBody;
@@ -68,6 +70,16 @@ public class GameController extends ApplicationAdapter {
 
 		player = new Player(playerBody);
 		playerView = new PlayerView(player);
+
+		// Enemy body Box2D
+
+		soldierBodyDef = new BodyDef();
+		soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
+		soldierBodyDef.position.set(500/GameController.PIXELS_TO_METERS,400/GameController.PIXELS_TO_METERS);
+		soldierBody = world.createBody(soldierBodyDef);
+
+		soldier = new Soldier(soldierBody);
+		enemyView  = new EnemyView(soldier);
 
 		// Platform body for Box2D
 
@@ -173,6 +185,7 @@ public class GameController extends ApplicationAdapter {
 		// Draw objects
 		playerView.render(batch);
 		platformView.render(batch);
+		enemyView.render(batch);
 		batch.draw(coinTile,coin.getPosition().x*GameController.PIXELS_TO_METERS,platform.getPosition().y*GameController.PIXELS_TO_METERS);
 
 		batch.end();
@@ -184,5 +197,6 @@ public class GameController extends ApplicationAdapter {
 		batch.dispose();
 		playerView.dispose();
 		platformView.dispose();
+		enemyView.dispose();
 	}
 }
