@@ -8,9 +8,6 @@ import org.chalmers.projectrolf.model.Soldier;
 
 import java.util.List;
 
-/**
- * Created by Marcus on 2016-04-21.
- */
 public class EnemyView {
 
     private Texture soldierTile;

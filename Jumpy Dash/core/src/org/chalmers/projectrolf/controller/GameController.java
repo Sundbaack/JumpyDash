@@ -10,11 +10,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
+
 import org.chalmers.projectrolf.model.*;
-import org.chalmers.projectrolf.view.EnemyView;
-import org.chalmers.projectrolf.view.CoinView;
+import org.chalmers.projectrolf.view.ItemView;
 import org.chalmers.projectrolf.view.PlatformView;
 import org.chalmers.projectrolf.view.PlayerView;
+import org.chalmers.projectrolf.view.EnemyView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +23,19 @@ import java.util.List;
 public class GameController extends ApplicationAdapter {
 
 	private World world;
-
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
+	private Texture background;
+
 	private PlayerView playerView;
-	private CoinView coinView;
+	private ItemView itemView;
 	private PlatformView platformView;
 	private EnemyView enemyView;
 
 	private List<Platform> platformList;
 	private List<Coin> coinList;
 	private List<Soldier> soldierList;
+	private List<Ability> abilityList;
 
 	private BodyDef playerBodyDef;
 	private Body playerBody;
@@ -44,11 +47,15 @@ public class GameController extends ApplicationAdapter {
 
 	private BodyDef coinBodyDef;
 	private Body coinBody;
+	private Coin coin;
+
 	private BodyDef soldierBodyDef;
 	private Body soldierBody;
 	private Soldier soldier;
-	private Coin coin;
-	private Texture background;
+
+	private BodyDef abilityBodyDef;
+	private Body abilityBody;
+	private Ability ability;
 
 	public static final float PIXELS_TO_METERS = 100f;
 	public int mapWidth;
@@ -60,11 +67,12 @@ public class GameController extends ApplicationAdapter {
 		platformList = new ArrayList<Platform>();
 		coinList = new ArrayList<Coin>();
 		soldierList = new ArrayList<Soldier>();
+		abilityList = new ArrayList<Ability>();
 
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
 		char[][] Level1 = {
-				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
@@ -76,7 +84,7 @@ public class GameController extends ApplicationAdapter {
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
-				{'.','.','.','#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','#','#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
@@ -92,11 +100,11 @@ public class GameController extends ApplicationAdapter {
 		mapHeight = Level1.length;
 		mapWidth = Level1[0].length;
 
-		// Loop map from top to bottom, left to right
+		// Loop from top to bottom, left to right
 		// Create objects, place them in lists and set their positions
-		for (int x = 0; x < mapWidth; x++) {
+		for (int y = 0; y < mapHeight; y++) {
 
-			for (int y = 0; y < mapHeight; y++) {
+			for (int x = 0; x < mapWidth; x++) {
 
 				// Player
 				if (Level1[y][x] == 'P') {
@@ -108,13 +116,12 @@ public class GameController extends ApplicationAdapter {
 					playerBody = world.createBody(playerBodyDef);
 
 					player = new Player(playerBody);
-					playerView = new PlayerView(player);
 				} else if (Level1[y][x] == '#') {
 
 					// Platform body for Box2D
 					platformBodyDef = new BodyDef();
 					platformBodyDef.type = BodyDef.BodyType.StaticBody;
-					platformBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, x * 32 / GameController.PIXELS_TO_METERS);
+					platformBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
 					platformBody = world.createBody(platformBodyDef);
 
 					platform = new Platform(platformBody);
@@ -134,18 +141,29 @@ public class GameController extends ApplicationAdapter {
 					// Soldier body Box2D
 					soldierBodyDef = new BodyDef();
 					soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
-					soldierBodyDef.position.set(y * 32 / GameController.PIXELS_TO_METERS, x * 32 / GameController.PIXELS_TO_METERS);
+					soldierBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
 					soldierBody = world.createBody(soldierBodyDef);
 
 					soldier = new Soldier(soldierBody);
 					soldierList.add(soldier);
+				} else if (Level1[y][x] == 'A') {
+
+					// Ability body Box2D
+					abilityBodyDef = new BodyDef();
+					abilityBodyDef.type = BodyDef.BodyType.DynamicBody;
+					abilityBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
+					abilityBody = world.createBody(abilityBodyDef);
+
+					ability = new Ability(abilityBody);
+					abilityList.add(ability);
 				}
 			}
 		}
 
 		platformView = new PlatformView(platformList);
-		//coinView = new CoinView();
 		enemyView  = new EnemyView(soldierList);
+		itemView = new ItemView(abilityList, coinList);
+		playerView = new PlayerView(player);
 
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -205,6 +223,7 @@ public class GameController extends ApplicationAdapter {
 
 		handleInput();
 		//soldier.move();
+		//player.move();
 
 		// Enable the camera to follow the player
 		if(player.getPosition().x > 500 / GameController.PIXELS_TO_METERS) {
@@ -217,10 +236,8 @@ public class GameController extends ApplicationAdapter {
 
 		world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
-		//player.move();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
 		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
@@ -230,9 +247,9 @@ public class GameController extends ApplicationAdapter {
 
 		// Draw objects
 		playerView.render(batch);
-		//coinView.render(batch);
+		itemView.render(batch);
 		platformView.render(batch);
-		//enemyView.render(batch);
+		enemyView.render(batch);
 
 		batch.end();
 	}
@@ -241,8 +258,8 @@ public class GameController extends ApplicationAdapter {
 	public void dispose() {
 		batch.dispose();
 		playerView.dispose();
-		//coinView.dispose();
+		itemView.dispose();
 		platformView.dispose();
-		//enemyView.dispose();
+		enemyView.dispose();
 	}
 }
