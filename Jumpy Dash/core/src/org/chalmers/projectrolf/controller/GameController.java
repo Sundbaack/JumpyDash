@@ -10,10 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import org.chalmers.projectrolf.model.Coin;
-import org.chalmers.projectrolf.model.Platform;
-import org.chalmers.projectrolf.model.Player;
-import org.chalmers.projectrolf.model.Soldier;
+import org.chalmers.projectrolf.model.*;
 import org.chalmers.projectrolf.view.EnemyView;
 import org.chalmers.projectrolf.view.CoinView;
 import org.chalmers.projectrolf.view.PlatformView;
@@ -33,6 +30,9 @@ public class GameController extends ApplicationAdapter {
 	private PlatformView platformView;
 	private EnemyView enemyView;
 
+	private List<Platform> platformList;
+	private List<Coin> coinList;
+	private List<Soldier> soldierList;
 
 	private BodyDef playerBodyDef;
 	private Body playerBody;
@@ -40,7 +40,6 @@ public class GameController extends ApplicationAdapter {
 
 	private BodyDef platformBodyDef;
 	private Body platformBody;
-	private Texture platformTile;
 	private Platform platform;
 
 	private BodyDef coinBodyDef;
@@ -48,45 +47,105 @@ public class GameController extends ApplicationAdapter {
 	private BodyDef soldierBodyDef;
 	private Body soldierBody;
 	private Soldier soldier;
-	private Texture coinTile;
 	private Coin coin;
 	private Texture background;
+
 	public static final float PIXELS_TO_METERS = 100f;
+	public int mapWidth;
+	public int mapHeight;
 
 	@Override
 	public void create () {
 
-		List<char[]> Levels = new ArrayList<char[]>();
+		platformList = new ArrayList<Platform>();
+		coinList = new ArrayList<Coin>();
+		soldierList = new ArrayList<Soldier>();
 
-		char[] Level1 =
-				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',
-				'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',};
+		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
-		Levels.add(Level1);
-		
-		platformTile = new Texture(Gdx.files.internal("platform.png"));
+		char[][] Level1 = {
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','P','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+				{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'}
+		};
 
+		mapHeight = Level1.length;
+		mapWidth = Level1[0].length;
+
+		// Loop map from top to bottom, left to right
+		// Create objects, place them in lists and set their positions
+		for (int x = 0; x < mapWidth; x++) {
+
+			for (int y = 0; y < mapHeight; y++) {
+
+				// Player
+				if (Level1[y][x] == 'P') {
+
+					// Player body Box2D
+					playerBodyDef = new BodyDef();
+					playerBodyDef.type = BodyDef.BodyType.DynamicBody;
+					playerBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
+					playerBody = world.createBody(playerBodyDef);
+
+					player = new Player(playerBody);
+					playerView = new PlayerView(player);
+				} else if (Level1[y][x] == '#') {
+
+					// Platform body for Box2D
+					platformBodyDef = new BodyDef();
+					platformBodyDef.type = BodyDef.BodyType.StaticBody;
+					platformBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, x * 32 / GameController.PIXELS_TO_METERS);
+					platformBody = world.createBody(platformBodyDef);
+
+					platform = new Platform(platformBody);
+					platformList.add(platform);
+				} else if (Level1[y][x] == 'C') {
+
+					// Coin body for Box2D
+					coinBodyDef = new BodyDef();
+					coinBodyDef.type = BodyDef.BodyType.StaticBody;
+					coinBodyDef.position.set(x * 32 / GameController.PIXELS_TO_METERS, y * 32 / GameController.PIXELS_TO_METERS);
+					coinBody = world.createBody(coinBodyDef);
+
+					coin = new Coin(coinBody, 20);
+					coinList.add(coin);
+				} else if (Level1[y][x] == 'S') {
+
+					// Soldier body Box2D
+					soldierBodyDef = new BodyDef();
+					soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
+					soldierBodyDef.position.set(y * 32 / GameController.PIXELS_TO_METERS, x * 32 / GameController.PIXELS_TO_METERS);
+					soldierBody = world.createBody(soldierBodyDef);
+
+					soldier = new Soldier(soldierBody);
+					soldierList.add(soldier);
+				}
+			}
+		}
+
+		platformView = new PlatformView(platformList);
+		//coinView = new CoinView();
+		enemyView  = new EnemyView(soldierList);
 
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -94,56 +153,6 @@ public class GameController extends ApplicationAdapter {
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 736);
-
-		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
-
-		// Player body Box2D
-
-		playerBodyDef = new BodyDef();
-		playerBodyDef.type = BodyDef.BodyType.DynamicBody;
-		playerBodyDef.position.set(200/GameController.PIXELS_TO_METERS, 400/GameController.PIXELS_TO_METERS);
-		playerBody = world.createBody(playerBodyDef);
-
-		player = new Player(playerBody);
-		playerView = new PlayerView(player);
-
-		// Enemy body Box2D
-
-		soldierBodyDef = new BodyDef();
-		soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
-		soldierBodyDef.position.set(500/GameController.PIXELS_TO_METERS,400/GameController.PIXELS_TO_METERS);
-		soldierBody = world.createBody(soldierBodyDef);
-
-		soldier = new Soldier(soldierBody);
-		enemyView  = new EnemyView(soldier);
-
-		// Platform body for Box2D
-
-		platformBodyDef = new BodyDef();
-		platformBodyDef.type = BodyDef.BodyType.StaticBody;
-		platformBodyDef.position.set(200/GameController.PIXELS_TO_METERS, 100/GameController.PIXELS_TO_METERS);
-		platformBody = world.createBody(platformBodyDef);
-
-		platform = new Platform(platformBody);
-		platformView = new PlatformView(platform);
-
-		// Coin body for Box2D
-
-		coinBodyDef = new BodyDef();
-		coinBodyDef.type = BodyDef.BodyType.StaticBody;
-		coinBodyDef.position.set(20/GameController.PIXELS_TO_METERS, 20/GameController.PIXELS_TO_METERS);
-		coinBody = world.createBody(coinBodyDef);
-
-		coin = new Coin(coinBody, 20);
-		//coinView = new CoinView();
-
-		// Soldier body for Box2D
-		soldierBodyDef = new BodyDef();
-		soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
-		soldierBodyDef.position.set(25/GameController.PIXELS_TO_METERS,25/GameController.PIXELS_TO_METERS);
-		soldierBody = world.createBody(soldierBodyDef);
-
-		soldier = new Soldier(soldierBody);
 
 		world.setContactListener(new ContactListener() {
 			@Override
@@ -223,21 +232,17 @@ public class GameController extends ApplicationAdapter {
 		playerView.render(batch);
 		//coinView.render(batch);
 		platformView.render(batch);
-		enemyView.render(batch);
-		
-
+		//enemyView.render(batch);
 
 		batch.end();
 	}
 
 	@Override
 	public void dispose() {
-		coinTile.dispose();
 		batch.dispose();
 		playerView.dispose();
-		platformTile.dispose();
-		coinView.dispose();
+		//coinView.dispose();
 		platformView.dispose();
-		enemyView.dispose();
+		//enemyView.dispose();
 	}
 }

@@ -4,22 +4,27 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.chalmers.projectrolf.controller.GameController;
-import org.chalmers.projectrolf.model.Enemy;
+import org.chalmers.projectrolf.model.Soldier;
+
+import java.util.List;
 
 /**
  * Created by Marcus on 2016-04-21.
  */
 public class EnemyView {
-    private Enemy enemy;
-    private Texture soldierTile;
 
-    public EnemyView(Enemy enemy){
-        this.enemy = enemy;
+    private Texture soldierTile;
+    private List<Soldier> soldierList;
+
+    public EnemyView(List<Soldier> soldierList){
+        this.soldierList = soldierList;
         soldierTile = new Texture(Gdx.files.internal("soldier.png"));
     }
 
-    public void render(SpriteBatch batch){
-        batch.draw(soldierTile,enemy.getPosition().x * GameController.PIXELS_TO_METERS,enemy.getPosition().y * GameController.PIXELS_TO_METERS);
+    public void render(SpriteBatch batch) {
+        for (Soldier s : soldierList) {
+            batch.draw(soldierTile, s.getPosition().x * GameController.PIXELS_TO_METERS, s.getPosition().y * GameController.PIXELS_TO_METERS);
+        }
     }
     public void dispose(){
         soldierTile.dispose();
