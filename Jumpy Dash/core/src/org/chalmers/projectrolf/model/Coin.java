@@ -4,7 +4,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 public class Coin extends Item {
 
-    public int valueCoin;
+    private int valueCoin;
 
     public Coin(Body body, int valueCoin, int tileWidthHeight){
 

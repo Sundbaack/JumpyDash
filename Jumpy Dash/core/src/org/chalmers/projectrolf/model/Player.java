@@ -32,11 +32,11 @@ public class Player {
     }
 
     public void setJumpState(){
-        jumpFlag = !jumpFlag;
+        this.jumpFlag = !jumpFlag;
     }
 
     public boolean getJumpState(){
-        return jumpFlag;
+        return this.jumpFlag;
     }
 
     public void jump() {
@@ -44,9 +44,11 @@ public class Player {
     }
 
     public void move() {
-        body.setSleepingAllowed(false);
-        Vector2 speed = this.body.getLinearVelocity();
+
+        //getBody().setSleepingAllowed(false);
+        Vector2 speed = getBody().getLinearVelocity();
         float speedX = speed.x;
+
         if (speedX < maxSpeedX) {
             getBody().applyForceToCenter(new Vector2(6, 0), true);
         }

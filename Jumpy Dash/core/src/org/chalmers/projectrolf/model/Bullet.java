@@ -6,14 +6,12 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import org.chalmers.projectrolf.controller.GameController;
 
-/**
- * Created by Surface pro 3 on 2016-04-26.
- */
 public class Bullet {
+
     private Body body;
-    private float maxSpeedX;
 
     public Bullet(Body body, int tileWidthHeight) {
+
         this.body = body;
         this.body.setLinearVelocity(10,0);
 

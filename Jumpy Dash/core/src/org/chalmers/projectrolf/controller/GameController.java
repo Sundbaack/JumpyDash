@@ -33,9 +33,11 @@ public class GameController extends ApplicationAdapter {
 	private List<Coin> coinList;
 	private List<Soldier> soldierList;
 	private List<Ability> abilityList;
+	private List<Bullet> bulletList;
 
-    private Bullet bullet;
 	private Player player;
+
+	private long previousFireTime;
 
 	public static final float PIXELS_TO_METERS = 100f;
 
@@ -46,6 +48,7 @@ public class GameController extends ApplicationAdapter {
 		coinList = new ArrayList<Coin>();
 		soldierList = new ArrayList<Soldier>();
 		abilityList = new ArrayList<Ability>();
+		bulletList = new ArrayList<Bullet>();
 
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
@@ -79,10 +82,8 @@ public class GameController extends ApplicationAdapter {
 
 		platformView = new PlatformView(platformList);
 		enemyView  = new EnemyView(soldierList);
-		itemView = new ItemView(abilityList, coinList);
+		itemView = new ItemView(abilityList, coinList, bulletList);
 		playerView = new PlayerView(player);
-
-
 
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -142,7 +143,7 @@ public class GameController extends ApplicationAdapter {
 		});
 	}
 
-	public void loadMap(char[][] Level) {
+	private void loadMap(char[][] Level) {
 
 		int mapHeight = Level.length;
 		int mapWidth = Level[0].length;
@@ -209,16 +210,40 @@ public class GameController extends ApplicationAdapter {
 		}
 	}
 
-	public void handleInput() {
+	private void handleInput() {
 
 		// Jumping
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpState()) {
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && player.getJumpState()) {
 			player.setJumpState();
 			player.jump();
 		}
-        if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
-        
+
+		if (Gdx.input.isKeyPressed(Input.Keys.F)) {
+			fireBullet();
         }
+	}
+
+	private void fireBullet() {
+
+		// Cooldown
+		long fireCooldown = 100;
+
+		// Allow shooting if not on cooldown
+		if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
+
+			// Reset cooldown
+			previousFireTime = System.currentTimeMillis();
+
+			// Bullet body Box2D
+			BodyDef bulletBodyDef = new BodyDef();
+			bulletBodyDef.type = BodyDef.BodyType.KinematicBody;
+			bulletBodyDef.position.set(player.getPosition().x + (32 / GameController.PIXELS_TO_METERS), player.getPosition().y + (8 / GameController.PIXELS_TO_METERS));
+			Body bulletBody = world.createBody(bulletBodyDef);
+			bulletBody.setBullet(true);
+
+			Bullet bullet = new Bullet(bulletBody, 16);
+			bulletList.add(bullet);
+		}
 	}
 
 	@Override
@@ -226,7 +251,7 @@ public class GameController extends ApplicationAdapter {
 
 		handleInput();
 		//soldier.move();
-		player.move();
+		//player.move();
 
 		// Enable the camera to follow the player
 		if(player.getPosition().x > 500 / GameController.PIXELS_TO_METERS) {
