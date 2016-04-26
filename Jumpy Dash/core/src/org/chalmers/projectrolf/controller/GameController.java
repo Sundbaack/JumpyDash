@@ -111,6 +111,15 @@ public class GameController extends ApplicationAdapter {
                         System.out.println("Ajabaja nu dog du");
                     }
 				}
+                for(Coin c: coinList){
+                    if((contact.getFixtureA().getBody() == player.getBody() &&
+                            contact.getFixtureB().getBody() == c.getBody())
+                            ||
+                            (contact.getFixtureA().getBody() == c.getBody() &&
+                                    contact.getFixtureB().getBody() == player.getBody())) {
+                        coinList.remove(coinList.indexOf(c));
+                    }
+                }
 			}
 
 			@Override
