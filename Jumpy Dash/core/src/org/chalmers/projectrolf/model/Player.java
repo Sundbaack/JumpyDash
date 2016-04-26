@@ -10,12 +10,14 @@ public class Player {
     private float impulse;
     private boolean jumpFlag;
     private float maxSpeedX;
+    private int points;
 
     public Player(Body body, int tileWidthHeight) {
 
         this.body = body;
         maxSpeedX = 5.5f;
         jumpFlag = false;
+        this.points=0;
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
@@ -56,6 +58,10 @@ public class Player {
 
     public Body getBody() {
         return this.body;
+    }
+
+    public int getPoints() {
+        return this.points;
     }
 
     public Vector2 getPosition() {
