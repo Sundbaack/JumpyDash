@@ -42,10 +42,9 @@ public class Player {
     }
 
     public void move() {
-
+        body.setSleepingAllowed(false);
         Vector2 speed = this.body.getLinearVelocity();
         float speedX = speed.x;
-
         if (speedX < maxSpeedX) {
             getBody().applyForceToCenter(new Vector2(6, 0), true);
         }
