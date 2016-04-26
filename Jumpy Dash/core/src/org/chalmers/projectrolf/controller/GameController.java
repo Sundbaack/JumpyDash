@@ -1,6 +1,7 @@
 package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 
+import com.badlogic.gdx.utils.TimeUtils;
 import org.chalmers.projectrolf.model.*;
 import org.chalmers.projectrolf.view.*;
 
@@ -37,6 +39,8 @@ public class GameController extends ApplicationAdapter {
 
     private Bullet bullet;
 	private Player player;
+
+	private long previousFireTime;
 
 	public static final float PIXELS_TO_METERS = 100f;
 
@@ -81,7 +85,7 @@ public class GameController extends ApplicationAdapter {
 
 		platformView = new PlatformView(platformList);
 		enemyView  = new EnemyView(soldierList);
-		itemView = new ItemView(abilityList, coinList);
+		itemView = new ItemView(abilityList, coinList, bulletList);
 		playerView = new PlayerView(player);
 
 		background = new Texture(Gdx.files.internal("background_1.png"));
@@ -114,6 +118,15 @@ public class GameController extends ApplicationAdapter {
                         System.out.println("Ajabaja nu dog du");
                     }
 				}
+                for(Coin c: coinList){
+                    if((contact.getFixtureA().getBody() == player.getBody() &&
+                            contact.getFixtureB().getBody() == c.getBody())
+                            ||
+                            (contact.getFixtureA().getBody() == c.getBody() &&
+                                    contact.getFixtureB().getBody() == player.getBody())) {
+                        coinList.remove(coinList.indexOf(c));
+                    }
+                }
 			}
 
 			@Override
@@ -203,27 +216,37 @@ public class GameController extends ApplicationAdapter {
 	public void handleInput() {
 
 		// Jumping
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpState()) {
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && player.getJumpState()) {
 			player.setJumpState();
 			player.jump();
 		}
 
-		if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-			shoot();
+		if (Gdx.input.isKeyPressed(Input.Keys.F)) {
+			fireBullet();
         }
 	}
 
-	public void shoot() {
+	public void fireBullet() {
 
-		// Bullet body Box2D
-		BodyDef bulletBodyDef = new BodyDef();
-		bulletBodyDef.type = BodyDef.BodyType.DynamicBody;
-		bulletBodyDef.position.set(player.getPosition().x + 32 / GameController.PIXELS_TO_METERS, player.getPosition().y + 32 / GameController.PIXELS_TO_METERS);
-		Body bulletBody = world.createBody(bulletBodyDef);
-		bulletBody.setBullet(true);
+		// Cooldown
+		long fireCooldown = 100;
 
-		Bullet bullet = new Bullet(bulletBody, 32);
-		bulletList.add(bullet);
+		// Allow shooting if not on cooldown
+		if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
+
+			// Reset cooldown
+			previousFireTime = System.currentTimeMillis();
+
+			// Bullet body Box2D
+			BodyDef bulletBodyDef = new BodyDef();
+			bulletBodyDef.type = BodyDef.BodyType.KinematicBody;
+			bulletBodyDef.position.set(player.getPosition().x + (32 / GameController.PIXELS_TO_METERS), player.getPosition().y + (8 / GameController.PIXELS_TO_METERS));
+			Body bulletBody = world.createBody(bulletBodyDef);
+			bulletBody.setBullet(true);
+
+			Bullet bullet = new Bullet(bulletBody, 16);
+			bulletList.add(bullet);
+		}
 	}
 
 	@Override
@@ -231,7 +254,7 @@ public class GameController extends ApplicationAdapter {
 
 		handleInput();
 		//soldier.move();
-		player.move();
+		//player.move();
 
 		// Enable the camera to follow the player
 		if(player.getPosition().x > 500 / GameController.PIXELS_TO_METERS) {
