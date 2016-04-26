@@ -105,6 +105,15 @@ public class GameController extends ApplicationAdapter {
 
 					}
 				}
+				for (Soldier s: soldierList){
+					if((contact.getFixtureA().getBody() == player.getBody() &&
+                            contact.getFixtureB().getBody() == s.getBody())
+                            ||
+                            (contact.getFixtureA().getBody() == s.getBody() &&
+                                    contact.getFixtureB().getBody() == player.getBody())) {
+                        System.out.println("Ajabaja nu dog du");
+                    }
+				}
 			}
 
 			@Override
