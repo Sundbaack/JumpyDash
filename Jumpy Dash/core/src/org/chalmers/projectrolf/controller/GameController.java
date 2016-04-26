@@ -34,6 +34,7 @@ public class GameController extends ApplicationAdapter {
 	private List<Soldier> soldierList;
 	private List<Ability> abilityList;
 
+    private Bullet bullet;
 	private Player player;
 
 	public static final float PIXELS_TO_METERS = 100f;
@@ -80,6 +81,8 @@ public class GameController extends ApplicationAdapter {
 		enemyView  = new EnemyView(soldierList);
 		itemView = new ItemView(abilityList, coinList);
 		playerView = new PlayerView(player);
+
+
 
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -213,6 +216,9 @@ public class GameController extends ApplicationAdapter {
 			player.setJumpState();
 			player.jump();
 		}
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
+        
+        }
 	}
 
 	@Override
