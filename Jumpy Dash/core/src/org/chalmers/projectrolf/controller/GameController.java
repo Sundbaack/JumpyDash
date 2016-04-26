@@ -1,7 +1,6 @@
 package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 
-import com.badlogic.gdx.utils.TimeUtils;
 import org.chalmers.projectrolf.model.*;
 import org.chalmers.projectrolf.view.*;
 
@@ -37,7 +35,6 @@ public class GameController extends ApplicationAdapter {
 	private List<Ability> abilityList;
 	private List<Bullet> bulletList;
 
-    private Bullet bullet;
 	private Player player;
 
 	private long previousFireTime;
@@ -146,7 +143,7 @@ public class GameController extends ApplicationAdapter {
 		});
 	}
 
-	public void loadMap(char[][] Level) {
+	private void loadMap(char[][] Level) {
 
 		int mapHeight = Level.length;
 		int mapWidth = Level[0].length;
@@ -213,7 +210,7 @@ public class GameController extends ApplicationAdapter {
 		}
 	}
 
-	public void handleInput() {
+	private void handleInput() {
 
 		// Jumping
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && player.getJumpState()) {
@@ -226,7 +223,7 @@ public class GameController extends ApplicationAdapter {
         }
 	}
 
-	public void fireBullet() {
+	private void fireBullet() {
 
 		// Cooldown
 		long fireCooldown = 100;
