@@ -33,6 +33,7 @@ public class GameController extends ApplicationAdapter {
 	private List<Coin> coinList;
 	private List<Soldier> soldierList;
 	private List<Ability> abilityList;
+    private List<Bullet> bulletList;
 
     private Bullet bullet;
 	private Player player;
@@ -46,6 +47,7 @@ public class GameController extends ApplicationAdapter {
 		coinList = new ArrayList<Coin>();
 		soldierList = new ArrayList<Soldier>();
 		abilityList = new ArrayList<Ability>();
+        bulletList = new ArrayList<Bullet>();
 
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
@@ -79,7 +81,7 @@ public class GameController extends ApplicationAdapter {
 
 		platformView = new PlatformView(platformList);
 		enemyView  = new EnemyView(soldierList);
-		itemView = new ItemView(abilityList, coinList);
+		itemView = new ItemView(abilityList, coinList, bulletList);
 		playerView = new PlayerView(player);
 
 
