@@ -33,6 +33,7 @@ public class GameController extends ApplicationAdapter {
 	private List<Coin> coinList;
 	private List<Soldier> soldierList;
 	private List<Ability> abilityList;
+	private List<Bullet> bulletList;
 
     private Bullet bullet;
 	private Player player;
@@ -46,6 +47,7 @@ public class GameController extends ApplicationAdapter {
 		coinList = new ArrayList<Coin>();
 		soldierList = new ArrayList<Soldier>();
 		abilityList = new ArrayList<Ability>();
+		bulletList = new ArrayList<Bullet>();
 
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
@@ -81,8 +83,6 @@ public class GameController extends ApplicationAdapter {
 		enemyView  = new EnemyView(soldierList);
 		itemView = new ItemView(abilityList, coinList);
 		playerView = new PlayerView(player);
-
-
 
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -207,9 +207,23 @@ public class GameController extends ApplicationAdapter {
 			player.setJumpState();
 			player.jump();
 		}
-        if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
-        
+
+		if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+			shoot();
         }
+	}
+
+	public void shoot() {
+
+		// Bullet body Box2D
+		BodyDef bulletBodyDef = new BodyDef();
+		bulletBodyDef.type = BodyDef.BodyType.DynamicBody;
+		bulletBodyDef.position.set(player.getPosition().x + 32 / GameController.PIXELS_TO_METERS, player.getPosition().y + 32 / GameController.PIXELS_TO_METERS);
+		Body bulletBody = world.createBody(bulletBodyDef);
+		bulletBody.setBullet(true);
+
+		Bullet bullet = new Bullet(bulletBody, 32);
+		bulletList.add(bullet);
 	}
 
 	@Override
