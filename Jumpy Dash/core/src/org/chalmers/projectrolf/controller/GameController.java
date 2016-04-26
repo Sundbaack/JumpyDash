@@ -121,7 +121,9 @@ public class GameController extends ApplicationAdapter {
                             ||
                             (contact.getFixtureA().getBody() == c.getBody() &&
                                     contact.getFixtureB().getBody() == player.getBody())) {
-                        coinList.remove(coinList.indexOf(c));
+                        player.setPoints(c.getValue());
+						coinList.remove(coinList.indexOf(c));
+
                     }
                 }
 			}

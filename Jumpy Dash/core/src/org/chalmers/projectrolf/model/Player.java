@@ -66,6 +66,10 @@ public class Player {
         return this.points;
     }
 
+    public void setPoints(int a) {
+        this.points=this.getPoints()+a;
+    }
+
     public Vector2 getPosition() {
         return this.body.getPosition();
     }
