@@ -13,7 +13,7 @@ public class Bullet {
     public Bullet(Body body, int tileWidthHeight) {
 
         this.body = body;
-        this.body.setLinearVelocity(10,0);
+        this.body.setLinearVelocity(15,0);
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
