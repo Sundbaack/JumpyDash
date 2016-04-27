@@ -4,7 +4,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 public class Ability extends Item {
 
-    public Ability(Body body, int tileWidthHeight) {
+    public Ability(Body body, float tileWidthHeight) {
         super(body, tileWidthHeight);
     }
 }

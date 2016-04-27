@@ -1,7 +1,6 @@
 package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
 
 import org.chalmers.projectrolf.model.*;
@@ -38,11 +38,13 @@ public class GameController extends ApplicationAdapter {
 
 	private Player player;
     private Levels levels;
-    private int fire = 0;
+	private float tileWidthHeight;
 
 	private long previousFireTime;
 
 	public static final float PIXELS_TO_METERS = 100f;
+	private Box2DDebugRenderer debugRenderer;
+	private Matrix4 debugMatrix;
 
 	@Override
 	public void create () {
@@ -54,9 +56,9 @@ public class GameController extends ApplicationAdapter {
 		bulletList = new ArrayList<Bullet>();
 
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
+		tileWidthHeight = 32;
 
         levels = new Levels();
-
 		loadMap(levels.getLevel1());
 
 		platformView = new PlatformView(platformList);
@@ -68,9 +70,9 @@ public class GameController extends ApplicationAdapter {
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		batch = new SpriteBatch();
 
+		//debugRenderer = new Box2DDebugRenderer();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 736);
-		//camera.position.set(0,0,0);
 
 		world.setContactListener(new ContactListener() {
 			@Override
@@ -129,7 +131,6 @@ public class GameController extends ApplicationAdapter {
 
 		int mapHeight = Level.length;
 		int mapWidth = Level[0].length;
-		int tileWidthHeight = 32;
 
 		// Loop from top to bottom, left to right
 		// Create objects, place them in lists and set their positions
@@ -146,7 +147,7 @@ public class GameController extends ApplicationAdapter {
 					playerBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body playerBody = world.createBody(playerBodyDef);
 
-					player = new Player(playerBody, tileWidthHeight);
+					player = new Player(playerBody, tileWidthHeight / PIXELS_TO_METERS);
 				} else if (Level[y][x] == '#') {
 
 					// Platform body for Box2D
@@ -155,7 +156,7 @@ public class GameController extends ApplicationAdapter {
 					platformBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body platformBody = world.createBody(platformBodyDef);
 
-					Platform platform = new Platform(platformBody, tileWidthHeight);
+					Platform platform = new Platform(platformBody, tileWidthHeight / PIXELS_TO_METERS);
 					platformList.add(platform);
 				} else if (Level[y][x] == 'C') {
 
@@ -165,7 +166,7 @@ public class GameController extends ApplicationAdapter {
 					coinBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body coinBody = world.createBody(coinBodyDef);
 
-					Coin coin = new Coin(coinBody, 20, tileWidthHeight);
+					Coin coin = new Coin(coinBody, 20, tileWidthHeight / PIXELS_TO_METERS);
 					coinList.add(coin);
 				} else if (Level[y][x] == 'S') {
 
@@ -175,7 +176,7 @@ public class GameController extends ApplicationAdapter {
 					soldierBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body soldierBody = world.createBody(soldierBodyDef);
 
-					Soldier soldier = new Soldier(soldierBody, tileWidthHeight);
+					Soldier soldier = new Soldier(soldierBody, tileWidthHeight / PIXELS_TO_METERS);
 					soldierList.add(soldier);
 				} else if (Level[y][x] == 'A') {
 
@@ -185,7 +186,7 @@ public class GameController extends ApplicationAdapter {
 					abilityBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body abilityBody = world.createBody(abilityBodyDef);
 
-					Ability ability = new Ability(abilityBody, tileWidthHeight);
+					Ability ability = new Ability(abilityBody, tileWidthHeight / PIXELS_TO_METERS);
 					abilityList.add(ability);
 				}
 			}
@@ -223,7 +224,7 @@ public class GameController extends ApplicationAdapter {
 			Body bulletBody = world.createBody(bulletBodyDef);
 			bulletBody.setBullet(true);
 
-			Bullet bullet = new Bullet(bulletBody, 16);
+			Bullet bullet = new Bullet(bulletBody, (tileWidthHeight / 2) / GameController.PIXELS_TO_METERS);
 			bulletList.add(bullet);
 		}
 
@@ -261,6 +262,11 @@ public class GameController extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(camera.combined);
 
+		/*
+		debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS,
+				PIXELS_TO_METERS, 0);
+		*/
+
 		batch.begin();
 
 		// Draw background
@@ -273,6 +279,8 @@ public class GameController extends ApplicationAdapter {
 		enemyView.render(batch);
 
 		batch.end();
+
+		//debugRenderer.render(world, debugMatrix);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ public class Soldier extends Enemy {
 
     private boolean directionFlag = true;
 
-    public Soldier(Body body, int tileWidthHeight) {
+    public Soldier(Body body, float tileWidthHeight) {
         super(body, tileWidthHeight);
     }
 

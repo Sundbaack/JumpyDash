@@ -4,19 +4,20 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import org.chalmers.projectrolf.controller.GameController;
 
 public class Enemy {
 
     private Body body;
 
-    public Enemy(Body body, int tileWidthHeight) {
+    public Enemy(Body body, float tileWidthHeight) {
 
         this.body = body;
+        float hTileWidthHeight = tileWidthHeight / 2;
+        Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox((tileWidthHeight / 2) / GameController.PIXELS_TO_METERS, (tileWidthHeight / 2) / GameController.PIXELS_TO_METERS);
+        polygon.setAsBox(hTileWidthHeight, hTileWidthHeight, vCenter, 0);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 

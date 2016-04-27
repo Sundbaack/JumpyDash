@@ -2,7 +2,6 @@ package org.chalmers.projectrolf.model;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import org.chalmers.projectrolf.controller.GameController;
 
 public class Player {
 
@@ -12,18 +11,21 @@ public class Player {
     private float maxSpeedX;
     private int points;
 
-    public Player(Body body, int tileWidthHeight) {
+    public Player(Body body, float tileWidthHeight) {
 
         this.body = body;
         maxSpeedX = 5.5f;
         jumpFlag = false;
         this.points=0;
+        float hTileWidthHeight = tileWidthHeight / 2;
+        Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox((tileWidthHeight / 2) / GameController.PIXELS_TO_METERS, (tileWidthHeight / 2) / GameController.PIXELS_TO_METERS);
+        polygon.setAsBox(hTileWidthHeight, hTileWidthHeight, vCenter, 0);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
+        fixtureDef.friction = 0;
 
         // Attach fixture to the body
         this.body.createFixture(fixtureDef);
@@ -45,7 +47,6 @@ public class Player {
 
     public void move() {
 
-        //getBody().setSleepingAllowed(false);
         Vector2 speed = getBody().getLinearVelocity();
         float speedX = speed.x;
 
@@ -67,7 +68,7 @@ public class Player {
     }
 
     public void setPoints(int a) {
-        this.points=this.getPoints()+a;
+        this.points += a;
     }
 
     public Vector2 getPosition() {
