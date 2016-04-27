@@ -13,10 +13,11 @@ public class Item {
 
         this.body = body;
         float hTileWidthHeight = tileWidthHeight / 2;
+        Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox(hTileWidthHeight, hTileWidthHeight, new Vector2(hTileWidthHeight, hTileWidthHeight), 0);
+        polygon.setAsBox(hTileWidthHeight, hTileWidthHeight, vCenter, 0);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
 
