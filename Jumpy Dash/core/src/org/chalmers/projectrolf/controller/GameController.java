@@ -1,6 +1,7 @@
 package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -37,6 +38,7 @@ public class GameController extends ApplicationAdapter {
 
 	private Player player;
     private Levels levels;
+    private int fire = 0;
 
 	private long previousFireTime;
 
@@ -68,6 +70,7 @@ public class GameController extends ApplicationAdapter {
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 736);
+		//camera.position.set(0,0,0);
 
 		world.setContactListener(new ContactListener() {
 			@Override
@@ -205,10 +208,10 @@ public class GameController extends ApplicationAdapter {
 	private void fireBullet() {
 
 		// Cooldown
-		long fireCooldown = 100;
+		long fireCooldown = 50;
 
 		// Allow shooting if not on cooldown
-		if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
+		if (System.currentTimeMillis() - previousFireTime >= fireCooldown && bulletList.size() < 3) {
 
 			// Reset cooldown
 			previousFireTime = System.currentTimeMillis();
@@ -223,14 +226,25 @@ public class GameController extends ApplicationAdapter {
 			Bullet bullet = new Bullet(bulletBody, 16);
 			bulletList.add(bullet);
 		}
+
+	}
+
+    // Remove bullets when moving out of screen
+	private void updateBullets() {
+		for (int i = 0; i < bulletList.size(); i++) {
+			if (((bulletList.get(i).getPosition().x * GameController.PIXELS_TO_METERS) + 16) > (camera.position.x + 1280 / 2)) {
+				bulletList.remove(i);
+			}
+		}
 	}
 
 	@Override
 	public void render () {
 
 		handleInput();
+		updateBullets();
 		//soldier.move();
-		player.move();
+		//player.move();
 
 		// Enable the camera to follow the player
 		if(player.getPosition().x > 500 / GameController.PIXELS_TO_METERS) {
