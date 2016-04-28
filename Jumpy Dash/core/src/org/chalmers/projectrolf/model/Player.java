@@ -8,15 +8,15 @@ public class Player {
     private Body body;
     private float impulse;
     private boolean jumpFlag;
-    private float maxSpeedX;
     private int points;
+    private static final float MAX_SPEED_X = 5.5f;
 
     public Player(Body body, float tileWidthHeight) {
 
         this.body = body;
-        maxSpeedX = 5.5f;
         jumpFlag = false;
-        this.points=0;
+        this.points = 0;
+
         float hTileWidthHeight = tileWidthHeight / 2;
         Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
 
@@ -50,7 +50,7 @@ public class Player {
         Vector2 speed = getBody().getLinearVelocity();
         float speedX = speed.x;
 
-        if (speedX < maxSpeedX) {
+        if (speedX < MAX_SPEED_X) {
             getBody().applyForceToCenter(new Vector2(6, 0), true);
         }
     }
