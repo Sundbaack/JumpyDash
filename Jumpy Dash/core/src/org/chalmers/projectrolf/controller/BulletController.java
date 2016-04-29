@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BulletController {
 
-    private final BulletView bulletView;
+    private BulletView bulletView;
     private List<Bullet> bulletList;
     private long previousFireTime;
     private float tileWidthHeight;
@@ -19,7 +19,6 @@ public class BulletController {
 
         bulletList = new ArrayList<Bullet>();
         this.tileWidthHeight = tileWidthHeight;
-
         bulletView = new BulletView(bulletList);
     }
 
@@ -30,21 +29,20 @@ public class BulletController {
 
         // Allow shooting if not on cooldown
         if (System.currentTimeMillis() - previousFireTime >= fireCooldown && bulletList.size() < 3) {
-        /*
+
             // Reset cooldown
             previousFireTime = System.currentTimeMillis();
 
             // Bullet body Box2D
             BodyDef bulletBodyDef = new BodyDef();
             bulletBodyDef.type = BodyDef.BodyType.KinematicBody;
-            bulletBodyDef.position.set(player.getPosition().x + (32 / GameController.PIXELS_TO_METERS), player.getPosition().y + ((tileWidthHeight / 2) / GameController.PIXELS_TO_METERS));
-            Body bulletBody = world.createBody(bulletBodyDef);
+            bulletBodyDef.position.set(PlayerController.player.getPosition().x + (32 / GameController.PIXELS_TO_METERS), PlayerController.player.getPosition().y + ((tileWidthHeight / 2) / GameController.PIXELS_TO_METERS));
+            Body bulletBody = GameController.world.createBody(bulletBodyDef);
             bulletBody.setBullet(true);
 
             Bullet bullet = new Bullet(bulletBody, (tileWidthHeight / 2) / GameController.PIXELS_TO_METERS;
             bulletList.add(bullet);
 
-        */
         }
 
     }
@@ -52,7 +50,7 @@ public class BulletController {
     // Remove bullets when moving out of screen
     private void updateBullets() {
         for (int i = 0; i < bulletList.size(); i++) {
-            if (((bulletList.get(i).getPosition().x * GameController.PIXELS_TO_METERS) + 16) > (camera.position.x + 1280 / 2)) {
+            if (((bulletList.get(i).getPosition().x * GameController.PIXELS_TO_METERS) + 16) > (GameController.camera.position.x + 1280 / 2)) {
                 bulletList.remove(i);
             }
         }
