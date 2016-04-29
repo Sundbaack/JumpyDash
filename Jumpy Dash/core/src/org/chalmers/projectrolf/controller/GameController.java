@@ -20,11 +20,11 @@ import java.util.List;
 
 public class GameController extends ApplicationAdapter {
 
-	private World world;
+	public static World world;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture background;
-
+	private PlatformController platformController;
 	private PlayerView playerView;
 	private ItemView itemView;
 	private PlatformView platformView;
@@ -48,7 +48,7 @@ public class GameController extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-
+		platformController = new PlatformController();
 		platformList = new ArrayList<Platform>();
 		coinList = new ArrayList<Coin>();
 		soldierList = new ArrayList<Soldier>();
@@ -61,7 +61,7 @@ public class GameController extends ApplicationAdapter {
         levels = new Levels();
 		loadMap(levels.getLevel1());
 
-		platformView = new PlatformView(platformList);
+		//platformView = new PlatformView(platformList);
 		enemyView  = new EnemyView(soldierList);
 		itemView = new ItemView(abilityList, coinList, bulletList);
 		playerView = new PlayerView(player);
@@ -149,15 +149,15 @@ public class GameController extends ApplicationAdapter {
 
 					player = new Player(playerBody, tileWidthHeight / PIXELS_TO_METERS);
 				} else if (Level[y][x] == '#') {
-
+					platformController.createObject(x,y,tileWidthHeight,mapHeight);
 					// Platform body for Box2D
-					BodyDef platformBodyDef = new BodyDef();
+					/*BodyDef platformBodyDef = new BodyDef();
 					platformBodyDef.type = BodyDef.BodyType.StaticBody;
 					platformBodyDef.position.set(x * tileWidthHeight / GameController.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / GameController.PIXELS_TO_METERS);
 					Body platformBody = world.createBody(platformBodyDef);
 
 					Platform platform = new Platform(platformBody, tileWidthHeight / PIXELS_TO_METERS);
-					platformList.add(platform);
+					platformList.add(platform);*/
 				} else if (Level[y][x] == 'C') {
 
 					// Coin body for Box2D
@@ -275,7 +275,7 @@ public class GameController extends ApplicationAdapter {
 		// Draw objects
 		playerView.render(batch);
 		itemView.render(batch);
-		platformView.render(batch);
+		platformController.getPlatformView().render(batch);
 		enemyView.render(batch);
 
 		batch.end();
