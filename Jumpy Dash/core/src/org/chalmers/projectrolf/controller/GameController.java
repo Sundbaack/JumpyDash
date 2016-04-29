@@ -21,10 +21,11 @@ import java.util.List;
 public class GameController extends ApplicationAdapter {
 
 	public static World world;
-	private OrthographicCamera camera;
+	public static OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture background;
 	private PlatformController platformController;
+	private BulletController bulletController;
 	private PlayerView playerView;
 	private ItemView itemView;
 	private PlatformView platformView;
@@ -48,7 +49,10 @@ public class GameController extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		tileWidthHeight = 32;
+
 		platformController = new PlatformController();
+		bulletController = new BulletController(tileWidthHeight);
 		platformList = new ArrayList<Platform>();
 		coinList = new ArrayList<Coin>();
 		soldierList = new ArrayList<Soldier>();
@@ -56,7 +60,7 @@ public class GameController extends ApplicationAdapter {
 		bulletList = new ArrayList<Bullet>();
 
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
-		tileWidthHeight = 32;
+
 
         levels = new Levels();
 		loadMap(levels.getLevel1());
