@@ -1,5 +1,6 @@
 package org.chalmers.projectrolf.controller;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import org.chalmers.projectrolf.model.Enemy;
@@ -32,7 +33,7 @@ public class SoldierController {
         BodyDef soldierBodyDef = new BodyDef();
         soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
         soldierBodyDef.position.set(x * tileWidthHeight / PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / PIXELS_TO_METERS);
-        Body soldierBody = world.createBody(soldierBodyDef);
+        Body soldierBody = GameController.world.createBody(soldierBodyDef);
 
         Soldier soldier = new Soldier(soldierBody, tileWidthHeight / PIXELS_TO_METERS);
         soldierList.add(soldier);
