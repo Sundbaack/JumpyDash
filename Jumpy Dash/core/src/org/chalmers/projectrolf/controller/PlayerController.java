@@ -1,5 +1,7 @@
 package org.chalmers.projectrolf.controller;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import org.chalmers.projectrolf.model.Player;
@@ -29,8 +31,18 @@ public class PlayerController {
         playerView = new PlayerView(player);
     }
 
-    public PlayerView getPlayerView(){
+    public PlayerView getPlayerView() {
         return this.playerView;
+    }
+
+    public void handleInput() {
+
+        // Jumping
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            //player.setJumpState();
+            player.jump();
+        }
+
     }
 
 }

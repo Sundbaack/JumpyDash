@@ -22,7 +22,7 @@ public class CoinView {
     }
 
     public void render(SpriteBatch batch) {
-        for(Coin c: coinList) {
+        for (Coin c : coinList) {
             batch.draw(coinTile, c.getPosition().x * GameController.PIXELS_TO_METERS, c.getPosition().y * GameController.PIXELS_TO_METERS);
         }
     }

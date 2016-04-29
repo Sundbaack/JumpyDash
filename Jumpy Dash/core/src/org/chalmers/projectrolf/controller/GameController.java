@@ -15,17 +15,21 @@ import com.badlogic.gdx.physics.box2d.*;
 import org.chalmers.projectrolf.model.*;
 import org.chalmers.projectrolf.view.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GameController extends ApplicationAdapter {
 
 	public static World world;
 	public static OrthographicCamera camera;
+
 	private SpriteBatch batch;
 	private Texture background;
 	private PlatformController platformController;
 	private BulletController bulletController;
+	private PlayerController playerController;
+	private AbilityController abilityController;
+	private CoinController coinController;
+	private SoldierController soldierController;
+
+	/*
 	private PlayerView playerView;
 	private ItemView itemView;
 	private PlatformView platformView;
@@ -36,12 +40,13 @@ public class GameController extends ApplicationAdapter {
 	private List<Soldier> soldierList;
 	private List<Ability> abilityList;
 	private List<Bullet> bulletList;
+	*/
 
 	private Player player;
     private Levels levels;
 	private float tileWidthHeight;
 
-	private long previousFireTime;
+	//private long previousFireTime;
 
 	public static final float PIXELS_TO_METERS = 100f;
 	private Box2DDebugRenderer debugRenderer;
@@ -52,12 +57,19 @@ public class GameController extends ApplicationAdapter {
 		tileWidthHeight = 32;
 
 		platformController = new PlatformController();
-		bulletController = new BulletController(tileWidthHeight);
+		bulletController = new BulletController(16);
+		playerController = new PlayerController();
+		abilityController = new AbilityController();
+		coinController = new CoinController();
+		soldierController = new SoldierController(tileWidthHeight);
+
+		/*
 		platformList = new ArrayList<Platform>();
 		coinList = new ArrayList<Coin>();
 		soldierList = new ArrayList<Soldier>();
 		abilityList = new ArrayList<Ability>();
 		bulletList = new ArrayList<Bullet>();
+		*/
 
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 
@@ -65,22 +77,25 @@ public class GameController extends ApplicationAdapter {
         levels = new Levels();
 		loadMap(levels.getLevel1());
 
-		//platformView = new PlatformView(platformList);
+		/*
+		platformView = new PlatformView(platformList);
 		enemyView  = new EnemyView(soldierList);
 		itemView = new ItemView(abilityList, coinList, bulletList);
 		playerView = new PlayerView(player);
+		*/
 
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		batch = new SpriteBatch();
 
-		//debugRenderer = new Box2DDebugRenderer();
+		debugRenderer = new Box2DDebugRenderer();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 736);
 
 		world.setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
+				/*
 				// Check to see if the collision is between the the player and a platform
 				for (Platform p: platformList) {
 					if ((contact.getFixtureA().getBody() == player.getBody() &&
@@ -112,6 +127,7 @@ public class GameController extends ApplicationAdapter {
 
                     }
                 }
+                */
 			}
 
 			@Override
@@ -144,7 +160,8 @@ public class GameController extends ApplicationAdapter {
 
 				// Player
 				if (Level[y][x] == 'P') {
-
+					playerController.createObject(x,y,tileWidthHeight,mapHeight);
+					/*
 					// Player body Box2D
 					BodyDef playerBodyDef = new BodyDef();
 					playerBodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -152,6 +169,8 @@ public class GameController extends ApplicationAdapter {
 					Body playerBody = world.createBody(playerBodyDef);
 
 					player = new Player(playerBody, tileWidthHeight / PIXELS_TO_METERS);
+
+					*/
 				} else if (Level[y][x] == '#') {
 					platformController.createObject(x,y,tileWidthHeight,mapHeight);
 					// Platform body for Box2D
@@ -163,7 +182,8 @@ public class GameController extends ApplicationAdapter {
 					Platform platform = new Platform(platformBody, tileWidthHeight / PIXELS_TO_METERS);
 					platformList.add(platform);*/
 				} else if (Level[y][x] == 'C') {
-
+					coinController.createObject(x,y,tileWidthHeight,mapHeight);
+					/*
 					// Coin body for Box2D
 					BodyDef coinBodyDef = new BodyDef();
 					coinBodyDef.type = BodyDef.BodyType.StaticBody;
@@ -172,8 +192,10 @@ public class GameController extends ApplicationAdapter {
 
 					Coin coin = new Coin(coinBody, 20, tileWidthHeight / PIXELS_TO_METERS);
 					coinList.add(coin);
+					*/
 				} else if (Level[y][x] == 'S') {
-
+					soldierController.createObject(x,y,mapHeight);
+					/*
 					// Soldier body Box2D
 					BodyDef soldierBodyDef = new BodyDef();
 					soldierBodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -182,8 +204,11 @@ public class GameController extends ApplicationAdapter {
 
 					Soldier soldier = new Soldier(soldierBody, tileWidthHeight / PIXELS_TO_METERS);
 					soldierList.add(soldier);
-				} else if (Level[y][x] == 'A') {
 
+					*/
+				} else if (Level[y][x] == 'A') {
+					abilityController.createObject(x,y,tileWidthHeight,mapHeight);
+					/*
 					// Ability body Box2D
 					BodyDef abilityBodyDef = new BodyDef();
 					abilityBodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -192,6 +217,7 @@ public class GameController extends ApplicationAdapter {
 
 					Ability ability = new Ability(abilityBody, tileWidthHeight / PIXELS_TO_METERS);
 					abilityList.add(ability);
+					*/
 				}
 			}
 		}
@@ -200,17 +226,17 @@ public class GameController extends ApplicationAdapter {
 	private void handleInput() {
 
 		// Jumping
-		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && player.getJumpState()) {
-			player.setJumpState();
-			player.jump();
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && PlayerController.player.getJumpState()) {
+			PlayerController.player.setJumpState();
+			PlayerController.player.jump();
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.F)) {
-			fireBullet();
+			bulletController.fireBullet();
         }
 	}
 
-	private void fireBullet() {
+	/*private void fireBullet() {
 
 		// Cooldown
 		long fireCooldown = 50;
@@ -242,15 +268,18 @@ public class GameController extends ApplicationAdapter {
 			}
 		}
 	}
+	*/
 
 	@Override
 	public void render () {
 
-		handleInput();
-		updateBullets();
+		playerController.handleInput();
+		bulletController.handleInput();
+		bulletController.updateBullets();
 		//soldier.move();
 		//player.move();
 
+		/*
 		// Enable the camera to follow the player
 		if(player.getPosition().x > 500 / GameController.PIXELS_TO_METERS) {
 
@@ -259,17 +288,17 @@ public class GameController extends ApplicationAdapter {
 			camera.position.set(position);
 			camera.update();
 		}
-
+		*/
 		world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60hz
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(camera.combined);
 
-		/*
+
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS,
 				PIXELS_TO_METERS, 0);
-		*/
+
 
 		batch.begin();
 
@@ -277,22 +306,26 @@ public class GameController extends ApplicationAdapter {
 		batch.draw(background, 0, 0, 0, 0, 10000, 736);
 
 		// Draw objects
-		playerView.render(batch);
-		itemView.render(batch);
+		//playerView.render(batch);
+		//itemView.render(batch);
 		platformController.getPlatformView().render(batch);
-		enemyView.render(batch);
-
+		playerController.getPlayerView().render(batch);
+		bulletController.getView().render(batch);
+		coinController.getCoinView().render(batch);
+		//abilityController.getAbilityView().render(batch);
+		soldierController.getView().render(batch);
+		//enemyView.render(batch);
 		batch.end();
 
-		//debugRenderer.render(world, debugMatrix);
+		debugRenderer.render(world, debugMatrix);
 	}
 
 	@Override
 	public void dispose() {
 		batch.dispose();
-		playerView.dispose();
-		itemView.dispose();
-		platformView.dispose();
-		enemyView.dispose();
+		//playerView.dispose();
+		//itemView.dispose();
+		//fplatformView.dispose();
+		//enemyView.dispose();
 	}
 }

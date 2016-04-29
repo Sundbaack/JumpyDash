@@ -24,6 +24,7 @@ public class PlatformController extends ApplicationAdapter {
 
     public PlatformController(){
         platformList = new ArrayList<Platform>();
+        platformView = new PlatformView(platformList);
 
     }
 
@@ -35,7 +36,6 @@ public class PlatformController extends ApplicationAdapter {
         platformBody = GameController.world.createBody(platformBodyDef);
         platform = new Platform(platformBody, tileWidthHeight / GameController.PIXELS_TO_METERS);
         platformList.add(platform);
-        platformView = new PlatformView(platformList);
     }
 
     public PlatformView getPlatformView(){

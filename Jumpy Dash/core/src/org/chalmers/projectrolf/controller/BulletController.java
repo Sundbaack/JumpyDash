@@ -1,5 +1,7 @@
 package org.chalmers.projectrolf.controller;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import org.chalmers.projectrolf.model.Bullet;
@@ -22,7 +24,7 @@ public class BulletController {
         bulletView = new BulletView(bulletList);
     }
 
-    private void fireBullet() {
+    public void fireBullet() {
 
         // Cooldown
         long fireCooldown = 50;
@@ -40,7 +42,7 @@ public class BulletController {
             Body bulletBody = GameController.world.createBody(bulletBodyDef);
             bulletBody.setBullet(true);
 
-            Bullet bullet = new Bullet(bulletBody, (tileWidthHeight / 2) / GameController.PIXELS_TO_METERS;
+            Bullet bullet = new Bullet(bulletBody, (tileWidthHeight / 2) / GameController.PIXELS_TO_METERS);
             bulletList.add(bullet);
 
         }
@@ -48,11 +50,22 @@ public class BulletController {
     }
 
     // Remove bullets when moving out of screen
-    private void updateBullets() {
+    public void updateBullets() {
         for (int i = 0; i < bulletList.size(); i++) {
             if (((bulletList.get(i).getPosition().x * GameController.PIXELS_TO_METERS) + 16) > (GameController.camera.position.x + 1280 / 2)) {
                 bulletList.remove(i);
             }
+        }
+    }
+
+    public BulletView getView() {
+         return bulletView;
+    }
+
+    public void handleInput() {
+        // Jumping
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+            fireBullet();
         }
     }
 }
