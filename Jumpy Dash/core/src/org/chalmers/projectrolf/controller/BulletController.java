@@ -2,6 +2,7 @@ package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import org.chalmers.projectrolf.model.Bullet;
@@ -15,13 +16,13 @@ public class BulletController {
     private BulletView bulletView;
     private List<Bullet> bulletList;
     private long previousFireTime;
-    private float tileWidthHeight;
+    private final float tileWidthHeight;
 
     public BulletController(float tileWidthHeight) {
 
         bulletList = new ArrayList<Bullet>();
         this.tileWidthHeight = tileWidthHeight;
-        bulletView = new BulletView(bulletList);
+        bulletView = new BulletView();
     }
 
     public void fireBullet() {
@@ -38,34 +39,43 @@ public class BulletController {
             // Bullet body Box2D
             BodyDef bulletBodyDef = new BodyDef();
             bulletBodyDef.type = BodyDef.BodyType.KinematicBody;
-            bulletBodyDef.position.set(PlayerController.player.getPosition().x + (32 / GameController.PIXELS_TO_METERS), PlayerController.player.getPosition().y + ((tileWidthHeight / 2) / GameController.PIXELS_TO_METERS));
-            Body bulletBody = GameController.world.createBody(bulletBodyDef);
+            bulletBodyDef.position.set(PlayerController.player.getPosition().x + (32 / JumpyDash.PIXELS_TO_METERS), PlayerController.player.getPosition().y + ((tileWidthHeight / 2) / JumpyDash.PIXELS_TO_METERS));
+            Body bulletBody = JumpyDash.world.createBody(bulletBodyDef);
             bulletBody.setBullet(true);
 
-            Bullet bullet = new Bullet(bulletBody, (tileWidthHeight / 2) / GameController.PIXELS_TO_METERS);
+            Bullet bullet = new Bullet(bulletBody, (tileWidthHeight / 2) / JumpyDash.PIXELS_TO_METERS);
             bulletList.add(bullet);
-
         }
-
     }
 
     // Remove bullets when moving out of screen
     public void updateBullets() {
         for (int i = 0; i < bulletList.size(); i++) {
-            if (((bulletList.get(i).getPosition().x * GameController.PIXELS_TO_METERS) + 16) > (GameController.camera.position.x + 1280 / 2)) {
+            if (((bulletList.get(i).getPosition().x * JumpyDash.PIXELS_TO_METERS) + 16) > (JumpyDash.camera.position.x + 1280 / 2)) {
                 bulletList.remove(i);
             }
         }
     }
 
-    public BulletView getView() {
-         return bulletView;
+    public void update(SpriteBatch batch) {
+        handleInput();
+        updateBullets();
+        render(batch);
+    }
+
+    public void render(SpriteBatch  batch) {
+        for (Bullet b : bulletList) {
+            bulletView.render(b.getPosition().x * JumpyDash.PIXELS_TO_METERS, b.getPosition().y * JumpyDash.PIXELS_TO_METERS, batch);
+        }
     }
 
     public void handleInput() {
-        // Jumping
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             fireBullet();
         }
+    }
+
+    public void dispose() {
+        bulletView.dispose();
     }
 }

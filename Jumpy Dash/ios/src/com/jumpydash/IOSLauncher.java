@@ -1,6 +1,6 @@
 package com.jumpydash;
 
-import org.chalmers.projectrolf.controller.GameController;
+import org.chalmers.projectrolf.controller.JumpyDash;
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 
@@ -11,7 +11,7 @@ public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new GameController(), config);
+        return new IOSApplication(new JumpyDash(), config);
     }
 
     public static void main(String[] argv) {
