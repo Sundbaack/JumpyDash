@@ -18,10 +18,12 @@ public class PlatformController extends ApplicationAdapter {
     private List<Platform> platformList;
     private PlatformView platformView;
     private final float tileWidthHeight;
+    private final float PIXELS_TO_METERS;
 
-    public PlatformController(float tileWidthHeight) {
+    public PlatformController(float tileWidthHeight, float PIXELS_TO_METERS) {
 
         this.tileWidthHeight = tileWidthHeight;
+        this.PIXELS_TO_METERS = PIXELS_TO_METERS;
         platformList = new ArrayList<Platform>();
         platformView = new PlatformView();
     }
@@ -30,9 +32,9 @@ public class PlatformController extends ApplicationAdapter {
 
         platformBodyDef = new BodyDef();
         platformBodyDef.type = BodyDef.BodyType.StaticBody;
-        platformBodyDef.position.set(x * tileWidthHeight / JumpyDash.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / JumpyDash.PIXELS_TO_METERS);
+        platformBodyDef.position.set(x * tileWidthHeight / PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / PIXELS_TO_METERS);
         platformBody = JumpyDash.world.createBody(platformBodyDef);
-        platform = new Platform(platformBody, tileWidthHeight / JumpyDash.PIXELS_TO_METERS);
+        platform = new Platform(platformBody, tileWidthHeight / PIXELS_TO_METERS);
         platformList.add(platform);
     }
 
@@ -42,7 +44,7 @@ public class PlatformController extends ApplicationAdapter {
 
     public void render(SpriteBatch batch) {
         for (Platform p : platformList) {
-            platformView.render(p.getPosition().x * JumpyDash.PIXELS_TO_METERS, p.getPosition().y * JumpyDash.PIXELS_TO_METERS, batch);
+            platformView.render(p.getPosition().x * PIXELS_TO_METERS, p.getPosition().y * PIXELS_TO_METERS, batch);
         }
     }
 

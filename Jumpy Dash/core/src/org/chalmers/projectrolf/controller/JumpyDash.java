@@ -27,7 +27,7 @@ public class JumpyDash extends ApplicationAdapter {
 
     private Levels levels;
 	private final float tileWidthHeight = 32;
-	public static final float PIXELS_TO_METERS = 100f;
+	private static final float PIXELS_TO_METERS = 100f;
 
 	//private Box2DDebugRenderer debugRenderer;
 	//private Matrix4 debugMatrix;
@@ -36,12 +36,12 @@ public class JumpyDash extends ApplicationAdapter {
 	public void create () {
 
 		// Controllers
-		platformController = new PlatformController(tileWidthHeight);
-		bulletController = new BulletController(tileWidthHeight / 2);
-		playerController = new PlayerController(tileWidthHeight);
-		abilityController = new AbilityController(tileWidthHeight);
-		coinController = new CoinController(tileWidthHeight);
-		soldierController = new SoldierController(tileWidthHeight);
+		platformController = new PlatformController(tileWidthHeight, PIXELS_TO_METERS);
+		bulletController = new BulletController(tileWidthHeight / 2, PIXELS_TO_METERS);
+		playerController = new PlayerController(tileWidthHeight, PIXELS_TO_METERS);
+		abilityController = new AbilityController(tileWidthHeight, PIXELS_TO_METERS);
+		coinController = new CoinController(tileWidthHeight, PIXELS_TO_METERS);
+		soldierController = new SoldierController(tileWidthHeight, PIXELS_TO_METERS);
 
 		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
 

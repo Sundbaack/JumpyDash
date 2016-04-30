@@ -18,10 +18,12 @@ public class CoinController extends ApplicationAdapter {
     private List<Coin> coinList;
     private CoinView coinView;
     private final float tileWidthHeight;
+    private final float PIXELS_TO_METERS;
 
-    public CoinController(float tileWidthHeight) {
+    public CoinController(float tileWidthHeight, float PIXELS_TO_METERS) {
 
         this.tileWidthHeight = tileWidthHeight;
+        this.PIXELS_TO_METERS = PIXELS_TO_METERS;
         coinList = new ArrayList<Coin>();
         coinView = new CoinView();
     }
@@ -31,10 +33,10 @@ public class CoinController extends ApplicationAdapter {
         // Coin body for Box2D
         coinBodyDef = new BodyDef();
         coinBodyDef.type = BodyDef.BodyType.StaticBody;
-        coinBodyDef.position.set(x * tileWidthHeight / JumpyDash.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / JumpyDash.PIXELS_TO_METERS);
+        coinBodyDef.position.set(x * tileWidthHeight / PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / PIXELS_TO_METERS);
         coinBody = JumpyDash.world.createBody(coinBodyDef);
 
-        Coin coin = new Coin(coinBody, 20, tileWidthHeight / JumpyDash.PIXELS_TO_METERS);
+        Coin coin = new Coin(coinBody, 20, tileWidthHeight / PIXELS_TO_METERS);
         coinList.add(coin);
     }
 
@@ -44,7 +46,7 @@ public class CoinController extends ApplicationAdapter {
 
     public void render(SpriteBatch batch) {
         for (Coin c : coinList) {
-            coinView.render(c.getPosition().x * JumpyDash.PIXELS_TO_METERS, c.getPosition().y * JumpyDash.PIXELS_TO_METERS, batch);
+            coinView.render(c.getPosition().x * PIXELS_TO_METERS, c.getPosition().y * PIXELS_TO_METERS, batch);
         }
     }
 

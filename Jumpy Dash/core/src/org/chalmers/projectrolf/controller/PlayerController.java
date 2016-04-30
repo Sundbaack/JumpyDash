@@ -16,9 +16,11 @@ public class PlayerController {
     public static Player player;
     private PlayerView playerView;
     private final float tileWidthHeight;
+    private final float PIXELS_TO_METERS;
 
-    public PlayerController(float tileWidthHeight) {
+    public PlayerController(float tileWidthHeight, float PIXELS_TO_METERS) {
         this.tileWidthHeight = tileWidthHeight;
+        this.PIXELS_TO_METERS = PIXELS_TO_METERS;
         playerView = new PlayerView();
     }
 
@@ -26,10 +28,10 @@ public class PlayerController {
         // Player body Box2D
         playerBodyDef = new BodyDef();
         playerBodyDef.type = BodyDef.BodyType.DynamicBody;
-        playerBodyDef.position.set(x * tileWidthHeight / JumpyDash.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / JumpyDash.PIXELS_TO_METERS);
+        playerBodyDef.position.set(x * tileWidthHeight / PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / PIXELS_TO_METERS);
         playerBody = JumpyDash.world.createBody(playerBodyDef);
 
-        player = new Player(playerBody, tileWidthHeight / JumpyDash.PIXELS_TO_METERS);
+        player = new Player(playerBody, tileWidthHeight / PIXELS_TO_METERS);
     }
 
     public void update(SpriteBatch batch) {
@@ -37,17 +39,17 @@ public class PlayerController {
         render(batch);
 
         // Enable the camera to follow the player
-        if(player.getPosition().x > 500 / JumpyDash.PIXELS_TO_METERS) {
+        if(player.getPosition().x > 500 / PIXELS_TO_METERS) {
 
             Vector3 position = JumpyDash.camera.position;
-            position.x = JumpyDash.camera.position.x + 1280 / JumpyDash.PIXELS_TO_METERS + (player.getPosition().x * JumpyDash.PIXELS_TO_METERS - JumpyDash.camera.position.x) * 0.1f;
+            position.x = JumpyDash.camera.position.x + 1280 / PIXELS_TO_METERS + (player.getPosition().x * PIXELS_TO_METERS - JumpyDash.camera.position.x) * 0.1f;
             JumpyDash.camera.position.set(position);
             JumpyDash.camera.update();
         }
     }
 
     public void render(SpriteBatch batch) {
-        playerView.render(player.getPosition().x * JumpyDash.PIXELS_TO_METERS, player.getPosition().y * JumpyDash.PIXELS_TO_METERS, batch);
+        playerView.render(player.getPosition().x * PIXELS_TO_METERS, player.getPosition().y * PIXELS_TO_METERS, batch);
     }
 
     public void handleInput() {

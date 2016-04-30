@@ -16,10 +16,12 @@ public class AbilityController {
     private List<Ability> abilityList;
     private AbilityView abilityView;
     private final float tileWidthHeight;
+    private final float PIXELS_TO_METERS;
 
-    public AbilityController(float tileWidthHeight) {
+    public AbilityController(float tileWidthHeight, float PIXELS_TO_METERS) {
 
         this.tileWidthHeight = tileWidthHeight;
+        this.PIXELS_TO_METERS = PIXELS_TO_METERS;
         abilityList = new ArrayList<Ability>();
         abilityView = new AbilityView();
     }
@@ -27,10 +29,10 @@ public class AbilityController {
     public void createObject(int x, int y, int mapHeight) {
         abilityBodyDef = new BodyDef();
         abilityBodyDef.type = BodyDef.BodyType.DynamicBody;
-        abilityBodyDef.position.set(x * tileWidthHeight / JumpyDash.PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / JumpyDash.PIXELS_TO_METERS);
+        abilityBodyDef.position.set(x * tileWidthHeight / PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / PIXELS_TO_METERS);
         abilityBody = JumpyDash.world.createBody(abilityBodyDef);
 
-        Ability ability = new Ability(abilityBody, tileWidthHeight / JumpyDash.PIXELS_TO_METERS);
+        Ability ability = new Ability(abilityBody, tileWidthHeight / PIXELS_TO_METERS);
         abilityList.add(ability);
     }
 
@@ -40,7 +42,7 @@ public class AbilityController {
 
     public void render(SpriteBatch batch) {
         for(Ability a: abilityList) {
-            abilityView.render(a.getPosition().x * JumpyDash.PIXELS_TO_METERS, a.getPosition().y * JumpyDash.PIXELS_TO_METERS, batch);
+            abilityView.render(a.getPosition().x * PIXELS_TO_METERS, a.getPosition().y * PIXELS_TO_METERS, batch);
         }
     }
 

@@ -17,11 +17,13 @@ public class BulletController {
     private List<Bullet> bulletList;
     private long previousFireTime;
     private final float tileWidthHeight;
+    private final float PIXELS_TO_METERS;
 
-    public BulletController(float tileWidthHeight) {
+    public BulletController(float tileWidthHeight, float PIXELS_TO_METERS) {
 
         bulletList = new ArrayList<Bullet>();
         this.tileWidthHeight = tileWidthHeight;
+        this.PIXELS_TO_METERS = PIXELS_TO_METERS;
         bulletView = new BulletView();
     }
 
@@ -39,11 +41,11 @@ public class BulletController {
             // Bullet body Box2D
             BodyDef bulletBodyDef = new BodyDef();
             bulletBodyDef.type = BodyDef.BodyType.KinematicBody;
-            bulletBodyDef.position.set(PlayerController.player.getPosition().x + (32 / JumpyDash.PIXELS_TO_METERS), PlayerController.player.getPosition().y + ((tileWidthHeight / 2) / JumpyDash.PIXELS_TO_METERS));
+            bulletBodyDef.position.set(PlayerController.player.getPosition().x + (32 / PIXELS_TO_METERS), PlayerController.player.getPosition().y + ((tileWidthHeight / 2) / PIXELS_TO_METERS));
             Body bulletBody = JumpyDash.world.createBody(bulletBodyDef);
             bulletBody.setBullet(true);
 
-            Bullet bullet = new Bullet(bulletBody, (tileWidthHeight / 2) / JumpyDash.PIXELS_TO_METERS);
+            Bullet bullet = new Bullet(bulletBody, (tileWidthHeight / 2) / PIXELS_TO_METERS);
             bulletList.add(bullet);
         }
     }
@@ -51,7 +53,7 @@ public class BulletController {
     // Remove bullets when moving out of screen
     public void updateBullets() {
         for (int i = 0; i < bulletList.size(); i++) {
-            if (((bulletList.get(i).getPosition().x * JumpyDash.PIXELS_TO_METERS) + 16) > (JumpyDash.camera.position.x + 1280 / 2)) {
+            if (((bulletList.get(i).getPosition().x * PIXELS_TO_METERS) + 16) > (JumpyDash.camera.position.x + 1280 / 2)) {
                 bulletList.remove(i);
             }
         }
@@ -65,7 +67,7 @@ public class BulletController {
 
     public void render(SpriteBatch  batch) {
         for (Bullet b : bulletList) {
-            bulletView.render(b.getPosition().x * JumpyDash.PIXELS_TO_METERS, b.getPosition().y * JumpyDash.PIXELS_TO_METERS, batch);
+            bulletView.render(b.getPosition().x * PIXELS_TO_METERS, b.getPosition().y * PIXELS_TO_METERS, batch);
         }
     }
 

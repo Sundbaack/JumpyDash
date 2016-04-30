@@ -9,18 +9,17 @@ import org.chalmers.projectrolf.view.SoldierView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.chalmers.projectrolf.controller.JumpyDash.PIXELS_TO_METERS;
-
-
 public class SoldierController {
 
     private List<Soldier> soldierList;
     private SoldierView soldierView;
     private final float tileWidthHeight;
+    private final float PIXELS_TO_METERS;
 
-    public SoldierController(float tileWidthHeight) {
+    public SoldierController(float tileWidthHeight, float PIXELS_TO_METERS) {
         soldierList = new ArrayList<Soldier>();
         this.tileWidthHeight = tileWidthHeight;
+        this.PIXELS_TO_METERS = PIXELS_TO_METERS;
 
         soldierView = new SoldierView();
     }
@@ -41,7 +40,7 @@ public class SoldierController {
 
     public void render(SpriteBatch batch) {
         for(Soldier p : soldierList) {
-           soldierView.render(p.getPosition().x * JumpyDash.PIXELS_TO_METERS, p.getPosition().y * JumpyDash.PIXELS_TO_METERS, batch);
+           soldierView.render(p.getPosition().x * PIXELS_TO_METERS, p.getPosition().y * PIXELS_TO_METERS, batch);
         }
     }
 
