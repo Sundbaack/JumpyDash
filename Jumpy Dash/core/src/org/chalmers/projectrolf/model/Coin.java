@@ -1,7 +1,5 @@
 package org.chalmers.projectrolf.model;
 
-import org.chalmers.projectrolf.controller.JDBody;
-
 public class Coin extends Item {
 
     private int valueCoin;

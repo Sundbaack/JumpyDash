@@ -1,7 +1,6 @@
 package org.chalmers.projectrolf.model;
 
 import com.badlogic.gdx.math.Vector2;
-import org.chalmers.projectrolf.controller.JDBody;
 
 public class Bullet {
 
