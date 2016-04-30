@@ -1,33 +1,18 @@
 package org.chalmers.projectrolf.model;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import org.chalmers.projectrolf.controller.JDBody;
 
 public class Bullet {
 
-    private Body body;
+    private JDBody body;
 
-    public Bullet(Body body, float tileWidthHeight) {
-
+    public Bullet(JDBody body) {
         this.body = body;
-        this.body.setLinearVelocity(15,0);
-        float hTileWidthHeight = tileWidthHeight / 2;
-        Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
-
-        // Create a polygon and apply it to a fixture
-        PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox(hTileWidthHeight, hTileWidthHeight, vCenter, 0);
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = polygon;
-
-        // Attach fixture to the body
-        this.body.createFixture(fixtureDef);
+        this.body.setLinearVelocity(new Vector2(15, 0));
     }
 
-
-    public Body getBody() {
+    public JDBody getBody() {
         return this.body;
     }
 

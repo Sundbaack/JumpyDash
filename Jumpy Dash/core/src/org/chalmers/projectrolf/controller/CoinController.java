@@ -2,8 +2,6 @@ package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import org.chalmers.projectrolf.model.Coin;
 import org.chalmers.projectrolf.view.CoinView;
 
@@ -12,32 +10,20 @@ import java.util.List;
 
 public class CoinController extends ApplicationAdapter {
 
-    private BodyDef coinBodyDef;
-    private Body coinBody;
-
     private List<Coin> coinList;
     private CoinView coinView;
-    private final float tileWidthHeight;
     private final float PIXELS_TO_METERS;
+    private Box2D box2D;
 
-    public CoinController(float tileWidthHeight, float PIXELS_TO_METERS) {
-
-        this.tileWidthHeight = tileWidthHeight;
-        this.PIXELS_TO_METERS = PIXELS_TO_METERS;
+    public CoinController(Box2D box2D) {
+        this.box2D = box2D;
+        this.PIXELS_TO_METERS = box2D.getPixelsToMeters();
         coinList = new ArrayList<Coin>();
         coinView = new CoinView();
     }
 
     public void createObject(int x, int y, int mapHeight) {
-
-        // Coin body for Box2D
-        coinBodyDef = new BodyDef();
-        coinBodyDef.type = BodyDef.BodyType.StaticBody;
-        coinBodyDef.position.set(x * tileWidthHeight / PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / PIXELS_TO_METERS);
-        coinBody = JumpyDash.world.createBody(coinBodyDef);
-
-        Coin coin = new Coin(coinBody, 20, tileWidthHeight / PIXELS_TO_METERS);
-        coinList.add(coin);
+        coinList.add(new Coin( box2D.newStatic(x, y, mapHeight, false), 20));
     }
 
     public void update(SpriteBatch batch) {

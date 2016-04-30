@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public class JDBody {
-    Body body;
+    public Body body;
 
     public float getMass() {
         return body.getMass();
@@ -16,6 +16,10 @@ public class JDBody {
 
     public void applyForceToCenter(Vector2 force, boolean wake) {
         body.applyForceToCenter(force, wake);
+    }
+
+    public void setLinearVelocity(Vector2 v) {
+        body.setLinearVelocity(v);
     }
 
     public Vector2 getLinearVelocity() {

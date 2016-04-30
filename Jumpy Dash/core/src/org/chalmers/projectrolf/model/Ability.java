@@ -1,10 +1,10 @@
 package org.chalmers.projectrolf.model;
 
-import com.badlogic.gdx.physics.box2d.Body;
+import org.chalmers.projectrolf.controller.JDBody;
 
 public class Ability extends Item {
 
-    public Ability(Body body, float tileWidthHeight) {
-        super(body, tileWidthHeight);
+    public Ability(JDBody body) {
+        super(body);
     }
 }

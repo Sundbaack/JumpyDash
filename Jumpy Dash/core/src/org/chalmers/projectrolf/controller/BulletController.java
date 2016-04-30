@@ -3,8 +3,6 @@ package org.chalmers.projectrolf.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import org.chalmers.projectrolf.model.Bullet;
 import org.chalmers.projectrolf.view.BulletView;
 
@@ -16,15 +14,14 @@ public class BulletController {
     private BulletView bulletView;
     private List<Bullet> bulletList;
     private long previousFireTime;
-    private final float tileWidthHeight;
+    private Box2D box2D;
     private final float PIXELS_TO_METERS;
 
-    public BulletController(float tileWidthHeight, float PIXELS_TO_METERS) {
-
+    public BulletController(Box2D box2D) {
+        this.box2D = box2D;
         bulletList = new ArrayList<Bullet>();
-        this.tileWidthHeight = tileWidthHeight;
-        this.PIXELS_TO_METERS = PIXELS_TO_METERS;
         bulletView = new BulletView();
+        this.PIXELS_TO_METERS = box2D.getPixelsToMeters();
     }
 
     public void fireBullet() {
@@ -37,16 +34,7 @@ public class BulletController {
 
             // Reset cooldown
             previousFireTime = System.currentTimeMillis();
-
-            // Bullet body Box2D
-            BodyDef bulletBodyDef = new BodyDef();
-            bulletBodyDef.type = BodyDef.BodyType.KinematicBody;
-            bulletBodyDef.position.set(PlayerController.getPosition().x + (32 / PIXELS_TO_METERS), PlayerController.getPosition().y + ((tileWidthHeight / 2) / PIXELS_TO_METERS));
-            Body bulletBody = JumpyDash.world.createBody(bulletBodyDef);
-            bulletBody.setBullet(true);
-
-            Bullet bullet = new Bullet(bulletBody, (tileWidthHeight / 2) / PIXELS_TO_METERS);
-            bulletList.add(bullet);
+            bulletList.add(new Bullet(box2D.newBullet(PlayerController.getPosition().x, PlayerController.getPosition().y)));
         }
     }
 

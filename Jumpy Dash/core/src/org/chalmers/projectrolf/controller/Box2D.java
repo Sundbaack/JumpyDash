@@ -5,20 +5,26 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class Box2D {
 
-    private World world;
+    public World world;
     private static final float PIXELS_TO_METERS = 100f;
+    private final float tileWidthHeight;
 
-    private Box2D() {
-
+    public Box2D(float tileWidthHeight) {
+        this.tileWidthHeight = tileWidthHeight;
         world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
         world.setContactListener(new CollisionListener());
     }
 
-    public Body newDynamic(float x, float y, float tileWidthHeight) {
+    public float getPixelsToMeters() {
+        return this.PIXELS_TO_METERS;
+    }
+
+    public JDBody newDynamic(float x, float y, int mapHeight) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS);
-        Body body = world.createBody(bodyDef);
+        bodyDef.position.set((x * tileWidthHeight) / PIXELS_TO_METERS, (mapHeight - 1 - y) * tileWidthHeight / PIXELS_TO_METERS);
+        JDBody jdBody = new JDBody();
+        jdBody.body = world.createBody(bodyDef);
 
         float hTileWidthHeight = (tileWidthHeight / 2) / PIXELS_TO_METERS;
         Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
@@ -31,18 +37,19 @@ public class Box2D {
         fixtureDef.friction = 0;
 
         // Attach fixture to the body
-        body.createFixture(fixtureDef);
+        jdBody.body.createFixture(fixtureDef);
 
-        return body;
+        return jdBody;
     }
 
-    public Body newStatic(float x, float y, float tileWidthHeight, boolean ghost) {
+    public JDBody newStatic(float x, float y, int mapHeight, boolean ghost) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS);
-        Body body = world.createBody(bodyDef);
+        bodyDef.position.set((x * tileWidthHeight) / PIXELS_TO_METERS, (mapHeight - 1 - y) * tileWidthHeight / PIXELS_TO_METERS);
+        JDBody jdBody = new JDBody();
+        jdBody.body = world.createBody(bodyDef);
 
-        if (!ghost) {
+        if (ghost == false) {
             float hTileWidthHeight = (tileWidthHeight / 2) / PIXELS_TO_METERS;
 
             Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
@@ -54,8 +61,11 @@ public class Box2D {
             fixtureDef.shape = polygon;
 
             // Attach fixture to the body
-            body.createFixture(fixtureDef);
+            jdBody.body.createFixture(fixtureDef);
         } else {
+
+            //Not working yet for some reason
+
             //Ghost vertices
             Vector2 v1 = new Vector2(0, tileWidthHeight);
             Vector2 v2 = new Vector2(tileWidthHeight, tileWidthHeight);
@@ -73,16 +83,17 @@ public class Box2D {
             fixtureDef.shape = edgeShape;
 
             // Attach fixture to the body
-            body.createFixture(fixtureDef);
+            jdBody.body.createFixture(fixtureDef);
         }
-        return body;
+        return jdBody;
     }
 
-    public Body newKinematic(float x, float y, float tileWidthHeight, boolean bullet) {
+    public JDBody newBullet(float x, float y) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS);
-        Body body = world.createBody(bodyDef);
+        bodyDef.position.set(x + (40 / PIXELS_TO_METERS),  y + ((tileWidthHeight / 2 / 2) / PIXELS_TO_METERS));
+        JDBody jdBody = new JDBody();
+        jdBody.body = world.createBody(bodyDef);
 
         float hTileWidthHeight = (tileWidthHeight / 2) / PIXELS_TO_METERS;
         Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
@@ -92,14 +103,16 @@ public class Box2D {
         polygon.setAsBox(hTileWidthHeight, hTileWidthHeight, vCenter, 0);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
+        jdBody.body.setBullet(true);
 
         // Attach fixture to the body
-        body.createFixture(fixtureDef);
+        jdBody.body.createFixture(fixtureDef);
 
-        if (bullet) {
-            body.setBullet(true);
-        }
-        return body;
+        return jdBody;
+    }
+
+    public void step() {
+        world.step(1/60f, 6, 3);
     }
 
 }

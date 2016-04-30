@@ -6,18 +6,16 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
-import org.chalmers.projectrolf.model.*;
+import org.chalmers.projectrolf.model.Levels;
 
 public class JumpyDash extends ApplicationAdapter {
 
-	public static World world;
 	public static OrthographicCamera camera;
 
 	private SpriteBatch batch;
 	private Texture background;
 
+	private Box2D box2D;
 	private PlatformController platformController;
 	private BulletController bulletController;
 	private PlayerController playerController;
@@ -27,23 +25,22 @@ public class JumpyDash extends ApplicationAdapter {
 
     private Levels levels;
 	private final float tileWidthHeight = 32;
-	private static final float PIXELS_TO_METERS = 100f;
-
 	//private Box2DDebugRenderer debugRenderer;
 	//private Matrix4 debugMatrix;
 
 	@Override
 	public void create () {
 
-		// Controllers
-		platformController = new PlatformController(tileWidthHeight, PIXELS_TO_METERS);
-		bulletController = new BulletController(tileWidthHeight / 2, PIXELS_TO_METERS);
-		playerController = new PlayerController(tileWidthHeight, PIXELS_TO_METERS);
-		abilityController = new AbilityController(tileWidthHeight, PIXELS_TO_METERS);
-		coinController = new CoinController(tileWidthHeight, PIXELS_TO_METERS);
-		soldierController = new SoldierController(tileWidthHeight, PIXELS_TO_METERS);
+		// Box2D wrapper
+		box2D = new Box2D(tileWidthHeight);
 
-		world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
+		// Controllers
+		platformController = new PlatformController(box2D);
+		bulletController = new BulletController(box2D);
+		playerController = new PlayerController(box2D);
+		abilityController = new AbilityController(box2D);
+		coinController = new CoinController(box2D);
+		soldierController = new SoldierController(box2D);
 
 		levels = new Levels();
 		loadMap(levels.getLevel1());
@@ -55,9 +52,6 @@ public class JumpyDash extends ApplicationAdapter {
 		//debugRenderer = new Box2DDebugRenderer();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 736);
-
-		world.setContactListener(new CollisionListener());
-
 	}
 
 	private void loadMap(char[][] Level) {
@@ -94,17 +88,17 @@ public class JumpyDash extends ApplicationAdapter {
 	@Override
 	public void render () {
 
-		/*
-		// Debugging
-		debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
-		debugRenderer.render(world, debugMatrix);
-		*/
+		box2D.step();
 
-		world.step(1 / 60f, 6, 3); // Step the physics simulation forward at a rate of 60fps
-
+		camera.update();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(camera.combined);
+		/*
+		// Debugging
+		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);
+		debugRenderer.render(box2D.world, debugMatrix);
+		*/
 
 		batch.begin();
 

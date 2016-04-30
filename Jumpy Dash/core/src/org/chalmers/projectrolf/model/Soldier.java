@@ -1,14 +1,14 @@
 package org.chalmers.projectrolf.model;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
+import org.chalmers.projectrolf.controller.JDBody;
 
 public class Soldier extends Enemy {
 
     private boolean directionFlag = true;
 
-    public Soldier(Body body, float tileWidthHeight) {
-        super(body, tileWidthHeight);
+    public Soldier(JDBody body) {
+        super(body);
     }
 
     public void move() {

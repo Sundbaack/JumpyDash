@@ -1,14 +1,14 @@
 package org.chalmers.projectrolf.model;
 
-import com.badlogic.gdx.physics.box2d.Body;
+import org.chalmers.projectrolf.controller.JDBody;
 
 public class Coin extends Item {
 
     private int valueCoin;
 
-    public Coin(Body body, int valueCoin, float tileWidthHeight){
+    public Coin(JDBody body, int valueCoin){
 
-        super(body, tileWidthHeight);
+        super(body);
         this.valueCoin = valueCoin;
     }
 

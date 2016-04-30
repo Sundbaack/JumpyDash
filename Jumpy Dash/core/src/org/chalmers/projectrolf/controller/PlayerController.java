@@ -5,34 +5,24 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.view.PlayerView;
 
 public class PlayerController {
 
-    private BodyDef playerBodyDef;
-    private Body playerBody;
+    private Box2D box2D;
     public static Player player;
     private PlayerView playerView;
-    private final float tileWidthHeight;
     private final float PIXELS_TO_METERS;
 
-    public PlayerController(float tileWidthHeight, float PIXELS_TO_METERS) {
-        this.tileWidthHeight = tileWidthHeight;
-        this.PIXELS_TO_METERS = PIXELS_TO_METERS;
+    public PlayerController(Box2D box2D) {
+        this.box2D = box2D;
+        this.PIXELS_TO_METERS = box2D.getPixelsToMeters();
         playerView = new PlayerView();
     }
 
     public void createObject(int x, int y, int mapHeight) {
-        // Player body Box2D
-        playerBodyDef = new BodyDef();
-        playerBodyDef.type = BodyDef.BodyType.DynamicBody;
-        playerBodyDef.position.set(x * tileWidthHeight / PIXELS_TO_METERS, (mapHeight - 1 - y) * 32 / PIXELS_TO_METERS);
-        playerBody = JumpyDash.world.createBody(playerBodyDef);
-
-        player = new Player(playerBody, tileWidthHeight / PIXELS_TO_METERS);
+        player = new Player(box2D.newDynamic(x, y, mapHeight));
     }
 
     public void update(SpriteBatch batch) {
