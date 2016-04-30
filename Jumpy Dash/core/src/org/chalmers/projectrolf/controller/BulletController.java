@@ -41,7 +41,7 @@ public class BulletController {
             // Bullet body Box2D
             BodyDef bulletBodyDef = new BodyDef();
             bulletBodyDef.type = BodyDef.BodyType.KinematicBody;
-            bulletBodyDef.position.set(PlayerController.player.getPosition().x + (32 / PIXELS_TO_METERS), PlayerController.player.getPosition().y + ((tileWidthHeight / 2) / PIXELS_TO_METERS));
+            bulletBodyDef.position.set(PlayerController.getPosition().x + (32 / PIXELS_TO_METERS), PlayerController.getPosition().y + ((tileWidthHeight / 2) / PIXELS_TO_METERS));
             Body bulletBody = JumpyDash.world.createBody(bulletBodyDef);
             bulletBody.setBullet(true);
 
