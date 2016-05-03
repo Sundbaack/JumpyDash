@@ -8,9 +8,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.chalmers.projectrolf.model.Levels;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class JumpyDash extends ApplicationAdapter {
-
-
 
 	private SpriteBatch batch;
 	private Texture background;
@@ -29,7 +34,7 @@ public class JumpyDash extends ApplicationAdapter {
 	//private Matrix4 debugMatrix;
 
 	@Override
-	public void create () {
+	public void create() {
 
 		// Box2D wrapper
 		box2D = new Box2D(tileWidthHeight);
@@ -41,9 +46,14 @@ public class JumpyDash extends ApplicationAdapter {
 		abilityController = new AbilityController(box2D);
 		coinController = new CoinController(box2D);
 		soldierController = new SoldierController(box2D);
+		//File level = new File("level1.txt");
+		//Scanner inFile1 = new Scanner(new File("level1.txt")).useDelimiter(",\\s*");
+		try{
+			loadMap(new File("level1.txt"));
+		}catch(FileNotFoundException e){
+			System.out.print("File not found");
+		}
 
-		levels = new Levels();
-		loadMap(levels.getLevel1());
 
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -53,10 +63,30 @@ public class JumpyDash extends ApplicationAdapter {
 
 	}
 
-	private void loadMap(char[][] Level) {
+	private void loadMap(File level) throws FileNotFoundException  {
+		Scanner scanLevel = new Scanner(level);
+		//List<String> temp = new ArrayList<String>();
 
-		int mapHeight = Level.length;
-		int mapWidth = Level[0].length;
+		char[][] level1 = new char[23][1200];
+
+
+		for (int y = 0; y < level1.length; y++){
+			String currentLine = scanLevel.nextLine();
+			System.out.print(currentLine.length());
+			currentLine = currentLine.replaceAll("\\s+","");
+			//currentLine.split("  ");
+			System.out.print("\n"+currentLine.length());
+			//System.out.print("\n" + currentLine.charAt(23));
+
+			for(int x = 0; x < currentLine.length(); x++ ){
+				level1[y][x]= currentLine.charAt(x);
+				//System.out.print(level1[x][y]);
+			}
+		}
+		System.out.println(level1[0].length);
+
+		int mapHeight = level1.length;
+		int mapWidth = level1[0].length;
 
 		// Loop from top to bottom, left to right
 		// Create objects, place them in lists and set their positions
@@ -64,19 +94,19 @@ public class JumpyDash extends ApplicationAdapter {
 
 			for (int x = 0; x < mapWidth; x++) {
 
-				if (Level[y][x] == 'P') {
+				if (level1[y][x] == 'P') {
 					playerController.createObject(x, y, mapHeight);
 
-				} else if (Level[y][x] == '#') {
+				} else if (level1[y][x] == '#') {
 					platformController.createObject(x, y, mapHeight);
 
-				} else if (Level[y][x] == 'C') {
+				} else if (level1[y][x] == 'C') {
 					coinController.createObject(x, y, mapHeight);
 
-				} else if (Level[y][x] == 'S') {
+				} else if (level1[y][x] == 'S') {
 					soldierController.createObject(x, y, mapHeight);
 
-				} else if (Level[y][x] == 'A') {
+				} else if (level1[y][x] == 'A') {
 					abilityController.createObject(x, y, mapHeight);
 
 				}
