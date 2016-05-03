@@ -13,10 +13,10 @@ public class Soldier extends Enemy {
     public void move() {
         // Checks in what direction the soldier should move
         if(directionFlag){
-            this.getBody().applyForceToCenter(new Vector2(50f, 0), true);
+            getJDBody().applyForceToCenter(new Vector2(50f, 0), true);
         }
         else{
-            this.getBody().applyForceToCenter(new Vector2(-50f, 0), true);
+            getJDBody().applyForceToCenter(new Vector2(-50f, 0), true);
         }
     }
 

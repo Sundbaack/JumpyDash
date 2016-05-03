@@ -14,6 +14,10 @@ public class JDBody {
         body.applyLinearImpulse(impulse, point, wake);
     }
 
+    public Body getBody() {
+        return this.body;
+    }
+
     public void applyForceToCenter(Vector2 force, boolean wake) {
         body.applyForceToCenter(force, wake);
     }

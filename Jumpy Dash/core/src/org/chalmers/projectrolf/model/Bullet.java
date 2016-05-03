@@ -11,7 +11,7 @@ public class Bullet {
         this.body.setLinearVelocity(new Vector2(15, 0));
     }
 
-    public JDBody getBody() {
+    public JDBody getJDBody() {
         return this.body;
     }
 

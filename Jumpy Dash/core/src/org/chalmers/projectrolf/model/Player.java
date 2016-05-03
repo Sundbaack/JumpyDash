@@ -28,16 +28,16 @@ public class Player {
     }
 
     public void jump() {
-        getBody().applyLinearImpulse(new Vector2(0, getImpulse()), getBody().getWorldCenter(), true);
+        getJDBody().applyLinearImpulse(new Vector2(0, getImpulse()), getJDBody().getWorldCenter(), true);
     }
 
     public void move() {
 
-        Vector2 speed = getBody().getLinearVelocity();
+        Vector2 speed = getJDBody().getLinearVelocity();
         float speedX = speed.x;
 
         if (speedX < MAX_SPEED_X) {
-            getBody().applyForceToCenter(new Vector2(6, 0), true);
+            getJDBody().applyForceToCenter(new Vector2(6, 0), true);
         }
     }
 
@@ -45,7 +45,7 @@ public class Player {
         return this.impulse;
     }
 
-    public JDBody getBody() {
+    public JDBody getJDBody() {
         return this.body;
     }
 

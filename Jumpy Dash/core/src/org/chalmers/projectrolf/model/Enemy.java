@@ -11,7 +11,7 @@ public class Enemy {
         this.body = body;
     }
 
-    public JDBody getBody() {
+    public JDBody getJDBody() {
         return this.body;
     }
 

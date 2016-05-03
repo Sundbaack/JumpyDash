@@ -1,46 +1,47 @@
 package org.chalmers.projectrolf.controller;
 
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.*;
 import org.chalmers.projectrolf.model.Platform;
 
 public class CollisionListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
+        Fixture fa = contact.getFixtureA();
+        Fixture fb = contact.getFixtureB();
 
         // Check to see if the collision is between the the player and a platform
 		for (Platform p: PlatformController.getPlatformList()) {
-		    if ((contact.getFixtureA().getBody() == PlayerController.player.getBody().body &&
-			    contact.getFixtureB().getBody() == p.getBody().body)
+
+            if ((fa.getBody() == PlayerController.getPlayer().getJDBody().getBody() &&
+			    fb.getBody() == p.getJDBody().getBody())
 				||
-			    (contact.getFixtureA().getBody() == p.getBody().body &&
-						contact.getFixtureB().getBody() == PlayerController.player.getBody().body)) {
-				if (!PlayerController.player.getJumpState()) {
-                    PlayerController.player.setJumpState();
+			    (fa.getBody() == p.getJDBody().getBody() &&
+						fb.getBody() == PlayerController.getPlayer().getJDBody().getBody())) {
+
+                if (!PlayerController.getPlayer().getJumpState()) {
+                    PlayerController.getPlayer().setJumpState();
                 }
 			}
 		}
 
         /*
 		for (Soldier s: soldierList){
-		    if((contact.getFixtureA().getBody() == player.getBody() &&
-                contact.getFixtureB().getBody() == s.getBody())
+		    if((contact.getFixtureA().getJDBody() == player.getJDBody() &&
+                contact.getFixtureB().getJDBody() == s.getJDBody())
                 ||
-                (contact.getFixtureA().getBody() == s.getBody() &&
-                    contact.getFixtureB().getBody() == player.getBody())) {
+                (contact.getFixtureA().getJDBody() == s.getJDBody() &&
+                    contact.getFixtureB().getJDBody() == player.getJDBody())) {
                         System.out.println("Ajabaja nu dog du");
             }
 		}
 
         for(Coin c: coinList){
-            if((contact.getFixtureA().getBody() == player.getBody() &&
-               contact.getFixtureB().getBody() == c.getBody())
+            if((contact.getFixtureA().getJDBody() == player.getJDBody() &&
+               contact.getFixtureB().getJDBody() == c.getJDBody())
                ||
-               (contact.getFixtureA().getBody() == c.getBody() &&
-                    contact.getFixtureB().getBody() == player.getBody())) {
+               (contact.getFixtureA().getJDBody() == c.getJDBody() &&
+                    contact.getFixtureB().getJDBody() == player.getJDBody())) {
                         player.setPoints(c.getValue());
 						coinList.remove(coinList.indexOf(c));
 

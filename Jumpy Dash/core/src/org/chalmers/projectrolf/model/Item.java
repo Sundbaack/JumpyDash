@@ -10,7 +10,7 @@ public class Item {
         this.body = body;
     }
 
-    public JDBody getBody() {
+    public JDBody getJDBody() {
         return this.body;
     }
 

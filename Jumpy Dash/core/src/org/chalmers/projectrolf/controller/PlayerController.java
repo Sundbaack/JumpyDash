@@ -5,13 +5,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.view.PlayerView;
 
 public class PlayerController {
 
     private Box2D box2D;
-    public static Player player;
+    private static Player player;
     private PlayerView playerView;
     private final float PIXELS_TO_METERS;
 
@@ -55,6 +56,9 @@ public class PlayerController {
         return player.getPosition();
     }
 
+    public static Player getPlayer() {
+        return player;
+    }
     public void dispose() {
         playerView.dispose();
     }
