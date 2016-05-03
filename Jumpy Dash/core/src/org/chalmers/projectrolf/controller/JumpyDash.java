@@ -10,7 +10,7 @@ import org.chalmers.projectrolf.model.Levels;
 
 public class JumpyDash extends ApplicationAdapter {
 
-	public static OrthographicCamera camera;
+
 
 	private SpriteBatch batch;
 	private Texture background;
@@ -50,8 +50,7 @@ public class JumpyDash extends ApplicationAdapter {
 		batch = new SpriteBatch();
 
 		//debugRenderer = new Box2DDebugRenderer();
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 1280, 736);
+
 	}
 
 	private void loadMap(char[][] Level) {
@@ -89,11 +88,11 @@ public class JumpyDash extends ApplicationAdapter {
 	public void render () {
 
 		box2D.step();
+		box2D.update();
 
-		camera.update();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.setProjectionMatrix(camera.combined);
+		batch.setProjectionMatrix(box2D.getCamera().combined);
 		/*
 		// Debugging
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);

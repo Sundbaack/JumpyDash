@@ -41,7 +41,7 @@ public class BulletController {
     // Remove bullets when moving out of screen
     public void updateBullets() {
         for (int i = 0; i < bulletList.size(); i++) {
-            if (((bulletList.get(i).getPosition().x * PIXELS_TO_METERS) + 16) > (JumpyDash.camera.position.x + 1280 / 2)) {
+            if (((bulletList.get(i).getPosition().x * PIXELS_TO_METERS) + 16) > (Box2D.camera.position.x + 1280 / 2)) {
                 bulletList.remove(i);
             }
         }

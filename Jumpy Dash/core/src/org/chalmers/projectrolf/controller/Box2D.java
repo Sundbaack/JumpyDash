@@ -1,10 +1,15 @@
 package org.chalmers.projectrolf.controller;
 
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import org.chalmers.projectrolf.model.JDBody;
 
 public class Box2D {
+
+
+    public static OrthographicCamera camera;
 
     public World world;
     private static final float PIXELS_TO_METERS = 100f;
@@ -14,6 +19,9 @@ public class Box2D {
         this.tileWidthHeight = tileWidthHeight;
         world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
         world.setContactListener(new CollisionListener());
+
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 1280, 736);
     }
 
     public float getPixelsToMeters() {
@@ -114,6 +122,14 @@ public class Box2D {
 
     public void step() {
         world.step(1/60f, 6, 3);
+    }
+
+    public void update(){
+        camera.update();
+    }
+
+    public Camera getCamera(){
+        return camera;
     }
 
 }

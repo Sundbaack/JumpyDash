@@ -28,14 +28,14 @@ public class PlayerController {
     public void update(SpriteBatch batch) {
         handleInput();
         render(batch);
-
+       // player.move();
         // Enable the camera to follow the player
         if(player.getPosition().x > 500 / PIXELS_TO_METERS) {
 
-            Vector3 position = JumpyDash.camera.position;
-            position.x = JumpyDash.camera.position.x + 1280 / PIXELS_TO_METERS + (player.getPosition().x * PIXELS_TO_METERS - JumpyDash.camera.position.x) * 0.1f;
-            JumpyDash.camera.position.set(position);
-            JumpyDash.camera.update();
+            Vector3 position = Box2D.camera.position;
+            position.x = Box2D.camera.position.x + 1280 / PIXELS_TO_METERS + (player.getPosition().x * PIXELS_TO_METERS - Box2D.camera.position.x) * 0.1f;
+            Box2D.camera.position.set(position);
+            Box2D.camera.update();
         }
     }
 
