@@ -4,24 +4,27 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import org.chalmers.projectrolf.model.Platform;
 
 public class CollisionListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        /*
-        // Check to see if the collision is between the the player and a platform
-		for (Platform p: platformList) {
-		    if ((contact.getFixtureA().getBody() == player.getBody() &&
-			    contact.getFixtureB().getBody() == p.getBody())
-				||
-			    (contact.getFixtureA().getBody() == p.getBody() &&
-						contact.getFixtureB().getBody() == player.getBody())) {
-				player.setJumpState();
 
+        // Check to see if the collision is between the the player and a platform
+		for (Platform p: PlatformController.getPlatformList()) {
+		    if ((contact.getFixtureA().getBody() == PlayerController.player.getBody().body &&
+			    contact.getFixtureB().getBody() == p.getBody().body)
+				||
+			    (contact.getFixtureA().getBody() == p.getBody().body &&
+						contact.getFixtureB().getBody() == PlayerController.player.getBody().body)) {
+				if (!PlayerController.player.getJumpState()) {
+                    PlayerController.player.setJumpState();
+                }
 			}
 		}
 
+        /*
 		for (Soldier s: soldierList){
 		    if((contact.getFixtureA().getBody() == player.getBody() &&
                 contact.getFixtureB().getBody() == s.getBody())

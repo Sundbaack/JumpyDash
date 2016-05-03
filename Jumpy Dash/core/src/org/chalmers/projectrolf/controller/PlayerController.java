@@ -28,7 +28,8 @@ public class PlayerController {
     public void update(SpriteBatch batch) {
         handleInput();
         render(batch);
-       // player.move();
+        //player.move();
+
         // Enable the camera to follow the player
         if(player.getPosition().x > 500 / PIXELS_TO_METERS) {
 
@@ -44,8 +45,8 @@ public class PlayerController {
     }
 
     public void handleInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            //player.setJumpState();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpState()) {
+            player.setJumpState();
             player.jump();
         }
     }

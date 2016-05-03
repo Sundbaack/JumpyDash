@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlatformController extends ApplicationAdapter {
 
-    private List<Platform> platformList;
+    private static List<Platform> platformList;
     private PlatformView platformView;
     private Box2D box2D;
     private final float PIXELS_TO_METERS;
@@ -34,6 +34,10 @@ public class PlatformController extends ApplicationAdapter {
         for (Platform p : platformList) {
             platformView.render(p.getPosition().x * PIXELS_TO_METERS, p.getPosition().y * PIXELS_TO_METERS, batch);
         }
+    }
+
+    public static List<Platform> getPlatformList() {
+        return platformList;
     }
 
     public void dispose() {

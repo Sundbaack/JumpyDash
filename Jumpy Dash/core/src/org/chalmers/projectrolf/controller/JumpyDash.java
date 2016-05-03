@@ -3,16 +3,11 @@ package org.chalmers.projectrolf.controller;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.chalmers.projectrolf.model.Levels;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class JumpyDash extends ApplicationAdapter {
@@ -28,7 +23,6 @@ public class JumpyDash extends ApplicationAdapter {
 	private CoinController coinController;
 	private SoldierController soldierController;
 
-    private Levels levels;
 	private final float tileWidthHeight = 32;
 	//private Box2DDebugRenderer debugRenderer;
 	//private Matrix4 debugMatrix;
@@ -46,44 +40,33 @@ public class JumpyDash extends ApplicationAdapter {
 		abilityController = new AbilityController(box2D);
 		coinController = new CoinController(box2D);
 		soldierController = new SoldierController(box2D);
-		//File level = new File("level1.txt");
-		//Scanner inFile1 = new Scanner(new File("level1.txt")).useDelimiter(",\\s*");
-		try{
+
+		try {
 			loadMap(new File("level1.txt"));
-		}catch(FileNotFoundException e){
+		} catch (FileNotFoundException e) {
 			System.out.print("File not found");
 		}
-
 
 		background = new Texture(Gdx.files.internal("background_1.png"));
 		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		batch = new SpriteBatch();
 
 		//debugRenderer = new Box2DDebugRenderer();
-
 	}
 
 	private void loadMap(File level) throws FileNotFoundException  {
 		Scanner scanLevel = new Scanner(level);
-		//List<String> temp = new ArrayList<String>();
 
 		char[][] level1 = new char[23][1200];
 
-
 		for (int y = 0; y < level1.length; y++){
 			String currentLine = scanLevel.nextLine();
-			System.out.print(currentLine.length());
 			currentLine = currentLine.replaceAll("\\s+","");
-			//currentLine.split("  ");
-			System.out.print("\n"+currentLine.length());
-			//System.out.print("\n" + currentLine.charAt(23));
 
 			for(int x = 0; x < currentLine.length(); x++ ){
 				level1[y][x]= currentLine.charAt(x);
-				//System.out.print(level1[x][y]);
 			}
 		}
-		System.out.println(level1[0].length);
 
 		int mapHeight = level1.length;
 		int mapWidth = level1[0].length;
@@ -123,6 +106,7 @@ public class JumpyDash extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(box2D.getCamera().combined);
+
 		/*
 		// Debugging
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);
