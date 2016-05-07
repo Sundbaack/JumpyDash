@@ -9,20 +9,18 @@ import java.util.List;
 
 public class AbilityController {
 
-    private List<Ability> abilityList;
+    private List<Ability> abilities;
     private AbilityView abilityView;
     private Box2D box2D;
-    private final float PIXELS_TO_METERS;
 
     public AbilityController(Box2D box2D) {
         this.box2D = box2D;
-        this.PIXELS_TO_METERS = box2D.getPixelsToMeters();
-        abilityList = new ArrayList<Ability>();
+        abilities = new ArrayList<Ability>();
         abilityView = new AbilityView();
     }
 
     public void createObject(int x, int y, int mapHeight) {
-        abilityList.add(new Ability(box2D.newDynamic(x, y, mapHeight)));
+        abilities.add(new Ability(box2D.newDynamic(x, y, mapHeight)));
     }
 
     public void update(SpriteBatch batch) {
@@ -30,8 +28,8 @@ public class AbilityController {
     }
 
     public void render(SpriteBatch batch) {
-        for(Ability a: abilityList) {
-            abilityView.render(a.getPosition().x * PIXELS_TO_METERS, a.getPosition().y * PIXELS_TO_METERS, batch);
+        for(Ability a: abilities) {
+            abilityView.render(a.getPosition().x * box2D.getPixelsToMeters(), a.getPosition().y *  box2D.getPixelsToMeters(), batch);
         }
     }
 

@@ -22,7 +22,7 @@ public class Player {
         this.jumpFlag = !jumpFlag;
     }
 
-    public boolean getJumpState(){
+    public boolean getJumpState() {
         return this.jumpFlag;
     }
 

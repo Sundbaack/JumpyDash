@@ -9,20 +9,18 @@ import java.util.List;
 
 public class PlatformController extends ApplicationAdapter {
 
-    private static List<Platform> platformList;
+    private static List<Platform> platforms;
     private PlatformView platformView;
     private Box2D box2D;
-    private final float PIXELS_TO_METERS;
 
     public PlatformController(Box2D box2D) {
         this.box2D = box2D;
-        this.PIXELS_TO_METERS = box2D.getPixelsToMeters();
-        platformList = new ArrayList<Platform>();
+        platforms = new ArrayList<Platform>();
         platformView = new PlatformView();
     }
 
     public void createObject(int x, int y, int mapHeight) {
-        platformList.add(new Platform(box2D.newStatic(x, y, mapHeight, false)));
+        platforms.add(new Platform(box2D.newStatic(x, y, mapHeight, false)));
     }
 
     public void update(SpriteBatch batch) {
@@ -30,13 +28,13 @@ public class PlatformController extends ApplicationAdapter {
     }
 
     public void render(SpriteBatch batch) {
-        for (Platform p : platformList) {
-            platformView.render(p.getPosition().x * PIXELS_TO_METERS, p.getPosition().y * PIXELS_TO_METERS, batch);
+        for (Platform p : platforms) {
+            platformView.render(p.getPosition().x * box2D.getPixelsToMeters(), p.getPosition().y * box2D.getPixelsToMeters(), batch);
         }
     }
 
-    public static List<Platform> getPlatformList() {
-        return platformList;
+    public static List<Platform> getPlatforms() {
+        return platforms;
     }
 
     public void dispose() {
