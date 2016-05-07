@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.chalmers.projectrolf.model.Platform;
 import org.chalmers.projectrolf.view.PlatformView;
-
 import java.util.ArrayList;
 import java.util.List;
 

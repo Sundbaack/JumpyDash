@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.chalmers.projectrolf.model.Bullet;
 import org.chalmers.projectrolf.view.BulletView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class BulletController {
     // Remove bullets when moving out of screen
     public void updateBullets() {
         for (int i = 0; i < bulletList.size(); i++) {
-            if (((bulletList.get(i).getPosition().x * PIXELS_TO_METERS) + 16) > (Box2D.camera.position.x + 1280 / 2)) {
+            if (((bulletList.get(i).getPosition().x * PIXELS_TO_METERS) + 16) > (box2D.getCamera().position.x + 1280 / 2)) {
                 bulletList.remove(i);
             }
         }

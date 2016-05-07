@@ -5,7 +5,6 @@ public class Coin extends Item {
     private int valueCoin;
 
     public Coin(JDBody body, int valueCoin){
-
         super(body);
         this.valueCoin = valueCoin;
     }

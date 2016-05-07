@@ -23,7 +23,7 @@ public class CoinController extends ApplicationAdapter {
     }
 
     public void createObject(int x, int y, int mapHeight) {
-        coinList.add(new Coin( box2D.newStatic(x, y, mapHeight, false), 20));
+        coinList.add(new Coin(box2D.newStatic(x, y, mapHeight, false), 20));
     }
 
     public void update(SpriteBatch batch) {
@@ -39,5 +39,4 @@ public class CoinController extends ApplicationAdapter {
     public void dispose() {
         coinView.dispose();
     }
-
 }

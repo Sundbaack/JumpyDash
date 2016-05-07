@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.view.PlayerView;
 
@@ -34,10 +33,10 @@ public class PlayerController {
         // Enable the camera to follow the player
         if(player.getPosition().x > 500 / PIXELS_TO_METERS) {
 
-            Vector3 position = Box2D.camera.position;
-            position.x = Box2D.camera.position.x + 1280 / PIXELS_TO_METERS + (player.getPosition().x * PIXELS_TO_METERS - Box2D.camera.position.x) * 0.1f;
-            Box2D.camera.position.set(position);
-            Box2D.camera.update();
+            Vector3 position = box2D.getCamera().position;
+            position.x = box2D.getCamera().position.x + 1280 / PIXELS_TO_METERS + (player.getPosition().x * PIXELS_TO_METERS - box2D.getCamera().position.x) * 0.1f;
+            box2D.getCamera().position.set(position);
+            box2D.getCamera().update();
         }
     }
 
@@ -59,6 +58,7 @@ public class PlayerController {
     public static Player getPlayer() {
         return player;
     }
+
     public void dispose() {
         playerView.dispose();
     }

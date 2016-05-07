@@ -1,6 +1,5 @@
 package org.chalmers.projectrolf.controller;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -8,11 +7,9 @@ import org.chalmers.projectrolf.model.JDBody;
 
 public class Box2D {
 
-
-    public static OrthographicCamera camera;
-
-    public World world;
-    private static final float PIXELS_TO_METERS = 100f;
+    private OrthographicCamera camera;
+    private World world;
+    private final float PIXELS_TO_METERS = 100f;
     private final float tileWidthHeight;
 
     public Box2D(float tileWidthHeight) {
@@ -26,6 +23,10 @@ public class Box2D {
 
     public float getPixelsToMeters() {
         return this.PIXELS_TO_METERS;
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
     }
 
     public JDBody newDynamic(float x, float y, int mapHeight) {
@@ -58,7 +59,7 @@ public class Box2D {
         JDBody jdBody = new JDBody();
         jdBody.body = world.createBody(bodyDef);
 
-        if (ghost == false) {
+        if (!ghost) {
             float hTileWidthHeight = (tileWidthHeight / 2) / PIXELS_TO_METERS;
 
             Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
@@ -127,9 +128,4 @@ public class Box2D {
     public void update(){
         camera.update();
     }
-
-    public Camera getCamera(){
-        return camera;
-    }
-
 }
