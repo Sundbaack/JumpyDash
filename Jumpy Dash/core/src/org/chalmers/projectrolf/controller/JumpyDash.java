@@ -27,11 +27,12 @@ public class JumpyDash extends ApplicationAdapter {
 	@Override
 	public void create() {
 
-		batch = new SpriteBatch();
-		stage = new Stage(new ScreenViewport());
-
 		// Box2D wrapper
 		box2D = new Box2D(tileWidthHeight);
+
+		batch = new SpriteBatch();
+		stage = new Stage(new ScreenViewport(), batch);
+		stage.getViewport().setCamera(box2D.getCamera());
 
 		try {
 			loadMap(new File("level1.txt"));
@@ -116,6 +117,6 @@ public class JumpyDash extends ApplicationAdapter {
 
 	@Override
 	public void dispose() {
-
+		stage.dispose();
 	}
 }
