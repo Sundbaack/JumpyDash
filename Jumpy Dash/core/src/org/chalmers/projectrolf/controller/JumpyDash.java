@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.io.File;
@@ -27,7 +26,6 @@ public class JumpyDash extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-
 		// Box2D wrapper
 		box2D = new Box2D(tileWidthHeight);
 
@@ -96,10 +94,7 @@ public class JumpyDash extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-
-
-		//System.out.println(stage.getActors());
-
+		
 		box2D.step();
 		box2D.update();
 
