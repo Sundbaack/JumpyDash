@@ -11,7 +11,7 @@ public class CollisionListener implements ContactListener {
         Fixture fb = contact.getFixtureB();
 
         // Check to see if the collision is between the the player and a platform
-		for (Platform p: PlatformController.getPlatformList()) {
+		for (Platform p: PlatformController.getPlatforms()) {
 
             if ((fa.getBody() == PlayerController.getPlayer().getJDBody().getBody() &&
 			    fb.getBody() == p.getJDBody().getBody())

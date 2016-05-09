@@ -7,7 +7,6 @@ public class Enemy {
     private JDBody body;
 
     public Enemy(JDBody body) {
-
         this.body = body;
     }
 

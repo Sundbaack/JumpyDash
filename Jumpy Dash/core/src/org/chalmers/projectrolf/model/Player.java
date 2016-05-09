@@ -11,7 +11,6 @@ public class Player {
     private static final float MAX_SPEED_X = 5.5f;
 
     public Player(JDBody body) {
-
         this.body = body;
         jumpFlag = false;
         this.points = 0;
@@ -23,7 +22,7 @@ public class Player {
         this.jumpFlag = !jumpFlag;
     }
 
-    public boolean getJumpState(){
+    public boolean getJumpState() {
         return this.jumpFlag;
     }
 
