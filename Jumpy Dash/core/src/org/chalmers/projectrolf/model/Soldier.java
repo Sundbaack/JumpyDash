@@ -8,6 +8,7 @@ public class Soldier extends Enemy {
 
     public Soldier(JDBody body) {
         super(body);
+
     }
 
     public void move() {

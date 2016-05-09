@@ -12,6 +12,7 @@ public class Player {
 
     public Player(JDBody body) {
         this.body = body;
+        this.body.setUserData(this);
         jumpFlag = false;
         this.points = 0;
 

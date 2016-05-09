@@ -1,13 +1,9 @@
 package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.projectrolf.model.Ability;
 import org.chalmers.projectrolf.view.AbilityView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AbilityController extends Actor{
 

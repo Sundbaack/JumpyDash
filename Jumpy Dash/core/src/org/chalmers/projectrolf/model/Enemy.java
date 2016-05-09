@@ -8,6 +8,7 @@ public class Enemy {
 
     public Enemy(JDBody body) {
         this.body = body;
+        this.body.setUserData(this);
     }
 
     public JDBody getJDBody() {

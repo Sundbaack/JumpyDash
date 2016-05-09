@@ -1,8 +1,7 @@
 package org.chalmers.projectrolf.controller;
 
-import com.badlogic.gdx.ApplicationAdapter;
+
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.projectrolf.model.Coin;
 import org.chalmers.projectrolf.view.CoinView;
