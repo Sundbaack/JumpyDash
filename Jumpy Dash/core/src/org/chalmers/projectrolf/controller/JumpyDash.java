@@ -18,6 +18,7 @@ public class JumpyDash extends ApplicationAdapter {
 	private Texture background;
 	private SpriteBatch batch;
 
+
 	private Box2D box2D;
 
 	private final float tileWidthHeight = 32;
@@ -94,7 +95,7 @@ public class JumpyDash extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		
+
 		box2D.step();
 		box2D.update();
 

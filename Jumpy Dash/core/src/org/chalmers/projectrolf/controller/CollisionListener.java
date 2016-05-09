@@ -2,16 +2,26 @@ package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.physics.box2d.*;
 import org.chalmers.projectrolf.model.Platform;
+import org.chalmers.projectrolf.model.Player;
 
 public class CollisionListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        Fixture fa = contact.getFixtureA();
-        Fixture fb = contact.getFixtureB();
+        Body a = contact.getFixtureA().getBody();
+        Body b = contact.getFixtureB().getBody();
+        if (a.getUserData() instanceof Player && b.getUserData() instanceof Platform || b.getUserData() instanceof Platform && a.getUserData() instanceof Player){
+            System.out.println("Working");
+            if (!PlayerController.getPlayer().getJumpState()) {
+                PlayerController.getPlayer().setJumpState();
+            }
+
+        }
+
+
 
         // Check to see if the collision is between the the player and a platform
-	/*	for (Platform p: PlatformController.getPlatforms()) {
+    /*	for (Platform p: PlatformController.getPlatforms()) {
 
             if ((fa.getBody() == PlayerController.getPlayer().getJDBody().getBody() &&
 			    fb.getBody() == p.getJDBody().getBody())
