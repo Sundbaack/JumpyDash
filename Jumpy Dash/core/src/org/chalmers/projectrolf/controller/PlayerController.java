@@ -2,30 +2,27 @@ package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.view.PlayerView;
 
-public class PlayerController {
+public class PlayerController extends Actor {
 
     private Box2D box2D;
     private static Player player;
     private PlayerView playerView;
 
-    public PlayerController(Box2D box2D) {
+    public PlayerController(Box2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         playerView = new PlayerView();
-    }
-
-    public void createObject(int x, int y, int mapHeight) {
         player = new Player(box2D.newDynamic(x, y, mapHeight));
     }
 
-    public void update(SpriteBatch batch) {
+    public void act(float delta) {
         handleInput();
-        render(batch);
         //player.move();
 
         // Enable the camera to follow the player
@@ -38,8 +35,9 @@ public class PlayerController {
         }
     }
 
-    public void render(SpriteBatch batch) {
-        playerView.render(player.getPosition().x * box2D.getPixelsToMeters(), player.getPosition().y * box2D.getPixelsToMeters(), batch);
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        playerView.render(batch, player.getPosition().x * box2D.getPixelsToMeters(), player.getPosition().y * box2D.getPixelsToMeters());
     }
 
     public void handleInput() {
