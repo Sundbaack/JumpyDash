@@ -16,7 +16,7 @@ public class PlatformController extends Actor {
         this.box2D = box2D;
       // platforms = new ArrayList<Platform>();
         platformView = new PlatformView();
-        platform = new Platform(box2D.newStatic(x, y, mapHeight,false));
+        platform = new Platform(box2D.newStatic(x, y, mapHeight,true));
 
     }
 
