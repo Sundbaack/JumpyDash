@@ -19,7 +19,7 @@ public class CollisionListener implements ContactListener {
             }
         }
         if(a.getUserData() instanceof Player && b.getUserData() instanceof Coin || b.getUserData() instanceof Coin && a.getUserData() instanceof Player){
-            Player.setPoints(Coin.getValue());
+            PlayerController.getPlayer().setPoints(Coin.getValue());
         }
     }
 
