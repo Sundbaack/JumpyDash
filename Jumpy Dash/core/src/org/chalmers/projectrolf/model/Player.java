@@ -7,7 +7,7 @@ public class Player {
     private JDBody body;
     private float impulse;
     private boolean jumpFlag;
-    private int points;
+    private static int points;
     private static final float MAX_SPEED_X = 5.5f;
 
     public Player(JDBody body) {
@@ -49,12 +49,12 @@ public class Player {
         return this.body;
     }
 
-    public int getPoints() {
-        return this.points;
+    public static int getPoints() {
+        return points;
     }
 
-    public void setPoints(int a) {
-        this.points += a;
+    public static void setPoints(int a) {
+        points += a;
     }
 
     public Vector2 getPosition() {
