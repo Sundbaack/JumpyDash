@@ -1,7 +1,7 @@
 package org.chalmers.projectrolf.model;
 
 import com.badlogic.gdx.math.Vector2;
-import org.junit.Test;
+
 
 public class Soldier extends Enemy {
 
