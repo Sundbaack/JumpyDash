@@ -28,7 +28,7 @@ public class PlayerController extends Actor {
 
     public void act(float delta) {
         handleInput();
-        //.move();
+        move();
 
         // Enable the camera to follow the player
         if(getPosition().x > 500 / box2D.getPixelsToMeters()) {
@@ -43,7 +43,6 @@ public class PlayerController extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         playerView.render(batch, getPosition().x * box2D.getPixelsToMeters(), getPosition().y * box2D.getPixelsToMeters());
-
     }
 
     public void handleInput() {
@@ -51,7 +50,7 @@ public class PlayerController extends Actor {
             player.setJumpState();
             jump();
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             BulletController bulletController = new BulletController(box2D);
             getStage().addActor(bulletController);
             System.out.println(getStage().getActors());

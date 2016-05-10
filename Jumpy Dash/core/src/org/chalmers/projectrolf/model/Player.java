@@ -8,7 +8,6 @@ public class Player {
     private static final float MAX_SPEED_X = 5.5f;
 
     public Player() {
-        //this.body.setUserData(this);
         jumpFlag = false;
         this.points = 0;
     }
