@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.view.PlayerView;
 
@@ -45,6 +46,11 @@ public class PlayerController extends Actor {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpState()) {
             player.setJumpState();
             player.jump();
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
+            BulletController bulletController = new BulletController(box2D);
+            getStage().addActor(bulletController);
+            System.out.println(getStage().getActors());
         }
     }
 
