@@ -2,8 +2,10 @@ package org.chalmers.projectrolf.controller;
 
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.projectrolf.model.Coin;
+import org.chalmers.projectrolf.model.JDBody;
 import org.chalmers.projectrolf.view.CoinView;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.List;
 public class CoinController extends Actor {
 
     private CoinView coinView;
+    private static JDBody body;
     private Box2D box2D;
     private Coin coin;
 
@@ -19,7 +22,9 @@ public class CoinController extends Actor {
     public CoinController(Box2D box2D,int x, int y, int mapHeight) {
         this.box2D = box2D;
         coinView = new CoinView();
-        coin = new Coin(box2D.newStatic(x,y,mapHeight,false),1);
+        coin = new Coin(1);
+        body = box2D.newStatic(x, y, mapHeight, false);
+        body.setUserData(coin);
     }
 
     public void act(float Delta){
@@ -28,8 +33,16 @@ public class CoinController extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        coinView.render(batch, coin.getPosition().x*box2D.getPixelsToMeters(),coin.getPosition().y * box2D.getPixelsToMeters());
+        coinView.render(batch, getPosition().x*box2D.getPixelsToMeters(), getPosition().y * box2D.getPixelsToMeters());
 
+    }
+
+    public JDBody getJDBody() {
+        return this.body;
+    }
+
+    public static Vector2 getPosition() {
+        return body.getPosition();
     }
 
 

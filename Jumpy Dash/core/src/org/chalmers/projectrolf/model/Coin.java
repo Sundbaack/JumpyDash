@@ -4,8 +4,8 @@ public class Coin extends Item {
 
     private static int valueCoin;
 
-    public Coin(JDBody body, int valueCoin){
-        super(body);
+    public Coin(int valueCoin){
+        super();
         this.valueCoin = valueCoin;
     }
 
