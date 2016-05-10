@@ -13,7 +13,7 @@ import org.chalmers.projectrolf.view.PlayerView;
 public class PlayerController extends Actor {
 
     private Box2D box2D;
-    private JDBody body;
+    private static JDBody body;
     private static Player player;
     private PlayerView playerView;
 
@@ -51,6 +51,11 @@ public class PlayerController extends Actor {
             player.setJumpState();
             jump();
         }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
+            BulletController bulletController = new BulletController(box2D);
+            getStage().addActor(bulletController);
+            System.out.println(getStage().getActors());
+        }
     }
 
     public void jump() {
@@ -71,8 +76,8 @@ public class PlayerController extends Actor {
         return this.body;
     }
 
-    public Vector2 getPosition() {
-        return this.body.getPosition();
+    public static Vector2 getPosition() {
+        return body.getPosition();
     }
 
     public static Player getPlayer() {
