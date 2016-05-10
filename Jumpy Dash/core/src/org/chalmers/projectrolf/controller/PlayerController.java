@@ -27,6 +27,7 @@ public class PlayerController extends Actor {
         player.setImpulse(jdBody.getMass() * 6f);
     }
 
+    @Override
     public void act(float delta) {
         handleInput();
         move();
@@ -37,7 +38,6 @@ public class PlayerController extends Actor {
             Vector3 position = box2D.getCamera().position;
             position.x = box2D.getCamera().position.x + 1280 / box2D.getPixelsToMeters() + (getPosition().x * box2D.getPixelsToMeters() - box2D.getCamera().position.x) * 0.1f;
             box2D.getCamera().position.set(position);
-            box2D.getCamera().update();
         }
     }
 
