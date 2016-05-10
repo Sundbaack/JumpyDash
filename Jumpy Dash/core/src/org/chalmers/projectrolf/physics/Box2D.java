@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Box2D {
+public class Box2D implements IBox2D {
 
     private OrthographicCamera camera;
     private World world;
@@ -14,10 +14,13 @@ public class Box2D {
     public Box2D(float tileWidthHeight) {
         this.tileWidthHeight = tileWidthHeight;
         world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
-        world.setContactListener(new CollisionListener());
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 736);
+    }
+
+    public World getWorld() {
+        return this.world;
     }
 
     public float getPixelsToMeters() {

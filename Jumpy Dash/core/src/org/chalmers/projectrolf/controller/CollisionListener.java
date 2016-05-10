@@ -1,7 +1,6 @@
-package org.chalmers.projectrolf.physics;
+package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.physics.box2d.*;
-import org.chalmers.projectrolf.controller.PlayerController;
 import org.chalmers.projectrolf.model.Coin;
 import org.chalmers.projectrolf.model.Platform;
 import org.chalmers.projectrolf.model.Player;

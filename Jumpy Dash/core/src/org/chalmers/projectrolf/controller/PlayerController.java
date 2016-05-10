@@ -6,25 +6,25 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import org.chalmers.projectrolf.physics.Box2D;
-import org.chalmers.projectrolf.physics.JDBody;
+import org.chalmers.projectrolf.physics.IBox2D;
 import org.chalmers.projectrolf.model.Player;
+import org.chalmers.projectrolf.physics.IJDBody;
 import org.chalmers.projectrolf.view.PlayerView;
 
 public class PlayerController extends Actor {
 
-    private Box2D box2D;
-    private static JDBody body;
+    private IBox2D box2D;
+    private IJDBody jdBody;
     private static Player player;
     private PlayerView playerView;
 
-    public PlayerController(Box2D box2D, int x, int y, int mapHeight) {
+    public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         playerView = new PlayerView();
         player = new Player();
-        body = box2D.newDynamic(x, y, mapHeight);
-        body.setUserData(player);
-        player.setImpulse(this.body.getMass() * 6f);
+        jdBody = box2D.newDynamic(x, y, mapHeight);
+        jdBody.setUserData(player);
+        player.setImpulse(jdBody.getMass() * 6f);
     }
 
     public void act(float delta) {
@@ -58,25 +58,21 @@ public class PlayerController extends Actor {
     }
 
     public void jump() {
-        getJDBody().applyLinearImpulse(new Vector2(0, player.getImpulse()), getJDBody().getWorldCenter(), true);
+        jdBody.applyLinearImpulse(new Vector2(0, player.getImpulse()), jdBody.getWorldCenter(), true);
     }
 
     public void move() {
 
-        Vector2 speed = getJDBody().getLinearVelocity();
+        Vector2 speed = jdBody.getLinearVelocity();
         float speedX = speed.x;
 
         if (speedX < player.getMaxSpeedX()) {
-            getJDBody().applyForceToCenter(new Vector2(6, 0), true);
+            jdBody.applyForceToCenter(new Vector2(6, 0), true);
         }
     }
 
-    public JDBody getJDBody() {
-        return this.body;
-    }
-
-    public static Vector2 getPosition() {
-        return body.getPosition();
+    public Vector2 getPosition() {
+        return jdBody.getPosition();
     }
 
     public static Player getPlayer() {

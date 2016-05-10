@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import org.chalmers.projectrolf.physics.Box2D;
+import org.chalmers.projectrolf.physics.IBox2D;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -17,16 +19,15 @@ public class JumpyDash extends ApplicationAdapter {
 	private Stage stage;
 	private Texture background;
 	private SpriteBatch batch;
-	private Box2D box2D;
+	private IBox2D box2D;
 	private final float tileWidthHeight = 32;
 	//private Box2DDebugRenderer debugRenderer;
 	//private Matrix4 debugMatrix;
 
 	@Override
 	public void create() {
-
-		// Box2D wrapper
 		box2D = new Box2D(tileWidthHeight);
+		box2D.getWorld().setContactListener(new CollisionListener());
 
 		batch = new SpriteBatch();
 		stage = new Stage(new ScreenViewport(box2D.getCamera()), batch);
