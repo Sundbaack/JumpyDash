@@ -51,7 +51,7 @@ public class PlayerController extends Actor {
             jump();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-            BulletController bulletController = new BulletController(box2D);
+            BulletController bulletController = new BulletController(box2D, getPosition().x, getPosition().y);
             getStage().addActor(bulletController);
             System.out.println(getStage().getActors());
         }

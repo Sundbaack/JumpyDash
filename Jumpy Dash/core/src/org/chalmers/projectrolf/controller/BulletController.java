@@ -17,11 +17,11 @@ public class BulletController extends Actor {
     private static JDBody body;
     private Box2D box2D;
 
-    public BulletController(Box2D box2D) {
+    public BulletController(Box2D box2D, float x, float y) {
         this.box2D = box2D;
         bulletView = new BulletView();
         bullet = new Bullet();
-        body = (box2D.newBullet(PlayerController.getPosition().x,PlayerController.getPosition().y));
+        body = (box2D.newBullet(x, y));
         body.setLinearVelocity(new Vector2(15f,0));
         body.setUserData(bullet);
     }
@@ -57,6 +57,7 @@ public class BulletController extends Actor {
     public JDBody getJDBody(){
         return body;
     }
+
     public void act(float delta){
         updateBullets();
         System.out.println(getPosition());
