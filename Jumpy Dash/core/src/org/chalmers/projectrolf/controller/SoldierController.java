@@ -38,6 +38,10 @@ public class SoldierController extends Actor {
         return body.getPosition();
     }
 
+    public JDBody getBody() {
+        return body;
+    }
+
     public void move() {
         // Checks in what direction the soldier should move
         if(soldier.getDirectionFlag()){
