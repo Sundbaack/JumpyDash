@@ -77,11 +77,11 @@ public class Box2D {
             //Not working yet for some reason
 
             //Ghost vertices
-            Vector2 v1 = new Vector2(0, tileWidthHeight);
-            Vector2 v2 = new Vector2(tileWidthHeight, tileWidthHeight);
-            Vector2 v0 = new Vector2(0,-tileWidthHeight);
-            Vector2 v3 = new Vector2(tileWidthHeight,-tileWidthHeight);
-
+            Vector2 v1 = new Vector2(0, tileWidthHeight / PIXELS_TO_METERS);
+            Vector2 v2 = new Vector2(tileWidthHeight / PIXELS_TO_METERS, tileWidthHeight / PIXELS_TO_METERS);
+            Vector2 v0 = new Vector2(0, 0);
+            Vector2 v3 = new Vector2(tileWidthHeight / PIXELS_TO_METERS, 0);
+            
             // Create a EdgeShape and apply it to a fixture
             EdgeShape edgeShape = new EdgeShape();
             edgeShape.set(v1, v2);

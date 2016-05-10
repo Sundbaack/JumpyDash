@@ -2,6 +2,7 @@ package org.chalmers.projectrolf.model;
 
 import com.badlogic.gdx.math.Vector2;
 
+
 public class Soldier extends Enemy {
 
     private boolean directionFlag = true;
@@ -23,6 +24,10 @@ public class Soldier extends Enemy {
 
     public void setDirectionFlag(){
         directionFlag = !directionFlag;
+    }
+
+    public boolean getDirectionFlag(){
+        return directionFlag;
     }
 
 }
