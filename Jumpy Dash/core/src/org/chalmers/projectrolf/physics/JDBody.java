@@ -1,4 +1,4 @@
-package org.chalmers.projectrolf.model;
+package org.chalmers.projectrolf.physics;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;

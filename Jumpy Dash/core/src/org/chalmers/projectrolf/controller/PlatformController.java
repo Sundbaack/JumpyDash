@@ -3,7 +3,8 @@ package org.chalmers.projectrolf.controller;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import org.chalmers.projectrolf.model.JDBody;
+import org.chalmers.projectrolf.physics.Box2D;
+import org.chalmers.projectrolf.physics.JDBody;
 import org.chalmers.projectrolf.model.Platform;
 import org.chalmers.projectrolf.view.PlatformView;
 
