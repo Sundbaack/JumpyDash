@@ -2,14 +2,10 @@ package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import org.chalmers.projectrolf.physics.Box2D;
 import org.chalmers.projectrolf.physics.IBox2D;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -17,8 +13,6 @@ import java.util.Scanner;
 public class JumpyDash extends ApplicationAdapter {
 
 	private Stage stage;
-	private Texture background;
-	private SpriteBatch batch;
 	private IBox2D box2D;
 	private final float tileWidthHeight = 32;
 	//private Box2DDebugRenderer debugRenderer;
@@ -29,17 +23,13 @@ public class JumpyDash extends ApplicationAdapter {
 		box2D = new Box2D(tileWidthHeight);
 		box2D.getWorld().setContactListener(new CollisionListener());
 
-		batch = new SpriteBatch();
-		stage = new Stage(new ScreenViewport(box2D.getCamera()), batch);
+		stage = new Stage(new ScreenViewport(box2D.getCamera()));
 
 		try {
 			loadMap(new File("level1.txt"));
 		} catch (FileNotFoundException e) {
 			System.out.print("File not found");
 		}
-
-		background = new Texture(Gdx.files.internal("background_1.png"));
-		background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
 		//debugRenderer = new Box2DDebugRenderer();
 	}
@@ -93,13 +83,8 @@ public class JumpyDash extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-
 		box2D.step();
 		box2D.update();
-
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.setProjectionMatrix(box2D.getCamera().combined);
 
 		/*
 		// Debugging
@@ -107,12 +92,6 @@ public class JumpyDash extends ApplicationAdapter {
 		debugRenderer.render(box2D.world, debugMatrix);
 		*/
 
-		batch.begin();
-
-		// Draw background
-		batch.draw(background, 0, 0, 0, 0, 10000, 736);
-
-		batch.end();
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 	}
