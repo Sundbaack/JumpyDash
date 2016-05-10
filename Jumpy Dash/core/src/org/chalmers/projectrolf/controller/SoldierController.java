@@ -1,38 +1,32 @@
 package org.chalmers.projectrolf.controller;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.projectrolf.model.Soldier;
 import org.chalmers.projectrolf.view.SoldierView;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SoldierController extends Actor {
 
-public class SoldierController {
-
-    private List<Soldier> soldiers;
+    private Soldier soldier;
     private SoldierView soldierView;
     private Box2D box2D;
 
-    public SoldierController(Box2D box2D) {
-        soldiers = new ArrayList<Soldier>();
-        this.box2D = box2D;
+    public SoldierController(Box2D box2D,int x,int y, int mapHeight) {
 
+        this.box2D = box2D;
+        soldier = new Soldier(box2D.newDynamic(x,y,mapHeight));
         soldierView = new SoldierView();
     }
 
-    public void createObject(int x,int y, int mapHeight) {
-        Soldier soldier = new Soldier(box2D.newDynamic(x, y, mapHeight));
-        soldiers.add(soldier);
+
+    public void act(float Delta){
+
     }
 
-    public void update(SpriteBatch batch) {
-        render(batch);
-    }
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+       soldierView.render(batch, soldier.getPosition().x*box2D.getPixelsToMeters(),soldier.getPosition().y * box2D.getPixelsToMeters());
 
-    public void render(SpriteBatch batch) {
-        for(Soldier p : soldiers) {
-           soldierView.render(p.getPosition().x * box2D.getPixelsToMeters(), p.getPosition().y * box2D.getPixelsToMeters(), batch);
-        }
     }
 
     public void dispose() {

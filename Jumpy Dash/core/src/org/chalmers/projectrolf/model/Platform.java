@@ -8,6 +8,7 @@ public class Platform  {
 
     public Platform(JDBody body){
         this.body = body;
+        this.body.setUserData(this);
     }
 
     public JDBody getJDBody() {

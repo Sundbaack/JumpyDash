@@ -8,6 +8,7 @@ public class Bullet {
 
     public Bullet(JDBody body) {
         this.body = body;
+        this.body.setUserData(this);
         this.body.setLinearVelocity(new Vector2(15, 0));
     }
 

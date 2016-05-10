@@ -18,6 +18,7 @@ public class JumpyDash extends ApplicationAdapter {
 	private Texture background;
 	private SpriteBatch batch;
 
+
 	private Box2D box2D;
 
 	private final float tileWidthHeight = 32;
@@ -26,13 +27,12 @@ public class JumpyDash extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-
 		// Box2D wrapper
 		box2D = new Box2D(tileWidthHeight);
 
 		batch = new SpriteBatch();
-		stage = new Stage(new ScreenViewport(), batch);
-		stage.getViewport().setCamera(box2D.getCamera());
+		stage = new Stage(new ScreenViewport(box2D.getCamera()), batch);
+
 
 		try {
 			loadMap(new File("level1.txt"));
@@ -72,17 +72,21 @@ public class JumpyDash extends ApplicationAdapter {
 				if (level1[y][x] == 'P') {
 					PlayerController p = new PlayerController(box2D, x, y, mapHeight);
 					stage.addActor(p);
-				} else if (level1[y][x] == '#') {
-					//platformController.createObject(x, y, mapHeight);
 
+				} else if (level1[y][x] == '#') {
+					PlatformController platformController = new PlatformController(box2D,x, y, mapHeight);
+					stage.addActor(platformController);
 				} else if (level1[y][x] == 'C') {
-					//coinController.createObject(x, y, mapHeight);
+					CoinController coinController = new CoinController(box2D,x,y,mapHeight);
+					stage.addActor(coinController);
 
 				} else if (level1[y][x] == 'S') {
-					//soldierController.createObject(x, y, mapHeight);
+					SoldierController soldierController = new SoldierController(box2D,x,y,mapHeight);
+					stage.addActor(soldierController);
 
 				} else if (level1[y][x] == 'A') {
-					//abilityController.createObject(x, y, mapHeight);
+					AbilityController abilityController = new AbilityController(box2D,x,y,mapHeight);
+					stage.addActor(abilityController);
 
 				}
 			}
@@ -90,10 +94,7 @@ public class JumpyDash extends ApplicationAdapter {
 	}
 
 	@Override
-	public void render () {
-
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
+	public void render() {
 
 		box2D.step();
 		box2D.update();
@@ -113,6 +114,8 @@ public class JumpyDash extends ApplicationAdapter {
 		batch.draw(background, 0, 0, 0, 0, 10000, 736);
 
 		batch.end();
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 	}
 
 	@Override

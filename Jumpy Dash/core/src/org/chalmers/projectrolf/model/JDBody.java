@@ -37,4 +37,8 @@ public class JDBody {
     public Vector2 getWorldCenter() {
         return body.getWorldCenter();
     }
+
+    public void setUserData(Object userData){
+        body.setUserData(userData);
+    }
 }

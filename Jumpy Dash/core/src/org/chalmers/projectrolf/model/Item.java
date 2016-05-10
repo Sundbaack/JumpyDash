@@ -8,6 +8,7 @@ public class Item {
 
     public Item(JDBody body) {
         this.body = body;
+        this.body.setUserData(this);
     }
 
     public JDBody getJDBody() {

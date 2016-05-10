@@ -37,7 +37,8 @@ public class PlayerController extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        playerView.render(batch, player.getPosition().x * box2D.getPixelsToMeters(), player.getPosition().y * box2D.getPixelsToMeters());
+        playerView.render(batch, player.getPosition().x*box2D.getPixelsToMeters(), player.getPosition().y*box2D.getPixelsToMeters() );
+
     }
 
     public void handleInput() {
