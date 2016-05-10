@@ -60,7 +60,6 @@ public class BulletController extends Actor {
 
     public void act(float delta){
         updateBullets();
-        System.out.println(getPosition());
     }
 
     public void draw(Batch batch, float parentAlpha){

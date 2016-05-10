@@ -10,7 +10,6 @@ import org.chalmers.projectrolf.view.PlatformView;
 
 public class PlatformController extends Actor {
 
-    //private static List<Platform> platforms;
     private PlatformView platformView;
     private Platform platform;
     private Box2D box2D;
@@ -18,28 +17,16 @@ public class PlatformController extends Actor {
 
     public PlatformController(Box2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-      // platforms = new ArrayList<Platform>();
-
         platformView = new PlatformView();
         platform = new Platform();
         this.body = box2D.newStatic(x,y,mapHeight,true);
         body.setUserData(platform);
-
     }
-
-  /*  public void createObject(int x, int y, int mapHeight) {
-        platforms.add(new Platform(box2D.newStatic(x, y, mapHeight, false)));
-    }
-
-
-    public void update(SpriteBatch batch) {
-        render(batch);
-    }
-*/
 
     public void act(float delta) {
 
     }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         platformView.render(batch,getPosition().x * box2D.getPixelsToMeters(), getPosition().y * box2D.getPixelsToMeters());
@@ -49,7 +36,7 @@ public class PlatformController extends Actor {
         return body.getPosition();
     }
 
-    public JDBody getBody(){
+    public JDBody getJDBody(){
         return body;
     }
 

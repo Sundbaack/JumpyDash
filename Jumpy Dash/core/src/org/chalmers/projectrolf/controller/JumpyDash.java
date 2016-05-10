@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import org.chalmers.projectrolf.physics.Box2D;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -18,22 +17,19 @@ public class JumpyDash extends ApplicationAdapter {
 	private Stage stage;
 	private Texture background;
 	private SpriteBatch batch;
-
-
 	private Box2D box2D;
-
 	private final float tileWidthHeight = 32;
 	//private Box2DDebugRenderer debugRenderer;
 	//private Matrix4 debugMatrix;
 
 	@Override
 	public void create() {
+
 		// Box2D wrapper
 		box2D = new Box2D(tileWidthHeight);
 
 		batch = new SpriteBatch();
 		stage = new Stage(new ScreenViewport(box2D.getCamera()), batch);
-
 
 		try {
 			loadMap(new File("level1.txt"));
@@ -103,6 +99,7 @@ public class JumpyDash extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(box2D.getCamera().combined);
+
 		/*
 		// Debugging
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);
