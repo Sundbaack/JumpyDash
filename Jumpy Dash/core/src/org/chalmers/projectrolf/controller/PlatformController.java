@@ -21,7 +21,7 @@ public class PlatformController extends Actor {
 
         platformView = new PlatformView();
         platform = new Platform();
-        this.body = box2D.newDynamic(x,y,mapHeight);
+        this.body = box2D.newStatic(x,y,mapHeight,true);
         body.setUserData(platform);
 
     }
