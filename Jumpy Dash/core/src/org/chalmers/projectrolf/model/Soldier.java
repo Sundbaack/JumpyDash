@@ -1,6 +1,7 @@
 package org.chalmers.projectrolf.model;
 
 import com.badlogic.gdx.math.Vector2;
+import org.junit.Test;
 
 public class Soldier extends Enemy {
 
@@ -22,6 +23,10 @@ public class Soldier extends Enemy {
 
     public void setDirectionFlag(){
         directionFlag = !directionFlag;
+    }
+
+    public boolean getDirectionFlag(){
+        return directionFlag;
     }
 
 }
