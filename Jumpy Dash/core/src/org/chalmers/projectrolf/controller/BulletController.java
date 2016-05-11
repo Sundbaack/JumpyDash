@@ -57,7 +57,7 @@ public class BulletController extends Actor {
     public void act(float delta) {
         updateBullets();
     }
-
+    @Override
     public void draw(Batch batch, float parentAlpha) {
         bulletView.render(batch, getPosition().x * box2D.getPixelsToMeters(), getPosition().y * box2D.getPixelsToMeters());
     }
