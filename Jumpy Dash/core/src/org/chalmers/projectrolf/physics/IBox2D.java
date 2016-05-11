@@ -17,7 +17,5 @@ public interface IBox2D {
 
     JDBody newBullet(float x, float y);
 
-    void step();
-
     void update();
 }

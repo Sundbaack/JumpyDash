@@ -84,7 +84,6 @@ public class JumpyDash extends Game {
 
 	@Override
 	public void render() {
-		box2D.step();
 		box2D.update();
 
 		/*

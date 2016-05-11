@@ -123,12 +123,9 @@ public class Box2D implements IBox2D {
         return jdBody;
     }
 
-    public void step() {
+    public void update() {
         world.step(1/60f, 8, 3);
         world.clearForces();
-    }
-
-    public void update(){
         camera.update();
     }
 }
