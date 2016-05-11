@@ -1,6 +1,6 @@
 package org.chalmers.projectrolf.controller;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class JumpyDash extends ApplicationAdapter {
+public class JumpyDash extends Game {
 
 	private Stage stage;
 	private IBox2D box2D;
