@@ -9,6 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.height = 736;
 		config.width = 1280;
+		config.resizable = false;
 		new LwjglApplication(new JumpyDash(), config);
 	}
 }

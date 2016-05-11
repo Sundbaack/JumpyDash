@@ -124,7 +124,8 @@ public class Box2D implements IBox2D {
     }
 
     public void step() {
-        world.step(1/60f, 6, 3);
+        world.step(1/60f, 8, 3);
+        world.clearForces();
     }
 
     public void update(){

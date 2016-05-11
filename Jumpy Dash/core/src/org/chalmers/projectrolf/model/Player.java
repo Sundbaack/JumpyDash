@@ -5,7 +5,7 @@ public class Player {
     private float impulse;
     private boolean jumpFlag;
     private static int points;
-    private static final float MAX_SPEED_X = 5.5f;
+    private static final float MAX_SPEED_X = 3.5f;
 
     public Player() {
         jumpFlag = false;

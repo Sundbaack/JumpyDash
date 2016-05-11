@@ -44,7 +44,7 @@ public class JumpyDash extends ApplicationAdapter {
 			currentLine = currentLine.replaceAll("\\s+","");
 
 			for(int x = 0; x < currentLine.length(); x++ ){
-				level1[y][x]= currentLine.charAt(x);
+				level1[y][x] = currentLine.charAt(x);
 			}
 		}
 
@@ -78,6 +78,7 @@ public class JumpyDash extends ApplicationAdapter {
 
 				}
 			}
+
 		}
 	}
 

@@ -67,7 +67,7 @@ public class PlayerController extends Actor {
         float speedX = speed.x;
 
         if (speedX < player.getMaxSpeedX()) {
-            jdBody.applyForceToCenter(new Vector2(6, 0), true);
+            jdBody.applyForceToCenter(new Vector2(4, 0), true);
         }
     }
 
