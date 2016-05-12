@@ -78,7 +78,6 @@ public class JumpyDash extends Game {
 
 				}
 			}
-
 		}
 	}
 
