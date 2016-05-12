@@ -18,7 +18,7 @@ public class JDBody implements IJDBody {
     }
 
     public Vector2 toVector2(Vector2f vector2f){
-        Vector2 vector2 = new Vector2(vector2f.getX(),vector2f.getY());
+        Vector2 vector2 = new Vector2(vector2f.x,vector2f.y);
         return vector2;
     }
 
