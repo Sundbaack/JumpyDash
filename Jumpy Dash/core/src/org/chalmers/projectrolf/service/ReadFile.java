@@ -1,15 +1,12 @@
 package org.chalmers.projectrolf.service;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import org.chalmers.projectrolf.physics.IBox2D;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ReadFile {
 
-    public static char[][] read(IBox2D box2D, Stage stage, File tileMap) throws FileNotFoundException {
+    public static char[][] read(File tileMap) throws FileNotFoundException {
         Scanner scanLevel = new Scanner(tileMap);
 
         char[][] level = new char[23][1200];
@@ -22,7 +19,6 @@ public class ReadFile {
                 level[y][x] = currentLine.charAt(x);
             }
         }
-
         return level;
     }
 }

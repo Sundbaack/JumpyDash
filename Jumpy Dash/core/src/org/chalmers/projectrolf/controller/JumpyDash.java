@@ -22,6 +22,8 @@ public class JumpyDash extends Game {
 	public void render() {
 		// Render the current Screen
 		getScreen().render(Gdx.graphics.getDeltaTime());
+
+		// Update actors
 		stage.act();
 		stage.draw();
 	}

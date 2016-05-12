@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
 
         // Load the map
         try {
-            loadMap(ReadFile.read(box2D, stage, new File("level1.txt")));
+            loadMap(ReadFile.read(new File("level1.txt")));
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
