@@ -13,14 +13,13 @@ public class SoldierController extends Actor {
     private Soldier soldier;
     private SoldierView soldierView;
     private IBox2D box2D;
-    private IJDBody jdBody;
+
 
     public SoldierController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        soldier = new Soldier();
+        soldier = new Soldier(box2D.newDynamic(x,y,mapHeight));
         soldierView = new SoldierView();
-        jdBody = box2D.newDynamic(x,y,mapHeight);
-        jdBody.setUserData(soldier);
+
     }
 
     public void act(float Delta){
@@ -29,22 +28,8 @@ public class SoldierController extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-       soldierView.render(batch, getPosition().x * box2D.getPixelsToMeters(),getPosition().y * box2D.getPixelsToMeters());
+       soldierView.render(batch, soldier.getPosition().x * box2D.getPixelsToMeters(),soldier.getPosition().y * box2D.getPixelsToMeters());
 
-    }
-
-    public Vector2 getPosition(){
-        return jdBody.getPosition();
-    }
-
-    public void move() {
-        // Checks in what direction the soldier should move
-        if(soldier.getDirectionFlag()){
-            jdBody.applyForceToCenter(new Vector2(50f, 0), true);
-        }
-        else{
-            jdBody.applyForceToCenter(new Vector2(-50f, 0), true);
-        }
     }
 
     public void dispose() {
