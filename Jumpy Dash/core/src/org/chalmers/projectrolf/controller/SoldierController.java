@@ -1,11 +1,9 @@
 package org.chalmers.projectrolf.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.projectrolf.physics.IBox2D;
 import org.chalmers.projectrolf.model.Soldier;
-import org.chalmers.projectrolf.physics.IJDBody;
 import org.chalmers.projectrolf.view.SoldierView;
 
 public class SoldierController extends Actor {
