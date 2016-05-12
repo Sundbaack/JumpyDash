@@ -1,7 +1,7 @@
 package org.chalmers.projectrolf.model;
 
-import com.badlogic.gdx.math.Vector2;
 import org.chalmers.projectrolf.physics.IJDBody;
+import javax.vecmath.Vector2f;
 
 public class Soldier extends Enemy {
 
@@ -25,15 +25,15 @@ public class Soldier extends Enemy {
     public void move() {
         // Checks in what direction the soldier should move
         if(getDirectionFlag()){
-            jdBody.applyForceToCenter(new Vector2(50f, 0), true);
+            jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(50f,0)), true);
         }
         else{
-            jdBody.applyForceToCenter(new Vector2(-50f, 0), true);
+            jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(-50f,0)), true);
         }
     }
 
-    public Vector2 getPosition(){
-        return jdBody.getPosition();
+    public Vector2f getPosition(){
+        return jdBody.toVector2f(jdBody.getPosition());
     }
 
 }

@@ -1,7 +1,8 @@
 package org.chalmers.projectrolf.model;
 
-import com.badlogic.gdx.math.Vector2;
 import org.chalmers.projectrolf.physics.IJDBody;
+
+import javax.vecmath.Vector2f;
 
 public class Platform  {
 
@@ -13,7 +14,7 @@ public class Platform  {
     }
 
 
-    public Vector2 getPosition(){
-        return jdBody.getPosition();
+    public Vector2f getPosition(){
+        return jdBody.toVector2f(jdBody.getPosition());
     }
-}
+    }
