@@ -1,7 +1,7 @@
 package org.chalmers.projectrolf.model;
 
-import com.badlogic.gdx.math.Vector2;
 import org.chalmers.projectrolf.physics.IJDBody;
+import javax.vecmath.Vector2f;
 
 public class Player {
 
@@ -22,21 +22,22 @@ public class Player {
 
 
     public void jump() {
-        jdBody.applyLinearImpulse(new Vector2(0, getImpulse()), jdBody.getWorldCenter(), true);
+        Vector2f vector2f = new Vector2f(0,getImpulse());
+        jdBody.applyLinearImpulse(jdBody.toVector2(vector2f), jdBody.getWorldCenter(), true);
     }
 
     public void move() {
 
-        Vector2 speed = jdBody.getLinearVelocity();
+        Vector2f speed = jdBody.toVector2f(jdBody.getLinearVelocity());
         float speedX = speed.x;
 
         if (speedX < getMaxSpeedX()) {
-            jdBody.applyForceToCenter(new Vector2(4, 0), true);
+            jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(4,0)), true);
         }
     }
 
-    public Vector2 getPosition() {
-        return jdBody.getPosition();
+    public Vector2f getPosition() {
+        return jdBody.toVector2f(jdBody.getPosition());
     }
 
     public void setJumpState(){

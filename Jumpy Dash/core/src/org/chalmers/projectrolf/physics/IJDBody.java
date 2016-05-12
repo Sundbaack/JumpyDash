@@ -2,11 +2,17 @@ package org.chalmers.projectrolf.physics;
 
 import com.badlogic.gdx.math.Vector2;
 
+import javax.vecmath.Vector2f;
+
 public interface IJDBody {
 
     float getMass();
 
     void applyLinearImpulse(Vector2 impulse, Vector2 point, boolean wake);
+
+    Vector2 toVector2(Vector2f vector2f);
+
+    Vector2f toVector2f(Vector2 vector2);
 
     void applyForceToCenter(Vector2 force, boolean wake);
 

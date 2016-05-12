@@ -3,11 +3,14 @@ package org.chalmers.projectrolf.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.projectrolf.physics.IBox2D;
 import org.chalmers.projectrolf.model.Player;
 import org.chalmers.projectrolf.view.PlayerView;
+
+import javax.vecmath.Vector2f;
 
 public class PlayerController extends Actor {
 
@@ -51,9 +54,16 @@ public class PlayerController extends Actor {
         }
     }
 
+    public Vector2 toVector2(Vector2f vector2f){
+        Vector2 vector2 = new Vector2(vector2f.getX(),vector2f.getY());
+        return vector2;
+    }
+
     public static Player getPlayer() {
         return player;
     }
+
+
 
     public void dispose() {
         playerView.dispose();
