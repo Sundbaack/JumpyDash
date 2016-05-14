@@ -19,6 +19,9 @@ public class MenuScreen implements Screen {
     private Game game;
     private Stage stage;
     private Texture menuBackground;
+    private Skin skin;
+    private Pixmap pixmap;
+    private BitmapFont font;
 
     public MenuScreen(Game game, Stage stage) {
         this.game = game;
@@ -29,8 +32,8 @@ public class MenuScreen implements Screen {
 
     public void createUI() {
 
-        Skin skin = new Skin();
-        Pixmap pixmap = new Pixmap(250, 75, Pixmap.Format.RGBA8888);
+        skin = new Skin();
+        pixmap = new Pixmap(250, 75, Pixmap.Format.RGBA8888);
         pixmap.setColor(new Color(54,52,52,1));
         pixmap.fill();
         skin.add("grey", new Texture(pixmap));
@@ -39,7 +42,7 @@ public class MenuScreen implements Screen {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 18;
-        BitmapFont font = generator.generateFont(parameter);
+        font = generator.generateFont(parameter);
         generator.dispose();
 
         skin.add("font",font);
@@ -109,6 +112,8 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        skin.dispose();
+        pixmap.dispose();
+        font.dispose();
     }
 }
