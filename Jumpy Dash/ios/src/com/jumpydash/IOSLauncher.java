@@ -1,6 +1,6 @@
 package com.jumpydash;
 
-import org.chalmers.projectrolf.controller.JumpyDash;
+import org.chalmers.jumpydash.controller.JumpyDash;
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 
