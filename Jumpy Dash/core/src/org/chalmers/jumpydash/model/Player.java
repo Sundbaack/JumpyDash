@@ -1,5 +1,6 @@
 package org.chalmers.jumpydash.model;
 
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import org.chalmers.jumpydash.physics.IJDBody;
 import javax.vecmath.Vector2f;
 
@@ -11,15 +12,17 @@ public class Player {
     private static int points;
     private static final float MAX_SPEED_X = 3.5f;
 
+
     public Player(IJDBody jdBody) {
         this.jdBody = jdBody;
         jumpFlag = false;
+
+
 
         jdBody.setUserData(this);
         setImpulse(jdBody.getMass() * 6f);
         this.points = 0;
     }
-
 
     public void jump() {
         Vector2f vector2f = new Vector2f(0,getImpulse());
@@ -35,6 +38,8 @@ public class Player {
             jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(4,0)), true);
         }
     }
+
+
 
     public Vector2f getPosition() {
         return jdBody.toVector2f(jdBody.getPosition());
