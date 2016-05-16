@@ -19,5 +19,4 @@ public class AbilityView {
     public void dispose() {
         abilityTile.dispose();
     }
-
 }

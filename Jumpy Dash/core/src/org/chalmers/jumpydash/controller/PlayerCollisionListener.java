@@ -7,17 +7,12 @@ import org.chalmers.jumpydash.model.Platform;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.physics.*;
 import org.chalmers.jumpydash.physics.Box2D;
-
 import javax.swing.*;
 
-/**
- * Created by Surface pro 3 on 2016-05-16.
- */
 public class PlayerCollisionListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-
 
     }
 

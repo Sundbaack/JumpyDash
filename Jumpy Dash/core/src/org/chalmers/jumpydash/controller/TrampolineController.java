@@ -6,9 +6,6 @@ import org.chalmers.jumpydash.model.Trampoline;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.TrampolineView;
 
-/**
- * Created by alexsundback on 2016-05-16.
- */
 public class TrampolineController extends Actor {
 
     private TrampolineView trampolineView;
@@ -33,5 +30,4 @@ public class TrampolineController extends Actor {
     public void dispose() {
         trampolineView.dispose();
     }
-
 }

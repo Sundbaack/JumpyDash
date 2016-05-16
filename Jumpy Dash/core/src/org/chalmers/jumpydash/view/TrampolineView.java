@@ -4,9 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-/**
- * Created by alexsundback on 2016-05-16.
- */
 public class TrampolineView {
 
     private Texture trampolineTile;
@@ -22,5 +19,4 @@ public class TrampolineView {
     public void dispose() {
         trampolineTile.dispose();
     }
-
 }

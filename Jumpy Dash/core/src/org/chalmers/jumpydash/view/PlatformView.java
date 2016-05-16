@@ -19,6 +19,4 @@ public class PlatformView {
     public void dispose(){
         platformTile.dispose();
     }
-
-
 }

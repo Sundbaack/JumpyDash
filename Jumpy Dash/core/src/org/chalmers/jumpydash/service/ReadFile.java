@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class ReadFile {
 
-    public static char[][] read(File tileMap) throws FileNotFoundException {
+    public static char[][] fileToArray(File tileMap) throws FileNotFoundException {
         Scanner scanLevel = new Scanner(tileMap);
 
         char[][] level = new char[23][1200];

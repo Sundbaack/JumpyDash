@@ -34,5 +34,4 @@ public class Enemy {
     public IJDBody getJdBody(){
         return jdBody;
     }
-
 }

@@ -13,8 +13,7 @@ public class Platform  {
         jdBody.setUserData(this);
     }
 
-
     public Vector2f getPosition(){
         return jdBody.toVector2f(jdBody.getPosition());
     }
-    }
+}

@@ -16,8 +16,11 @@ public class Coin extends Item {
         this.jdBody.setUserData(this);
     }
 
-    public static int getValue() { return valueCoin; }
+    public static int getValue() {
+        return valueCoin;
+    }
 
-    public Vector2f getPosition() { return jdBody.toVector2f(jdBody.getPosition()); }
-
+    public Vector2f getPosition() {
+        return jdBody.toVector2f(jdBody.getPosition());
+    }
 }

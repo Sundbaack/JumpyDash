@@ -1,6 +1,5 @@
 package org.chalmers.jumpydash.model;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import org.chalmers.jumpydash.physics.IJDBody;
 import javax.vecmath.Vector2f;
 
@@ -17,8 +16,6 @@ public class Player {
     public Player(IJDBody jdBody) {
         this.jdBody = jdBody;
         jumpFlag = false;
-
-
 
         jdBody.setUserData(this);
         setImpulse(jdBody.getMass() * 6f);

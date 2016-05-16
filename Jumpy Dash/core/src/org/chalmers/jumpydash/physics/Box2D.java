@@ -27,8 +27,6 @@ public class Box2D implements IBox2D {
         return this.PIXELS_TO_METERS;
     }
 
-
-
     public OrthographicCamera getCamera() {
         return camera;
     }

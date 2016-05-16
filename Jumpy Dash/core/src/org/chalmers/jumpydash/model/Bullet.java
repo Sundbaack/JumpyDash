@@ -14,9 +14,8 @@ public class Bullet {
         this.jdBody.setLinearVelocity(jdBody.toVector2(new Vector2f(15f, 0)));
         this.jdBody.setUserData(this);
     }
+
     public Vector2f getPosition() {
         return jdBody.toVector2f(jdBody.getPosition());
     }
-
-
 }

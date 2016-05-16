@@ -37,7 +37,7 @@ public class GameScreen implements Screen {
 
         // Load the map
         try {
-            loadMap(ReadFile.read(new File("level1.txt")));
+            loadMap(ReadFile.fileToArray(new File("level1.txt")));
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -114,7 +114,6 @@ public class GameScreen implements Screen {
                     spikeController.setName("spike");
                     stage.addActor(spikeController);
                 }
-
             }
         }
     }
@@ -128,8 +127,6 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         // Update box2D simulations and camera
         box2D.update();
-        uiStage.act(delta);
-        uiStage.draw();
         /*
 		// Debugging
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);
@@ -160,6 +157,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        uiStage.dispose();
+
     }
 }

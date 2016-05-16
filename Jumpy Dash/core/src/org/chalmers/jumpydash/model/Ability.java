@@ -16,5 +16,4 @@ public class Ability extends Item {
     public Vector2f getPosition() {
         return jdBody.toVector2f(jdBody.getPosition());
     }
-
 }

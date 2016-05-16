@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class MenuScreen implements Screen {
 
@@ -27,11 +26,11 @@ public class MenuScreen implements Screen {
     private TextButton playButton;
     private TextButton quitButton;
 
-    public MenuScreen(Game game, Stage stage) {
+    public MenuScreen(Game game, Stage stage, Stage uiStage) {
         this.game = game;
         this.stage = stage;
 
-        uiStage = new Stage(new ScreenViewport());
+        this.uiStage = uiStage;
         Gdx.input.setInputProcessor(uiStage);
 
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
@@ -128,6 +127,5 @@ public class MenuScreen implements Screen {
         skin.dispose();
         pixmap.dispose();
         font.dispose();
-        uiStage.dispose();
     }
 }
