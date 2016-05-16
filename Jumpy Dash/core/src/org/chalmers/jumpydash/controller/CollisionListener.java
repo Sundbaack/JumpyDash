@@ -1,17 +1,13 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.physics.box2d.*;
-<<<<<<< HEAD
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
-=======
 import org.chalmers.jumpydash.model.Coin;
 import org.chalmers.jumpydash.model.Platform;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.model.Trampoline;
->>>>>>> f94d1d4b5696d513f08696223791fd559929d7d7
 import org.chalmers.jumpydash.model.*;
-import org.chalmers.jumpydash.physics.IBox2D;
 public class CollisionListener implements ContactListener {
 
     //PlayerCollisionListener playerCollisionListener = new PlayerCollisionListener();

@@ -60,6 +60,7 @@ public class MenuScreen implements Screen {
         // Play button
         playButton = new TextButton("Play", textButtonStyle);
         playButton.setPosition(515, 350);
+        playButton.setName("playButton");
         stage.addActor(playButton);
 
         playButton.addListener(new ClickListener() {
@@ -72,6 +73,7 @@ public class MenuScreen implements Screen {
         // Quit button
         quitButton = new TextButton("Quit", textButtonStyle);
         quitButton.setPosition(515, 250);
+        playButton.setName("quitButton");
         stage.addActor(quitButton);
 
         quitButton.addListener(new ClickListener() {

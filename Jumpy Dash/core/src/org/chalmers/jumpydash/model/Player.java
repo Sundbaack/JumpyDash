@@ -40,14 +40,10 @@ public class Player {
         }
     }
 
-<<<<<<< HEAD
-
-=======
     public void applyTrampolineImpulse() {
         vector2f = new Vector2f(0, getImpulse() + 2.5f);
         jdBody.applyLinearImpulse(jdBody.toVector2(vector2f), jdBody.getWorldCenter(), true);
     }
->>>>>>> f94d1d4b5696d513f08696223791fd559929d7d7
 
     public Vector2f getPosition() {
         return jdBody.toVector2f(jdBody.getPosition());
