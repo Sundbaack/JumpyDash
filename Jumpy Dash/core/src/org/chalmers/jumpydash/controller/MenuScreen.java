@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -22,6 +23,8 @@ public class MenuScreen implements Screen {
     private Skin skin;
     private Pixmap pixmap;
     private BitmapFont font;
+    private TextButton playButton;
+    private TextButton quitButton;
 
     public MenuScreen(Game game, Stage stage) {
         this.game = game;
@@ -55,7 +58,7 @@ public class MenuScreen implements Screen {
         skin.add("style", textButtonStyle);
 
         // Play button
-        TextButton playButton = new TextButton("Play", textButtonStyle);
+        playButton = new TextButton("Play", textButtonStyle);
         playButton.setPosition(515, 350);
         stage.addActor(playButton);
 
@@ -67,7 +70,7 @@ public class MenuScreen implements Screen {
         });
 
         // Quit button
-        TextButton quitButton = new TextButton("Quit", textButtonStyle);
+        quitButton = new TextButton("Quit", textButtonStyle);
         quitButton.setPosition(515, 250);
         stage.addActor(quitButton);
 
@@ -107,7 +110,8 @@ public class MenuScreen implements Screen {
 
     @Override
     public void hide() {
-
+        playButton.remove();
+        quitButton.remove();
     }
 
     @Override

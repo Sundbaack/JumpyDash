@@ -11,6 +11,7 @@ public class Player {
     private boolean jumpFlag;
     private static int points;
     private static final float MAX_SPEED_X = 3.5f;
+    private Vector2f vector2f;
 
 
     public Player(IJDBody jdBody) {
@@ -25,7 +26,7 @@ public class Player {
     }
 
     public void jump() {
-        Vector2f vector2f = new Vector2f(0,getImpulse());
+        vector2f = new Vector2f(0,getImpulse());
         jdBody.applyLinearImpulse(jdBody.toVector2(vector2f), jdBody.getWorldCenter(), true);
     }
 
@@ -39,7 +40,14 @@ public class Player {
         }
     }
 
+<<<<<<< HEAD
 
+=======
+    public void applyTrampolineImpulse() {
+        vector2f = new Vector2f(0, getImpulse() + 2.5f);
+        jdBody.applyLinearImpulse(jdBody.toVector2(vector2f), jdBody.getWorldCenter(), true);
+    }
+>>>>>>> f94d1d4b5696d513f08696223791fd559929d7d7
 
     public Vector2f getPosition() {
         return jdBody.toVector2f(jdBody.getPosition());

@@ -26,7 +26,7 @@ public class PlayerController extends Actor {
         handleInput();
         player.move();
 
-       
+
         // Enable the camera to follow the player
         if (player.getPosition().x > 500 / box2D.getPixelsToMeters()) {
 

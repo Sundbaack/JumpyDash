@@ -67,10 +67,18 @@ public class GameScreen implements Screen {
                     soldierController.setName("soldier");
                     stage.addActor(soldierController);
                 } else if (level[y][x] == 'A') {
+<<<<<<< HEAD
                     AbilityController abilityController =new AbilityController(box2D, x, y, mapHeight);
                     abilityController.setName("ability");
                     stage.addActor(abilityController);
+=======
+                    stage.addActor(new AbilityController(box2D, x, y, mapHeight));
+
+                } else if (level[y][x] == 'T') {
+                    stage.addActor(new TrampolineController(box2D, x, y, mapHeight));
+>>>>>>> f94d1d4b5696d513f08696223791fd559929d7d7
                 }
+
             }
         }
     }
