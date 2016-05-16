@@ -108,6 +108,11 @@ public class GameScreen implements Screen {
                     TrampolineController trampolineController = new TrampolineController(box2D, x, y, mapHeight);
                     trampolineController.setName("trampoline");
                     stage.addActor(trampolineController);
+
+                } else if (level[y][x] == 'O') {
+                    SpikeController spikeController = new SpikeController(box2D, x, y, mapHeight);
+                    spikeController.setName("spike");
+                    stage.addActor(spikeController);
                 }
 
             }
