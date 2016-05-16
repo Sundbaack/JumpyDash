@@ -9,6 +9,7 @@ public class Soldier extends Enemy {
     private boolean directionFlag;
 
     public Soldier(IJDBody jdBody) {
+        super(2);
         this.jdBody = jdBody;
         this.jdBody.setUserData(this);
         directionFlag=true;
