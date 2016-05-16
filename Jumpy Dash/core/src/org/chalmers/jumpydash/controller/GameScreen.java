@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
         createUI();
     }
 
-    public void createUI() {
+    private void createUI() {
         skin = new Skin();
 
         // Use custom font
@@ -68,7 +68,7 @@ public class GameScreen implements Screen {
 
     }
 
-    public void loadMap(char[][] level) {
+    private void loadMap(char[][] level) {
 
         int mapHeight = level.length;
         int mapWidth = level[0].length;

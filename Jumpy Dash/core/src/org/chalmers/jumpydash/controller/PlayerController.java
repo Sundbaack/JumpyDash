@@ -26,7 +26,6 @@ public class PlayerController extends Actor {
         handleInput();
         player.move();
 
-
         // Enable the camera to follow the player
         if (player.getPosition().x > 500 / box2D.getPixelsToMeters()) {
 
@@ -41,8 +40,7 @@ public class PlayerController extends Actor {
         playerView.render(batch, player.getPosition().x * box2D.getPixelsToMeters(), player.getPosition().y * box2D.getPixelsToMeters());
     }
 
-
-    public void handleInput() {
+    private void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpState()) {
             player.setJumpState();
             player.jump();

@@ -28,8 +28,6 @@ public class CoinController extends Actor {
 
     }
 
-
-
     public void dispose() {
         coinView.dispose();
     }

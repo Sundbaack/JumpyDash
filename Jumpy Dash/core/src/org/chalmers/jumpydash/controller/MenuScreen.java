@@ -37,7 +37,7 @@ public class MenuScreen implements Screen {
         createUI();
     }
 
-    public void createUI() {
+    private void createUI() {
         skin = new Skin();
         pixmap = new Pixmap(250, 75, Pixmap.Format.RGBA8888);
         pixmap.setColor(new Color(54,52,52,1));

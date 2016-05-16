@@ -6,15 +6,11 @@ import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CannonView;
 
-/**
- * Created by Johannes on 2016-05-16.
- */
 public class CannonController extends Actor {
 
     private Cannon cannon;
     private CannonView cannonView;
     private IBox2D box2D;
-
 
     public CannonController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;

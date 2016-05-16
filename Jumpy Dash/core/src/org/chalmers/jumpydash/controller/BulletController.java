@@ -38,12 +38,11 @@ public class BulletController extends Actor {
     }*/
 
     // Remove bullets when moving out of screen
-     public void updateBullets() {
+     private void updateBullets() {
          if (((bullet.getPosition().x * box2D.getPixelsToMeters()) + 16) > (box2D.getCamera().position.x + 1280 / 2)) {
              this.remove();
          }
      }
-
 
     public void act(float delta) {
         updateBullets();

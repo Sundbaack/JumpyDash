@@ -6,9 +6,6 @@ import org.chalmers.jumpydash.model.Spike;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.SpikeView;
 
-/**
- * Created by alexsundback on 2016-05-16.
- */
 public class SpikeController extends Actor {
 
     private SpikeView spikeView;
