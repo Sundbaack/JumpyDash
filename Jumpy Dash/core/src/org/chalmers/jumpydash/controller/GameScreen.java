@@ -70,7 +70,6 @@ public class GameScreen implements Screen {
                     AbilityController abilityController =new AbilityController(box2D, x, y, mapHeight);
                     abilityController.setName("ability");
                     stage.addActor(abilityController);
-                    stage.addActor(new AbilityController(box2D, x, y, mapHeight));
 
                 } else if (level[y][x] == 'T') {
                     stage.addActor(new TrampolineController(box2D, x, y, mapHeight));
