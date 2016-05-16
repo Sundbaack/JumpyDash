@@ -61,7 +61,10 @@ public class GameScreen implements Screen {
                 } else if (level[y][x] == 'A') {
                     stage.addActor(new AbilityController(box2D, x, y, mapHeight));
 
+                } else if (level[y][x] == 'T') {
+                    stage.addActor(new TrampolineController(box2D, x, y, mapHeight));
                 }
+
             }
         }
     }
