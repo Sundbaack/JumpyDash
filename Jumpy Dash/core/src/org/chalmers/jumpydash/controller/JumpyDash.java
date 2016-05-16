@@ -10,9 +10,8 @@ public class JumpyDash extends Game {
 
 	@Override
 	public void create() {
-		// Create a new Stage and set inputProcessor
+		// Create a new Stage
 		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
 
 		// Switch to menu
 		setScreen(new MenuScreen(this, stage));

@@ -1,30 +1,36 @@
 package org.chalmers.jumpydash.controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.ReadFile;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameScreen implements Screen {
 
     private Stage stage;
+    private Stage uiStage;
     private IBox2D box2D;
+    private Skin skin;
+    private BitmapFont font;
     private final float tileWidthHeight = 32;
 
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
 
-    public GameScreen(Stage stage) {
-        box2D = new Box2D(tileWidthHeight);
-
-
+    public GameScreen(Stage stage, Stage uiStage) {
         this.stage = stage;
+        this.uiStage = uiStage;
+
+        box2D = new Box2D(tileWidthHeight);
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
 
         //debugRenderer = new Box2DDebugRenderer();
@@ -35,7 +41,30 @@ public class GameScreen implements Screen {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
+
         box2D.getWorld().setContactListener(new CollisionListener(stage.getActors()));
+        createUI();
+    }
+
+    public void createUI() {
+        skin = new Skin();
+
+        // Use custom font
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 18;
+        font = generator.generateFont(parameter);
+        generator.dispose();
+
+        skin.add("font", font);
+
+        Label.LabelStyle style = new Label.LabelStyle();
+        style.font = skin.getFont("font");
+
+        Label label = new Label("Score: ", style);
+        label.setPosition(10, 700);
+        label.setName("score");
+        uiStage.addActor(label);
 
     }
 
@@ -94,8 +123,9 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         // Update box2D simulations and camera
         box2D.update();
-
-		/*
+        uiStage.act(delta);
+        uiStage.draw();
+        /*
 		// Debugging
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);
 		debugRenderer.render(box2D.world, debugMatrix);
@@ -125,6 +155,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        uiStage.dispose();
     }
 }
