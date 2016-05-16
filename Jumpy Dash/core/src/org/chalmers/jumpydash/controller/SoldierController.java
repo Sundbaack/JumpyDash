@@ -21,7 +21,7 @@ public class SoldierController extends Actor {
     }
 
     public void act(float Delta){
-
+        soldier.move();
     }
 
     @Override

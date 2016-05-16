@@ -9,6 +9,7 @@ public class Soldier extends Enemy {
     private boolean directionFlag;
 
     public Soldier(IJDBody jdBody) {
+        super(2);
         this.jdBody = jdBody;
         this.jdBody.setUserData(this);
         directionFlag=true;
@@ -25,10 +26,10 @@ public class Soldier extends Enemy {
     public void move() {
         // Checks in what direction the soldier should move
         if(getDirectionFlag()){
-            jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(50f,0)), true);
+            jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(2f,0)), true);
         }
         else{
-            jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(-50f,0)), true);
+            jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(-2f,0)), true);
         }
     }
 
