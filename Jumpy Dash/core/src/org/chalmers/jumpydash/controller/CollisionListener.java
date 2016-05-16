@@ -1,50 +1,57 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
 import org.chalmers.jumpydash.model.*;
 import org.chalmers.jumpydash.physics.IBox2D;
 
 public class CollisionListener implements ContactListener {
 
+    //PlayerCollisionListener playerCollisionListener = new PlayerCollisionListener();
 
-    private IBox2D box2D;
-        PlayerCollisionListener playerCollisionListener = new PlayerCollisionListener();
+    private Array<Actor> actors;
 
-
+    public CollisionListener(Array<Actor> actors){
+        this.actors = actors;
+    }
     @Override
     public void beginContact(Contact contact) {
-            Body a = contact.getFixtureA().getBody();
-            Body b = contact.getFixtureB().getBody();
+        Body a = contact.getFixtureA().getBody();
+        Body b = contact.getFixtureB().getBody();
 
-            boolean playera = a.getUserData() instanceof Player;
-            boolean coinb = b.getUserData() instanceof Coin;
-            boolean playerb = b.getUserData() instanceof Player;
-            boolean coina = a.getUserData() instanceof Coin;
-            boolean platforma = a.getUserData() instanceof Platform;
-            boolean platformb = b.getUserData() instanceof Platform;
-            boolean soldiera = a.getUserData() instanceof Enemy;
-            boolean soldierb = b.getUserData() instanceof Enemy;
-            boolean bulleta = a.getUserData() instanceof Bullet;
-            boolean bulletb = b.getUserData() instanceof Bullet;
+        boolean playera = a.getUserData() instanceof Player;
+        boolean coinb = b.getUserData() instanceof Coin;
+        boolean playerb = b.getUserData() instanceof Player;
+        boolean coina = a.getUserData() instanceof Coin;
+        boolean platforma = a.getUserData() instanceof Platform;
+        boolean platformb = b.getUserData() instanceof Platform;
+        boolean soldiera = a.getUserData() instanceof Enemy;
+        boolean soldierb = b.getUserData() instanceof Enemy;
+        boolean bulleta = a.getUserData() instanceof Bullet;
+        boolean bulletb = b.getUserData() instanceof Bullet;
 
+        for(Actor actor : actors){
 
-            if ((playera && platformb)||
-                    (platforma && playerb)) {
-                if (!PlayerController.getPlayer().getJumpState()) {
-                    PlayerController.getPlayer().setJumpState();
-                }
+        }
+
+        if ((playera && platformb) ||
+                (platforma && playerb)) {
+            if (!PlayerController.getPlayer().getJumpState()) {
+                PlayerController.getPlayer().setJumpState();
             }
-            if ((playera && coinb) || (coina && playerb)) {
-                System.out.println("funkar");
-                PlayerController.getPlayer().setPoints(Coin.getValue());
-            }
-            if((playera && soldierb)|| soldiera && playerb){
+        }
+        if ((playera && coinb) || (coina && playerb)) {
+            System.out.println("funkar");
+            PlayerController.getPlayer().setPoints(Coin.getValue());
+        }
+        if ((playera && soldierb) || soldiera && playerb) {
 
-            }
+        }
 
-            if(bulleta && soldiera || bulletb && soldierb){
+        if (bulleta && soldiera || bulletb && soldierb) {
 
-            }
+        }
 
     }
 

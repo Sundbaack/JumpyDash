@@ -8,18 +8,21 @@ import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.ReadFile;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen implements Screen {
 
     private Stage stage;
     private IBox2D box2D;
     private final float tileWidthHeight = 32;
+
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
 
     public GameScreen(Stage stage) {
         box2D = new Box2D(tileWidthHeight);
-        box2D.getWorld().setContactListener(new CollisionListener());
+
 
         this.stage = stage;
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
@@ -32,6 +35,7 @@ public class GameScreen implements Screen {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
+        box2D.getWorld().setContactListener(new CollisionListener(stage.getActors()));
 
     }
 
@@ -47,20 +51,25 @@ public class GameScreen implements Screen {
             for (int x = 0; x < mapWidth; x++) {
 
                 if (level[y][x] == 'P') {
-                    stage.addActor(new PlayerController(box2D, x, y, mapHeight));
-
+                    PlayerController playerController = new PlayerController(box2D,x,y,mapHeight);
+                    playerController.setName("player");
+                    stage.addActor(playerController);
                 } else if (level[y][x] == '#') {
-                    stage.addActor(new PlatformController(box2D, x, y, mapHeight));
-
+                    PlatformController platformController = new PlatformController(box2D, x, y, mapHeight);
+                    platformController.setName("platform");
+                    stage.addActor(platformController);
                 } else if (level[y][x] == 'C') {
-                    stage.addActor(new CoinController(box2D, x, y, mapHeight));
-
+                    CoinController coinController = new CoinController(box2D, x, y, mapHeight);
+                    coinController.setName("coin");
+                    stage.addActor(coinController);
                 } else if (level[y][x] == 'S') {
-                    stage.addActor(new SoldierController(box2D, x, y, mapHeight));
-
+                    SoldierController soldierController = new SoldierController(box2D, x, y, mapHeight);
+                    soldierController.setName("soldier");
+                    stage.addActor(soldierController);
                 } else if (level[y][x] == 'A') {
-                    stage.addActor(new AbilityController(box2D, x, y, mapHeight));
-
+                    AbilityController abilityController =new AbilityController(box2D, x, y, mapHeight);
+                    abilityController.setName("ability");
+                    stage.addActor(abilityController);
                 }
             }
         }

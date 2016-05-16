@@ -26,8 +26,9 @@ public class PlayerController extends Actor {
         handleInput();
         player.move();
 
+       
         // Enable the camera to follow the player
-        if(player.getPosition().x > 500 / box2D.getPixelsToMeters()) {
+        if (player.getPosition().x > 500 / box2D.getPixelsToMeters()) {
 
             Vector3 position = box2D.getCamera().position;
             position.x = box2D.getCamera().position.x + 1280 / box2D.getPixelsToMeters() + (player.getPosition().x * box2D.getPixelsToMeters() - box2D.getCamera().position.x) * 0.1f;
@@ -39,6 +40,7 @@ public class PlayerController extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         playerView.render(batch, player.getPosition().x * box2D.getPixelsToMeters(), player.getPosition().y * box2D.getPixelsToMeters());
     }
+
 
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpState()) {
