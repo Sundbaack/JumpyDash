@@ -19,7 +19,7 @@ public class GameScreen implements Screen {
 
     public GameScreen(Stage stage) {
         box2D = new Box2D(tileWidthHeight);
-        box2D.getWorld().setContactListener(new CollisionListener(box2D));
+        box2D.getWorld().setContactListener(new CollisionListener());
 
         this.stage = stage;
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));

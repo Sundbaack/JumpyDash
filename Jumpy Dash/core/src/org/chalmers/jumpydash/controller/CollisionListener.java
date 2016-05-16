@@ -9,9 +9,7 @@ public class CollisionListener implements ContactListener {
 
     private IBox2D box2D;
         PlayerCollisionListener playerCollisionListener = new PlayerCollisionListener();
-       public CollisionListener(IBox2D box2D){
-           this.box2D = box2D;
-       }
+
 
     @Override
     public void beginContact(Contact contact) {
@@ -41,7 +39,7 @@ public class CollisionListener implements ContactListener {
                 PlayerController.getPlayer().setPoints(Coin.getValue());
             }
             if((playera && soldierb)|| soldiera && playerb){
-                box2D.getWorld().dispose();
+
             }
 
             if(bulleta && soldiera || bulletb && soldierb){
