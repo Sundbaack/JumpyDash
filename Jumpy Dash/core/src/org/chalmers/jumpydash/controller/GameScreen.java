@@ -53,18 +53,22 @@ public class GameScreen implements Screen {
                 if (level[y][x] == 'P') {
                     PlayerController playerController = new PlayerController(box2D,x,y,mapHeight);
                     playerController.setName("player");
+
                     stage.addActor(playerController);
                 } else if (level[y][x] == '#') {
                     PlatformController platformController = new PlatformController(box2D, x, y, mapHeight);
                     platformController.setName("platform");
+
                     stage.addActor(platformController);
                 } else if (level[y][x] == 'C') {
                     CoinController coinController = new CoinController(box2D, x, y, mapHeight);
                     coinController.setName("coin");
+
                     stage.addActor(coinController);
                 } else if (level[y][x] == 'S') {
                     SoldierController soldierController = new SoldierController(box2D, x, y, mapHeight);
                     soldierController.setName("soldier");
+
                     stage.addActor(soldierController);
                 } else if (level[y][x] == 'A') {
                     AbilityController abilityController =new AbilityController(box2D, x, y, mapHeight);
@@ -72,7 +76,9 @@ public class GameScreen implements Screen {
                     stage.addActor(abilityController);
 
                 } else if (level[y][x] == 'T') {
-                    stage.addActor(new TrampolineController(box2D, x, y, mapHeight));
+                    TrampolineController trampolineController = new TrampolineController(box2D, x, y, mapHeight);
+                    trampolineController.setName("trampoline");
+                    stage.addActor(trampolineController);
                 }
 
             }
