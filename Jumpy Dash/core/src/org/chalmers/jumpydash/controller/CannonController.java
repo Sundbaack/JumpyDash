@@ -20,13 +20,17 @@ public class CannonController extends Actor {
         this.box2D = box2D;
         cannon = new Cannon(box2D.newDynamic(x,y,mapHeight));
         cannonView = new CannonView();
-        BulletController bulletController = new BulletController(box2D, cannon.getPosition().x, cannon.getPosition().y);
-        getStage().addActor(bulletController);
     }
 
     public void act(float Delta){
 
     }
+
+    public void fireShit(){
+        BulletController bulletController = new BulletController(box2D, cannon.getPosition().x, cannon.getPosition().y);
+        getStage().addActor(bulletController);
+    }
+
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
