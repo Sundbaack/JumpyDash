@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import org.chalmers.jumpydash.model.Coin;
 import org.chalmers.jumpydash.model.Platform;
 import org.chalmers.jumpydash.model.Player;
+import org.chalmers.jumpydash.model.Trampoline;
 
 public class CollisionListener implements ContactListener {
 
