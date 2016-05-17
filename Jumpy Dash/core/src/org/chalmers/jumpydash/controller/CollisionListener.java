@@ -35,7 +35,7 @@ public class CollisionListener implements ContactListener {
         a = contact.getFixtureA().getBody();
         b = contact.getFixtureB().getBody();
 
-        //Checks what instance the userdata is
+        //Check what instance the userdata is
         playerA = a.getUserData() instanceof Player;
         coinB = b.getUserData() instanceof Coin;
         playerB = b.getUserData() instanceof Player;
@@ -51,34 +51,32 @@ public class CollisionListener implements ContactListener {
         spikeA = a.getUserData() instanceof Spike;
         spikeB = b.getUserData() instanceof Spike;
 
-        
-
-        //Checks collision between player and platform
+        //Check collision between player and platform
         if ((playerA && platformB) ||
                 (platformA && playerB)) {
             if (!PlayerController.getPlayer().getJumpState()) {
                 PlayerController.getPlayer().setJumpState();
             }
         }
-        //Checks collision between player and coin
+        //Check collision between player and coin
         if ((playerA && coinB) || (coinA && playerB)) {
             PlayerController.getPlayer().setPoints(Coin.getValue());
         }
 
-        //Checks collision between player and soldier
+        //Check collision between player and soldier
         if ((playerA && soldierB) || (soldierA && playerB)) {
                 PlayerController.getPlayer().setDamage(1);
                 PlayerController.getPlayer().applySoldierImpulse();
         }
-        //Checks collision between bullet and soldier
+        //Check collision between bullet and soldier
         if (bulletA && soldierA || bulletB && soldierB) {
 
         }
-        //Checks collision between player and trampoline
+        //Check collision between player and trampoline
         if (playerA && trampolineB || trampolineA && playerB) {
             PlayerController.getPlayer().applyTrampolineImpulse();
         }
-        //Checks collision between player and spike
+        //Check collision between player and spike
         if (playerA && spikeB || spikeA && playerB) {
             PlayerController.getPlayer().setDamage(PlayerController.getPlayer().getHealth());
         }
