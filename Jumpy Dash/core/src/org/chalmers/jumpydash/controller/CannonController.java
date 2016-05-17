@@ -17,7 +17,7 @@ public class CannonController extends Actor {
 
     public CannonController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        cannon = new Cannon(box2D.newDynamic(x,y,mapHeight));
+        cannon = new Cannon(box2D.newDynKin(x,y,mapHeight,false));
         cannonView = new CannonView();
     }
 
