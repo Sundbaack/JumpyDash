@@ -14,44 +14,63 @@ public class CollisionListener implements ContactListener {
 
     private Array<Actor> actors;
 
+    private Body a;
+    private Body b;
+
+    private boolean playerA;
+    private boolean coinB;
+    private boolean playerB;
+    private boolean coinA;
+    private boolean platformA;
+    private boolean platformB;
+    private boolean soldierA;
+    private boolean soldierB;
+    private boolean bulletA;
+    private boolean bulletB;
+
     public CollisionListener(Array<Actor> actors){
         this.actors = actors;
     }
     @Override
     public void beginContact(Contact contact) {
-        Body a = contact.getFixtureA().getBody();
-        Body b = contact.getFixtureB().getBody();
 
-        boolean playera = a.getUserData() instanceof Player;
-        boolean coinb = b.getUserData() instanceof Coin;
-        boolean playerb = b.getUserData() instanceof Player;
-        boolean coina = a.getUserData() instanceof Coin;
-        boolean platforma = a.getUserData() instanceof Platform;
-        boolean platformb = b.getUserData() instanceof Platform;
-        boolean soldiera = a.getUserData() instanceof Enemy;
-        boolean soldierb = b.getUserData() instanceof Enemy;
-        boolean bulleta = a.getUserData() instanceof Bullet;
-        boolean bulletb = b.getUserData() instanceof Bullet;
+        //Bodies to be used for contact
+        a = contact.getFixtureA().getBody();
+        b = contact.getFixtureB().getBody();
 
-        for(Actor actor : actors){
+        //Checks what instance the userdata is
+        playerA = a.getUserData() instanceof Player;
+        coinB = b.getUserData() instanceof Coin;
+        playerB = b.getUserData() instanceof Player;
+        coinA = a.getUserData() instanceof Coin;
+        platformA = a.getUserData() instanceof Platform;
+        platformB = b.getUserData() instanceof Platform;
+        soldierA = a.getUserData() instanceof Enemy;
+        soldierB = b.getUserData() instanceof Enemy;
+        bulletA = a.getUserData() instanceof Bullet;
+        bulletB = b.getUserData() instanceof Bullet;
+        
 
-        }
-
-        if ((playera && platformb) ||
-                (platforma && playerb)) {
+        //Checks collision between player and platform
+        if ((playerA && platformB) ||
+                (platformA && playerB)) {
             if (!PlayerController.getPlayer().getJumpState()) {
                 PlayerController.getPlayer().setJumpState();
             }
         }
-        if ((playera && coinb) || (coina && playerb)) {
+        //Checks collision between player and coin
+        if ((playerA && coinB) || (coinA && playerB)) {
             System.out.println("funkar");
             PlayerController.getPlayer().setPoints(Coin.getValue());
         }
-        if ((playera && soldierb) || soldiera && playerb) {
 
+        //Checks collision between player and soldier
+        if ((playerA && soldierB) || (soldierA && playerB)) {
+            
+            System.out.println("touching");
         }
-
-        if (bulleta && soldiera || bulletb && soldierb) {
+        //Checks collision between bullet and soldier
+        if (bulletA && soldierA || bulletB && soldierB) {
 
         }
 
@@ -59,6 +78,12 @@ public class CollisionListener implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
+
+        if ((playerA && platformB) ||
+                (platformA && playerB)) {
+
+        }
+
 
     }
 
