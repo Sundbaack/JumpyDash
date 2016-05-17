@@ -23,12 +23,18 @@ public class GameScreen implements Screen {
     private BitmapFont font;
     private final float tileWidthHeight = 32;
 
+    private Label scoreLabel;
+    private Label timeLabel;
+    private long startTime;
+    private PlayerController playerController;
+
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
 
     public GameScreen(Stage stage, Stage uiStage) {
         this.stage = stage;
         this.uiStage = uiStage;
+        startTime = System.currentTimeMillis();
 
         box2D = new Box2D(tileWidthHeight);
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
@@ -52,7 +58,7 @@ public class GameScreen implements Screen {
         // Use custom font
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 18;
+        parameter.size = 20;
         font = generator.generateFont(parameter);
         generator.dispose();
 
@@ -61,10 +67,15 @@ public class GameScreen implements Screen {
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = skin.getFont("font");
 
-        Label label = new Label("Score: ", style);
-        label.setPosition(10, 700);
-        label.setName("score");
-        uiStage.addActor(label);
+        scoreLabel = new Label("Score: ", style);
+        scoreLabel.setPosition(10, 700);
+        scoreLabel.setName("score");
+        uiStage.addActor(scoreLabel);
+
+        timeLabel = new Label("Time", style);
+        timeLabel.setPosition(400, 700);
+        timeLabel.setName("time");
+        uiStage.addActor(timeLabel);
 
     }
 
@@ -80,7 +91,7 @@ public class GameScreen implements Screen {
             for (int x = 0; x < mapWidth; x++) {
 
                 if (level[y][x] == 'P') {
-                    PlayerController playerController = new PlayerController(box2D,x,y,mapHeight);
+                    playerController = new PlayerController(box2D, x, y, mapHeight);
                     playerController.setName("player");
 
                     stage.addActor(playerController);
@@ -127,6 +138,9 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         // Update box2D simulations and camera
         box2D.update();
+
+        scoreLabel.setText("Score: " + playerController.getPlayer().getPoints());
+
         /*
 		// Debugging
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);
