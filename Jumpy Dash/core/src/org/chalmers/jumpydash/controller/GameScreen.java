@@ -1,10 +1,14 @@
 package org.chalmers.jumpydash.controller;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -13,9 +17,12 @@ import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.ReadFile;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class GameScreen implements Screen {
 
+    private Game game;
     private Stage stage;
     private Stage uiStage;
     private IBox2D box2D;
@@ -23,12 +30,21 @@ public class GameScreen implements Screen {
     private BitmapFont font;
     private final float tileWidthHeight = 32;
 
+    private Label scoreLabel;
+    private Label timeLabel;
+    private long startTime;
+    private SimpleDateFormat dateFormat;
+
+    private PlayerController playerController;
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
 
-    public GameScreen(Stage stage, Stage uiStage) {
+    public GameScreen(Game game, Stage stage, Stage uiStage) {
+        this.game = game;
         this.stage = stage;
         this.uiStage = uiStage;
+        startTime = System.currentTimeMillis();
+        dateFormat = new SimpleDateFormat("mm:ss");
 
         box2D = new Box2D(tileWidthHeight);
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
@@ -52,7 +68,7 @@ public class GameScreen implements Screen {
         // Use custom font
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 18;
+        parameter.size = 22;
         font = generator.generateFont(parameter);
         generator.dispose();
 
@@ -61,11 +77,15 @@ public class GameScreen implements Screen {
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = skin.getFont("font");
 
-        Label label = new Label("Score: ", style);
-        label.setPosition(10, 700);
-        label.setName("score");
-        uiStage.addActor(label);
+        scoreLabel = new Label("Score", style);
+        scoreLabel.setPosition(10, 700);
+        scoreLabel.setName("score");
+        uiStage.addActor(scoreLabel);
 
+        timeLabel = new Label("Time", style);
+        timeLabel.setPosition(612, 700);
+        timeLabel.setName("time");
+        uiStage.addActor(timeLabel);
     }
 
     private void loadMap(char[][] level) {
@@ -80,8 +100,7 @@ public class GameScreen implements Screen {
             for (int x = 0; x < mapWidth; x++) {
 
                 if (level[y][x] == 'P') {
-                    PlayerController playerController = new PlayerController(box2D,x,y,mapHeight);
-
+                    playerController = new PlayerController(box2D, x, y, mapHeight);
                     stage.addActor(playerController);
                 } else if (level[y][x] == '#') {
                     PlatformController platformController = new PlatformController(box2D, x, y, mapHeight);
@@ -123,8 +142,21 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         // Update box2D simulations and camera
         box2D.update();
+
+        // Update scoreLabel
+        scoreLabel.setText("Score: " + playerController.getPlayer().getPoints());
+
+        // Update timeLabel
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        timeLabel.setText(dateFormat.format(new Date(elapsedTime)));
+
+        if(elapsedTime >= 5000) {
+            game.setScreen(new GameOverScreen(game, stage, uiStage));
+        }
+
         /*
 		// Debugging
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);
@@ -155,6 +187,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        skin.dispose();
+        font.dispose();
     }
 }
