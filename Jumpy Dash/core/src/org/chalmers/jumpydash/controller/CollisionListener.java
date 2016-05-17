@@ -67,12 +67,8 @@ public class CollisionListener implements ContactListener {
 
         //Checks collision between player and soldier
         if ((playerA && soldierB) || (soldierA && playerB)) {
-            if(PlayerController.getPlayer().getHealth() > 1) {
                 PlayerController.getPlayer().setDamage(1);
                 PlayerController.getPlayer().applySoldierImpulse();
-            }else {
-                System.out.println("you are dead");
-            }
         }
         //Checks collision between bullet and soldier
         if (bulletA && soldierA || bulletB && soldierB) {
