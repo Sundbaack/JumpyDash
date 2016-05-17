@@ -156,9 +156,8 @@ public class GameScreen implements Screen {
         long elapsedTime = System.currentTimeMillis() - startTime;
         timeLabel.setText(dateFormat.format(new Date(elapsedTime)));
 
-        if(elapsedTime >= 5000) {
-            game.setScreen(new GameOverScreen(game, stage, uiStage));
-        }
+        // Gameover
+        //game.setScreen(new GameOverScreen(game, stage, uiStage));
 
         /*
 		// Debugging
