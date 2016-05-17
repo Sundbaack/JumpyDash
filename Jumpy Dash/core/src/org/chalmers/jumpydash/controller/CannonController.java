@@ -26,9 +26,11 @@ public class CannonController extends Actor {
     }
 
     public void fireShit(){
-        BulletController bulletController = new BulletController(box2D, cannon.getPosition().x, cannon.getPosition().y);
-        getStage().addActor(bulletController);
-        //bulletController.fireBullet();
+        if(cannon.allowedToFire()){
+            BulletController bulletController = new BulletController(box2D, cannon.getPosition().x, cannon.getPosition().y);
+            getStage().addActor(bulletController);
+        }
+
     }
 
 

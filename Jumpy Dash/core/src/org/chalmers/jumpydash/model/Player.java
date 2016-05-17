@@ -10,7 +10,7 @@ public class Player {
     private boolean jumpFlag;
     private static int points;
     private static int health = 3;
-    private static long previousFireTime;
+    private static long previousFireTime = 0;
     private static final float MAX_SPEED_X = 3.5f;
     private Vector2f vector2f;
 
