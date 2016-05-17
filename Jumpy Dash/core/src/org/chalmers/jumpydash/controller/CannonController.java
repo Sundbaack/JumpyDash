@@ -30,7 +30,6 @@ public class CannonController extends Actor {
             BulletController bulletController = new BulletController(box2D, cannon.getPosition().x, cannon.getPosition().y);
             getStage().addActor(bulletController);
         }
-
     }
 
 
