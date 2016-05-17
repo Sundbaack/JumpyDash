@@ -18,18 +18,15 @@ public class BulletController extends Actor {
         bulletView = new BulletView();
         bullet = new Bullet(box2D.newBullet(x,y));
     }
-
-    /*public void fireBullet() {
+/*
+    public void fireBullet() {
 
         // Cooldown
         long fireCooldown = 50;
 
         // Allow shooting if not on cooldown
-        if (System.currentTimeMillis() - previousFireTime >= fireCooldown && bullets.size() < 3) {
-            if(count <3){
-                System.out.println(count);
-                new Bullet(box2D.newBullet(PlayerController.getPosition().x, PlayerController.getPosition().y));
-            }
+        if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
+                new Bullet(box2D.newBullet(bullet.getPosition().getX(), bullet.getPosition().y));
             // Reset cooldown
             previousFireTime = System.currentTimeMillis();
             // bullets.add(

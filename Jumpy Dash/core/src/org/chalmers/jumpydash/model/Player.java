@@ -10,6 +10,7 @@ public class Player {
     private boolean jumpFlag;
     private static int points;
     private static int health = 3;
+    private static long previousFireTime = 0;
     private static final float MAX_SPEED_X = 3.5f;
     private Vector2f vector2f;
 
@@ -19,13 +20,22 @@ public class Player {
         jumpFlag = false;
 
         jdBody.setUserData(this);
-        setImpulse(jdBody.getMass() * 6f);
+        setImpulse(jdBody.getMass() * 4f);
         this.points = 0;
     }
 
     public void jump() {
         vector2f = new Vector2f(0,getImpulse());
         jdBody.applyLinearImpulse(jdBody.toVector2(vector2f), jdBody.getWorldCenter(), true);
+    }
+
+    public boolean allowedToFire(){
+        long fireCooldown = 250;
+        if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
+            previousFireTime = System.currentTimeMillis();
+            return true;
+        }
+        return false;
     }
 
     public void move() {

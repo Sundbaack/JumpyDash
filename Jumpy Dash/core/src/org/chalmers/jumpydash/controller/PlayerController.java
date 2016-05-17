@@ -49,7 +49,7 @@ public class PlayerController extends Actor {
             player.setJumpState();
             player.jump();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)&& player.allowedToFire()==true) {
             BulletController bulletController = new BulletController(box2D, player.getPosition().x, player.getPosition().y);
             getStage().addActor(bulletController);
         }
