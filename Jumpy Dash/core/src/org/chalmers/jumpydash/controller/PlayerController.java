@@ -25,6 +25,11 @@ public class PlayerController extends Actor {
     public void act(float delta) {
         handleInput();
         player.move();
+        //Check if player is dead
+        if(player.getHealth() <= 0){
+            System.out.println("You are dead");
+            this.dispose();
+        }
 
         // Enable the camera to follow the player
         if (player.getPosition().x > 500 / box2D.getPixelsToMeters()) {
