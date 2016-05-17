@@ -43,6 +43,11 @@ public class Player {
         jdBody.applyLinearImpulse(jdBody.toVector2(vector2f), jdBody.getWorldCenter(), true);
     }
 
+    public void applySoldierImpulse(){
+        vector2f = new Vector2f(-getImpulse(),0);
+        jdBody.applyLinearImpulse(jdBody.toVector2(vector2f),jdBody.getWorldCenter(),true);
+    }
+
     public Vector2f getPosition() {
         return jdBody.toVector2f(jdBody.getPosition());
     }

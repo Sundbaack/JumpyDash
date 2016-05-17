@@ -10,10 +10,6 @@ import org.chalmers.jumpydash.model.Trampoline;
 import org.chalmers.jumpydash.model.*;
 public class CollisionListener implements ContactListener {
 
-    //PlayerCollisionListener playerCollisionListener = new PlayerCollisionListener();
-
-    private Array<Actor> actors;
-
     private Body a;
     private Body b;
 
@@ -28,9 +24,6 @@ public class CollisionListener implements ContactListener {
     private boolean bulletA;
     private boolean bulletB;
 
-    public CollisionListener(Array<Actor> actors){
-        this.actors = actors;
-    }
     @Override
     public void beginContact(Contact contact) {
 
@@ -60,14 +53,17 @@ public class CollisionListener implements ContactListener {
         }
         //Checks collision between player and coin
         if ((playerA && coinB) || (coinA && playerB)) {
-            System.out.println("funkar");
             PlayerController.getPlayer().setPoints(Coin.getValue());
         }
 
         //Checks collision between player and soldier
         if ((playerA && soldierB) || (soldierA && playerB)) {
-            
-            System.out.println("touching");
+            if(PlayerController.getPlayer().getHealth() > 1) {
+                PlayerController.getPlayer().setHealth(1);
+                PlayerController.getPlayer().applySoldierImpulse();
+            }else {
+                System.out.println("you are dead");
+            }
         }
         //Checks collision between bullet and soldier
         if (bulletA && soldierA || bulletB && soldierB) {
@@ -78,12 +74,6 @@ public class CollisionListener implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-
-        if ((playerA && platformB) ||
-                (platformA && playerB)) {
-
-        }
-
 
     }
 
