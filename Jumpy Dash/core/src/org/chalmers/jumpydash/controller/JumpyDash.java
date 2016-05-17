@@ -1,7 +1,6 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class JumpyDash extends Game {
@@ -23,8 +22,7 @@ public class JumpyDash extends Game {
 
 	@Override
 	public void render() {
-		// Render the current Screen
-		getScreen().render(Gdx.graphics.getDeltaTime());
+		super.render();
 
 		// Update actors
 		stage.act();
@@ -35,6 +33,7 @@ public class JumpyDash extends Game {
 
 	@Override
 	public void dispose() {
+		super.dispose();
 		stage.dispose();
 		uiStage.dispose();
 	}

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,30 +14,26 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class MenuScreen implements Screen {
+public class GameOverScreen implements Screen {
 
     private Game game;
     private Stage stage;
     private Stage uiStage;
-    private Texture menuBackground;
+
     private Skin skin;
     private Pixmap pixmap;
     private BitmapFont font;
     private TextButton playButton;
-    private TextButton quitButton;
+    private TextButton menuButton;
 
-    public MenuScreen(Game game, Stage stage, Stage uiStage) {
+    public GameOverScreen(Game game, Stage stage, Stage uiStage) {
         this.game = game;
         this.stage = stage;
-
         this.uiStage = uiStage;
-        Gdx.input.setInputProcessor(uiStage);
-
-        menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
         createUI();
     }
 
-    private void createUI() {
+    public void createUI() {
         skin = new Skin();
         pixmap = new Pixmap(250, 75, Pixmap.Format.RGBA8888);
         pixmap.setColor(new Color(54,52,52,1));
@@ -62,7 +57,7 @@ public class MenuScreen implements Screen {
         skin.add("style", textButtonStyle);
 
         // Play button
-        playButton = new TextButton("Play", textButtonStyle);
+        playButton = new TextButton("Play again", textButtonStyle);
         playButton.setPosition(515, 350);
         playButton.setName("playButton");
         uiStage.addActor(playButton);
@@ -74,16 +69,16 @@ public class MenuScreen implements Screen {
             }
         });
 
-        // Quit button
-        quitButton = new TextButton("Quit", textButtonStyle);
-        quitButton.setPosition(515, 250);
-        playButton.setName("quitButton");
-        uiStage.addActor(quitButton);
+        // Menu button
+        menuButton = new TextButton("Menu", textButtonStyle);
+        menuButton.setPosition(515, 250);
+        menuButton.setName("menuButton");
+        uiStage.addActor(menuButton);
 
-        quitButton.addListener(new ClickListener() {
+        menuButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                // Exit application
-                System.exit(0);
+                // Switch to menu
+                game.setScreen(new MenuScreen(game, stage, uiStage));
             }
         });
     }
@@ -95,15 +90,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        uiStage.getBatch().begin();
-        uiStage.getBatch().draw(menuBackground,0,0);
-        uiStage.getBatch().end();
-
-        uiStage.act(delta);
-        uiStage.draw();
     }
 
     @Override
@@ -124,13 +111,11 @@ public class MenuScreen implements Screen {
     @Override
     public void hide() {
         playButton.remove();
-        quitButton.remove();
+        menuButton.remove();
     }
 
     @Override
     public void dispose() {
-        skin.dispose();
-        pixmap.dispose();
-        font.dispose();
+
     }
 }

@@ -1,10 +1,14 @@
 package org.chalmers.jumpydash.controller;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -18,6 +22,7 @@ import java.util.Date;
 
 public class GameScreen implements Screen {
 
+    private Game game;
     private Stage stage;
     private Stage uiStage;
     private IBox2D box2D;
@@ -34,7 +39,8 @@ public class GameScreen implements Screen {
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
 
-    public GameScreen(Stage stage, Stage uiStage) {
+    public GameScreen(Game game, Stage stage, Stage uiStage) {
+        this.game = game;
         this.stage = stage;
         this.uiStage = uiStage;
         startTime = System.currentTimeMillis();
@@ -139,6 +145,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         // Update box2D simulations and camera
         box2D.update();
 
@@ -148,6 +155,10 @@ public class GameScreen implements Screen {
         // Update timeLabel
         long elapsedTime = System.currentTimeMillis() - startTime;
         timeLabel.setText(dateFormat.format(new Date(elapsedTime)));
+
+        if(elapsedTime >= 5000) {
+            game.setScreen(new GameOverScreen(game, stage, uiStage));
+        }
 
         /*
 		// Debugging
