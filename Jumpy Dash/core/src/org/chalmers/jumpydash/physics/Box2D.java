@@ -31,9 +31,13 @@ public class Box2D implements IBox2D {
         return camera;
     }
 
-    public JDBody newDynamic(float x, float y, int mapHeight) {
+    public JDBody newDynKin(float x, float y, int mapHeight, boolean kinematic) {
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        if(kinematic){
+            bodyDef.type = BodyDef.BodyType.KinematicBody;
+        }else {
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
+        }
         bodyDef.position.set((x * tileWidthHeight) / PIXELS_TO_METERS, (mapHeight - 1 - y) * tileWidthHeight / PIXELS_TO_METERS);
         JDBody jdBody = new JDBody();
         jdBody.body = world.createBody(bodyDef);
@@ -99,6 +103,8 @@ public class Box2D implements IBox2D {
         }
         return jdBody;
     }
+
+
 
     public JDBody newBullet(float x, float y) {
         BodyDef bodyDef = new BodyDef();

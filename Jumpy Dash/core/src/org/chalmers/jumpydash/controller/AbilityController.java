@@ -14,7 +14,7 @@ public class AbilityController extends Actor{
 
     public AbilityController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        ability = new Ability(box2D.newDynamic(x, y, mapHeight));
+        ability = new Ability(box2D.newStatic(x, y, mapHeight, false));
         abilityView = new AbilityView();
     }
 

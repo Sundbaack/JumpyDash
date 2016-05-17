@@ -101,37 +101,34 @@ public class GameScreen implements Screen {
 
                 if (level[y][x] == 'P') {
                     playerController = new PlayerController(box2D, x, y, mapHeight);
-                    playerController.setName("player");
-
                     stage.addActor(playerController);
                 } else if (level[y][x] == '#') {
                     PlatformController platformController = new PlatformController(box2D, x, y, mapHeight);
-                    platformController.setName("platform");
 
                     stage.addActor(platformController);
-                } else if (level[y][x] == 'C') {
+                } else if(level[y][x] == 'M'){
+                    MovingPlatformController movingPlatformController = new MovingPlatformController(box2D,x,y,mapHeight);
+                    stage.addActor(movingPlatformController);
+                }
+
+                else if (level[y][x] == 'C') {
                     CoinController coinController = new CoinController(box2D, x, y, mapHeight);
-                    coinController.setName("coin");
 
                     stage.addActor(coinController);
                 } else if (level[y][x] == 'S') {
                     SoldierController soldierController = new SoldierController(box2D, x, y, mapHeight);
-                    soldierController.setName("soldier");
 
                     stage.addActor(soldierController);
                 } else if (level[y][x] == 'A') {
                     AbilityController abilityController =new AbilityController(box2D, x, y, mapHeight);
-                    abilityController.setName("ability");
                     stage.addActor(abilityController);
 
                 } else if (level[y][x] == 'T') {
                     TrampolineController trampolineController = new TrampolineController(box2D, x, y, mapHeight);
-                    trampolineController.setName("trampoline");
                     stage.addActor(trampolineController);
 
                 } else if (level[y][x] == 'O') {
                     SpikeController spikeController = new SpikeController(box2D, x, y, mapHeight);
-                    spikeController.setName("spike");
                     stage.addActor(spikeController);
                 }
             }

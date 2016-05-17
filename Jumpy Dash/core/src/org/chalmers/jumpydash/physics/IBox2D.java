@@ -11,7 +11,7 @@ public interface IBox2D {
 
     OrthographicCamera getCamera();
 
-    JDBody newDynamic(float x, float y, int mapHeight);
+    JDBody newDynKin(float x, float y, int mapHeight, boolean kinematic);
 
     JDBody newStatic(float x, float y, int mapHeight, boolean ghost);
 
