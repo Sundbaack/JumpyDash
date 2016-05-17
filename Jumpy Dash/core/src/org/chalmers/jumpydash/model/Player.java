@@ -20,7 +20,7 @@ public class Player {
         jumpFlag = false;
 
         jdBody.setUserData(this);
-        setImpulse(jdBody.getMass() * 6f);
+        setImpulse(jdBody.getMass() * 4f);
         this.points = 0;
     }
 
