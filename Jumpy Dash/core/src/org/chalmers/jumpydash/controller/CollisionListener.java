@@ -23,6 +23,10 @@ public class CollisionListener implements ContactListener {
     private boolean soldierB;
     private boolean bulletA;
     private boolean bulletB;
+    private boolean trampolineA;
+    private boolean trampolineB;
+    private boolean spikeA;
+    private boolean spikeB;
 
     @Override
     public void beginContact(Contact contact) {
@@ -42,6 +46,11 @@ public class CollisionListener implements ContactListener {
         soldierB = b.getUserData() instanceof Enemy;
         bulletA = a.getUserData() instanceof Bullet;
         bulletB = b.getUserData() instanceof Bullet;
+        trampolineA = a.getUserData() instanceof Trampoline;
+        trampolineB = b.getUserData() instanceof Trampoline;
+        spikeA = a.getUserData() instanceof Spike;
+        spikeB = b.getUserData() instanceof Spike;
+
         
 
         //Checks collision between player and platform
@@ -68,6 +77,14 @@ public class CollisionListener implements ContactListener {
         //Checks collision between bullet and soldier
         if (bulletA && soldierA || bulletB && soldierB) {
 
+        }
+        //Checks collision between player and trampoline
+        if (playerA && trampolineB || trampolineA && playerB) {
+            PlayerController.getPlayer().applyTrampolineImpulse();
+        }
+        //Checks collision between player and spike
+        if (playerA && spikeB || spikeA && playerB) {
+            PlayerController.getPlayer().setDamage(PlayerController.getPlayer().getHealth());
         }
 
     }
