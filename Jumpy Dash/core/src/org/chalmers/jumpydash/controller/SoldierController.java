@@ -14,7 +14,7 @@ public class SoldierController extends Actor {
 
     public SoldierController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        soldier = new Soldier(box2D.newDynamic(x,y,mapHeight));
+        soldier = new Soldier(box2D.newDynKin(x,y,mapHeight,false));
         soldierView = new SoldierView();
 
     }

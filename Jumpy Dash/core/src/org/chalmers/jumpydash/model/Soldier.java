@@ -8,7 +8,7 @@ public class Soldier extends Enemy {
     private boolean directionFlag;
 
     public Soldier(IJDBody jdBody) {
-        super(2, jdBody);
+        super(jdBody,1,1);
         jdBody.setUserData(this);
         directionFlag=true;
     }

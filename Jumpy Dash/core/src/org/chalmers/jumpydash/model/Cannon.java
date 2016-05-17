@@ -7,12 +7,12 @@ public class Cannon extends Enemy {
     private long previousFireTime =0;
 
     public Cannon(IJDBody jdBody) {
-        super(1, jdBody);
+        super(jdBody,1,1);
         jdBody.setUserData(this);
     }
 
     public boolean allowedToFire(){
-        long fireCooldown = 250;
+        long fireCooldown = 5000;
         if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
             previousFireTime = System.currentTimeMillis();
             return true;
