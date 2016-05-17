@@ -23,6 +23,10 @@ public class CollisionListener implements ContactListener {
     private boolean soldierB;
     private boolean bulletA;
     private boolean bulletB;
+    private boolean trampolineA;
+    private boolean trampolineB;
+    private boolean spikeA;
+    private boolean spikeB;
 
     @Override
     public void beginContact(Contact contact) {
@@ -31,7 +35,7 @@ public class CollisionListener implements ContactListener {
         a = contact.getFixtureA().getBody();
         b = contact.getFixtureB().getBody();
 
-        //Checks what instance the userdata is
+        //Check what instance the userdata is
         playerA = a.getUserData() instanceof Player;
         coinB = b.getUserData() instanceof Coin;
         playerB = b.getUserData() instanceof Player;
@@ -42,32 +46,39 @@ public class CollisionListener implements ContactListener {
         soldierB = b.getUserData() instanceof Enemy;
         bulletA = a.getUserData() instanceof Bullet;
         bulletB = b.getUserData() instanceof Bullet;
-        
+        trampolineA = a.getUserData() instanceof Trampoline;
+        trampolineB = b.getUserData() instanceof Trampoline;
+        spikeA = a.getUserData() instanceof Spike;
+        spikeB = b.getUserData() instanceof Spike;
 
-        //Checks collision between player and platform
+        //Check collision between player and platform
         if ((playerA && platformB) ||
                 (platformA && playerB)) {
             if (!PlayerController.getPlayer().getJumpState()) {
                 PlayerController.getPlayer().setJumpState();
             }
         }
-        //Checks collision between player and coin
+        //Check collision between player and coin
         if ((playerA && coinB) || (coinA && playerB)) {
             PlayerController.getPlayer().setPoints(Coin.getValue());
         }
 
-        //Checks collision between player and soldier
+        //Check collision between player and soldier
         if ((playerA && soldierB) || (soldierA && playerB)) {
-            if(PlayerController.getPlayer().getHealth() > 1) {
                 PlayerController.getPlayer().setDamage(1);
                 PlayerController.getPlayer().applySoldierImpulse();
-            }else {
-                System.out.println("you are dead");
-            }
         }
-        //Checks collision between bullet and soldier
+        //Check collision between bullet and soldier
         if (bulletA && soldierA || bulletB && soldierB) {
 
+        }
+        //Check collision between player and trampoline
+        if (playerA && trampolineB || trampolineA && playerB) {
+            PlayerController.getPlayer().applyTrampolineImpulse();
+        }
+        //Check collision between player and spike
+        if (playerA && spikeB || spikeA && playerB) {
+            PlayerController.getPlayer().setDamage(PlayerController.getPlayer().getHealth());
         }
 
     }
