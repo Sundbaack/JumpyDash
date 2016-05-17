@@ -9,6 +9,7 @@ public class Player {
     private float impulse;
     private boolean jumpFlag;
     private static int points;
+    private static int health = 3;
     private static final float MAX_SPEED_X = 3.5f;
     private Vector2f vector2f;
 
@@ -73,5 +74,10 @@ public class Player {
     public static void setPoints(int a) {
         points += a;
     }
+
+    public static int getHealth() { return health; }
+
+    public static void setHealth(int damage) { health = health - damage; }
+
 }
 
