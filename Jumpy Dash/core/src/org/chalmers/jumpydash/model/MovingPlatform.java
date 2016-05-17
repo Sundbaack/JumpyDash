@@ -1,18 +1,15 @@
 package org.chalmers.jumpydash.model;
 
 import org.chalmers.jumpydash.physics.IJDBody;
-
 import javax.vecmath.Vector2f;
 
-/**
- * Created by Surface pro 3 on 2016-05-17.
- */
 public class MovingPlatform {
+
     private IJDBody jdBody;
     public static boolean movePlatforms = false;
 
     public MovingPlatform(IJDBody jdBody){
-        this.jdBody =jdBody;
+        this.jdBody = jdBody;
         jdBody.setUserData(this);
     }
 

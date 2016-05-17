@@ -18,7 +18,7 @@ public class PlayerController extends Actor {
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         playerView = new PlayerView();
-        player = new Player(box2D.newDynKin(x, y, mapHeight, false));
+        player = new Player(box2D.newBody(x, y, mapHeight, "dynamic", false));
     }
 
     @Override

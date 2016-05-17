@@ -14,11 +14,11 @@ public class SoldierController extends Actor {
 
     public SoldierController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        soldier = new Soldier(box2D.newDynKin(x,y,mapHeight,false));
+        soldier = new Soldier(box2D.newBody(x, y, mapHeight, "dynamic", false));
         soldierView = new SoldierView();
-
     }
 
+    @Override
     public void act(float Delta){
         soldier.move();
     }

@@ -15,9 +15,10 @@ public class CoinController extends Actor {
     public CoinController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         coinView = new CoinView();
-        coin = new Coin(1, box2D.newStatic(x, y, mapHeight, false));
+        coin = new Coin(box2D.newBody(x, y, mapHeight, "static", false), 1);
     }
 
+    @Override
     public void act(float Delta){
 
     }
@@ -25,7 +26,6 @@ public class CoinController extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         coinView.render(batch, coin.getPosition().x * box2D.getPixelsToMeters(), coin.getPosition().y * box2D.getPixelsToMeters());
-
     }
 
     public void dispose() {

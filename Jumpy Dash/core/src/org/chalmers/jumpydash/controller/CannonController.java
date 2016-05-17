@@ -6,9 +6,6 @@ import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CannonView;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class CannonController extends Actor {
 
     private Cannon cannon;
@@ -17,10 +14,11 @@ public class CannonController extends Actor {
 
     public CannonController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        cannon = new Cannon(box2D.newDynKin(x,y,mapHeight,false));
+        cannon = new Cannon(box2D.newBody(x, y, mapHeight, "dynamic", false));
         cannonView = new CannonView();
     }
 
+    @Override
     public void act(float Delta){
         fireShit();
     }
@@ -31,7 +29,6 @@ public class CannonController extends Actor {
             getStage().addActor(bulletController);
         }
     }
-
 
     @Override
     public void draw(Batch batch, float parentAlpha) {

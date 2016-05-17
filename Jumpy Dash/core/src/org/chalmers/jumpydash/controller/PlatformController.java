@@ -15,9 +15,10 @@ public class PlatformController extends Actor {
     public PlatformController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         platformView = new PlatformView();
-        platform = new Platform(box2D.newStatic(x,y,mapHeight,true));
+        platform = new Platform(box2D.newBody(x, y, mapHeight, "static", true));
     }
 
+    @Override
     public void act(float delta) {
 
     }

@@ -41,6 +41,7 @@ public class BulletController extends Actor {
          }
      }
 
+    @Override
     public void act(float delta) {
         updateBullets();
     }
