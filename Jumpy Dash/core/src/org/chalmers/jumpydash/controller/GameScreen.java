@@ -13,6 +13,8 @@ import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.ReadFile;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class GameScreen implements Screen {
 
@@ -26,8 +28,9 @@ public class GameScreen implements Screen {
     private Label scoreLabel;
     private Label timeLabel;
     private long startTime;
-    private PlayerController playerController;
+    private SimpleDateFormat dateFormat;
 
+    private PlayerController playerController;
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
 
@@ -35,6 +38,7 @@ public class GameScreen implements Screen {
         this.stage = stage;
         this.uiStage = uiStage;
         startTime = System.currentTimeMillis();
+        dateFormat = new SimpleDateFormat("mm:ss");
 
         box2D = new Box2D(tileWidthHeight);
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
@@ -58,7 +62,7 @@ public class GameScreen implements Screen {
         // Use custom font
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 20;
+        parameter.size = 22;
         font = generator.generateFont(parameter);
         generator.dispose();
 
@@ -67,16 +71,15 @@ public class GameScreen implements Screen {
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = skin.getFont("font");
 
-        scoreLabel = new Label("Score: ", style);
+        scoreLabel = new Label("Score", style);
         scoreLabel.setPosition(10, 700);
         scoreLabel.setName("score");
         uiStage.addActor(scoreLabel);
 
         timeLabel = new Label("Time", style);
-        timeLabel.setPosition(400, 700);
+        timeLabel.setPosition(612, 700);
         timeLabel.setName("time");
         uiStage.addActor(timeLabel);
-
     }
 
     private void loadMap(char[][] level) {
@@ -139,7 +142,12 @@ public class GameScreen implements Screen {
         // Update box2D simulations and camera
         box2D.update();
 
+        // Update scoreLabel
         scoreLabel.setText("Score: " + playerController.getPlayer().getPoints());
+
+        // Update timeLabel
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        timeLabel.setText(dateFormat.format(new Date(elapsedTime)));
 
         /*
 		// Debugging
@@ -171,6 +179,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        skin.dispose();
+        font.dispose();
     }
 }
