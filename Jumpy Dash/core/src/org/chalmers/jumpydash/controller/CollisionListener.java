@@ -74,6 +74,7 @@ public class CollisionListener implements ContactListener {
         }
         //Check collision between player and trampoline
         if (playerA && trampolineB || trampolineA && playerB) {
+            PlayerController.getPlayer().setJumpState();
             PlayerController.getPlayer().applyTrampolineImpulse();
         }
         //Check collision between player and spike
