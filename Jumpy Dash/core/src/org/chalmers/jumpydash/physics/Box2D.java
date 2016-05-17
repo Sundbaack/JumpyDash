@@ -4,27 +4,22 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
+import static org.chalmers.jumpydash.util.Constants.*;
+
 public class Box2D implements IBox2D {
 
     private OrthographicCamera camera;
     private World world;
-    private final float PIXELS_TO_METERS = 100f;
-    private final float tileWidthHeight;
 
-    public Box2D(float tileWidthHeight) {
-        this.tileWidthHeight = tileWidthHeight;
-        world = new World(new Vector2(0, -10f), true); //Create a world object with a gravity vector
+    public Box2D() {
+        world = new World(new Vector2(0, GRAVITY), true); //Create a world object with a gravity vector
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1280, 736);
+        camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
     public World getWorld() {
         return this.world;
-    }
-
-    public float getPixelsToMeters() {
-        return this.PIXELS_TO_METERS;
     }
 
     public OrthographicCamera getCamera() {
@@ -42,17 +37,16 @@ public class Box2D implements IBox2D {
             bodyDef.type = BodyDef.BodyType.StaticBody;
         }
 
-        bodyDef.position.set((x * tileWidthHeight) / PIXELS_TO_METERS, ((mapHeight - 1 - y) * tileWidthHeight) / PIXELS_TO_METERS);
+        bodyDef.position.set((x * TILE_SIZE) / PIXELS_TO_METERS, ((mapHeight - 1 - y) * TILE_SIZE) / PIXELS_TO_METERS);
         JDBody jdBody = new JDBody();
         jdBody.body = world.createBody(bodyDef);
 
         if (!ghost) {
-            float hTileWidthHeight = (tileWidthHeight / 2) / PIXELS_TO_METERS;
-            Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
+            Vector2 vCenter = new Vector2(H_TILE_SIZE / PIXELS_TO_METERS, H_TILE_SIZE / PIXELS_TO_METERS);
 
             // Create a polygon and apply it to a fixture
             PolygonShape polygon = new PolygonShape();
-            polygon.setAsBox(hTileWidthHeight, hTileWidthHeight, vCenter, 0);
+            polygon.setAsBox(H_TILE_SIZE / PIXELS_TO_METERS, H_TILE_SIZE / PIXELS_TO_METERS, vCenter, 0);
             FixtureDef fixtureDef = new FixtureDef();
             fixtureDef.shape = polygon;
             fixtureDef.friction = 0;
@@ -61,10 +55,10 @@ public class Box2D implements IBox2D {
             jdBody.body.createFixture(fixtureDef);
         } else {
             //Ghost vertices
-            Vector2 v1 = new Vector2(0, tileWidthHeight / PIXELS_TO_METERS);
-            Vector2 v2 = new Vector2(tileWidthHeight / PIXELS_TO_METERS, tileWidthHeight / PIXELS_TO_METERS);
+            Vector2 v1 = new Vector2(0, TILE_SIZE / PIXELS_TO_METERS);
+            Vector2 v2 = new Vector2(TILE_SIZE / PIXELS_TO_METERS, TILE_SIZE / PIXELS_TO_METERS);
             Vector2 v0 = new Vector2(0, 0);
-            Vector2 v3 = new Vector2(tileWidthHeight / PIXELS_TO_METERS, 0);
+            Vector2 v3 = new Vector2(TILE_SIZE / PIXELS_TO_METERS, 0);
 
             // Create a EdgeShape and apply it to a fixture
             EdgeShape edgeShape = new EdgeShape();
@@ -85,16 +79,15 @@ public class Box2D implements IBox2D {
     public JDBody newBullet(float x, float y) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(x + (40 / PIXELS_TO_METERS),  y + ((tileWidthHeight / 2 / 2) / PIXELS_TO_METERS));
+        bodyDef.position.set(x + ((TILE_SIZE + 8) / PIXELS_TO_METERS),  y + ((H_TILE_SIZE / 2) / PIXELS_TO_METERS));
         JDBody jdBody = new JDBody();
         jdBody.body = world.createBody(bodyDef);
 
-        float hTileWidthHeight = (tileWidthHeight / 2) / PIXELS_TO_METERS;
-        Vector2 vCenter = new Vector2(hTileWidthHeight, hTileWidthHeight);
+        Vector2 vCenter = new Vector2(H_TILE_SIZE / PIXELS_TO_METERS, H_TILE_SIZE / PIXELS_TO_METERS);
 
         // Create a polygon and apply it to a fixture
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox(hTileWidthHeight, hTileWidthHeight, vCenter, 0);
+        polygon.setAsBox(H_TILE_SIZE / PIXELS_TO_METERS, H_TILE_SIZE / PIXELS_TO_METERS, vCenter, 0);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
         jdBody.body.setBullet(true);
@@ -106,7 +99,7 @@ public class Box2D implements IBox2D {
     }
 
     public void update() {
-        world.step(1/60f, 8, 3);
+        world.step(TIME_STEP, VEL_ITERATIONS, POS_ITERATIONS);
         world.clearForces();
         camera.update();
     }

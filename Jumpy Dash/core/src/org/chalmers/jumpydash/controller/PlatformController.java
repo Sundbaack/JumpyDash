@@ -6,6 +6,8 @@ import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Platform;
 import org.chalmers.jumpydash.view.PlatformView;
 
+import static org.chalmers.jumpydash.util.Constants.*;
+
 public class PlatformController extends Actor {
 
     private PlatformView platformView;
@@ -25,7 +27,7 @@ public class PlatformController extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        platformView.render(batch, platform.getPosition().x * box2D.getPixelsToMeters(), platform.getPosition().y * box2D.getPixelsToMeters());
+        platformView.render(batch, platform.getPosition().x * PIXELS_TO_METERS, platform.getPosition().y * PIXELS_TO_METERS);
     }
 
     public void dispose() {

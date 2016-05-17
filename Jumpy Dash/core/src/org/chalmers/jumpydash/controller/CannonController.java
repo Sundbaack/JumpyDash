@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CannonView;
+import static org.chalmers.jumpydash.util.Constants.*;
 
 public class CannonController extends Actor {
 
@@ -32,7 +33,7 @@ public class CannonController extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        cannonView.render(batch, cannon.getPosition().x * box2D.getPixelsToMeters(),cannon.getPosition().y * box2D.getPixelsToMeters());
+        cannonView.render(batch, cannon.getPosition().x * PIXELS_TO_METERS, cannon.getPosition().y * PIXELS_TO_METERS);
 
     }
 

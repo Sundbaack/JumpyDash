@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Coin;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CoinView;
+import static org.chalmers.jumpydash.util.Constants.*;
 
 public class CoinController extends Actor {
 
@@ -25,7 +26,7 @@ public class CoinController extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        coinView.render(batch, coin.getPosition().x * box2D.getPixelsToMeters(), coin.getPosition().y * box2D.getPixelsToMeters());
+        coinView.render(batch, coin.getPosition().x * PIXELS_TO_METERS, coin.getPosition().y * PIXELS_TO_METERS);
     }
 
     public void dispose() {

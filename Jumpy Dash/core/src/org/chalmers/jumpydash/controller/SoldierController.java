@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Soldier;
 import org.chalmers.jumpydash.view.SoldierView;
+import static org.chalmers.jumpydash.util.Constants.*;
 
 public class SoldierController extends Actor {
 
@@ -25,7 +26,7 @@ public class SoldierController extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-       soldierView.render(batch, soldier.getPosition().x * box2D.getPixelsToMeters(),soldier.getPosition().y * box2D.getPixelsToMeters());
+       soldierView.render(batch, soldier.getPosition().x * PIXELS_TO_METERS, soldier.getPosition().y * PIXELS_TO_METERS);
 
     }
 

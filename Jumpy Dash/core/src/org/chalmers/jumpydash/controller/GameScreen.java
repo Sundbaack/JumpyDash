@@ -3,12 +3,9 @@ package org.chalmers.jumpydash.controller;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -28,7 +25,6 @@ public class GameScreen implements Screen {
     private IBox2D box2D;
     private Skin skin;
     private BitmapFont font;
-    private final float tileWidthHeight = 32;
 
     private Label scoreLabel;
     private Label timeLabel;
@@ -46,7 +42,7 @@ public class GameScreen implements Screen {
         startTime = System.currentTimeMillis();
         dateFormat = new SimpleDateFormat("mm:ss");
 
-        box2D = new Box2D(tileWidthHeight);
+        box2D = new Box2D();
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
 
         //debugRenderer = new Box2DDebugRenderer();

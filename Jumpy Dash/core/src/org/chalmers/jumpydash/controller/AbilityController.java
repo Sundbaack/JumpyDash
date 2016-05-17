@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Ability;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.AbilityView;
+import static org.chalmers.jumpydash.util.Constants.*;
 
 public class AbilityController extends Actor{
 
@@ -24,7 +25,7 @@ public class AbilityController extends Actor{
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        abilityView.render(batch, ability.getPosition().x * box2D.getPixelsToMeters(), ability.getPosition().y * box2D.getPixelsToMeters());
+        abilityView.render(batch, ability.getPosition().x * PIXELS_TO_METERS, ability.getPosition().y * PIXELS_TO_METERS);
 
     }
 
