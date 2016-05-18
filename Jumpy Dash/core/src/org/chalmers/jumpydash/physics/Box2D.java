@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
-import java.awt.*;
-
 import static org.chalmers.jumpydash.util.Constants.*;
 
 public class Box2D implements IBox2D {

@@ -9,7 +9,7 @@ public class TrampolineView {
     private Texture trampolineTile;
 
     public TrampolineView(){
-        trampolineTile = new Texture(Gdx.files.internal("player(1).png"));
+        trampolineTile = new Texture(Gdx.files.internal("trampoline.png"));
     }
 
     public void render(Batch batch, float x, float y) {
