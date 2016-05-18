@@ -75,6 +75,15 @@ public class CollisionListener implements ContactListener {
 
 
 
+        /*fix so bullets dissapear on any collision
+        if(bulletA){
+            System.out.println("hello");
+            bodiesToBeDestroyed.add(a);
+        }
+        else if(bulletB){
+            System.out.println("hello b");
+            bodiesToBeDestroyed.add(b);
+        }*/
         //Check collision between player and platform
         if ((playerA && platformB) ||
                 (platformA && playerB)) {
@@ -99,9 +108,11 @@ public class CollisionListener implements ContactListener {
         //Check collision between bullet and soldier
         if (bulletB && soldierA) {
             bodiesToBeDestroyed.add(a);
+            bodiesToBeDestroyed.add(b);
         }
 
         else if(bulletA && soldierB){
+            bodiesToBeDestroyed.add(a);
             bodiesToBeDestroyed.add(b);
         }
         if (bulletA && cannonB) {
@@ -109,13 +120,6 @@ public class CollisionListener implements ContactListener {
         }
         else if(bulletB && cannonA){
             bodiesToBeDestroyed.add(a);
-        }
-        //fix so bullets dissapear on any collision
-        if(bulletA){
-            bodiesToBeDestroyed.add(a);
-        }
-        else if(bulletB){
-            bodiesToBeDestroyed.add(b);
         }
         //Check collision between player and trampoline
         if (playerA && trampolineB || trampolineA && playerB) {
