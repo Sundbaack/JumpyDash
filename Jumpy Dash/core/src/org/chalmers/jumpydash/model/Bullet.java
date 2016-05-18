@@ -9,9 +9,9 @@ public class Bullet {
 
     private IJDBody jdBody;
 
-    public Bullet(JDBody jdBody) {
+    public Bullet(JDBody jdBody, Vector2f bulletDirection) {
         this.jdBody=jdBody;
-        this.jdBody.setLinearVelocity(jdBody.toVector2(new Vector2f(15f, 0)));
+        this.jdBody.setLinearVelocity(jdBody.toVector2(bulletDirection));
         this.jdBody.setUserData(this);
     }
 
