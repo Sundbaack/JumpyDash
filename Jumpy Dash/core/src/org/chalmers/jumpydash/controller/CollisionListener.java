@@ -27,13 +27,18 @@ public class CollisionListener implements ContactListener {
     private boolean trampolineB;
     private boolean spikeA;
     private boolean spikeB;
+    private boolean sensorA;
+    private boolean sensorB;
 
     @Override
     public void beginContact(Contact contact) {
+        boolean sensorAA = contact.getFixtureA().isSensor();
+        boolean sensorBB = contact.getFixtureB().isSensor();
 
         //Bodies to be used for contact
         a = contact.getFixtureA().getBody();
         b = contact.getFixtureB().getBody();
+
 
         //Check what instance the userdata is
         playerA = a.getUserData() instanceof Player;
@@ -50,6 +55,8 @@ public class CollisionListener implements ContactListener {
         trampolineB = b.getUserData() instanceof Trampoline;
         spikeA = a.getUserData() instanceof Spike;
         spikeB = b.getUserData() instanceof Spike;
+        sensorA = a.getUserData() instanceof Sensor;
+        sensorB = b.getUserData() instanceof Sensor;
 
         //Check collision between player and platform
         if ((playerA && platformB) ||
@@ -82,6 +89,18 @@ public class CollisionListener implements ContactListener {
             PlayerController.getPlayer().setDamage(PlayerController.getPlayer().getHealth());
         }
 
+        if(sensorAA) {
+            System.out.println("sensora");
+            if (playerB) {
+                System.out.println("ContactB");
+            }
+        }
+        if(sensorBB){
+            System.out.println("sensorb");
+               if(playerA){
+                   System.out.println("ContactA");
+               }
+           }
     }
 
     @Override
