@@ -28,7 +28,7 @@ public class PlayerController extends Actor {
         player.move();
         //Check if player is dead
         if(player.getHealth() <= 0){
-            System.out.println("You are dead");
+            //System.out.println("You are dead");
         }
 
         // Enable the camera to follow the player

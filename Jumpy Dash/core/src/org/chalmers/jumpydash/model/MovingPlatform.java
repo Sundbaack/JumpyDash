@@ -14,7 +14,7 @@ public class MovingPlatform {
     }
 
     public void moveUp(){
-        System.out.println("moving");
+        //System.out.println("moving");
         jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(10,100)),true);
     }
 

@@ -3,6 +3,8 @@ package org.chalmers.jumpydash.controller;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,12 +28,15 @@ public class GameScreen implements Screen {
     private Skin skin;
     private BitmapFont font;
 
+    private Texture health3;
+    private Texture health2;
+    private Texture health1;
     private Label scoreLabel;
     private Label timeLabel;
     private long startTime;
     private SimpleDateFormat dateFormat;
+    private FreeTypeFontGenerator generator;
 
-    private PlayerController playerController;
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
 
@@ -39,11 +44,18 @@ public class GameScreen implements Screen {
         this.game = game;
         this.stage = stage;
         this.uiStage = uiStage;
+        this.stage.clear();
+        this.uiStage.clear();
+
         startTime = System.currentTimeMillis();
         dateFormat = new SimpleDateFormat("mm:ss");
 
         box2D = new Box2D();
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
+
+        health3 = new Texture(Gdx.files.internal("health3.png"));
+        health2 = new Texture(Gdx.files.internal("health2.png"));
+        health1 = new Texture(Gdx.files.internal("health1.png"));
 
         //debugRenderer = new Box2DDebugRenderer();
 
@@ -62,11 +74,10 @@ public class GameScreen implements Screen {
         skin = new Skin();
 
         // Use custom font
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
+         generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 22;
         font = generator.generateFont(parameter);
-        generator.dispose();
 
         skin.add("font", font);
 
@@ -96,38 +107,32 @@ public class GameScreen implements Screen {
             for (int x = 0; x < mapWidth; x++) {
 
                 if (level[y][x] == 'P') {
-                    playerController = new PlayerController(box2D, x, y, mapHeight);
+                    PlayerController playerController = new PlayerController(box2D, x, y, mapHeight);
                     stage.addActor(playerController);
                 }
                 if (level[y][x] == '#') {
                     PlatformController platformController = new PlatformController(box2D, x, y, mapHeight);
-
                     stage.addActor(platformController);
                 }
                 if(level[y][x] == 'M'){
                     MovingPlatformController movingPlatformController = new MovingPlatformController(box2D,x,y,mapHeight);
                     stage.addActor(movingPlatformController);
                 }
-
                 if (level[y][x] == 'C') {
                     CoinController coinController = new CoinController(box2D, x, y, mapHeight);
-
                     stage.addActor(coinController);
                 }
                 if (level[y][x] == 'S') {
                     SoldierController soldierController = new SoldierController(box2D, x, y, mapHeight);
-
                     stage.addActor(soldierController);
                 }
                 if (level[y][x] == 'A') {
                     AbilityController abilityController =new AbilityController(box2D, x, y, mapHeight);
                     stage.addActor(abilityController);
-
                 }
                 if (level[y][x] == 'T') {
                     TrampolineController trampolineController = new TrampolineController(box2D, x, y, mapHeight);
                     stage.addActor(trampolineController);
-
                 }
                 if (level[y][x] == 'O') {
                     SpikeController spikeController = new SpikeController(box2D, x, y, mapHeight);
@@ -144,26 +149,40 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl20.glClearColor(0, 0, 0, 1);
+        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Update box2D simulations and camera
         box2D.update();
 
         // Update scoreLabel
-        scoreLabel.setText("Score: " + playerController.getPlayer().getPoints());
+        scoreLabel.setText("Score: " + PlayerController.getPlayer().getPoints());
 
         // Update timeLabel
         long elapsedTime = System.currentTimeMillis() - startTime;
         timeLabel.setText(dateFormat.format(new Date(elapsedTime)));
 
+        // Draw health
+        uiStage.getBatch().begin();
+        if (PlayerController.getPlayer().getHealth() == 3) {
+          uiStage.getBatch().draw(health3, 1040, 661);
+        } else if (PlayerController.getPlayer().getHealth() == 2) {
+            uiStage.getBatch().draw(health2, 1040, 661);
+        } else if (PlayerController.getPlayer().getHealth() == 1) {
+            uiStage.getBatch().draw(health1, 1040, 661);
+        }
+        uiStage.getBatch().end();
+
         // Gameover
-        //game.setScreen(new GameOverScreen(game, stage, uiStage));
+        if (PlayerController.getPlayer().getHealth() == 0) {
+            game.setScreen(new GameOverScreen(game, stage, uiStage));
+        }
 
         /*
 		// Debugging
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);
 		debugRenderer.render(box2D.world, debugMatrix);
 		*/
-
     }
 
     @Override
@@ -190,5 +209,6 @@ public class GameScreen implements Screen {
     public void dispose() {
         skin.dispose();
         font.dispose();
+        generator.dispose();
     }
 }

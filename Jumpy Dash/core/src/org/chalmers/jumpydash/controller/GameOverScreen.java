@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -25,11 +26,15 @@ public class GameOverScreen implements Screen {
     private BitmapFont font;
     private TextButton playButton;
     private TextButton menuButton;
+    private Texture gameOverBg;
 
     public GameOverScreen(Game game, Stage stage, Stage uiStage) {
         this.game = game;
         this.stage = stage;
         this.uiStage = uiStage;
+        this.stage.clear();
+        this.uiStage.clear();
+        gameOverBg = new Texture(Gdx.files.internal("gameOverBg.png"));
         createUI();
     }
 
@@ -90,7 +95,12 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl20.glClearColor(0, 0, 0, 1);
+        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        uiStage.getBatch().begin();
+        uiStage.getBatch().draw(gameOverBg, 0, 0);
+        uiStage.getBatch().end();
     }
 
     @Override
@@ -110,12 +120,14 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void hide() {
-        playButton.remove();
-        menuButton.remove();
+
     }
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        skin.dispose();
+        pixmap.dispose();
+        font.dispose();
     }
 }
