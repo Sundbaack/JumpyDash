@@ -16,7 +16,7 @@ public class PlayerView {
     }
 
     public void render(Batch batch, float x, float y) {
-        batch.draw(background, 0, 0, 0, 0, 10000, 736);
+        batch.draw(background, 0, 0, 0, 0, 9984, 736);
         batch.draw(playerTile, x, y);
     }
 
