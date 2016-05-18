@@ -13,7 +13,7 @@ public class Player {
     private static long previousFireTime;
     private static final float MAX_SPEED_X = 3.5f;
     private Vector2f vector2f;
-    private Vector2f speed;
+    private float playerSpeedX;
 
 
     public Player(IJDBody jdBody) {
@@ -22,7 +22,7 @@ public class Player {
         setImpulse(jdBody.getMass() * 4f);
         this.points = 0;
 
-        speed = new Vector2f(4,0);
+        playerSpeedX = 4;
 
         jumpFlag = false;
         health = 3;
@@ -50,7 +50,7 @@ public class Player {
         float speedX = speed.x;
 
         if (speedX < getMaxSpeedX()) {
-            jdBody.applyForceToCenter(jdBody.toVector2(speed), true);
+            jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(playerSpeedX, 0)), true);
         }
     }
 
@@ -101,11 +101,11 @@ public class Player {
     public static void setDamage(int damage) { health = health - damage; }
 
     public void setSpeed(float speedIncrease) {
-        speed.setX(speed.getX() + speedIncrease);
+        playerSpeedX += speedIncrease;
     }
 
     public float getSpeed(){
-        return speed.getX();
+        return playerSpeedX;
     }
 
 }
