@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -28,9 +29,9 @@ public class GameScreen implements Screen {
     private Skin skin;
     private BitmapFont font;
 
-    private Texture health3;
-    private Texture health2;
-    private Texture health1;
+    private Image health3;
+    private Image health2;
+    private Image health1;
     private Label scoreLabel;
     private Label timeLabel;
     private long startTime;
@@ -53,9 +54,13 @@ public class GameScreen implements Screen {
         box2D = new Box2D();
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
 
-        health3 = new Texture(Gdx.files.internal("health3.png"));
-        health2 = new Texture(Gdx.files.internal("health2.png"));
-        health1 = new Texture(Gdx.files.internal("health1.png"));
+        health3 = new Image(new Texture(Gdx.files.internal("health3.png")));
+        health3.setPosition(1125, 682);
+        health2 = new Image(new Texture(Gdx.files.internal("health2.png")));
+        health2.setPosition(1125, 682);
+        health1 = new Image(new Texture(Gdx.files.internal("health1.png")));
+        health1.setPosition(1125, 682);
+        uiStage.addActor(health3);
 
         //debugRenderer = new Box2DDebugRenderer();
 
@@ -163,15 +168,13 @@ public class GameScreen implements Screen {
         timeLabel.setText(dateFormat.format(new Date(elapsedTime)));
 
         // Draw health
-        uiStage.getBatch().begin();
-        if (PlayerController.getPlayer().getHealth() == 3) {
-          uiStage.getBatch().draw(health3, 1040, 661);
-        } else if (PlayerController.getPlayer().getHealth() == 2) {
-            uiStage.getBatch().draw(health2, 1040, 661);
+        if (PlayerController.getPlayer().getHealth() == 2) {
+            health3.remove();
+            uiStage.addActor(health2);
         } else if (PlayerController.getPlayer().getHealth() == 1) {
-            uiStage.getBatch().draw(health1, 1040, 661);
+            health2.remove();
+            uiStage.addActor(health1);
         }
-        uiStage.getBatch().end();
 
         // Gameover
         if (PlayerController.getPlayer().getHealth() == 0) {
