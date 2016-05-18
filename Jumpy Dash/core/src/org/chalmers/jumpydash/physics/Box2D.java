@@ -28,7 +28,7 @@ public class Box2D implements IBox2D {
         return camera;
     }
 
-    public JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost, boolean sensor) {
+    public JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost) {
         BodyDef bodyDef = new BodyDef();
 
         if (type.equalsIgnoreCase("kinematic")) {

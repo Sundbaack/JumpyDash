@@ -142,6 +142,10 @@ public class GameScreen implements Screen {
                 if (level[y][x] == 'O') {
                     SpikeController spikeController = new SpikeController(box2D, x, y, mapHeight);
                     stage.addActor(spikeController);
+
+                } else if (level[y][x] == 'U') {
+                    SpeedUpController speedUpController = new SpeedUpController(box2D, x, y, mapHeight);
+                    stage.addActor(speedUpController);
                 }
             }
         }

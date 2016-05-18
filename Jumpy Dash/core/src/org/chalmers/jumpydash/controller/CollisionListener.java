@@ -8,6 +8,7 @@ import org.chalmers.jumpydash.model.Platform;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.model.Trampoline;
 import org.chalmers.jumpydash.model.*;
+
 public class CollisionListener implements ContactListener {
 
     private Body a;
@@ -27,8 +28,9 @@ public class CollisionListener implements ContactListener {
     private boolean trampolineB;
     private boolean spikeA;
     private boolean spikeB;
-    private boolean sensorA;
-    private boolean sensorB;
+
+    private boolean speedUpA;
+    private boolean speedUpB;
 
     @Override
     public void beginContact(Contact contact) {
@@ -55,8 +57,11 @@ public class CollisionListener implements ContactListener {
         trampolineB = b.getUserData() instanceof Trampoline;
         spikeA = a.getUserData() instanceof Spike;
         spikeB = b.getUserData() instanceof Spike;
-        sensorA = a.getUserData() instanceof Sensor;
-        sensorB = b.getUserData() instanceof Sensor;
+
+        speedUpA = a.getUserData() instanceof SpeedUp;
+        speedUpB = b.getUserData() instanceof SpeedUp;
+
+
 
         //Check collision between player and platform
         if ((playerA && platformB) ||
@@ -72,8 +77,8 @@ public class CollisionListener implements ContactListener {
 
         //Check collision between player and soldier
         if ((playerA && soldierB) || (soldierA && playerB)) {
-                PlayerController.getPlayer().setDamage(1);
-                PlayerController.getPlayer().applySoldierImpulse();
+            PlayerController.getPlayer().setDamage(1);
+            PlayerController.getPlayer().applySoldierImpulse();
         }
         //Check collision between bullet and soldier
         if (bulletA && soldierA || bulletB && soldierB) {
@@ -87,6 +92,10 @@ public class CollisionListener implements ContactListener {
         //Check collision between player and spike
         if (playerA && spikeB || spikeA && playerB) {
             PlayerController.getPlayer().setDamage(PlayerController.getPlayer().getHealth());
+        }
+        //Check collision between player and SpeedUp
+        if ((playerA && speedUpB) || (speedUpA && playerB)) {
+            PlayerController.getPlayer().playerSpeedUp();
         }
 
         if(sensorAA) {
