@@ -21,7 +21,10 @@ public class CoinController extends Actor {
 
     @Override
     public void act(float Delta){
-
+        // Remove the coin
+        if (!coin.getJdBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override

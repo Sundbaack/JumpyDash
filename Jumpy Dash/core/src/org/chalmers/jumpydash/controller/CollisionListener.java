@@ -1,13 +1,15 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Array;
 import org.chalmers.jumpydash.model.Coin;
 import org.chalmers.jumpydash.model.Platform;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.model.Trampoline;
 import org.chalmers.jumpydash.model.*;
+import org.chalmers.jumpydash.physics.IBox2D;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CollisionListener implements ContactListener {
 
@@ -32,6 +34,15 @@ public class CollisionListener implements ContactListener {
     private boolean speedUpA;
     private boolean speedUpB;
 
+    private IBox2D box2D;
+    private List<Body> bodiesToBeDestroyed;
+
+    public CollisionListener(IBox2D box2D) {
+        this.box2D = box2D;
+        bodiesToBeDestroyed = new ArrayList<Body>();
+        box2D.setBodiesToBeDestroyed(bodiesToBeDestroyed);
+    }
+
     @Override
     public void beginContact(Contact contact) {
         boolean sensorAA = contact.getFixtureA().isSensor();
@@ -40,7 +51,6 @@ public class CollisionListener implements ContactListener {
         //Bodies to be used for contact
         a = contact.getFixtureA().getBody();
         b = contact.getFixtureB().getBody();
-
 
         //Check what instance the userdata is
         playerA = a.getUserData() instanceof Player;
@@ -70,8 +80,12 @@ public class CollisionListener implements ContactListener {
             }
         }
         //Check collision between player and coin
-        if ((playerA && coinB) || (coinA && playerB)) {
+        if ((playerA && coinB)) {
             PlayerController.getPlayer().setPoints(Coin.getValue());
+            bodiesToBeDestroyed.add(b);
+        } else if ((coinA && playerB)) {
+            PlayerController.getPlayer().setPoints(Coin.getValue());
+            bodiesToBeDestroyed.add(a);
         }
 
         //Check collision between player and soldier

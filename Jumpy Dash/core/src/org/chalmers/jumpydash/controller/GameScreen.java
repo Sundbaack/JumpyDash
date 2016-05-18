@@ -71,7 +71,7 @@ public class GameScreen implements Screen {
             System.out.println("File not found");
         }
 
-        box2D.getWorld().setContactListener(new CollisionListener());
+        box2D.getWorld().setContactListener(new CollisionListener(box2D));
         createUI();
     }
 

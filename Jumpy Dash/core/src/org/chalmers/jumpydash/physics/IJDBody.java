@@ -1,6 +1,7 @@
 package org.chalmers.jumpydash.physics;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 
 import javax.vecmath.Vector2f;
 
@@ -13,6 +14,8 @@ public interface IJDBody {
     Vector2 toVector2(Vector2f vector2f);
 
     Vector2f toVector2f(Vector2 vector2);
+
+    boolean isActive();
 
     void applyForceToCenter(Vector2 force, boolean wake);
 

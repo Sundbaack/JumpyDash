@@ -27,8 +27,8 @@ public class JDBody implements IJDBody {
         return vector2f;
     }
 
-    public Body getBody() {
-        return this.body;
+    public boolean isActive() {
+        return body.isActive();
     }
 
     public void applyForceToCenter(Vector2 force, boolean wake) {
