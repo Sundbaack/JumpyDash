@@ -2,19 +2,13 @@ package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import org.chalmers.jumpydash.model.Ability;
 import org.chalmers.jumpydash.model.Sensor;
 import org.chalmers.jumpydash.physics.IBox2D;
-import org.chalmers.jumpydash.view.AbilityView;
 import org.chalmers.jumpydash.view.SensorView;
 
 import static org.chalmers.jumpydash.util.Constants.PIXELS_TO_METERS;
 
-/**
- * Created by Surface pro 3 on 2016-05-18.
- */
 public class SensorController extends Actor {
-
 
     private SensorView sensorView;
     private IBox2D box2D;
