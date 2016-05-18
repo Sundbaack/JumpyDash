@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Bullet;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.BulletView;
+import static org.chalmers.jumpydash.util.Constants.*;
 
 public class BulletController extends Actor {
 
@@ -36,18 +37,19 @@ public class BulletController extends Actor {
 
     // Remove bullets when moving out of screen
      private void updateBullets() {
-         if (((bullet.getPosition().x * box2D.getPixelsToMeters()) + 16) > (box2D.getCamera().position.x + 1200 / 2)) {
+         if (((bullet.getPosition().x * PIXELS_TO_METERS) + H_TILE_SIZE) > (box2D.getCamera().position.x + SCREEN_WIDTH / 2)) {
              this.remove();
          }
      }
 
+    @Override
     public void act(float delta) {
         updateBullets();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        bulletView.render(batch, bullet.getPosition().x * box2D.getPixelsToMeters(), bullet.getPosition().y * box2D.getPixelsToMeters());
+        bulletView.render(batch, bullet.getPosition().x * PIXELS_TO_METERS, bullet.getPosition().y * PIXELS_TO_METERS);
     }
 
     public void dispose() {

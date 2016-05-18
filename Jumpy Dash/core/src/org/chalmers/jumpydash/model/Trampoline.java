@@ -1,7 +1,6 @@
 package org.chalmers.jumpydash.model;
 
 import org.chalmers.jumpydash.physics.IJDBody;
-
 import javax.vecmath.Vector2f;
 
 public class Trampoline {

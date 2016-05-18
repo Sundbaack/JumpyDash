@@ -20,7 +20,7 @@ public class MenuScreen implements Screen {
     private Game game;
     private Stage stage;
     private Stage uiStage;
-    private Texture menuBackground;
+    private Texture menuBg;
     private Skin skin;
     private Pixmap pixmap;
     private BitmapFont font;
@@ -30,11 +30,13 @@ public class MenuScreen implements Screen {
     public MenuScreen(Game game, Stage stage, Stage uiStage) {
         this.game = game;
         this.stage = stage;
-
         this.uiStage = uiStage;
+        this.stage.clear();
+        this.uiStage.clear();
+
         Gdx.input.setInputProcessor(uiStage);
 
-        menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
+        menuBg = new Texture(Gdx.files.internal("menuBg.png"));
         createUI();
     }
 
@@ -95,15 +97,12 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl20.glClearColor(0, 0, 0, 1);
+        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         uiStage.getBatch().begin();
-        uiStage.getBatch().draw(menuBackground,0,0);
+        uiStage.getBatch().draw(menuBg, 0, 0);
         uiStage.getBatch().end();
-
-        uiStage.act(delta);
-        uiStage.draw();
     }
 
     @Override
@@ -123,8 +122,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void hide() {
-        playButton.remove();
-        quitButton.remove();
+
     }
 
     @Override

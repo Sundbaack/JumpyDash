@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.view.PlayerView;
+import static org.chalmers.jumpydash.util.Constants.*;
 
 public class PlayerController extends Actor {
 
@@ -18,7 +19,7 @@ public class PlayerController extends Actor {
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         playerView = new PlayerView();
-        player = new Player(box2D.newDynKin(x, y, mapHeight, false));
+        player = new Player(box2D.newBody(x, y, mapHeight, "dynamic", false));
     }
 
     @Override
@@ -27,21 +28,21 @@ public class PlayerController extends Actor {
         player.move();
         //Check if player is dead
         if(player.getHealth() <= 0){
-            System.out.println("You are dead");
+            //System.out.println("You are dead");
         }
 
         // Enable the camera to follow the player
-        if (player.getPosition().x > 500 / box2D.getPixelsToMeters()) {
+        if (player.getPosition().x > CAMERA_UPDATE_POINT / PIXELS_TO_METERS) {
 
             Vector3 position = box2D.getCamera().position;
-            position.x = box2D.getCamera().position.x + 1280 / box2D.getPixelsToMeters() + (player.getPosition().x * box2D.getPixelsToMeters() - box2D.getCamera().position.x) * 0.1f;
+            position.x = box2D.getCamera().position.x + SCREEN_WIDTH / PIXELS_TO_METERS + (player.getPosition().x * PIXELS_TO_METERS - box2D.getCamera().position.x) * 0.1f;
             box2D.getCamera().position.set(position);
         }
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        playerView.render(batch, player.getPosition().x * box2D.getPixelsToMeters(), player.getPosition().y * box2D.getPixelsToMeters());
+        playerView.render(batch, player.getPosition().x * PIXELS_TO_METERS, player.getPosition().y * PIXELS_TO_METERS);
     }
 
     private void handleInput() {
