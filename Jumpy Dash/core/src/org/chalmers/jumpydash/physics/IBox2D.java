@@ -8,8 +8,7 @@ import java.util.List;
 
 public interface IBox2D {
 
-
-    void setBodiesToBeDestroyed(List<Body> bodiesToBeDestroyed);
+    List<Body> getBodiesToBeDestroyed();
 
     World getWorld();
 

@@ -17,6 +17,8 @@ public interface IJDBody {
 
     boolean isActive();
 
+    Body getBody();
+
     void applyForceToCenter(Vector2 force, boolean wake);
 
     void setLinearVelocity(Vector2 v);

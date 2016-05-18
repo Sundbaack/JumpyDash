@@ -8,9 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.view.PlayerView;
-
 import javax.vecmath.Vector2f;
-
 import static org.chalmers.jumpydash.util.Constants.*;
 
 public class PlayerController extends Actor {
@@ -29,10 +27,6 @@ public class PlayerController extends Actor {
     public void act(float delta) {
         handleInput();
         player.move();
-        //Check if player is dead
-        if(player.getHealth() <= 0){
-            //System.out.println("You are dead");
-        }
 
         // Enable the camera to follow the player
         if (player.getPosition().x > CAMERA_UPDATE_POINT / PIXELS_TO_METERS) {
@@ -53,7 +47,7 @@ public class PlayerController extends Actor {
             player.setJumpState();
             player.jump();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F)&& player.allowedToFire()==true) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F) && player.allowedToFire()) {
             BulletController bulletController = new BulletController(box2D, player.getPosition().x, player.getPosition().y,new Vector2f(15f, 0));
             getStage().addActor(bulletController);
         }
