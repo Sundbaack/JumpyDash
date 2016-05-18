@@ -57,7 +57,6 @@ public class CollisionListener implements ContactListener {
         trampolineB = b.getUserData() instanceof Trampoline;
         spikeA = a.getUserData() instanceof Spike;
         spikeB = b.getUserData() instanceof Spike;
-
         speedUpA = a.getUserData() instanceof SpeedUp;
         speedUpB = b.getUserData() instanceof SpeedUp;
 
