@@ -5,6 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Bullet;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.BulletView;
+
+import javax.vecmath.Vector2f;
+
 import static org.chalmers.jumpydash.util.Constants.*;
 
 public class BulletController extends Actor {
@@ -14,10 +17,10 @@ public class BulletController extends Actor {
     private Bullet bullet;
     private IBox2D box2D;
 
-    public BulletController(IBox2D box2D, float x, float y) {
+    public BulletController(IBox2D box2D, float x, float y, Vector2f bulletDirection) {
         this.box2D = box2D;
         bulletView = new BulletView();
-        bullet = new Bullet(box2D.newBullet(x,y));
+        bullet = new Bullet(box2D.newBullet(x,y),bulletDirection);
     }
 /*
     public void fireBullet() {

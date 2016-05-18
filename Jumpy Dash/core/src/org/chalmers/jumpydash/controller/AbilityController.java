@@ -11,7 +11,7 @@ public class AbilityController extends Actor{
 
     private AbilityView abilityView;
     private IBox2D box2D;
-    private Ability ability;
+    private static Ability ability;
 
     public AbilityController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
@@ -27,6 +27,10 @@ public class AbilityController extends Actor{
     public void draw(Batch batch, float parentAlpha) {
         abilityView.render(batch, ability.getPosition().x * PIXELS_TO_METERS, ability.getPosition().y * PIXELS_TO_METERS);
 
+    }
+
+    public static Ability getAbility() {
+        return ability;
     }
 
     public void dispose() {
