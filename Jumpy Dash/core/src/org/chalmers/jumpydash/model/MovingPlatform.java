@@ -14,8 +14,13 @@ public class MovingPlatform {
     }
 
     public void moveUp(){
-        //System.out.println("moving");
-        jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(10,100)),true);
+        if(movePlatforms == true){
+            jdBody.setLinearVelocity(jdBody.toVector2(new Vector2f(0,1)));
+        }
+        else {
+            jdBody.setLinearVelocity(jdBody.toVector2(new Vector2f(0,0)));
+        }
+
     }
 
     public Vector2f getPosition(){
