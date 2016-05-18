@@ -27,7 +27,7 @@ public class Player {
     }
 
     public void jump() {
-        MovingPlatform.movePlatforms = true;
+        MovingPlatform.movePlatforms = !(MovingPlatform.movePlatforms);
         vector2f = new Vector2f(0,getImpulse());
         jdBody.applyLinearImpulse(jdBody.toVector2(vector2f), jdBody.getWorldCenter(), true);
     }
