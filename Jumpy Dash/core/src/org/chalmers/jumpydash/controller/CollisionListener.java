@@ -71,8 +71,8 @@ public class CollisionListener implements ContactListener {
 
         //Check collision between player and soldier
         if ((playerA && soldierB) || (soldierA && playerB)) {
-                PlayerController.getPlayer().setDamage(1);
-                PlayerController.getPlayer().applySoldierImpulse();
+            PlayerController.getPlayer().setDamage(1);
+            PlayerController.getPlayer().applySoldierImpulse();
         }
         //Check collision between bullet and soldier
         if (bulletA && soldierA || bulletB && soldierB) {
@@ -88,7 +88,8 @@ public class CollisionListener implements ContactListener {
             PlayerController.getPlayer().setDamage(PlayerController.getPlayer().getHealth());
         }
         //Check collision between player and SpeedUp
-        if (playerA && speedUpB || speedUpA && playerB) {
+        if ((playerA && speedUpB) || (speedUpA && playerB)) {
+            PlayerController.getPlayer().playerSpeedUp();
         }
 
     }

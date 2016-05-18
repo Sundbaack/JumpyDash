@@ -13,14 +13,14 @@ import static org.chalmers.jumpydash.util.Constants.*;
  */
 public class SpeedUpController extends Actor {
 
-    private static SpeedUp speedUp;
+    private SpeedUp speedUp;
     private SpeedUpView speedUpView;
     private IBox2D box2D;
 
     public SpeedUpController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        speedUp = new SpeedUp(box2D.newBody(x, y, mapHeight, "static", false));
         speedUpView = new SpeedUpView();
+        speedUp = new SpeedUp(box2D.newBody(x, y, mapHeight, "static", false));
     }
 
     public void act(float Delta) {
@@ -34,10 +34,6 @@ public class SpeedUpController extends Actor {
 
     public void dispose() {
         speedUpView.dispose();
-    }
-
-    public static SpeedUp getSpeedUp() {
-        return speedUp;
     }
 
 }

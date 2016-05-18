@@ -64,6 +64,10 @@ public class Player {
         jdBody.applyLinearImpulse(jdBody.toVector2(vector2f),jdBody.getWorldCenter(),true);
     }
 
+    public void playerSpeedUp() {
+        setSpeed(100);
+    }
+
     public Vector2f getPosition() {
         return jdBody.toVector2f(jdBody.getPosition());
     }

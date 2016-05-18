@@ -6,7 +6,6 @@ public class Ability extends Item {
 
     public Ability(IJDBody jdBody) {
         super(jdBody);
-        jdBody.setUserData(this);
     }
 
 }
