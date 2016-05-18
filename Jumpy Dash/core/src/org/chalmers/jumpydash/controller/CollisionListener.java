@@ -107,8 +107,12 @@ public class CollisionListener implements ContactListener {
             PlayerController.getPlayer().setDamage(PlayerController.getPlayer().getHealth());
         }
         //Check collision between player and SpeedUp
-        if ((playerA && speedUpB) || (speedUpA && playerB)) {
+        if ((playerA && speedUpB)) {
             PlayerController.getPlayer().playerSpeedUp();
+            bodiesToBeDestroyed.add(a);
+        } else if ((speedUpA && playerB)) {
+            PlayerController.getPlayer().playerSpeedUp();
+            bodiesToBeDestroyed.add(b);
         }
 
         if(sensorAA) {

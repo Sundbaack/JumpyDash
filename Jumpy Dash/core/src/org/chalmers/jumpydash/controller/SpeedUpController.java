@@ -24,7 +24,10 @@ public class SpeedUpController extends Actor {
     }
 
     public void act(float Delta) {
-
+        //Remove SpeedUp
+        if (!speedUp.getJdBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override
