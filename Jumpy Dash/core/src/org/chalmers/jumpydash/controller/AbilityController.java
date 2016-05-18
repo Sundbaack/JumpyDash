@@ -28,6 +28,10 @@ public class AbilityController extends Actor{
 
     }
 
+    public Ability getAbility() {
+        return ability;
+    }
+
     public void dispose() {
         abilityView.dispose();
     }

@@ -10,7 +10,6 @@ public class Ability extends Item {
 
     public Ability(IJDBody jdBody){
         this.jdBody = jdBody;
-        this.jdBody.setUserData(this);
     }
 
     public Vector2f getPosition() {
