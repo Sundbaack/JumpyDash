@@ -34,7 +34,7 @@ public class GameOverScreen implements Screen {
         this.uiStage = uiStage;
         this.stage.clear();
         this.uiStage.clear();
-        gameOverBg = new Texture(Gdx.files.internal("gameOverBg.png"));
+        gameOverBg = new Texture(Gdx.files.internal("images/gameOverBg.png"));
         createUI();
     }
 
@@ -46,7 +46,7 @@ public class GameOverScreen implements Screen {
         skin.add("grey", new Texture(pixmap));
 
         // Use custom font
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 18;
         font = generator.generateFont(parameter);

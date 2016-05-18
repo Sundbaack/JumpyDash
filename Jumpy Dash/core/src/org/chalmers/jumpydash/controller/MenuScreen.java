@@ -36,7 +36,7 @@ public class MenuScreen implements Screen {
 
         Gdx.input.setInputProcessor(uiStage);
 
-        menuBg = new Texture(Gdx.files.internal("menuBg.png"));
+        menuBg = new Texture(Gdx.files.internal("images/menuBg.png"));
         createUI();
     }
 
@@ -48,7 +48,7 @@ public class MenuScreen implements Screen {
         skin.add("grey", new Texture(pixmap));
 
         // Use custom font
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 18;
         font = generator.generateFont(parameter);

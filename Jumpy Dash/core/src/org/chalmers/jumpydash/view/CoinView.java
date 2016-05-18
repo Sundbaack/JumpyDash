@@ -9,7 +9,7 @@ public class CoinView {
     private Texture coinTile;
 
     public CoinView() {
-        coinTile = new Texture(Gdx.files.internal("coin.png"));
+        coinTile = new Texture(Gdx.files.internal("images/coin.png"));
     }
 
     public void render(Batch batch,float x, float y) {

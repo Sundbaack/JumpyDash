@@ -9,7 +9,7 @@ public class PlatformView {
     private Texture platformTile;
 
     public PlatformView(){
-        platformTile = new Texture(Gdx.files.internal("platform.png"));
+        platformTile = new Texture(Gdx.files.internal("images/platform.png"));
     }
 
     public void render(Batch batch,float x, float y){

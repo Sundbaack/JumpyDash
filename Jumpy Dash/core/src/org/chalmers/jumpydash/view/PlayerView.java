@@ -10,8 +10,8 @@ public class PlayerView {
     private Texture background;
 
     public PlayerView() {
-        playerTile = new Texture(Gdx.files.internal("player.png"));
-        background = new Texture(Gdx.files.internal("bg.png"));
+        playerTile = new Texture(Gdx.files.internal("images/player.png"));
+        background = new Texture(Gdx.files.internal("images/bg.png"));
         background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
     }
 

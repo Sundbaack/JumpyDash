@@ -9,7 +9,7 @@ public class SoldierView {
     private Texture soldierTile;
 
     public SoldierView() {
-        soldierTile = new Texture(Gdx.files.internal("soldier.png"));
+        soldierTile = new Texture(Gdx.files.internal("images/soldier.png"));
     }
 
     public void render(Batch batch,float x, float y){

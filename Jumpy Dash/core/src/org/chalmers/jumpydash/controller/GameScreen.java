@@ -54,11 +54,11 @@ public class GameScreen implements Screen {
         box2D = new Box2D();
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
 
-        health3 = new Image(new Texture(Gdx.files.internal("health3.png")));
+        health3 = new Image(new Texture(Gdx.files.internal("images/health3.png")));
         health3.setPosition(1125, 682);
-        health2 = new Image(new Texture(Gdx.files.internal("health2.png")));
+        health2 = new Image(new Texture(Gdx.files.internal("images/health2.png")));
         health2.setPosition(1125, 682);
-        health1 = new Image(new Texture(Gdx.files.internal("health1.png")));
+        health1 = new Image(new Texture(Gdx.files.internal("images/health1.png")));
         health1.setPosition(1125, 682);
         uiStage.addActor(health3);
 
@@ -66,7 +66,7 @@ public class GameScreen implements Screen {
 
         // Load the map
         try {
-            loadMap(ReadFile.fileToArray(new File("level1.txt")));
+            loadMap(ReadFile.fileToArray(new File("levels/level1.txt")));
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -79,7 +79,7 @@ public class GameScreen implements Screen {
         skin = new Skin();
 
         // Use custom font
-         generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
+         generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 22;
         font = generator.generateFont(parameter);

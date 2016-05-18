@@ -9,7 +9,7 @@ public class BulletView {
     private Texture bulletTile;
 
     public BulletView() {
-        bulletTile = new Texture(Gdx.files.internal("bullet.png"));
+        bulletTile = new Texture(Gdx.files.internal("images/bullet.png"));
     }
 
     public void render(Batch batch,float x, float y) {

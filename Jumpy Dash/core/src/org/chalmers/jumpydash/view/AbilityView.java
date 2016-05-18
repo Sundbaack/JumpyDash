@@ -9,7 +9,7 @@ public class AbilityView {
     private Texture abilityTile;
 
     public AbilityView() {
-        abilityTile = new Texture(Gdx.files.internal("ability.png"));
+        abilityTile = new Texture(Gdx.files.internal("images/ability.png"));
     }
 
     public void render(Batch batch,float x, float y) {

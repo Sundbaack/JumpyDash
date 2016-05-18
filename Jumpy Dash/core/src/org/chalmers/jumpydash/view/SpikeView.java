@@ -9,7 +9,7 @@ public class SpikeView {
     private Texture spikeTile;
 
     public SpikeView() {
-        spikeTile = new Texture(Gdx.files.internal("spike.png"));
+        spikeTile = new Texture(Gdx.files.internal("images/spike.png"));
     }
 
     public void render(Batch batch, float x, float y) {
