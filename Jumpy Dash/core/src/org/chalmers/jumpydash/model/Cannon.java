@@ -4,7 +4,7 @@ import org.chalmers.jumpydash.physics.IJDBody;
 
 public class Cannon extends Enemy {
 
-    private long previousFireTime =0;
+    private long previousFireTime = 0;
 
     public Cannon(IJDBody jdBody) {
         super(jdBody,1,1);

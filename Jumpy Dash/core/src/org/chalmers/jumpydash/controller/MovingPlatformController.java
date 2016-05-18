@@ -6,9 +6,8 @@ import org.chalmers.jumpydash.model.MovingPlatform;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.MovingPlatformView;
 
-/**
- * Created by Surface pro 3 on 2016-05-17.
- */
+import static org.chalmers.jumpydash.util.Constants.*;
+
 public class MovingPlatformController extends Actor {
 
     private MovingPlatformView movingPlatformView;
@@ -18,9 +17,10 @@ public class MovingPlatformController extends Actor {
     public MovingPlatformController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         movingPlatformView = new MovingPlatformView();
-        movingPlatform = new MovingPlatform(box2D.newDynKin(x,y,mapHeight,true));
+        movingPlatform = new MovingPlatform(box2D.newBody(x, y, mapHeight, "kinematic", false));
     }
 
+    @Override
     public void act(float delta) {
         if(MovingPlatform.movePlatforms == true){
             movingPlatform.moveUp();
@@ -29,7 +29,7 @@ public class MovingPlatformController extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        movingPlatformView.render(batch, movingPlatform.getPosition().x * box2D.getPixelsToMeters(), movingPlatform.getPosition().y * box2D.getPixelsToMeters());
+        movingPlatformView.render(batch, movingPlatform.getPosition().x * PIXELS_TO_METERS, movingPlatform.getPosition().y * PIXELS_TO_METERS);
     }
 
     public void dispose() {

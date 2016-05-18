@@ -9,8 +9,8 @@ public class Player {
     private float impulse;
     private boolean jumpFlag;
     private static int points;
-    private static int health = 3;
-    private static long previousFireTime = 0;
+    private static int health;
+    private static long previousFireTime;
     private static final float MAX_SPEED_X = 3.5f;
     private Vector2f vector2f;
     private Vector2f speed;
@@ -18,14 +18,16 @@ public class Player {
 
     public Player(IJDBody jdBody) {
         this.jdBody = jdBody;
-        jumpFlag = false;
-
         jdBody.setUserData(this);
         setImpulse(jdBody.getMass() * 4f);
         this.points = 0;
 
         speed = new Vector2f(4,0);
 
+        jumpFlag = false;
+        health = 3;
+        previousFireTime = 0;
+        points = 0;
     }
 
     public void jump() {

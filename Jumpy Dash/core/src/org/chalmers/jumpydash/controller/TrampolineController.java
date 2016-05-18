@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Trampoline;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.TrampolineView;
+import static org.chalmers.jumpydash.util.Constants.*;
 
 public class TrampolineController extends Actor {
 
@@ -15,16 +16,17 @@ public class TrampolineController extends Actor {
     public TrampolineController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         trampolineView = new TrampolineView();
-        trampoline = new Trampoline(box2D.newStatic(x, y, mapHeight, false));
+        trampoline = new Trampoline(box2D.newBody(x, y, mapHeight, "static", false));
     }
 
+    @Override
     public void act(float Delta) {
 
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        trampolineView.render(batch, trampoline.getPosition().x * box2D.getPixelsToMeters(), trampoline.getPosition().y * box2D.getPixelsToMeters());
+        trampolineView.render(batch, trampoline.getPosition().x * PIXELS_TO_METERS, trampoline.getPosition().y * PIXELS_TO_METERS);
     }
 
     public void dispose() {
