@@ -3,6 +3,7 @@ package org.chalmers.jumpydash.controller;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -26,6 +27,7 @@ public class MenuScreen implements Screen {
     private BitmapFont font;
     private TextButton playButton;
     private TextButton quitButton;
+    private Music music;
 
     public MenuScreen(Game game, Stage stage, Stage uiStage) {
         this.game = game;
@@ -36,6 +38,9 @@ public class MenuScreen implements Screen {
 
         Gdx.input.setInputProcessor(uiStage);
 
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/getlucky.mp3"));
+        music.play();
+        music.setVolume(0.2f);
         menuBg = new Texture(Gdx.files.internal("images/menuBg.png"));
         createUI();
     }
@@ -122,7 +127,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void hide() {
-
+        music.stop();
     }
 
     @Override
@@ -130,5 +135,6 @@ public class MenuScreen implements Screen {
         skin.dispose();
         pixmap.dispose();
         font.dispose();
+        music.dispose();
     }
 }
