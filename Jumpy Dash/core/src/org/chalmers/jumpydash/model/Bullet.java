@@ -18,4 +18,8 @@ public class Bullet {
     public Vector2f getPosition() {
         return jdBody.toVector2f(jdBody.getPosition());
     }
+
+    public IJDBody getJdBody(){
+        return jdBody;
+    }
 }

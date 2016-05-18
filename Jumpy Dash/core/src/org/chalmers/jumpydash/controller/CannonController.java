@@ -25,6 +25,9 @@ public class CannonController extends Actor {
     @Override
     public void act(float Delta){
         fireCannon();
+        if (!cannon.getJdBody().isActive()) {
+            this.remove();
+        }
     }
 
     public void fireCannon(){

@@ -48,6 +48,9 @@ public class BulletController extends Actor {
     @Override
     public void act(float delta) {
         updateBullets();
+        if (!bullet.getJdBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override

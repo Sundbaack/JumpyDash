@@ -30,7 +30,8 @@ public class CollisionListener implements ContactListener {
     private boolean trampolineB;
     private boolean spikeA;
     private boolean spikeB;
-
+    private boolean cannonA;
+    private boolean cannonB;
     private boolean speedUpA;
     private boolean speedUpB;
 
@@ -59,8 +60,8 @@ public class CollisionListener implements ContactListener {
         coinA = a.getUserData() instanceof Coin;
         platformA = a.getUserData() instanceof Platform;
         platformB = b.getUserData() instanceof Platform;
-        soldierA = a.getUserData() instanceof Enemy;
-        soldierB = b.getUserData() instanceof Enemy;
+        soldierA = a.getUserData() instanceof Soldier;
+        soldierB = b.getUserData() instanceof Soldier;
         bulletA = a.getUserData() instanceof Bullet;
         bulletB = b.getUserData() instanceof Bullet;
         trampolineA = a.getUserData() instanceof Trampoline;
@@ -69,6 +70,8 @@ public class CollisionListener implements ContactListener {
         spikeB = b.getUserData() instanceof Spike;
         speedUpA = a.getUserData() instanceof SpeedUp;
         speedUpB = b.getUserData() instanceof SpeedUp;
+        cannonA = a.getUserData() instanceof Cannon;
+        cannonB = b.getUserData() instanceof Cannon;
 
 
 
@@ -94,8 +97,25 @@ public class CollisionListener implements ContactListener {
             PlayerController.getPlayer().applySoldierImpulse();
         }
         //Check collision between bullet and soldier
-        if (bulletA && soldierA || bulletB && soldierB) {
+        if (bulletB && soldierA) {
+            bodiesToBeDestroyed.add(a);
+        }
 
+        else if(bulletA && soldierB){
+            bodiesToBeDestroyed.add(b);
+        }
+        if (bulletA && cannonB) {
+            bodiesToBeDestroyed.add(b);
+        }
+        else if(bulletB && cannonA){
+            bodiesToBeDestroyed.add(a);
+        }
+        //fix so bullets dissapear on any collision
+        if(bulletA){
+            bodiesToBeDestroyed.add(a);
+        }
+        else if(bulletB){
+            bodiesToBeDestroyed.add(b);
         }
         //Check collision between player and trampoline
         if (playerA && trampolineB || trampolineA && playerB) {

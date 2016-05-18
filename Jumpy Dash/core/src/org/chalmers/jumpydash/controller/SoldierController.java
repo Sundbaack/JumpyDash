@@ -22,6 +22,9 @@ public class SoldierController extends Actor {
     @Override
     public void act(float Delta){
         soldier.move();
+        if (!soldier.getJdBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override
