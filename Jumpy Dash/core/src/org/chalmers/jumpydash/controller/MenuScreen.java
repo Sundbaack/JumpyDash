@@ -41,6 +41,8 @@ public class MenuScreen implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("sounds/getlucky.mp3"));
         music.play();
         music.setVolume(0.2f);
+        music.setLooping(true);
+
         menuBg = new Texture(Gdx.files.internal("images/menuBg.png"));
         createUI();
     }
