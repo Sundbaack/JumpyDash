@@ -1,14 +1,10 @@
-package org.chalmers.jumpydash.controller;
+package org.chalmers.jumpydash.controller.collision;
 
 import com.badlogic.gdx.physics.box2d.*;
+import org.chalmers.jumpydash.controller.PlayerController;
 import org.chalmers.jumpydash.model.*;
 import org.chalmers.jumpydash.physics.IBox2D;
 
-import javax.swing.*;
-
-/**
- * Created by Surface pro 3 on 2016-05-19.
- */
 public class PlayerCollisionListener implements ContactListener{
 
     private boolean playerA;

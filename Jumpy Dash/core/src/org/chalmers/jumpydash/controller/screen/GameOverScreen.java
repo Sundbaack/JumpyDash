@@ -1,4 +1,4 @@
-package org.chalmers.jumpydash.controller;
+package org.chalmers.jumpydash.controller.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import org.chalmers.jumpydash.controller.screen.GameScreen;
+import org.chalmers.jumpydash.controller.screen.MenuScreen;
 
 public class GameOverScreen implements Screen {
 

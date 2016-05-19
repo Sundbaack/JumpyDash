@@ -1,33 +1,20 @@
-package org.chalmers.jumpydash.controller;
+package org.chalmers.jumpydash.controller.collision;
 
 import com.badlogic.gdx.physics.box2d.*;
-import org.chalmers.jumpydash.model.Coin;
-import org.chalmers.jumpydash.model.Platform;
-import org.chalmers.jumpydash.model.Player;
-import org.chalmers.jumpydash.model.Trampoline;
-import org.chalmers.jumpydash.model.*;
 import org.chalmers.jumpydash.physics.IBox2D;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class CollisionListener implements ContactListener {
 
-    private PlayerCollisionListener playerCollisionListener;
-    private BulletCollisionListener soldierCollisionListener;
     private List<ContactListener> collisionListenerList;
-
-    private IBox2D box2D;
 
     public CollisionListener(IBox2D box2D) {
         collisionListenerList = new ArrayList<ContactListener>();
-        this.box2D = box2D;
-        playerCollisionListener = new PlayerCollisionListener(box2D);
-        soldierCollisionListener = new BulletCollisionListener(box2D);
 
-        collisionListenerList.add(playerCollisionListener);
-        collisionListenerList.add(soldierCollisionListener);
+        // Add separate contact listeners
+        collisionListenerList.add(new PlayerCollisionListener(box2D));
+        collisionListenerList.add(new BulletCollisionListener(box2D));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.chalmers.jumpydash.controller;
+package org.chalmers.jumpydash.controller.collision;
 
 import com.badlogic.gdx.physics.box2d.*;
 import org.chalmers.jumpydash.model.Bullet;
@@ -6,9 +6,6 @@ import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.model.Soldier;
 import org.chalmers.jumpydash.physics.IBox2D;
 
-/**
- * Created by Surface pro 3 on 2016-05-19.
- */
 public class BulletCollisionListener implements ContactListener {
 
     private boolean bulletA;
@@ -17,7 +14,6 @@ public class BulletCollisionListener implements ContactListener {
     private boolean cannonB;
     private boolean soldierA;
     private boolean soldierB;
-
 
     private IBox2D box2D;
 
