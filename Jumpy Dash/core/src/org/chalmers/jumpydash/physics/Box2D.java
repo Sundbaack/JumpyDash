@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -136,10 +137,18 @@ public class Box2D implements IBox2D {
                         world.destroyJoint(list.get(0).joint);
                     }
 
+<<<<<<< HEAD
                     world.destroyBody(b);
                     b.setActive(false);
                     b.setUserData(null);
                 }
+=======
+                world.destroyBody(b);
+
+                //b.setActive(false);
+                //b.setUserData(null);
+            }
+>>>>>>> b4bc388e6e727392052ac60a499dd4ef7987d88d
         }
 
         bodiesToBeDestroyed.clear();
