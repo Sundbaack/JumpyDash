@@ -21,7 +21,9 @@ public class MovingPlatformController extends Actor {
 
     @Override
     public void act(float delta) {
+        if (MovingPlatform.movePlatforms) {
             movingPlatform.moveUp();
+        }
     }
 
     @Override

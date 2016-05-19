@@ -151,6 +151,7 @@ public class Box2D implements IBox2D {
                 System.out.println(b.getUserData());
                 Array<JointEdge> list = b.getJointList();
 
+
                 while (list.size > 0) {
                     world.destroyJoint(list.get(0).joint);
                 }
@@ -159,6 +160,7 @@ public class Box2D implements IBox2D {
                 //b.setActive(false);
                 //b.setUserData(null);
             }
+
         }
 
         bodiesToBeDestroyed.clear();
