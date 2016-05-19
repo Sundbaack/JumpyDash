@@ -122,7 +122,7 @@ public class Box2D implements IBox2D {
                 }
 
                 world.destroyBody(b);
-
+                b = null;
                 //b.setActive(false);
                 //b.setUserData(null);
             }
