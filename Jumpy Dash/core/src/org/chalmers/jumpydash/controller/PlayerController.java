@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import org.chalmers.jumpydash.controller.screen.GameScreen;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.view.PlayerView;
@@ -37,6 +38,7 @@ public class PlayerController extends Actor {
             position.x = box2D.getCamera().position.x + SCREEN_WIDTH / PIXELS_TO_METERS + (player.getPosition().x * PIXELS_TO_METERS - box2D.getCamera().position.x) * 0.1f;
             box2D.getCamera().position.set(position);
         }
+
     }
 
     @Override

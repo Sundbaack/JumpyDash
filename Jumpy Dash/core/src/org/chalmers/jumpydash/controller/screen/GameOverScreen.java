@@ -2,7 +2,6 @@ package org.chalmers.jumpydash.controller.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -15,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class GameOverScreen implements Screen {
+public class GameOverScreen extends BaseScreen {
 
     private Game game;
     private Stage stage;
@@ -34,8 +33,13 @@ public class GameOverScreen implements Screen {
         this.uiStage = uiStage;
         this.stage.clear();
         this.uiStage.clear();
+
         gameOverBg = new Texture(Gdx.files.internal("images/gameOverBg.png"));
         createUI();
+    }
+
+    public Game getGameInstance() {
+        return this.game;
     }
 
     public void createUI() {
@@ -70,7 +74,7 @@ public class GameOverScreen implements Screen {
         playButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Switch to game
-                game.setScreen(new GameScreen(game, stage, uiStage));
+                BaseScreen.setScreen(new GameScreen(game, stage, uiStage));
             }
         });
 
@@ -83,14 +87,9 @@ public class GameOverScreen implements Screen {
         menuButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Switch to menu
-                game.setScreen(new MenuScreen(game, stage, uiStage));
+                BaseScreen.setScreen(new MenuScreen(game, stage, uiStage));
             }
         });
-    }
-
-    @Override
-    public void show() {
-
     }
 
     @Override
@@ -101,26 +100,6 @@ public class GameOverScreen implements Screen {
         uiStage.getBatch().begin();
         uiStage.getBatch().draw(gameOverBg, 0, 0);
         uiStage.getBatch().end();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
     }
 
     @Override

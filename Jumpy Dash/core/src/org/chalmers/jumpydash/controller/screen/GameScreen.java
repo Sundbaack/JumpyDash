@@ -22,9 +22,8 @@ import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class GameScreen implements Screen {
+public class GameScreen extends BaseScreen {
 
-    private Game game;
     private Stage stage;
     private Stage uiStage;
     private IBox2D box2D;
@@ -39,6 +38,7 @@ public class GameScreen implements Screen {
     private long startTime;
     private SimpleDateFormat dateFormat;
     private FreeTypeFontGenerator generator;
+    private Game game;
 
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
@@ -75,6 +75,10 @@ public class GameScreen implements Screen {
 
         box2D.getWorld().setContactListener(new CollisionListener(box2D));
         createUI();
+    }
+
+    public Game getGameInstance() {
+        return this.game;
     }
 
     private void createUI() {
@@ -162,11 +166,6 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void show() {
-
-    }
-
-    @Override
     public void render(float delta) {
         Gdx.gl20.glClearColor(0, 0, 0, 1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -190,9 +189,8 @@ public class GameScreen implements Screen {
             uiStage.addActor(health1);
         }
 
-        // Gameover
         if (PlayerController.getPlayer().getHealth() == 0) {
-            game.setScreen(new GameOverScreen(game, stage, uiStage));
+            BaseScreen.setScreen(new GameOverScreen(game, stage, uiStage));
         }
 
         /*
@@ -200,26 +198,6 @@ public class GameScreen implements Screen {
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(box2D.getPixelsToMeters(), box2D.getPixelsToMeters(), 0);
 		debugRenderer.render(box2D.world, debugMatrix);
 		*/
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
     }
 
     @Override

@@ -1,10 +1,9 @@
-package org.chalmers.jumpydash.controller;
+package org.chalmers.jumpydash.controller.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import org.chalmers.jumpydash.controller.screen.MenuScreen;
 
 public class JumpyDash extends Game {
 
@@ -20,7 +19,7 @@ public class JumpyDash extends Game {
 		uiStage = new Stage();
 
 		// Switch to menu
-		setScreen(new MenuScreen(this, stage, uiStage));
+		BaseScreen.setScreen(new MenuScreen(this, stage, uiStage));
 	}
 
 	@Override

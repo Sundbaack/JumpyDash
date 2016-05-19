@@ -67,6 +67,7 @@ public class Player {
     public IJDBody getJDBody() {
         return this.jdBody;
     }
+
     public void playerSpeedUp() {
         setSpeed(100);
     }
