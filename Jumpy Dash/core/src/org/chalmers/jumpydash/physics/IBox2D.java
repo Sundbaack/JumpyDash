@@ -14,7 +14,7 @@ public interface IBox2D {
 
     OrthographicCamera getCamera();
 
-    JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost);
+    JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost, boolean sensor);
 
     JDBody newBullet(float x, float y);
 

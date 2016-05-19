@@ -16,7 +16,7 @@ public class SpeedUpController extends Actor {
     public SpeedUpController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         speedUpView = new SpeedUpView();
-        speedUp = new SpeedUp(box2D.newBody(x, y, mapHeight, "static", false));
+        speedUp = new SpeedUp(box2D.newBody(x, y, mapHeight, "static", false,false));
     }
 
     public void act(float Delta) {

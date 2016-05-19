@@ -32,10 +32,9 @@ public class CollisionListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        for(ContactListener c: collisionListenerList){
+       for(ContactListener c: collisionListenerList){
             c.beginContact(contact);
         }
-
     }
 
     @Override

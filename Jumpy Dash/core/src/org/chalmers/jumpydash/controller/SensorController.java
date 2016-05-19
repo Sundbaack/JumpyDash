@@ -16,7 +16,7 @@ public class SensorController extends Actor {
 
     public SensorController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        sensor  = new Sensor(box2D.newBody(x, y, mapHeight, "static", false));
+        sensor  = new Sensor(box2D.newBody(x, y, mapHeight, "static", false,true));
         sensorView = new SensorView();
     }
 

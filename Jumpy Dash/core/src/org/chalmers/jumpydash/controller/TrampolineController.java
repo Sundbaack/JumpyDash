@@ -16,7 +16,7 @@ public class TrampolineController extends Actor {
     public TrampolineController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         trampolineView = new TrampolineView();
-        trampoline = new Trampoline(box2D.newBody(x, y, mapHeight, "static", false));
+        trampoline = new Trampoline(box2D.newBody(x, y, mapHeight, "static", false,false));
     }
 
     @Override
