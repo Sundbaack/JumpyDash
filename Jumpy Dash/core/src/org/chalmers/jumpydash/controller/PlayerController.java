@@ -10,7 +10,8 @@ import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.view.PlayerView;
 import javax.vecmath.Vector2f;
-import static org.chalmers.jumpydash.util.Constants.*;
+import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
+import static org.chalmers.jumpydash.physics.Box2D.SCREEN_WIDTH;
 
 public class PlayerController extends Actor {
 
@@ -18,6 +19,8 @@ public class PlayerController extends Actor {
     private static Player player;
     private PlayerView playerView;
     private Sound sound;
+    public static final int CAMERA_UPDATE_POINT = 500;
+
 
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;

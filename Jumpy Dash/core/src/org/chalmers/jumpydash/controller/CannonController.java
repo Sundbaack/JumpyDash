@@ -6,7 +6,7 @@ import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CannonView;
 import javax.vecmath.Vector2f;
-import static org.chalmers.jumpydash.util.Constants.*;
+import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class CannonController extends Actor {
 

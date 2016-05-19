@@ -1,4 +1,4 @@
-package org.chalmers.jumpydash.controller;
+package org.chalmers.jumpydash.controller.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;

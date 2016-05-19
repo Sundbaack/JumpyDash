@@ -6,7 +6,9 @@ import org.chalmers.jumpydash.model.Bullet;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.BulletView;
 import javax.vecmath.Vector2f;
-import static org.chalmers.jumpydash.util.Constants.*;
+import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
+import static org.chalmers.jumpydash.physics.Box2D.SCREEN_WIDTH;
+import static org.chalmers.jumpydash.physics.Box2D.TILE_SIZE;
 
 public class BulletController extends Actor {
 
@@ -22,7 +24,7 @@ public class BulletController extends Actor {
 
     // Remove bullets when moving out of screen
     private void updateBullets() {
-        if (((bullet.getPosition().x * PIXELS_TO_METERS) + H_TILE_SIZE) >= (box2D.getCamera().position.x + SCREEN_WIDTH / 2)) {
+        if (((bullet.getPosition().x * PIXELS_TO_METERS) + TILE_SIZE / 2) >= (box2D.getCamera().position.x + SCREEN_WIDTH / 2)) {
             box2D.getBodiesToBeDestroyed().add(bullet.getJdBody().getBody());
         }
     }

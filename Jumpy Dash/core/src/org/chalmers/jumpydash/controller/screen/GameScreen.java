@@ -1,4 +1,4 @@
-package org.chalmers.jumpydash.controller;
+package org.chalmers.jumpydash.controller.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -12,11 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import org.chalmers.jumpydash.model.Sensor;
+import org.chalmers.jumpydash.controller.*;
+import org.chalmers.jumpydash.controller.collision.CollisionListener;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.ReadFile;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -148,11 +148,11 @@ public class GameScreen implements Screen {
                 if (level[y][x] == 'U') {
                     SpeedUpController speedUpController = new SpeedUpController(box2D, x, y, mapHeight);
                     stage.addActor(speedUpController);
-                }
+                }/*
                 if (level[y][x] == 'B') {
                     CannonController cannonController = new CannonController(box2D, x, y, mapHeight);
                     stage.addActor(cannonController);
-                }
+                }*/
                 if(level[y][x] == '|'){
                     SensorController sensorController = new SensorController(box2D, x, y, mapHeight);
                     stage.addActor(sensorController);

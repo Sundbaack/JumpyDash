@@ -16,6 +16,10 @@ public interface IBox2D {
 
     JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost, boolean sensor);
 
+    void setGhost(JDBody jdBody);
+
+    void setSensor(JDBody jdBody);
+
     JDBody newBullet(float x, float y);
 
     void update();
