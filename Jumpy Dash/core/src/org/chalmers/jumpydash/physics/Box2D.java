@@ -4,19 +4,16 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-
 import static org.chalmers.jumpydash.util.Constants.*;
 
 public class Box2D implements IBox2D {
 
     private OrthographicCamera camera;
     private World world;
-    private List<Body> bodiesToBeDestroyed;
+    private final List<Body> bodiesToBeDestroyed;
 
     public Box2D() {
         world = new World(new Vector2(0, GRAVITY), true); //Create a world object with a gravity vector
@@ -115,18 +112,17 @@ public class Box2D implements IBox2D {
         world.clearForces();
 
         // Destroy bodies who are marked for destruction
-        if(!world.isLocked()) {
-            synchronized(bodiesToBeDestroyed) {
+        synchronized (bodiesToBeDestroyed) {
             for (Body b : bodiesToBeDestroyed) {
                 Array<JointEdge> list = b.getJointList();
 
-                    while (list.size > 0) {
-                        world.destroyJoint(list.get(0).joint);
-                    }
-
-                    world.destroyBody(b);
-                    b.setUserData(null);
+                while (list.size > 0) {
+                    world.destroyJoint(list.get(0).joint);
                 }
+
+                world.destroyBody(b);
+                b.setActive(false);
+                b.setUserData(null);
             }
         }
 
