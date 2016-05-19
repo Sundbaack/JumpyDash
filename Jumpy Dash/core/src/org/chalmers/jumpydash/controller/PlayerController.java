@@ -2,6 +2,7 @@ package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,6 +17,7 @@ public class PlayerController extends Actor {
     private IBox2D box2D;
     private static Player player;
     private PlayerView playerView;
+    private Sound sound;
 
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
@@ -50,6 +52,9 @@ public class PlayerController extends Actor {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F) && player.allowedToFire()) {
             BulletController bulletController = new BulletController(box2D, player.getPosition().x, player.getPosition().y,new Vector2f(12f + player.getJDBody().getLinearVelocity().x, 0));
             getStage().addActor(bulletController);
+            sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/gun.wav"));
+            sound.play(1);
+
         }
     }
 
@@ -59,5 +64,6 @@ public class PlayerController extends Actor {
 
     public void dispose() {
         playerView.dispose();
+        sound.dispose();
     }
 }

@@ -137,18 +137,13 @@ public class Box2D implements IBox2D {
                         world.destroyJoint(list.get(0).joint);
                     }
 
-<<<<<<< HEAD
-                    world.destroyBody(b);
-                    b.setActive(false);
-                    b.setUserData(null);
-                }
-=======
+
                 world.destroyBody(b);
 
                 //b.setActive(false);
                 //b.setUserData(null);
             }
->>>>>>> b4bc388e6e727392052ac60a499dd4ef7987d88d
+
         }
 
         bodiesToBeDestroyed.clear();

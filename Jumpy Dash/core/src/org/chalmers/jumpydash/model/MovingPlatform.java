@@ -6,11 +6,12 @@ import javax.vecmath.Vector2f;
 public class MovingPlatform {
 
     private IJDBody jdBody;
-    public static boolean movePlatforms = false;
+    public static boolean movePlatforms;
 
     public MovingPlatform(IJDBody jdBody){
         this.jdBody = jdBody;
         jdBody.setUserData(this);
+        movePlatforms = false;
     }
 
     public void moveUp(){

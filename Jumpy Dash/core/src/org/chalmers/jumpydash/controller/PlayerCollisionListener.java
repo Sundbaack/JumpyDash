@@ -1,5 +1,7 @@
 package org.chalmers.jumpydash.controller;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.*;
 import org.chalmers.jumpydash.model.*;
 import org.chalmers.jumpydash.physics.IBox2D;
@@ -27,6 +29,7 @@ public class PlayerCollisionListener implements ContactListener{
     private boolean speedUpB;
     private boolean sensorA;
     private boolean sensorB;
+    private Sound powerUpSound;
 
     private IBox2D box2D;
 
@@ -89,15 +92,19 @@ public class PlayerCollisionListener implements ContactListener{
 
 
         if((playerA && sensorB) || (sensorA && playerB)){
-            System.out.println("funklar");
+            MovingPlatform.movePlatforms = !MovingPlatform.movePlatforms;
         }
         //Check collision between player and SpeedUp
         if ((playerA && speedUpB)) {
             PlayerController.getPlayer().playerSpeedUp();
             box2D.getBodiesToBeDestroyed().add(b);
+            powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
+            powerUpSound.play(1);
         } else if ((speedUpA && playerB)) {
             PlayerController.getPlayer().playerSpeedUp();
             box2D.getBodiesToBeDestroyed().add(a);
+            powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
+            powerUpSound.play(1);
         }
     }
     @Override
