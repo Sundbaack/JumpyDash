@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
         startTime = System.currentTimeMillis();
         dateFormat = new SimpleDateFormat("mm:ss");
 
-        box2D = Box2D.getInstance();
+        box2D = new Box2D();
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
 
         health3 = new Image(new Texture(Gdx.files.internal("images/health3.png")));
@@ -148,11 +148,11 @@ public class GameScreen implements Screen {
                 if (level[y][x] == 'U') {
                     SpeedUpController speedUpController = new SpeedUpController(box2D, x, y, mapHeight);
                     stage.addActor(speedUpController);
-                }
+                }/*
                 if (level[y][x] == 'B') {
                     CannonController cannonController = new CannonController(box2D, x, y, mapHeight);
                     stage.addActor(cannonController);
-                }
+                }*/
                 if(level[y][x] == '|'){
                     SensorController sensorController = new SensorController(box2D, x, y, mapHeight);
                     stage.addActor(sensorController);
