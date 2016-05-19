@@ -12,16 +12,21 @@ import static org.chalmers.jumpydash.util.Constants.*;
 
 public class Box2D implements IBox2D {
 
+    private static IBox2D instance = new Box2D();
     private OrthographicCamera camera;
     private World world;
     private final List<Body> bodiesToBeDestroyed;
 
-    public Box2D() {
+    private Box2D() {
         world = new World(new Vector2(0, GRAVITY), true); //Create a world object with a gravity vector
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
         bodiesToBeDestroyed = Collections.synchronizedList(new ArrayList<Body>());
+    }
+
+    public static IBox2D getInstance() {
+        return instance;
     }
 
     public synchronized List<Body> getBodiesToBeDestroyed() {

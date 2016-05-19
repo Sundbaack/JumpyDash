@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import org.chalmers.jumpydash.model.Sensor;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.ReadFile;
@@ -53,7 +52,7 @@ public class GameScreen implements Screen {
         startTime = System.currentTimeMillis();
         dateFormat = new SimpleDateFormat("mm:ss");
 
-        box2D = new Box2D();
+        box2D = Box2D.getInstance();
         this.stage.setViewport(new ScreenViewport(box2D.getCamera()));
 
         health3 = new Image(new Texture(Gdx.files.internal("images/health3.png")));
