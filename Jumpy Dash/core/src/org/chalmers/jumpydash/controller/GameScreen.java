@@ -148,6 +148,10 @@ public class GameScreen implements Screen {
                     SpeedUpController speedUpController = new SpeedUpController(box2D, x, y, mapHeight);
                     stage.addActor(speedUpController);
                 }
+                if (level[y][x] == 'B') {
+                    CannonController cannonController = new CannonController(box2D, x, y, mapHeight);
+                    stage.addActor(cannonController);
+                }
             }
         }
     }

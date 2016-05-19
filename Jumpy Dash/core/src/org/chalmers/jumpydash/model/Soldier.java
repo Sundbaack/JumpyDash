@@ -5,25 +5,25 @@ import javax.vecmath.Vector2f;
 
 public class Soldier extends Enemy {
 
-    private boolean directionFlag;
+    private boolean directionRight;
 
     public Soldier(IJDBody jdBody) {
         super(jdBody,1,1);
         jdBody.setUserData(this);
-        directionFlag=true;
+        directionRight=true;
     }
 
     public void setDirectionFlag(){
-        directionFlag = !directionFlag;
+        directionRight = !directionRight;
     }
 
-    public boolean getDirectionFlag(){
-        return directionFlag;
+    public boolean getDirection(){
+        return directionRight;
     }
 
     public void move() {
         // Checks in what direction the soldier should move
-        if(getDirectionFlag()){
+        if(getDirection()){
             getJdBody().applyForceToCenter(getJdBody().toVector2(new Vector2f(2f,0)), true);
         }
         else{
