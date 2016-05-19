@@ -131,24 +131,16 @@ public class Box2D implements IBox2D {
         // Destroy bodies who are marked for destruction
         synchronized (bodiesToBeDestroyed) {
             for (Body b : bodiesToBeDestroyed) {
-                    Array<JointEdge> list = b.getJointList();
+                Array<JointEdge> list = b.getJointList();
 
-                    while (list.size > 0) {
-                        world.destroyJoint(list.get(0).joint);
-                    }
-
-<<<<<<< HEAD
-                    world.destroyBody(b);
-                    b.setActive(false);
-                    b.setUserData(null);
+                while (list.size > 0) {
+                    world.destroyJoint(list.get(0).joint);
                 }
-=======
                 world.destroyBody(b);
                 b = null;
                 //b.setActive(false);
                 //b.setUserData(null);
             }
->>>>>>> b4bc388e6e727392052ac60a499dd4ef7987d88d
         }
 
         bodiesToBeDestroyed.clear();
