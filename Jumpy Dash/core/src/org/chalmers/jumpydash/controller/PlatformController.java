@@ -5,8 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Platform;
 import org.chalmers.jumpydash.view.PlatformView;
-
-import static org.chalmers.jumpydash.util.Constants.*;
+import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class PlatformController extends Actor {
 

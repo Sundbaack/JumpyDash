@@ -5,8 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Sensor;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.SensorView;
-
-import static org.chalmers.jumpydash.util.Constants.PIXELS_TO_METERS;
+import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class SensorController extends Actor {
 

@@ -17,7 +17,6 @@ import org.chalmers.jumpydash.controller.collision.CollisionListener;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.ReadFile;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
