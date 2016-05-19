@@ -16,7 +16,7 @@ public class SpikeController extends Actor {
     public SpikeController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         spikeView = new SpikeView();
-        spike = new Spike(box2D.newBody(x, y, mapHeight, "static", false));
+        spike = new Spike(box2D.newBody(x, y, mapHeight, "static", false,false));
     }
 
     @Override

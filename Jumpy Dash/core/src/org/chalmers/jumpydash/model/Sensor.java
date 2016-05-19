@@ -9,6 +9,7 @@ public class Sensor {
 
     public Sensor(IJDBody jdBody) {
         this.jdBody = jdBody;
+        jdBody.setUserData(this);
     }
 
     public Vector2f getPosition() {

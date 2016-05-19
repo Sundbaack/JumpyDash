@@ -36,7 +36,7 @@ public class Box2D implements IBox2D {
         return camera;
     }
 
-    public JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost) {
+    public JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost,boolean sensor) {
         BodyDef bodyDef = new BodyDef();
 
         if (type.equalsIgnoreCase("kinematic")) {
@@ -50,8 +50,7 @@ public class Box2D implements IBox2D {
         bodyDef.position.set((x * TILE_SIZE) / PIXELS_TO_METERS, ((mapHeight - 1 - y) * TILE_SIZE) / PIXELS_TO_METERS);
         JDBody jdBody = new JDBody();
         jdBody.body = world.createBody(bodyDef);
-
-        if (!ghost) {
+        if (sensor) {
             Vector2 vCenter = new Vector2(H_TILE_SIZE / PIXELS_TO_METERS, H_TILE_SIZE / PIXELS_TO_METERS);
 
             // Create a polygon and apply it to a fixture
@@ -59,29 +58,46 @@ public class Box2D implements IBox2D {
             polygon.setAsBox(H_TILE_SIZE / PIXELS_TO_METERS, H_TILE_SIZE / PIXELS_TO_METERS, vCenter, 0);
             FixtureDef fixtureDef = new FixtureDef();
             fixtureDef.shape = polygon;
+            fixtureDef.isSensor = true;
             fixtureDef.friction = 0;
 
             // Attach fixture to the body
             jdBody.body.createFixture(fixtureDef);
         } else {
-            //Ghost vertices
-            Vector2 v1 = new Vector2(0, TILE_SIZE / PIXELS_TO_METERS);
-            Vector2 v2 = new Vector2(TILE_SIZE / PIXELS_TO_METERS, TILE_SIZE / PIXELS_TO_METERS);
-            Vector2 v0 = new Vector2(0, 0);
-            Vector2 v3 = new Vector2(TILE_SIZE / PIXELS_TO_METERS, 0);
 
-            // Create a EdgeShape and apply it to a fixture
-            EdgeShape edgeShape = new EdgeShape();
-            edgeShape.set(v1, v2);
-            edgeShape.setVertex0(v0);
-            edgeShape.setVertex3(v3);
-            edgeShape.setHasVertex0(true);
-            edgeShape.setHasVertex3(true);
-            FixtureDef fixtureDef = new FixtureDef();
-            fixtureDef.shape = edgeShape;
+            if (!ghost) {
+                Vector2 vCenter = new Vector2(H_TILE_SIZE / PIXELS_TO_METERS, H_TILE_SIZE / PIXELS_TO_METERS);
 
-            // Attach fixture to the body
-            jdBody.body.createFixture(fixtureDef);
+                // Create a polygon and apply it to a fixture
+                PolygonShape polygon = new PolygonShape();
+                polygon.setAsBox(H_TILE_SIZE / PIXELS_TO_METERS, H_TILE_SIZE / PIXELS_TO_METERS, vCenter, 0);
+                FixtureDef fixtureDef = new FixtureDef();
+                fixtureDef.shape = polygon;
+                fixtureDef.friction = 0;
+
+                // Attach fixture to the body
+                jdBody.body.createFixture(fixtureDef);
+            } else {
+                //Ghost vertices
+                Vector2 v1 = new Vector2(0, TILE_SIZE / PIXELS_TO_METERS);
+                Vector2 v2 = new Vector2(TILE_SIZE / PIXELS_TO_METERS, TILE_SIZE / PIXELS_TO_METERS);
+                Vector2 v0 = new Vector2(0, 0);
+                Vector2 v3 = new Vector2(TILE_SIZE / PIXELS_TO_METERS, 0);
+
+                // Create a EdgeShape and apply it to a fixture
+                EdgeShape edgeShape = new EdgeShape();
+                edgeShape.set(v1, v2);
+                edgeShape.setVertex0(v0);
+                edgeShape.setVertex3(v3);
+                edgeShape.setHasVertex0(true);
+                edgeShape.setHasVertex3(true);
+                FixtureDef fixtureDef = new FixtureDef();
+                fixtureDef.shape = edgeShape;
+
+                // Attach fixture to the body
+                jdBody.body.createFixture(fixtureDef);
+            }
+
         }
         return jdBody;
     }
@@ -115,17 +131,24 @@ public class Box2D implements IBox2D {
         // Destroy bodies who are marked for destruction
         synchronized (bodiesToBeDestroyed) {
             for (Body b : bodiesToBeDestroyed) {
-                Array<JointEdge> list = b.getJointList();
+                    Array<JointEdge> list = b.getJointList();
 
-                while (list.size > 0) {
-                    world.destroyJoint(list.get(0).joint);
+                    while (list.size > 0) {
+                        world.destroyJoint(list.get(0).joint);
+                    }
+
+<<<<<<< HEAD
+                    world.destroyBody(b);
+                    b.setActive(false);
+                    b.setUserData(null);
                 }
-
+=======
                 world.destroyBody(b);
                 b = null;
                 //b.setActive(false);
                 //b.setUserData(null);
             }
+>>>>>>> b4bc388e6e727392052ac60a499dd4ef7987d88d
         }
 
         bodiesToBeDestroyed.clear();

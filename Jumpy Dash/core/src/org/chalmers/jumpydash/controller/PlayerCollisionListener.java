@@ -25,6 +25,8 @@ public class PlayerCollisionListener implements ContactListener{
     private boolean spikeB;
     private boolean speedUpA;
     private boolean speedUpB;
+    private boolean sensorA;
+    private boolean sensorB;
 
     private IBox2D box2D;
 
@@ -47,6 +49,8 @@ public class PlayerCollisionListener implements ContactListener{
         spikeB = b.getUserData() instanceof Spike;
         speedUpA = a.getUserData() instanceof SpeedUp;
         speedUpB = b.getUserData() instanceof SpeedUp;
+        sensorA = a.getUserData() instanceof  Sensor;
+        sensorB = b.getUserData() instanceof  Sensor;
     }
 
     private void checkCollision(Body a, Body b){
@@ -83,6 +87,10 @@ public class PlayerCollisionListener implements ContactListener{
             PlayerController.getPlayer().setDamage(PlayerController.getPlayer().getHealth());
         }
 
+
+        if((playerA && sensorB) || (sensorA && playerB)){
+            System.out.println("funklar");
+        }
         //Check collision between player and SpeedUp
         if ((playerA && speedUpB)) {
             PlayerController.getPlayer().playerSpeedUp();

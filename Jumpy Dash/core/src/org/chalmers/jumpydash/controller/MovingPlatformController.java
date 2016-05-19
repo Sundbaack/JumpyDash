@@ -16,7 +16,7 @@ public class MovingPlatformController extends Actor {
     public MovingPlatformController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         movingPlatformView = new MovingPlatformView();
-        movingPlatform = new MovingPlatform(box2D.newBody(x, y, mapHeight, "kinematic", false));
+        movingPlatform = new MovingPlatform(box2D.newBody(x, y, mapHeight, "kinematic", false,false));
     }
 
     @Override
