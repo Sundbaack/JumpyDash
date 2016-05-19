@@ -4,19 +4,20 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Spike;
 import org.chalmers.jumpydash.physics.IBox2D;
+import org.chalmers.jumpydash.view.IView;
 import org.chalmers.jumpydash.view.SpikeView;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class SpikeController extends Actor {
 
-    private SpikeView spikeView;
-    private IBox2D box2D;
+    private IView spikeView;
     private Spike spike;
 
     public SpikeController(IBox2D box2D, int x, int y, int mapHeight) {
-        this.box2D = box2D;
         spikeView = new SpikeView();
-        spike = new Spike(box2D.newBody(x, y, mapHeight, "static", false,false));
+        spike = new Spike();
+        spike.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,false));
+        spike.getJDBody().setUserData(spike);
     }
 
     @Override

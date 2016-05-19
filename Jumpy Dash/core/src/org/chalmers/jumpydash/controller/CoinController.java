@@ -7,24 +7,26 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Coin;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CoinView;
+import org.chalmers.jumpydash.view.IView;
+
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class CoinController extends Actor {
 
-    private CoinView coinView;
-    private IBox2D box2D;
+    private IView coinView;
     private Coin coin;
     private Sound sound;
 
     public CoinController(IBox2D box2D, int x, int y, int mapHeight) {
-        this.box2D = box2D;
         coinView = new CoinView();
-        coin = new Coin(box2D.newBody(x, y, mapHeight, "static", false,true), 1);
+        coin = new Coin(1);
+        coin.setJDBody(box2D.newBody(x, y, mapHeight, "static", false, true));
+        coin.getJDBody().setUserData(coin);
     }
 
     @Override
     public void act(float Delta){
-        if (!coin.getJdBody().isActive()) {
+        if (!coin.getJDBody().isActive()) {
             sound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
             sound.play(1);
 

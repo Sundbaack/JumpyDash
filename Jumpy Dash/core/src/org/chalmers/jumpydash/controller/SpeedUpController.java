@@ -4,21 +4,23 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.SpeedUp;
 import org.chalmers.jumpydash.physics.IBox2D;
+import org.chalmers.jumpydash.view.IView;
 import org.chalmers.jumpydash.view.SpeedUpView;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class SpeedUpController extends Actor {
 
     private SpeedUp speedUp;
-    private SpeedUpView speedUpView;
-    private IBox2D box2D;
+    private IView speedUpView;
 
     public SpeedUpController(IBox2D box2D, int x, int y, int mapHeight) {
-        this.box2D = box2D;
         speedUpView = new SpeedUpView();
-        speedUp = new SpeedUp(box2D.newBody(x, y, mapHeight, "static", false,false));
+        speedUp = new SpeedUp();
+        speedUp.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,false));
+        speedUp.getJDBody().setUserData(speedUp);
     }
 
+    @Override
     public void act(float Delta) {
 
     }

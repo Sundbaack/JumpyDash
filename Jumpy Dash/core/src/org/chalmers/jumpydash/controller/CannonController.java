@@ -5,18 +5,21 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CannonView;
+import org.chalmers.jumpydash.view.IView;
 import javax.vecmath.Vector2f;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class CannonController extends Actor {
 
     private Cannon cannon;
-    private CannonView cannonView;
+    private IView cannonView;
     private IBox2D box2D;
 
     public CannonController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        cannon = new Cannon(box2D.newBody(x, y, mapHeight, "dynamic", false,false));
+        cannon = new Cannon();
+        cannon.setJDBody(box2D.newBody(x, y, mapHeight, "dynamic", false,false));
+        cannon.getJDBody().setUserData(cannon);
         cannonView = new CannonView();
     }
 
@@ -27,7 +30,7 @@ public class CannonController extends Actor {
 
     public void fireCannon(){
         if(cannon.allowedToFire()){
-            BulletController bulletController = new BulletController(box2D, cannon.getPosition().x, cannon.getPosition().y,new Vector2f(-5f, 0));
+            BulletController bulletController = new BulletController(box2D, cannon.getPosition().x, cannon.getPosition().y, new Vector2f(-5f, 0));
             getStage().addActor(bulletController);
         }
     }

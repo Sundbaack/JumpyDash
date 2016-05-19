@@ -1,14 +1,11 @@
 package org.chalmers.jumpydash.model;
 
-import org.chalmers.jumpydash.physics.IJDBody;
-
 public class Cannon extends Enemy {
 
     private long previousFireTime = 0;
 
-    public Cannon(IJDBody jdBody) {
-        super(jdBody,1,1);
-        jdBody.setUserData(this);
+    public Cannon() {
+        super(1,1);
     }
 
     public boolean allowedToFire(){

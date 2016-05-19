@@ -1,25 +1,18 @@
 package org.chalmers.jumpydash.model;
 
-import org.chalmers.jumpydash.physics.IJDBody;
 import javax.vecmath.Vector2f;
 
-public class Player {
+public class Player extends Tile {
 
-    private IJDBody jdBody;
     private float impulse;
     private boolean jumpFlag;
     private static int points;
     private static int health;
     private static long previousFireTime;
     private static final float MAX_SPEED_X = 3.5f;
-    private Vector2f vector2f;
     private float playerSpeedX;
 
-
-    public Player(IJDBody jdBody) {
-        this.jdBody = jdBody;
-        jdBody.setUserData(this);
-        setImpulse(jdBody.getMass() * 4f);
+    public Player() {
         this.points = 0;
 
         playerSpeedX = 4;
@@ -31,8 +24,7 @@ public class Player {
     }
 
     public void jump() {
-        vector2f = new Vector2f(0,getImpulse());
-        jdBody.applyLinearImpulse(jdBody.toVector2(vector2f), jdBody.getWorldCenter(), true);
+        getJDBody().applyLinearImpulse(new Vector2f(0,getImpulse()), getJDBody().getWorldCenter(), true);
     }
 
     public boolean allowedToFire(){
@@ -45,34 +37,24 @@ public class Player {
     }
 
     public void move() {
-        Vector2f speed = jdBody.toVector2f(jdBody.getLinearVelocity());
+        Vector2f speed = getJDBody().getLinearVelocity();
         float speedX = speed.x;
 
         if (speedX < getMaxSpeedX()) {
-            jdBody.applyForceToCenter(jdBody.toVector2(new Vector2f(playerSpeedX, 0)), true);
+            getJDBody().applyForceToCenter(new Vector2f(playerSpeedX, 0), true);
         }
     }
 
     public void applyTrampolineImpulse() {
-        vector2f = new Vector2f(0, getImpulse() + 2.5f);
-        jdBody.applyLinearImpulse(jdBody.toVector2(vector2f), jdBody.getWorldCenter(), true);
+        getJDBody().applyLinearImpulse(new Vector2f(0, getImpulse() + 2.5f), getJDBody().getWorldCenter(), true);
     }
 
     public void applySoldierImpulse(){
-        vector2f = new Vector2f(-getImpulse(),0);
-        jdBody.applyLinearImpulse(jdBody.toVector2(vector2f),jdBody.getWorldCenter(),true);
-    }
-
-    public IJDBody getJDBody() {
-        return this.jdBody;
+        getJDBody().applyLinearImpulse(new Vector2f(-getImpulse(),0), getJDBody().getWorldCenter(), true);
     }
 
     public void playerSpeedUp() {
         setSpeed(100);
-    }
-
-    public Vector2f getPosition() {
-        return jdBody.toVector2f(jdBody.getPosition());
     }
 
     public void setJumpState(){

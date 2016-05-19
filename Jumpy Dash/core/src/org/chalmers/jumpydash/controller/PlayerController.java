@@ -6,9 +6,9 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import org.chalmers.jumpydash.controller.screen.GameScreen;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
+import org.chalmers.jumpydash.view.IView;
 import org.chalmers.jumpydash.view.PlayerView;
 import javax.vecmath.Vector2f;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
@@ -18,15 +18,17 @@ public class PlayerController extends Actor {
 
     private IBox2D box2D;
     private static Player player;
-    private PlayerView playerView;
+    private IView playerView;
     private Sound sound;
     public static final int CAMERA_UPDATE_POINT = 500;
-
 
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         playerView = new PlayerView();
-        player = new Player(box2D.newBody(x, y, mapHeight, "dynamic", false,false));
+        player = new Player();
+        player.setJDBody(box2D.newBody(x, y, mapHeight, "dynamic", false,false));
+        player.getJDBody().setUserData(player);
+        player.setImpulse(player.getJDBody().getMass() * 4f);
     }
 
     @Override
@@ -59,7 +61,6 @@ public class PlayerController extends Actor {
             getStage().addActor(bulletController);
             sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/gun.wav"));
             sound.play(1);
-
         }
     }
 

@@ -9,7 +9,7 @@ public interface IJDBody {
 
     float getMass();
 
-    void applyLinearImpulse(Vector2 impulse, Vector2 point, boolean wake);
+    void applyLinearImpulse(Vector2f impulse, Vector2f point, boolean wake);
 
     Vector2 toVector2(Vector2f vector2f);
 
@@ -19,15 +19,15 @@ public interface IJDBody {
 
     Body getBody();
 
-    void applyForceToCenter(Vector2 force, boolean wake);
+    void applyForceToCenter(Vector2f force, boolean wake);
 
-    void setLinearVelocity(Vector2 v);
+    void setLinearVelocity(Vector2f v);
 
-    Vector2 getLinearVelocity();
+    Vector2f getLinearVelocity();
 
-    Vector2 getPosition();
+    Vector2f getPosition();
 
-    Vector2 getWorldCenter();
+    Vector2f getWorldCenter();
 
     void setUserData(Object userData);
 }

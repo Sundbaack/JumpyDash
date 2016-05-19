@@ -4,19 +4,20 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.MovingPlatform;
 import org.chalmers.jumpydash.physics.IBox2D;
+import org.chalmers.jumpydash.view.IView;
 import org.chalmers.jumpydash.view.MovingPlatformView;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class MovingPlatformController extends Actor {
 
-    private MovingPlatformView movingPlatformView;
+    private IView movingPlatformView;
     private MovingPlatform movingPlatform;
-    private IBox2D box2D;
 
     public MovingPlatformController(IBox2D box2D, int x, int y, int mapHeight) {
-        this.box2D = box2D;
         movingPlatformView = new MovingPlatformView();
-        movingPlatform = new MovingPlatform(box2D.newBody(x, y, mapHeight, "kinematic", false,false));
+        movingPlatform = new MovingPlatform();
+        movingPlatform.setJDBody(box2D.newBody(x, y, mapHeight, "kinematic", false,false));
+        movingPlatform.getJDBody().setUserData(movingPlatform);
     }
 
     @Override

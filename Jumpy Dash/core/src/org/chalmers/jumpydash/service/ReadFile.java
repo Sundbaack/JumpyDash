@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class ReadFile {
+public class ReadFile implements IReadFile {
 
-    public static char[][] fileToArray(File tileMap) throws FileNotFoundException {
+    public char[][] fileToArray(File tileMap) throws FileNotFoundException {
         Scanner scanLevel = new Scanner(tileMap);
 
         char[][] level = new char[23][1200];

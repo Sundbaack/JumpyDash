@@ -4,21 +4,23 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Sensor;
 import org.chalmers.jumpydash.physics.IBox2D;
+import org.chalmers.jumpydash.view.IView;
 import org.chalmers.jumpydash.view.SensorView;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class SensorController extends Actor {
 
-    private SensorView sensorView;
-    private IBox2D box2D;
+    private IView sensorView;
     private Sensor sensor;
 
     public SensorController(IBox2D box2D, int x, int y, int mapHeight) {
-        this.box2D = box2D;
-        sensor  = new Sensor(box2D.newBody(x, y, mapHeight, "static", false,true));
+        sensor  = new Sensor();
+        sensor.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,true));
+        sensor.getJDBody().setUserData(sensor);
         sensorView = new SensorView();
     }
 
+    @Override
     public void act(float Delta){
 
     }

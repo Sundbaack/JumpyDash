@@ -1,8 +1,6 @@
 package org.chalmers.jumpydash.controller.screen;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -16,6 +14,7 @@ import org.chalmers.jumpydash.controller.*;
 import org.chalmers.jumpydash.controller.collision.CollisionListener;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
+import org.chalmers.jumpydash.service.IReadFile;
 import org.chalmers.jumpydash.service.ReadFile;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,13 +37,11 @@ public class GameScreen extends BaseScreen {
     private long startTime;
     private SimpleDateFormat dateFormat;
     private FreeTypeFontGenerator generator;
-    private Game game;
 
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
 
-    public GameScreen(Game game, Stage stage, Stage uiStage) {
-        this.game = game;
+    public GameScreen(Stage stage, Stage uiStage) {
         this.stage = stage;
         this.uiStage = uiStage;
         this.stage.clear();
@@ -68,17 +65,14 @@ public class GameScreen extends BaseScreen {
 
         // Load the map
         try {
-            loadMap(ReadFile.fileToArray(new File("levels/level1.txt")));
+            IReadFile fileHandler = new ReadFile();
+            loadMap(fileHandler.fileToArray(new File("levels/level1.txt")));
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
 
         box2D.getWorld().setContactListener(new CollisionListener(box2D));
         createUI();
-    }
-
-    public Game getGameInstance() {
-        return this.game;
     }
 
     private void createUI() {
@@ -190,7 +184,7 @@ public class GameScreen extends BaseScreen {
         }
 
         if (PlayerController.getPlayer().getHealth() == 0) {
-            BaseScreen.setScreen(new GameOverScreen(game, stage, uiStage));
+            ScreenManager.getInstance().initGameOver(stage, uiStage);
         }
 
         /*

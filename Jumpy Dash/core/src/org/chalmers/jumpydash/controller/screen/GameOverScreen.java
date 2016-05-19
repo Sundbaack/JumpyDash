@@ -1,6 +1,5 @@
 package org.chalmers.jumpydash.controller.screen;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -16,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class GameOverScreen extends BaseScreen {
 
-    private Game game;
     private Stage stage;
     private Stage uiStage;
 
@@ -27,8 +25,7 @@ public class GameOverScreen extends BaseScreen {
     private TextButton menuButton;
     private Texture gameOverBg;
 
-    public GameOverScreen(Game game, Stage stage, Stage uiStage) {
-        this.game = game;
+    public GameOverScreen(Stage stage, Stage uiStage) {
         this.stage = stage;
         this.uiStage = uiStage;
         this.stage.clear();
@@ -36,10 +33,6 @@ public class GameOverScreen extends BaseScreen {
 
         gameOverBg = new Texture(Gdx.files.internal("images/gameOverBg.png"));
         createUI();
-    }
-
-    public Game getGameInstance() {
-        return this.game;
     }
 
     public void createUI() {
@@ -74,7 +67,7 @@ public class GameOverScreen extends BaseScreen {
         playButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Switch to game
-                BaseScreen.setScreen(new GameScreen(game, stage, uiStage));
+                ScreenManager.getInstance().initGame(stage, uiStage);
             }
         });
 
@@ -87,7 +80,7 @@ public class GameOverScreen extends BaseScreen {
         menuButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Switch to menu
-                BaseScreen.setScreen(new MenuScreen(game, stage, uiStage));
+                ScreenManager.getInstance().initMenu(stage, uiStage);
             }
         });
     }

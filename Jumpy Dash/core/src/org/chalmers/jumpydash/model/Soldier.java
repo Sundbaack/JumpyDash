@@ -1,16 +1,14 @@
 package org.chalmers.jumpydash.model;
 
-import org.chalmers.jumpydash.physics.IJDBody;
 import javax.vecmath.Vector2f;
 
 public class Soldier extends Enemy {
 
     private boolean directionRight;
 
-    public Soldier(IJDBody jdBody) {
-        super(jdBody,1,1);
-        jdBody.setUserData(this);
-        directionRight=true;
+    public Soldier() {
+        super(1,1);
+        directionRight = true;
     }
 
     public void setDirectionFlag(){
@@ -24,10 +22,9 @@ public class Soldier extends Enemy {
     public void move() {
         // Checks in what direction the soldier should move
         if(getDirection()){
-            getJdBody().applyForceToCenter(getJdBody().toVector2(new Vector2f(2f,0)), true);
-        }
-        else{
-            getJdBody().applyForceToCenter(getJdBody().toVector2(new Vector2f(-2f,0)), true);
+            getJDBody().applyForceToCenter(new Vector2f(2f,0), true);
+        } else{
+            getJDBody().applyForceToCenter(new Vector2f(-2f,0), true);
         }
     }
 }

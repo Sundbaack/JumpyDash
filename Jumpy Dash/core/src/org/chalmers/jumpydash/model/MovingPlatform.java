@@ -1,30 +1,20 @@
 package org.chalmers.jumpydash.model;
 
-import org.chalmers.jumpydash.physics.IJDBody;
 import javax.vecmath.Vector2f;
 
-public class MovingPlatform {
+public class MovingPlatform extends Tile {
 
-    private IJDBody jdBody;
     public static boolean movePlatforms;
 
-    public MovingPlatform(IJDBody jdBody){
-        this.jdBody = jdBody;
-        jdBody.setUserData(this);
+    public MovingPlatform() {
         movePlatforms = false;
     }
 
     public void moveUp(){
-        if(movePlatforms == true){
-            jdBody.setLinearVelocity(jdBody.toVector2(new Vector2f(0,1)));
+        if(movePlatforms) {
+            getJDBody().setLinearVelocity(new Vector2f(0, 1));
+        } else {
+            getJDBody().setLinearVelocity(new Vector2f(0, 0));
         }
-        else {
-            jdBody.setLinearVelocity(jdBody.toVector2(new Vector2f(0,0)));
-        }
-
-    }
-
-    public Vector2f getPosition(){
-        return jdBody.toVector2f(jdBody.getPosition());
     }
 }

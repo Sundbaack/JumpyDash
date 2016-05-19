@@ -1,6 +1,5 @@
 package org.chalmers.jumpydash.controller.screen;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
@@ -26,10 +25,8 @@ public class MenuScreen extends BaseScreen {
     private TextButton playButton;
     private TextButton quitButton;
     private Music music;
-    private Game game;
 
-    public MenuScreen(Game game, Stage stage, Stage uiStage) {
-        this.game = game;
+    public MenuScreen(Stage stage, Stage uiStage) {
         this.stage = stage;
         this.uiStage = uiStage;
         this.stage.clear();
@@ -44,10 +41,6 @@ public class MenuScreen extends BaseScreen {
 
         menuBg = new Texture(Gdx.files.internal("images/menuBg.png"));
         createUI();
-    }
-
-    public Game getGameInstance() {
-        return this.game;
     }
 
     private void createUI() {
@@ -82,7 +75,7 @@ public class MenuScreen extends BaseScreen {
         playButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Switch to game
-                BaseScreen.setScreen(new GameScreen(game, stage, uiStage));
+                ScreenManager.getInstance().initGame(stage, uiStage);
             }
         });
 
