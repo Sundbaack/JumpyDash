@@ -13,7 +13,7 @@ public class Box2D implements IBox2D {
 
     private OrthographicCamera camera;
     private World world;
-    private final List<Body> bodiesToBeDestroyed;
+    private List<Body> bodiesToBeDestroyed;
 
     public Box2D() {
         world = new World(new Vector2(0, GRAVITY), true); //Create a world object with a gravity vector
@@ -119,10 +119,11 @@ public class Box2D implements IBox2D {
                 while (list.size > 0) {
                     world.destroyJoint(list.get(0).joint);
                 }
-
+                
                 world.destroyBody(b);
-                b.setActive(false);
-                b.setUserData(null);
+
+                //b.setActive(false);
+                //b.setUserData(null);
             }
         }
 
