@@ -5,9 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CannonView;
-
 import javax.vecmath.Vector2f;
-
 import static org.chalmers.jumpydash.util.Constants.*;
 
 public class CannonController extends Actor {
@@ -25,9 +23,6 @@ public class CannonController extends Actor {
     @Override
     public void act(float Delta){
         fireCannon();
-        if (!cannon.getJdBody().isActive()) {
-            this.remove();
-        }
     }
 
     public void fireCannon(){

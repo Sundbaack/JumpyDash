@@ -5,12 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.SpeedUp;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.SpeedUpView;
-
 import static org.chalmers.jumpydash.util.Constants.*;
 
-/**
- * Created by alexsundback on 2016-05-18.
- */
 public class SpeedUpController extends Actor {
 
     private SpeedUp speedUp;
@@ -24,10 +20,7 @@ public class SpeedUpController extends Actor {
     }
 
     public void act(float Delta) {
-        //Remove SpeedUp
-        if (!speedUp.getJdBody().isActive()) {
-            this.remove();
-        }
+
     }
 
     @Override

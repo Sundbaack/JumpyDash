@@ -3,8 +3,11 @@ package org.chalmers.jumpydash.physics;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.chalmers.jumpydash.util.Constants.*;
@@ -20,10 +23,10 @@ public class Box2D implements IBox2D {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
-        bodiesToBeDestroyed = new ArrayList<Body>();
+        bodiesToBeDestroyed = Collections.synchronizedList(new ArrayList<Body>());
     }
 
-    public List<Body> getBodiesToBeDestroyed() {
+    public synchronized List<Body> getBodiesToBeDestroyed() {
         return this.bodiesToBeDestroyed;
     }
 
@@ -112,10 +115,21 @@ public class Box2D implements IBox2D {
         world.clearForces();
 
         // Destroy bodies who are marked for destruction
-        for (Body b : bodiesToBeDestroyed) {
-            world.destroyBody(b);
-            b.setActive(false);
+        if(!world.isLocked()) {
+            synchronized(bodiesToBeDestroyed) {
+            for (Body b : bodiesToBeDestroyed) {
+                Array<JointEdge> list = b.getJointList();
+
+                    while (list.size > 0) {
+                        world.destroyJoint(list.get(0).joint);
+                    }
+
+                    world.destroyBody(b);
+                    b.setUserData(null);
+                }
+            }
         }
+
         bodiesToBeDestroyed.clear();
         camera.update();
     }

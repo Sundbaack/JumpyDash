@@ -1,6 +1,8 @@
 package org.chalmers.jumpydash.model;
 
 import org.chalmers.jumpydash.physics.IJDBody;
+import org.chalmers.jumpydash.physics.JDBody;
+
 import javax.vecmath.Vector2f;
 
 public class Player {
@@ -64,6 +66,9 @@ public class Player {
         jdBody.applyLinearImpulse(jdBody.toVector2(vector2f),jdBody.getWorldCenter(),true);
     }
 
+    public IJDBody getJDBody() {
+        return this.jdBody;
+    }
     public void playerSpeedUp() {
         setSpeed(100);
     }
