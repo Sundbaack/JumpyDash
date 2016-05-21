@@ -13,14 +13,14 @@ allprojects {
     apply plugin: "idea"
     apply plugin: "pmd"
     apply plugin: "jdepend"
-    /*apply plugin: "findbugs"
+    apply plugin: "findbugs"
 
 
     findbugs {
         ignoreFailures = false
         effort = "max"
         reportLevel = "low"
-    }*/
+    }
 
     pmd {
         ignoreFailures = true
