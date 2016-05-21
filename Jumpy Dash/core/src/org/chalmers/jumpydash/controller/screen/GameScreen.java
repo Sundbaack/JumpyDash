@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import org.chalmers.jumpydash.controller.*;
 import org.chalmers.jumpydash.controller.collision.CollisionListener;
+import org.chalmers.jumpydash.model.Soldier;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.IReadFile;
@@ -37,6 +38,7 @@ public class GameScreen extends JDScreen {
     private long startTime;
     private SimpleDateFormat dateFormat;
     private FreeTypeFontGenerator generator;
+    private PlayerController playerController;
 
     //private Box2DDebugRenderer debugRenderer;
     //private Matrix4 debugMatrix;
@@ -71,7 +73,7 @@ public class GameScreen extends JDScreen {
             System.out.println("File not found");
         }
 
-        box2D.getWorld().setContactListener(new CollisionListener());
+        box2D.getWorld().setContactListener(new CollisionListener(playerController));
         createUI();
     }
 
@@ -112,7 +114,7 @@ public class GameScreen extends JDScreen {
             for (int x = 0; x < mapWidth; x++) {
 
                 if (level[y][x] == 'P') {
-                    PlayerController playerController = new PlayerController(box2D, x, y, mapHeight);
+                    playerController = new PlayerController(box2D, x, y, mapHeight);
                     stage.addActor(playerController);
                 }
                 if (level[y][x] == '#') {
@@ -168,22 +170,22 @@ public class GameScreen extends JDScreen {
         box2D.update();
 
         // Update scoreLabel
-        scoreLabel.setText("Score: " + PlayerController.getPlayer().getPoints());
+        scoreLabel.setText("Score: " + playerController.getPlayer().getPoints());
 
         // Update timeLabel
         long elapsedTime = System.currentTimeMillis() - startTime;
         timeLabel.setText(dateFormat.format(new Date(elapsedTime)));
 
         // Draw health
-        if (PlayerController.getPlayer().getHealth() == 2) {
+        if (playerController.getPlayer().getHealth() == 2) {
             health3.remove();
             uiStage.addActor(health2);
-        } else if (PlayerController.getPlayer().getHealth() == 1) {
+        } else if (playerController.getPlayer().getHealth() == 1) {
             health2.remove();
             uiStage.addActor(health1);
         }
 
-        if (PlayerController.getPlayer().getHealth() == 0) {
+        if (playerController.getPlayer().getHealth() == 0) {
             ScreenManager.getInstance().initGameOver(stage, uiStage);
         }
 

@@ -6,21 +6,18 @@ public class Player extends JDModel {
 
     private float impulse;
     private boolean jumpFlag;
-    private static int points;
-    private static int health;
-    private static long previousFireTime;
-    private static final float MAX_SPEED_X = 3.5f;
+    private int points;
+    private int health;
+    private long previousFireTime;
     private float playerSpeedX;
+    private final float MAX_SPEED_X = 3.5f;
 
     public Player() {
         this.points = 0;
-
         playerSpeedX = 4;
-
         jumpFlag = false;
         health = 3;
         previousFireTime = 0;
-        points = 0;
     }
 
     public void jump() {
@@ -65,11 +62,11 @@ public class Player extends JDModel {
         return this.jumpFlag;
     }
 
-    public static float getMaxSpeedX() {
+    private float getMaxSpeedX() {
         return MAX_SPEED_X;
     }
 
-    public float getImpulse() {
+    private float getImpulse() {
         return this.impulse;
     }
 
@@ -77,19 +74,19 @@ public class Player extends JDModel {
         this.impulse = impulse;
     }
 
-    public static int getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public static void setPoints(int a) {
+    public void setPoints(int a) {
         points += a;
     }
 
-    public static int getHealth() { return health; }
+    public int getHealth() { return health; }
 
-    public static void setDamage(int damage) { health = health - damage; }
+    public void setDamage(int damage) { health = health - damage; }
 
-    public void setSpeed(float speedIncrease) {
+    private void setSpeed(float speedIncrease) {
         playerSpeedX += speedIncrease;
     }
 

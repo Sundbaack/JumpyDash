@@ -9,6 +9,7 @@ import org.chalmers.jumpydash.model.*;
 
 public class PlayerCollisionListener extends JDCollision {
 
+    private PlayerController playerController;
     private boolean playerA;
     private boolean coinB;
     private boolean playerB;
@@ -26,6 +27,10 @@ public class PlayerCollisionListener extends JDCollision {
     private boolean sensorA;
     private boolean sensorB;
     private Sound powerUpSound;
+
+    public PlayerCollisionListener(PlayerController playerController) {
+        this.playerController = playerController;
+    }
 
     // Determine type of the two colliding bodies
     private void checkInstance(Body a, Body b) {
@@ -51,35 +56,35 @@ public class PlayerCollisionListener extends JDCollision {
     private void checkCollision(Body a, Body b) {
         if ((playerA && platformB) ||
                 (platformA && playerB)) {
-            if (!PlayerController.getPlayer().getJumpState()) {
-                PlayerController.getPlayer().setJumpState();
+            if (!playerController.getPlayer().getJumpState()) {
+                playerController.getPlayer().setJumpState();
             }
         }
         //Check collision between player and coin
         if ((playerA && coinB)) {
-            PlayerController.getPlayer().setPoints(Coin.getValue());
+            playerController.getPlayer().setPoints(Coin.getValue());
             b.setUserData(null);
         } else if ((coinA && playerB)) {
-            PlayerController.getPlayer().setPoints(Coin.getValue());
+            playerController.getPlayer().setPoints(Coin.getValue());
             a.setUserData(null);
         }
 
         //Check collision between player and soldier
         if ((playerA && soldierB) || (soldierA && playerB)) {
-            PlayerController.getPlayer().setDamage(1);
-            PlayerController.getPlayer().applySoldierImpulse();
+            playerController.getPlayer().setDamage(1);
+            playerController.getPlayer().applySoldierImpulse();
         }
         //Check collision between player and trampoline
         if (playerA && trampolineB || trampolineA && playerB) {
-            if (!PlayerController.getPlayer().getJumpState()) {
-                PlayerController.getPlayer().setJumpState();
+            if (!playerController.getPlayer().getJumpState()) {
+                playerController.getPlayer().setJumpState();
             }
-            PlayerController.getPlayer().applyTrampolineImpulse();
+            playerController.getPlayer().applyTrampolineImpulse();
         }
 
         //Check collision between player and spike
         if (playerA && spikeB || spikeA && playerB) {
-            PlayerController.getPlayer().setDamage(PlayerController.getPlayer().getHealth());
+            playerController.getPlayer().setDamage(playerController.getPlayer().getHealth());
         }
 
 
@@ -88,12 +93,12 @@ public class PlayerCollisionListener extends JDCollision {
         }
         //Check collision between player and SpeedUp
         if ((playerA && speedUpB)) {
-            PlayerController.getPlayer().playerSpeedUp();
+            playerController.getPlayer().playerSpeedUp();
             b.setUserData(null);
             powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
             powerUpSound.play(1);
         } else if ((speedUpA && playerB)) {
-            PlayerController.getPlayer().playerSpeedUp();
+            playerController.getPlayer().playerSpeedUp();
             a.setUserData(null);
             powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
             powerUpSound.play(1);
