@@ -5,7 +5,7 @@ public class Coin extends Item {
     private static int valueCoin;
 
     public Coin(int valueCoin){
-        Coin.valueCoin = valueCoin;
+        this.valueCoin = valueCoin;
     }
 
     public static int getValue() {

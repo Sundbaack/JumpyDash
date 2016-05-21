@@ -8,7 +8,7 @@ public abstract class JDModel {
     private IJDBody jdBody;
 
     public IJDBody getJDBody() {
-        return jdBody != null ? this.jdBody : null;
+        return this.jdBody;
     }
 
     public void setJDBody(IJDBody jdBody) {

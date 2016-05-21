@@ -10,7 +10,7 @@ import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 public class AbilityController extends JDController {
 
     private JDView abilityView;
-    private Ability ability;
+    private static Ability ability;
 
     public AbilityController(IBox2D box2D, int x, int y, int mapHeight) {
         ability = new Ability();
