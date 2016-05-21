@@ -11,6 +11,24 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
+    apply plugin: "pmd"
+    apply plugin: "jdepend"
+    /*apply plugin: "findbugs"
+
+
+    findbugs {
+        ignoreFailures = false
+        effort = "max"
+        reportLevel = "low"
+    }*/
+
+    pmd {
+        ignoreFailures = true
+    }
+
+    jdepend{
+        ignoreFailures = true
+    }
 
     version = '1.0'
     ext {

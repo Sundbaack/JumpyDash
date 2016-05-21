@@ -10,7 +10,7 @@ public class Player extends JDModel {
     private int health;
     private long previousFireTime;
     private float playerSpeedX;
-    private final float MAX_SPEED_X = 3.5f;
+    private static final float MAX_SPEED_X = 3.5f;
 
     public Player() {
         this.points = 0;

@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import org.chalmers.jumpydash.controller.*;
 import org.chalmers.jumpydash.controller.collision.CollisionListener;
-import org.chalmers.jumpydash.model.Soldier;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.IReadFile;
