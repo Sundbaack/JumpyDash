@@ -2,7 +2,7 @@ package org.chalmers.jumpydash.controller.screen;
 
 import com.badlogic.gdx.Screen;
 
-public abstract class BaseScreen implements Screen {
+public abstract class JDScreen implements Screen {
 
     @Override
     public void show() {

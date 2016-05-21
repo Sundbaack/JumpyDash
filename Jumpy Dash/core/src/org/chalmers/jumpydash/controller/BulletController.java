@@ -1,19 +1,18 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Bullet;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.BulletView;
-import org.chalmers.jumpydash.view.IView;
+import org.chalmers.jumpydash.view.JDView;
 import javax.vecmath.Vector2f;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 import static org.chalmers.jumpydash.physics.Box2D.SCREEN_WIDTH;
 import static org.chalmers.jumpydash.physics.Box2D.TILE_SIZE;
 
-public class BulletController extends Actor {
+public class BulletController extends JDController {
 
-    private IView bulletView;
+    private JDView bulletView;
     private Bullet bullet;
     private IBox2D box2D;
 
@@ -46,6 +45,7 @@ public class BulletController extends Actor {
         bulletView.render(batch, bullet.getPosition().x * PIXELS_TO_METERS, bullet.getPosition().y * PIXELS_TO_METERS);
     }
 
+    @Override
     public void dispose() {
         bulletView.dispose();
     }

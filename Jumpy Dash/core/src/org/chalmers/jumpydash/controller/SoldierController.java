@@ -1,17 +1,16 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Soldier;
-import org.chalmers.jumpydash.view.IView;
+import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.SoldierView;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
-public class SoldierController extends Actor {
+public class SoldierController extends JDController {
 
     private Soldier soldier;
-    private IView soldierView;
+    private JDView soldierView;
 
     public SoldierController(IBox2D box2D, int x, int y, int mapHeight) {
         soldier = new Soldier();
@@ -34,6 +33,7 @@ public class SoldierController extends Actor {
 
     }
 
+    @Override
     public void dispose() {
         soldierView.dispose();
     }

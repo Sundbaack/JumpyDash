@@ -1,16 +1,15 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Ability;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.AbilityView;
-import org.chalmers.jumpydash.view.IView;
+import org.chalmers.jumpydash.view.JDView;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
-public class AbilityController extends Actor{
+public class AbilityController extends JDController {
 
-    private IView abilityView;
+    private JDView abilityView;
     private static Ability ability;
 
     public AbilityController(IBox2D box2D, int x, int y, int mapHeight) {
@@ -20,6 +19,7 @@ public class AbilityController extends Actor{
         abilityView = new AbilityView();
     }
 
+    @Override
     public void act(float Delta) {
         if (!ability.getJDBody().isActive()) {
             this.remove();
@@ -32,6 +32,7 @@ public class AbilityController extends Actor{
 
     }
 
+    @Override
     public void dispose() {
         abilityView.dispose();
     }

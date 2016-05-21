@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-public class SpikeView implements IView {
+public class SpikeView implements JDView {
 
     private Texture spikeTile;
 

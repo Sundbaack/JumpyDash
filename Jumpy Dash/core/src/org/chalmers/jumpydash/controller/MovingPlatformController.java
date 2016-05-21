@@ -1,16 +1,15 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.MovingPlatform;
 import org.chalmers.jumpydash.physics.IBox2D;
-import org.chalmers.jumpydash.view.IView;
+import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.MovingPlatformView;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
-public class MovingPlatformController extends Actor {
+public class MovingPlatformController extends JDController {
 
-    private IView movingPlatformView;
+    private JDView movingPlatformView;
     private MovingPlatform movingPlatform;
 
     public MovingPlatformController(IBox2D box2D, int x, int y, int mapHeight) {
@@ -35,6 +34,7 @@ public class MovingPlatformController extends Actor {
         movingPlatformView.render(batch, movingPlatform.getPosition().x * PIXELS_TO_METERS, movingPlatform.getPosition().y * PIXELS_TO_METERS);
     }
 
+    @Override
     public void dispose() {
         movingPlatformView.dispose();
     }

@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollisionListener extends Collision {
+public class CollisionListener extends JDCollision {
 
     private List<ContactListener> collisionListenerList;
 

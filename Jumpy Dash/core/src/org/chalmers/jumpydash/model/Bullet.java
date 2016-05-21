@@ -1,6 +1,6 @@
 package org.chalmers.jumpydash.model;
 
-public class Bullet extends Tile {
+public class Bullet extends JDModel {
 
     public Bullet() {
 

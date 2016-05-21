@@ -2,7 +2,7 @@ package org.chalmers.jumpydash.model;
 
 import javax.vecmath.Vector2f;
 
-public class MovingPlatform extends Tile {
+public class MovingPlatform extends JDModel {
 
     public static boolean movePlatforms;
 

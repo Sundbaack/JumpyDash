@@ -1,6 +1,6 @@
 package org.chalmers.jumpydash.model;
 
-public abstract class Enemy extends Tile {
+public abstract class Enemy extends JDModel {
 
     private int healthPoints;
     private int damage;

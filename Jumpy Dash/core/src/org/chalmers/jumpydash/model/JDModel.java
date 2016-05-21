@@ -3,7 +3,7 @@ package org.chalmers.jumpydash.model;
 import org.chalmers.jumpydash.physics.IJDBody;
 import javax.vecmath.Vector2f;
 
-public abstract class Tile {
+public abstract class JDModel {
 
     private IJDBody jdBody;
 
@@ -24,9 +24,9 @@ public abstract class Tile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Tile tile = (Tile) o;
+        JDModel jdModel = (JDModel) o;
 
-        return jdBody != null ? jdBody.equals(tile.jdBody) : tile.jdBody == null;
+        return jdBody != null ? jdBody.equals(jdModel.jdBody) : jdModel.jdBody == null;
 
     }
 

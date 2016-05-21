@@ -2,7 +2,7 @@ package org.chalmers.jumpydash.model;
 
 import javax.vecmath.Vector2f;
 
-public class Player extends Tile {
+public class Player extends JDModel {
 
     private float impulse;
     private boolean jumpFlag;

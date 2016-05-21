@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-public class CoinView implements IView {
+public class CoinView implements JDView {
 
     private Texture coinTile;
 

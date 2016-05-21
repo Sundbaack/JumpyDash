@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-public class CannonView implements IView {
+public class CannonView implements JDView {
     private Texture cannonTile;
 
     public CannonView() {

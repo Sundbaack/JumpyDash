@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import org.chalmers.jumpydash.controller.PlayerController;
 import org.chalmers.jumpydash.model.*;
 
-public class PlayerCollisionListener extends Collision {
+public class PlayerCollisionListener extends JDCollision {
 
     private boolean playerA;
     private boolean coinB;

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-public class MovingPlatformView implements IView {
+public class MovingPlatformView implements JDView {
 
     private Texture platformTile;
 

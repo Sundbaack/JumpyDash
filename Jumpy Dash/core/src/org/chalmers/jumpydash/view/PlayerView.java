@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-public class PlayerView implements IView {
+public class PlayerView implements JDView {
 
     private Texture playerTile;
     private Texture background;

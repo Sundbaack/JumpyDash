@@ -1,16 +1,15 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.model.Trampoline;
 import org.chalmers.jumpydash.physics.IBox2D;
-import org.chalmers.jumpydash.view.IView;
+import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.TrampolineView;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
-public class TrampolineController extends Actor {
+public class TrampolineController extends JDController {
 
-    private IView trampolineView;
+    private JDView trampolineView;
     private Trampoline trampoline;
 
     public TrampolineController(IBox2D box2D, int x, int y, int mapHeight) {
@@ -32,6 +31,7 @@ public class TrampolineController extends Actor {
         trampolineView.render(batch, trampoline.getPosition().x * PIXELS_TO_METERS, trampoline.getPosition().y * PIXELS_TO_METERS);
     }
 
+    @Override
     public void dispose() {
         trampolineView.dispose();
     }

@@ -5,20 +5,19 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
-import org.chalmers.jumpydash.view.IView;
+import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.PlayerView;
 import javax.vecmath.Vector2f;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 import static org.chalmers.jumpydash.physics.Box2D.SCREEN_WIDTH;
 
-public class PlayerController extends Actor {
+public class PlayerController extends JDController {
 
     private IBox2D box2D;
     private static Player player;
-    private IView playerView;
+    private JDView playerView;
     private Sound sound;
     public static final int CAMERA_UPDATE_POINT = 500;
 
@@ -68,6 +67,7 @@ public class PlayerController extends Actor {
         return player;
     }
 
+    @Override
     public void dispose() {
         playerView.dispose();
         sound.dispose();

@@ -21,7 +21,7 @@ import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class GameScreen extends BaseScreen {
+public class GameScreen extends JDScreen {
 
     private Stage stage;
     private Stage uiStage;

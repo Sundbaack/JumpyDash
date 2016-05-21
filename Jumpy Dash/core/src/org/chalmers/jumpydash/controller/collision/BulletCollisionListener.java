@@ -6,7 +6,7 @@ import org.chalmers.jumpydash.model.Bullet;
 import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.model.Soldier;
 
-public class BulletCollisionListener extends Collision {
+public class BulletCollisionListener extends JDCollision {
 
     private boolean bulletA;
     private boolean bulletB;

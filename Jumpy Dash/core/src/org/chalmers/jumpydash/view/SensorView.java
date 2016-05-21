@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-public class SensorView implements IView {
+public class SensorView implements JDView {
 
     private Texture abilityTile;
 
