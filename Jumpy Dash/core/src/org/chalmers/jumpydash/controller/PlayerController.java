@@ -16,10 +16,10 @@ import static org.chalmers.jumpydash.physics.Box2D.SCREEN_WIDTH;
 public class PlayerController extends JDController {
 
     private IBox2D box2D;
-    private static Player player;
+    private Player player;
     private JDView playerView;
     private Sound sound;
-    public static final int CAMERA_UPDATE_POINT = 500;
+    private static final int CAMERA_UPDATE_POINT = 500;
 
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
