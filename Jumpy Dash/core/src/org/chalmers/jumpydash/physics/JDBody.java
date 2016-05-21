@@ -2,7 +2,6 @@ package org.chalmers.jumpydash.physics;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-
 import javax.vecmath.Vector2f;
 
 public class JDBody implements IJDBody {
@@ -23,10 +22,6 @@ public class JDBody implements IJDBody {
 
     public Vector2f toVector2f(Vector2 vector2){
         return new Vector2f(vector2.x,vector2.y);
-    }
-
-    public Body getBody() {
-        return this.body;
     }
 
     public boolean isActive() {

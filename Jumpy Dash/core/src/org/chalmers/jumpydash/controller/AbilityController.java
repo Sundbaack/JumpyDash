@@ -21,7 +21,9 @@ public class AbilityController extends Actor{
     }
 
     public void act(float Delta) {
-
+        if (!ability.getJDBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override

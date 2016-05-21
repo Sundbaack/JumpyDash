@@ -1,20 +1,20 @@
 package org.chalmers.jumpydash.controller.collision;
 
-import com.badlogic.gdx.physics.box2d.*;
-import org.chalmers.jumpydash.physics.IBox2D;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollisionListener implements ContactListener {
+public class CollisionListener extends Collision {
 
     private List<ContactListener> collisionListenerList;
 
-    public CollisionListener(IBox2D box2D) {
+    public CollisionListener() {
         collisionListenerList = new ArrayList<ContactListener>();
 
         // Add separate contact listeners
-        collisionListenerList.add(new PlayerCollisionListener(box2D));
-        collisionListenerList.add(new BulletCollisionListener(box2D));
+        collisionListenerList.add(new PlayerCollisionListener());
+        collisionListenerList.add(new BulletCollisionListener());
     }
 
     @Override
@@ -22,20 +22,5 @@ public class CollisionListener implements ContactListener {
        for(ContactListener c: collisionListenerList){
             c.beginContact(contact);
         }
-    }
-
-    @Override
-    public void endContact(Contact contact) {
-
-    }
-
-    @Override
-    public void preSolve(Contact contact, Manifold oldManifold) {
-
-    }
-
-    @Override
-    public void postSolve(Contact contact, ContactImpulse impulse) {
-
     }
 }

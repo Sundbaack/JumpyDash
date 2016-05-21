@@ -22,7 +22,9 @@ public class PlatformController extends Actor {
 
     @Override
     public void act(float delta) {
-
+        if (!platform.getJDBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override

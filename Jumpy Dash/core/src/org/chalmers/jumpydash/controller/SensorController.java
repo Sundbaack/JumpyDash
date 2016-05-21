@@ -22,7 +22,9 @@ public class SensorController extends Actor {
 
     @Override
     public void act(float Delta){
-
+        if (!sensor.getJDBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override

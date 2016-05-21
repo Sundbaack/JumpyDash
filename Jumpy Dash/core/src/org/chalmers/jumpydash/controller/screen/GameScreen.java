@@ -71,7 +71,7 @@ public class GameScreen extends BaseScreen {
             System.out.println("File not found");
         }
 
-        box2D.getWorld().setContactListener(new CollisionListener(box2D));
+        box2D.getWorld().setContactListener(new CollisionListener());
         createUI();
     }
 

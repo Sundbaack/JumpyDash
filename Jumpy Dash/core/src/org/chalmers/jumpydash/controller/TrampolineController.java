@@ -22,7 +22,9 @@ public class TrampolineController extends Actor {
 
     @Override
     public void act(float Delta) {
-
+        if (!trampoline.getJDBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override

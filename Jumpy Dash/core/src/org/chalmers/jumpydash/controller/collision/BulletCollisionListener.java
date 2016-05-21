@@ -1,12 +1,12 @@
 package org.chalmers.jumpydash.controller.collision;
 
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Contact;
 import org.chalmers.jumpydash.model.Bullet;
 import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.model.Soldier;
-import org.chalmers.jumpydash.physics.IBox2D;
 
-public class BulletCollisionListener implements ContactListener {
+public class BulletCollisionListener extends Collision {
 
     private boolean bulletA;
     private boolean bulletB;
@@ -15,13 +15,8 @@ public class BulletCollisionListener implements ContactListener {
     private boolean soldierA;
     private boolean soldierB;
 
-    private IBox2D box2D;
-
-    public BulletCollisionListener(IBox2D box2D){
-        this.box2D = box2D;
-    }
-
-    private void checkInstance(Body a, Body b){
+    // Determine type of the two colliding bodies
+    private void checkInstance(Body a, Body b) {
         bulletA = a.getUserData() instanceof Bullet;
         bulletB = b.getUserData() instanceof Bullet;
         cannonA = a.getUserData() instanceof Cannon;
@@ -30,17 +25,19 @@ public class BulletCollisionListener implements ContactListener {
         soldierB = b.getUserData() instanceof Soldier;
     }
 
-    private void checkCollision(Body a, Body b){
+    // Determine who is colliding with who
+    private void checkCollision(Body a, Body b) {
+        //Check collision between bullet and soldier
         if (bulletB && soldierA || bulletA && soldierB) {
-            box2D.getBodiesToBeDestroyed().add(a);
-            box2D.getBodiesToBeDestroyed().add(b);
+            a.setUserData(null);
+            b.setUserData(null);
         }
 
         //Check collision between bullet and cannon
         if (bulletA && cannonB) {
-            box2D.getBodiesToBeDestroyed().add(b);
-        } else if(bulletB && cannonA){
-            box2D.getBodiesToBeDestroyed().add(a);
+            b.setUserData(null);
+        } else if (bulletB && cannonA) {
+            a.setUserData(null);
         }
     }
 
@@ -50,21 +47,5 @@ public class BulletCollisionListener implements ContactListener {
         Body b = contact.getFixtureB().getBody();
         checkInstance(a,b);
         checkCollision(a,b);
-
-    }
-
-    @Override
-    public void endContact(Contact contact) {
-
-    }
-
-    @Override
-    public void preSolve(Contact contact, Manifold oldManifold) {
-
-    }
-
-    @Override
-    public void postSolve(Contact contact, ContactImpulse impulse) {
-
     }
 }

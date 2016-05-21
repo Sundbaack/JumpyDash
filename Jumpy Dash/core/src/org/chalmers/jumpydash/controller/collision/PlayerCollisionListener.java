@@ -2,12 +2,12 @@ package org.chalmers.jumpydash.controller.collision;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Contact;
 import org.chalmers.jumpydash.controller.PlayerController;
 import org.chalmers.jumpydash.model.*;
-import org.chalmers.jumpydash.physics.IBox2D;
 
-public class PlayerCollisionListener implements ContactListener{
+public class PlayerCollisionListener extends Collision {
 
     private boolean playerA;
     private boolean coinB;
@@ -27,13 +27,8 @@ public class PlayerCollisionListener implements ContactListener{
     private boolean sensorB;
     private Sound powerUpSound;
 
-    private IBox2D box2D;
-
-    public PlayerCollisionListener(IBox2D box2D){
-        this.box2D = box2D;
-    }
-
-    private void checkInstance(Body a, Body b){
+    // Determine type of the two colliding bodies
+    private void checkInstance(Body a, Body b) {
         playerA = a.getUserData() instanceof Player;
         coinB = b.getUserData() instanceof Coin;
         playerB = b.getUserData() instanceof Player;
@@ -52,7 +47,8 @@ public class PlayerCollisionListener implements ContactListener{
         sensorB = b.getUserData() instanceof  Sensor;
     }
 
-    private void checkCollision(Body a, Body b){
+    // Determine who is colliding with who
+    private void checkCollision(Body a, Body b) {
         if ((playerA && platformB) ||
                 (platformA && playerB)) {
             if (!PlayerController.getPlayer().getJumpState()) {
@@ -62,10 +58,10 @@ public class PlayerCollisionListener implements ContactListener{
         //Check collision between player and coin
         if ((playerA && coinB)) {
             PlayerController.getPlayer().setPoints(Coin.getValue());
-            box2D.getBodiesToBeDestroyed().add(b);
+            b.setUserData(null);
         } else if ((coinA && playerB)) {
             PlayerController.getPlayer().setPoints(Coin.getValue());
-            box2D.getBodiesToBeDestroyed().add(a);
+            a.setUserData(null);
         }
 
         //Check collision between player and soldier
@@ -93,36 +89,22 @@ public class PlayerCollisionListener implements ContactListener{
         //Check collision between player and SpeedUp
         if ((playerA && speedUpB)) {
             PlayerController.getPlayer().playerSpeedUp();
-            box2D.getBodiesToBeDestroyed().add(b);
+            b.setUserData(null);
             powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
             powerUpSound.play(1);
         } else if ((speedUpA && playerB)) {
             PlayerController.getPlayer().playerSpeedUp();
-            box2D.getBodiesToBeDestroyed().add(a);
+            a.setUserData(null);
             powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
             powerUpSound.play(1);
         }
     }
+
     @Override
     public void beginContact(Contact contact) {
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
         checkInstance(a,b);
         checkCollision(a,b);
-    }
-
-    @Override
-    public void endContact(Contact contact) {
-
-    }
-
-    @Override
-    public void preSolve(Contact contact, Manifold oldManifold) {
-
-    }
-
-    @Override
-    public void postSolve(Contact contact, ContactImpulse impulse) {
-
     }
 }

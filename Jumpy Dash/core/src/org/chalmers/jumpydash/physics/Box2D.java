@@ -5,13 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
-import java.util.*;
-
 public class Box2D implements IBox2D {
 
     private OrthographicCamera camera;
     private World world;
-    private final List<Body> bodiesToBeDestroyed;
 
     public static final int TILE_SIZE = 32;
     private static final float GRAVITY = -10f;
@@ -27,11 +24,6 @@ public class Box2D implements IBox2D {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
-        bodiesToBeDestroyed = Collections.synchronizedList(new ArrayList<Body>());
-    }
-
-    public synchronized List<Body> getBodiesToBeDestroyed() {
-        return this.bodiesToBeDestroyed;
     }
 
     public World getWorld() {
@@ -141,29 +133,15 @@ public class Box2D implements IBox2D {
         world.clearForces();
 
         // Destroy bodies who are marked for destruction
-        synchronized (bodiesToBeDestroyed) {
-            Set<Body> set = new HashSet<Body>(bodiesToBeDestroyed);
-            set.addAll(bodiesToBeDestroyed);
-            if(set.size() < bodiesToBeDestroyed.size()) {
-            System.out.println("Duplicates!");
-            }
-            for (Body b : bodiesToBeDestroyed) {
-                System.out.println(b.getUserData());
-                Array<JointEdge> list = b.getJointList();
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
 
-
-                while (list.size > 0) {
-                    world.destroyJoint(list.get(0).joint);
-                }
+        for (Body b : bodies) {
+            if (b.getUserData() == null ) {
                 world.destroyBody(b);
-                b = null;
-                //b.setActive(false);
-                //b.setUserData(null);
             }
-
         }
 
-        bodiesToBeDestroyed.clear();
         camera.update();
     }
 }

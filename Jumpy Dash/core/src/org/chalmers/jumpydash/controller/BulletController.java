@@ -29,7 +29,7 @@ public class BulletController extends Actor {
     // Remove bullets when moving out of screen
     private void updateBullets() {
         if (((bullet.getPosition().x * PIXELS_TO_METERS) + TILE_SIZE / 2) >= (box2D.getCamera().position.x + SCREEN_WIDTH / 2)) {
-            box2D.getBodiesToBeDestroyed().add(bullet.getJDBody().getBody());
+            bullet.getJDBody().setUserData(null);
         }
     }
 

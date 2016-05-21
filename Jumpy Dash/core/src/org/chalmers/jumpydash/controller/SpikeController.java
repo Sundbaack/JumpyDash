@@ -22,7 +22,9 @@ public class SpikeController extends Actor {
 
     @Override
     public void act(float Delta) {
-
+        if (!spike.getJDBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override

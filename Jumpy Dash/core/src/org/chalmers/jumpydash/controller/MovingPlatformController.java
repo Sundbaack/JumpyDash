@@ -25,6 +25,9 @@ public class MovingPlatformController extends Actor {
         if (MovingPlatform.movePlatforms) {
             movingPlatform.moveUp();
         }
+        if (!movingPlatform.getJDBody().isActive()) {
+            this.remove();
+        }
     }
 
     @Override
