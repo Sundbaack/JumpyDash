@@ -2,35 +2,24 @@ package org.chalmers.jumpydash.controller.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import org.chalmers.jumpydash.view.screen.MenuView;
 
 public class MenuScreen extends JDScreen {
 
     private Stage stage;
     private Stage uiStage;
-    private Texture menuBg;
-    private Skin skin;
-    private Pixmap pixmap;
-    private BitmapFont font;
-    private TextButton playButton;
-    private TextButton quitButton;
     private Music music;
+    private MenuView menuView;
 
     public MenuScreen(Stage stage, Stage uiStage) {
         this.stage = stage;
         this.uiStage = uiStage;
         this.stage.clear();
         this.uiStage.clear();
+        menuView = new MenuView(uiStage);
 
         Gdx.input.setInputProcessor(uiStage);
 
@@ -39,53 +28,18 @@ public class MenuScreen extends JDScreen {
         music.setVolume(0.2f);
         music.setLooping(true);
 
-        menuBg = new Texture(Gdx.files.internal("images/menuBg.png"));
-        createUI();
+        setListeners();
     }
 
-    private void createUI() {
-        skin = new Skin();
-        pixmap = new Pixmap(250, 75, Pixmap.Format.RGBA8888);
-        pixmap.setColor(new Color(54,52,52,1));
-        pixmap.fill();
-        skin.add("grey", new Texture(pixmap));
-
-        // Use custom font
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/OpenSans.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 18;
-        font = generator.generateFont(parameter);
-        generator.dispose();
-
-        skin.add("font",font);
-
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = skin.newDrawable("grey", Color.DARK_GRAY);
-        textButtonStyle.over = skin.newDrawable("grey", Color.LIGHT_GRAY);
-        textButtonStyle.font = skin.getFont("font");
-
-        skin.add("style", textButtonStyle);
-
-        // Play button
-        playButton = new TextButton("Play", textButtonStyle);
-        playButton.setPosition(515, 350);
-        playButton.setName("playButton");
-        uiStage.addActor(playButton);
-
-        playButton.addListener(new ClickListener() {
+    private void setListeners() {
+        menuView.getPlayButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Switch to game
                 ScreenManager.getInstance().initGame(stage, uiStage);
             }
         });
 
-        // Quit button
-        quitButton = new TextButton("Quit", textButtonStyle);
-        quitButton.setPosition(515, 250);
-        playButton.setName("quitButton");
-        uiStage.addActor(quitButton);
-
-        quitButton.addListener(new ClickListener() {
+        menuView.getQuitButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Exit application
                 System.exit(0);
@@ -95,12 +49,7 @@ public class MenuScreen extends JDScreen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl20.glClearColor(0, 0, 0, 1);
-        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        uiStage.getBatch().begin();
-        uiStage.getBatch().draw(menuBg, 0, 0);
-        uiStage.getBatch().end();
+        menuView.update();
     }
 
     @Override
@@ -110,9 +59,8 @@ public class MenuScreen extends JDScreen {
 
     @Override
     public void dispose() {
-        skin.dispose();
-        pixmap.dispose();
-        font.dispose();
+        stage.dispose();
+        uiStage.dispose();
         music.dispose();
     }
 }
