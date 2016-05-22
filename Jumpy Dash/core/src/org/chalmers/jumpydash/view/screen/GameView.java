@@ -9,14 +9,21 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import org.chalmers.jumpydash.service.ReadFile;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static org.chalmers.jumpydash.physics.Box2D.SCREEN_HEIGHT;
+import static org.chalmers.jumpydash.physics.Box2D.SCREEN_WIDTH;
+import static org.chalmers.jumpydash.physics.Box2D.TILE_SIZE;
 
 public class GameView {
 
     private Stage uiStage;
     private Skin skin;
     private BitmapFont font;
+    private Texture background;
 
     private Image health3;
     private Image health2;
@@ -37,6 +44,9 @@ public class GameView {
         health1 = new Image(new Texture(Gdx.files.internal("images/health1.png")));
         health1.setPosition(1125, 682);
         uiStage.addActor(health3);
+
+        background = new Texture(Gdx.files.internal("images/bg.png"));
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         loadUI();
     }
@@ -73,9 +83,14 @@ public class GameView {
         scoreLabel.setText("Score: " + points);
     }
 
-    public void update(int points, int health) {
+    public void update(int cameraPosX, int points, int health) {
         Gdx.gl20.glClearColor(0, 0, 0, 1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        // Draw background
+        uiStage.getBatch().begin();
+        uiStage.getBatch().draw(background, 0, 0, cameraPosX, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        uiStage.getBatch().end();
 
         // Update score label
         setScoreLabelText(points);
@@ -96,6 +111,7 @@ public class GameView {
 
 
     public void dispose() {
+        background.dispose();
         uiStage.dispose();
         skin.dispose();
         font.dispose();

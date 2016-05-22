@@ -37,7 +37,6 @@ public class GameScreen extends JDScreen {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
-
         // Set contact listener
         box2D.getWorld().setContactListener(new CollisionListener(playerController));
 
@@ -109,7 +108,7 @@ public class GameScreen extends JDScreen {
         box2D.update();
 
         // Update gameView
-        gameView.update(playerController.getPlayer().getPoints(), playerController.getPlayer().getHealth());
+        gameView.update(Math.round(box2D.getCamera().position.x), playerController.getPlayer().getPoints(), playerController.getPlayer().getHealth());
 
         // Gameover
         if (playerController.getPlayer().isDead()) {
