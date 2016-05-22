@@ -12,6 +12,7 @@ import org.chalmers.jumpydash.view.PlayerView;
 import javax.vecmath.Vector2f;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 import static org.chalmers.jumpydash.physics.Box2D.SCREEN_WIDTH;
+import static org.chalmers.jumpydash.physics.Box2D.TILE_SIZE;
 
 public class PlayerController extends JDController {
 
@@ -19,7 +20,6 @@ public class PlayerController extends JDController {
     private Player player;
     private JDView playerView;
     private Sound sound;
-    private static final int PLAYER_SIZE = 32;
     private static final int CAMERA_UPDATE_POINT = 500;
 
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
@@ -37,8 +37,8 @@ public class PlayerController extends JDController {
         player.move();
 
         // Check if player falls below map
-        if(player.getPosition().y < (-PLAYER_SIZE/PIXELS_TO_METERS)){
-            player.setDamage(player.getHealth());;
+        if(player.getPosition().y < (-TILE_SIZE/PIXELS_TO_METERS)){
+            player.setDamage(player.getHealth());
         }
 
         // Enable the camera to follow the player
