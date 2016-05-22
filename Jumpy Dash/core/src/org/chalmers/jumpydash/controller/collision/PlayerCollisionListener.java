@@ -48,7 +48,7 @@ public class PlayerCollisionListener extends JDCollision {
         spikeB = b.getUserData() instanceof Spike;
         speedUpA = a.getUserData() instanceof SpeedUp;
         speedUpB = b.getUserData() instanceof SpeedUp;
-        sensorA = a.getUserData() instanceof  Sensor;
+        sensorA = a.getUserData() instanceof Sensor;
         sensorB = b.getUserData() instanceof  Sensor;
     }
 

@@ -5,6 +5,7 @@ import org.chalmers.jumpydash.model.Ability;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.AbilityView;
 import org.chalmers.jumpydash.view.JDView;
+
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class AbilityController extends JDController {

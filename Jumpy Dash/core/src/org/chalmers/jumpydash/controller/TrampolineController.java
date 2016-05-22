@@ -5,6 +5,7 @@ import org.chalmers.jumpydash.model.Trampoline;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.TrampolineView;
+
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class TrampolineController extends JDController {

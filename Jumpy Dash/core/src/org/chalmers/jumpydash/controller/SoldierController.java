@@ -5,7 +5,7 @@ import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Soldier;
 import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.SoldierView;
-import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
+import org.chalmers.jumpydash.physics.Box2D;
 
 public class SoldierController extends JDController {
 
@@ -29,7 +29,7 @@ public class SoldierController extends JDController {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-       soldierView.render(batch, soldier.getPosition().x * PIXELS_TO_METERS, soldier.getPosition().y * PIXELS_TO_METERS);
+       soldierView.render(batch, soldier.getPosition().x * Box2D.PIXELS_TO_METERS, soldier.getPosition().y * Box2D.PIXELS_TO_METERS);
 
     }
 

@@ -7,8 +7,7 @@ import org.chalmers.jumpydash.model.Coin;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CoinView;
 import org.chalmers.jumpydash.view.JDView;
-
-import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
+import org.chalmers.jumpydash.physics.Box2D;
 
 public class CoinController extends JDController {
 
@@ -35,7 +34,7 @@ public class CoinController extends JDController {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        coinView.render(batch, coin.getPosition().x * PIXELS_TO_METERS, coin.getPosition().y * PIXELS_TO_METERS);
+        coinView.render(batch, coin.getPosition().x * Box2D.PIXELS_TO_METERS, coin.getPosition().y * Box2D.PIXELS_TO_METERS);
     }
 
     @Override
