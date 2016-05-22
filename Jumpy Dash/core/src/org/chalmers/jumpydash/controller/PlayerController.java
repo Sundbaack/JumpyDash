@@ -19,6 +19,7 @@ public class PlayerController extends JDController {
     private Player player;
     private JDView playerView;
     private Sound sound;
+    private static final int PLAYER_SIZE = 32;
     private static final int CAMERA_UPDATE_POINT = 500;
 
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
@@ -34,6 +35,11 @@ public class PlayerController extends JDController {
     public void act(float delta) {
         handleInput();
         player.move();
+
+        // Check if player falls below map
+        if(player.getPosition().y < (-PLAYER_SIZE/PIXELS_TO_METERS)){
+            player.setDamage(player.getHealth());;
+        }
 
         // Enable the camera to follow the player
         if (player.getPosition().x > CAMERA_UPDATE_POINT / PIXELS_TO_METERS) {
