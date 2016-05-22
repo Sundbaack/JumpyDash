@@ -50,6 +50,10 @@ public class Player extends JDModel {
         getJDBody().applyLinearImpulse(new Vector2f(-getImpulse(),0), getJDBody().getWorldCenter(), true);
     }
 
+    public boolean isDead() {
+        return health == 0;
+    }
+
     public void playerSpeedUp() {
         setSpeed(100);
     }
