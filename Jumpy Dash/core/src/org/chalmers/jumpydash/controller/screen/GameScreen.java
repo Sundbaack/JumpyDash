@@ -55,6 +55,7 @@ public class GameScreen extends JDScreen {
 
                 if (level[y][x] == 'P') {
                     playerController = new PlayerController(box2D, x, y, mapHeight);
+                    playerController.setName("playerController");
                     stage.addActor(playerController);
                 }
                 if (level[y][x] == '#') {
