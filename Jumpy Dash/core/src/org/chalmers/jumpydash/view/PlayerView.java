@@ -9,6 +9,7 @@ import org.chalmers.jumpydash.model.Player;
 
 public class PlayerView implements JDView {
 
+
     private Texture playerTileRunning;
     private Texture playerTileStanding;
     private Texture playerTileFalling;
@@ -27,7 +28,7 @@ public class PlayerView implements JDView {
         background = new Texture(Gdx.files.internal("images/bg.png"));
         background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         textureAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheet/playerAnimation.atlas"));
-        animation = new Animation(1f/40f,textureAtlas.getRegions());
+        animation = new Animation(1f / 40f, textureAtlas.getRegions());
 
     }
 
@@ -35,26 +36,26 @@ public class PlayerView implements JDView {
         currentState = player.getState();
         batch.draw(background, 0, 0, 0, 0, 9984, 736);
         //Fix magic values 6 and 2
-        switch(currentState){
+        switch (currentState) {
             case JUMPING:
-                if(elapsedTime >= animation.getAnimationDuration()){
-                    batch.draw(playerTileRunning,x-6,y);
+                if (elapsedTime >= animation.getAnimationDuration()) {
+                    batch.draw(playerTileRunning, x - 6, y);
                     break;
-                }else {
+                } else {
                     elapsedTime += Gdx.graphics.getDeltaTime();
-                    batch.draw(animation.getKeyFrame(elapsedTime, true), x-6, y);
+                    batch.draw(animation.getKeyFrame(elapsedTime, true), x - 6, y);
                     break;
                 }
             case FALLING:
-                batch.draw(playerTileFalling,x-6,y);
+                batch.draw(playerTileFalling, x - 6, y);
                 elapsedTime = 0f;
                 break;
             case RUNNING:
-                batch.draw(playerTileRunning,x,y-2);
+                batch.draw(playerTileRunning, x, y - 2);
                 elapsedTime = 0f;
                 break;
             default:
-                batch.draw(playerTileStanding,x,y-2);
+                batch.draw(playerTileStanding, x, y - 2);
                 elapsedTime = 0f;
                 break;
         }

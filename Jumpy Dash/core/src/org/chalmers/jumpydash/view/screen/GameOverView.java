@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
@@ -17,12 +18,15 @@ public class GameOverView {
     private Texture gameOverBg;
     private Skin skin;
     private Pixmap pixmap;
+    private Label scoreLabel;
     private BitmapFont font;
     private TextButton playButton;
     private TextButton menuButton;
+    private int points;
 
-    public GameOverView(Stage uiStage) {
+    public GameOverView(Stage uiStage, int points) {
         this.uiStage = uiStage;
+        this.points = points;
         gameOverBg = new Texture(Gdx.files.internal("images/gameOverBg.png"));
 
         loadUI();
@@ -38,7 +42,7 @@ public class GameOverView {
         // Use custom font
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 18;
+        parameter.size = 22;
         font = generator.generateFont(parameter);
         generator.dispose();
 
@@ -63,6 +67,14 @@ public class GameOverView {
         menuButton.setName("menuButton");
         uiStage.addActor(menuButton);
 
+        Label.LabelStyle style = new Label.LabelStyle();
+        style.fontColor = Color.DARK_GRAY;
+        style.font = skin.getFont("font");
+
+        scoreLabel = new Label("Your score: " + points, style);
+        scoreLabel.setPosition(576, 450);
+        scoreLabel.setName("score");
+        uiStage.addActor(scoreLabel);
     }
 
     public TextButton getPlayButton() {

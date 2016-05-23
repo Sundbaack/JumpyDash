@@ -9,7 +9,15 @@ public class ReadFile implements IReadFile {
     public char[][] fileToArray(File tileMap) throws FileNotFoundException {
         Scanner scanLevel = new Scanner(tileMap);
 
-        char[][] level = new char[23][1200];
+        // Read the first line to determine array size
+        String line = scanLevel.nextLine();
+        line = line.replaceAll("\\s+", "");
+        int mapLenght = line.length();
+
+        // Reset scanner
+        scanLevel = new Scanner(tileMap);
+
+        char[][] level = new char[23][mapLenght];
 
         for (int y = 0; y < level.length; y++) {
             String currentLine = scanLevel.nextLine();

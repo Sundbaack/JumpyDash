@@ -38,7 +38,7 @@ public class MenuView {
         // Use custom font
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/OpenSans.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 18;
+        parameter.size = 22;
         font = generator.generateFont(parameter);
         generator.dispose();
 
