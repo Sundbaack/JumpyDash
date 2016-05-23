@@ -3,7 +3,9 @@ package org.chalmers.jumpydash.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
@@ -22,13 +24,15 @@ public class PlayerController extends JDController {
     private Sound sound;
     private static final int CAMERA_UPDATE_POINT = 500;
 
+
+
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
-        playerView = new PlayerView();
         player = new Player();
         player.setJDBody(box2D.newBody(x, y, mapHeight, "dynamic", false,false));
         player.getJDBody().setUserData(player);
         player.setImpulse(player.getJDBody().getMass() * 4f);
+        playerView = new PlayerView(player);
     }
 
     @Override
@@ -43,7 +47,6 @@ public class PlayerController extends JDController {
 
         // Enable the camera to follow the player
         if (player.getPosition().x > CAMERA_UPDATE_POINT / PIXELS_TO_METERS) {
-
             Vector3 position = box2D.getCamera().position;
             position.x = box2D.getCamera().position.x + SCREEN_WIDTH / PIXELS_TO_METERS + (player.getPosition().x * PIXELS_TO_METERS - box2D.getCamera().position.x) * 0.1f;
             box2D.getCamera().position.set(position);
@@ -57,11 +60,10 @@ public class PlayerController extends JDController {
     }
 
     private void handleInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpState()) {
-            player.setJumpState();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (player.getState() == Player.State.RUNNING || player.getState() == Player.State.STANDING)) {
             player.jump();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F) && player.allowedToFire()) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F) && player.allowedToFire()) {;
             BulletController bulletController = new BulletController(box2D, player.getPosition().x, player.getPosition().y,new Vector2f(12f + player.getJDBody().getLinearVelocity().x, 0));
             getStage().addActor(bulletController);
             sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/gun.wav"));

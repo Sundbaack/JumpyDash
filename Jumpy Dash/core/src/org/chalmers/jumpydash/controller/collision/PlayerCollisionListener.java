@@ -55,9 +55,8 @@ public class PlayerCollisionListener extends JDCollision {
     // Determine who is colliding with who
     private void checkCollision(Body a, Body b) {
         if ((playerA && platformB) ||
-                (platformA && playerB)
-                && !playerController.getPlayer().getJumpState()) {
-                playerController.getPlayer().setJumpState();
+                (platformA && playerB)) {
+                playerController.getPlayer().currentState = Player.State.RUNNING;
         }
         //Check collision between player and coin
         if ((playerA && coinB)) {

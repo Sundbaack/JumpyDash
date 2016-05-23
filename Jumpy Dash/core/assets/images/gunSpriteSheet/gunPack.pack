@@ -1,0 +1,96 @@
+
+gunPack.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+gun00
+  rotate: false
+  xy: 1, 171
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun01
+  rotate: false
+  xy: 1, 137
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun02
+  rotate: false
+  xy: 43, 171
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun03
+  rotate: false
+  xy: 1, 103
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun04
+  rotate: false
+  xy: 43, 137
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun05
+  rotate: false
+  xy: 85, 171
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun06
+  rotate: false
+  xy: 1, 69
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun07
+  rotate: false
+  xy: 43, 103
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun08
+  rotate: false
+  xy: 85, 137
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun09
+  rotate: false
+  xy: 1, 35
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun10
+  rotate: false
+  xy: 43, 69
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun11
+  rotate: false
+  xy: 85, 103
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1
+gun12
+  rotate: false
+  xy: 1, 1
+  size: 40, 32
+  orig: 40, 32
+  offset: 0, 0
+  index: -1

@@ -4,6 +4,9 @@ import javax.vecmath.Vector2f;
 
 public class Player extends JDModel {
 
+    public enum State {FALLING,STANDING,JUMPING,RUNNING};
+    public State currentState;
+    public State previousState;
     private float impulse;
     private boolean jumpFlag;
     private int points;
@@ -18,10 +21,15 @@ public class Player extends JDModel {
         jumpFlag = false;
         health = 3;
         previousFireTime = 0;
+        currentState = State.RUNNING;
+        previousState = State.RUNNING;
     }
 
     public void jump() {
-        getJDBody().applyLinearImpulse(new Vector2f(0,getImpulse()), getJDBody().getWorldCenter(), true);
+            getJDBody().applyLinearImpulse(new Vector2f(0, getImpulse()), getJDBody().getWorldCenter(), true);
+            currentState = State.JUMPING;
+            previousState = State.RUNNING;
+
     }
 
     public boolean allowedToFire(){
@@ -30,6 +38,7 @@ public class Player extends JDModel {
             previousFireTime = System.currentTimeMillis();
             return true;
         }
+        setJumpState();
         return false;
     }
 
@@ -49,6 +58,27 @@ public class Player extends JDModel {
     public void applySoldierImpulse(){
         getJDBody().applyLinearImpulse(new Vector2f(-getImpulse(),0), getJDBody().getWorldCenter(), true);
     }
+
+
+    public State getState(){
+        if(this.getJDBody().getLinearVelocity().y > 0){
+            currentState = State.JUMPING;
+            //return State.JUMPING;
+        }
+        else if(this.getJDBody().getLinearVelocity().y < 0){
+            currentState = State.FALLING;
+            //return State.FALLING;
+        }
+        else if(this.getJDBody().getLinearVelocity().x != 0){
+            currentState = State.RUNNING;
+            //return State.RUNNING;
+        }
+        else{
+            currentState = State.STANDING;
+        }
+        return currentState;
+    }
+
 
     public boolean isDead() {
         return health == 0;

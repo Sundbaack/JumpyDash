@@ -1,0 +1,124 @@
+
+playerAnimation.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player00
+  rotate: false
+  xy: 1, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player01
+  rotate: false
+  xy: 47, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player02
+  rotate: false
+  xy: 93, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player03
+  rotate: false
+  xy: 139, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player04
+  rotate: false
+  xy: 185, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player05
+  rotate: false
+  xy: 231, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player06
+  rotate: false
+  xy: 277, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player07
+  rotate: false
+  xy: 323, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player08
+  rotate: false
+  xy: 369, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player09
+  rotate: false
+  xy: 415, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player10
+  rotate: false
+  xy: 461, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player11
+  rotate: false
+  xy: 507, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player12
+  rotate: false
+  xy: 553, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player13
+  rotate: false
+  xy: 599, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player14
+  rotate: false
+  xy: 645, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player15
+  rotate: false
+  xy: 691, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+player16
+  rotate: false
+  xy: 737, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
