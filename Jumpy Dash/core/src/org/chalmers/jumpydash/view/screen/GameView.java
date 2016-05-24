@@ -9,14 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import org.chalmers.jumpydash.service.ReadFile;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import static org.chalmers.jumpydash.physics.Box2D.SCREEN_HEIGHT;
 import static org.chalmers.jumpydash.physics.Box2D.SCREEN_WIDTH;
-import static org.chalmers.jumpydash.physics.Box2D.TILE_SIZE;
 
 public class GameView {
 
