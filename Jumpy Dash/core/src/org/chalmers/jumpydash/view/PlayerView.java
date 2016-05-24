@@ -13,7 +13,6 @@ public class PlayerView implements JDView {
     private Texture playerTileRunning;
     private Texture playerTileStanding;
     private Texture playerTileFalling;
-    private Texture background;
     private TextureAtlas textureAtlas;
     private Animation animation;
     private float elapsedTime = 0f;
@@ -25,8 +24,6 @@ public class PlayerView implements JDView {
         playerTileStanding = new Texture(Gdx.files.internal("images/playerStanding.png"));
         playerTileRunning = new Texture(Gdx.files.internal("images/player.png"));
         playerTileFalling = new Texture(Gdx.files.internal("images/rawSprites/player16.png"));
-        background = new Texture(Gdx.files.internal("images/bg.png"));
-        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         textureAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheet/playerAnimation.atlas"));
         animation = new Animation(1f / 40f, textureAtlas.getRegions());
 
@@ -34,7 +31,6 @@ public class PlayerView implements JDView {
 
     public void render(Batch batch, float x, float y) {
         currentState = player.getState();
-        batch.draw(background, 0, 0, 0, 0, 9984, 736);
         //Fix magic values 6 and 2
         switch (currentState) {
             case JUMPING:
@@ -62,7 +58,6 @@ public class PlayerView implements JDView {
     }
 
     public void dispose() {
-        background.dispose();
         textureAtlas.dispose();
         playerTileFalling.dispose();
         playerTileRunning.dispose();
