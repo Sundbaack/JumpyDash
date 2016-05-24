@@ -27,6 +27,7 @@ public class PlayerCollisionListener extends JDCollision {
     private boolean sensorA;
     private boolean sensorB;
     private Sound powerUpSound;
+    private Sound trampolineSound;
 
     public PlayerCollisionListener(PlayerController playerController) {
         this.playerController = playerController;
@@ -78,6 +79,8 @@ public class PlayerCollisionListener extends JDCollision {
                 playerController.getPlayer().setJumpState();
             }
             playerController.getPlayer().applyTrampolineImpulse();
+            trampolineSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/trampoline.wav"));
+            trampolineSound.play(1);
         }
 
         //Check collision between player and spike
