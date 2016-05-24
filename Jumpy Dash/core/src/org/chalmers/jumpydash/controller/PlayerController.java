@@ -33,6 +33,7 @@ public class PlayerController extends JDController {
         player.getJDBody().setUserData(player);
         player.setImpulse(player.getJDBody().getMass() * 4f);
         playerView = new PlayerView(player);
+
     }
 
     @Override
@@ -72,6 +73,10 @@ public class PlayerController extends JDController {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public boolean hej(){
+        return true;
     }
 
     @Override
