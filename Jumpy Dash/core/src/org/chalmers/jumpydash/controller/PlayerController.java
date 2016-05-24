@@ -37,7 +37,6 @@ public class PlayerController extends JDController {
 
     @Override
     public void act(float delta) {
-        handleInput();
         player.move();
 
         // Check if player falls below map
@@ -59,7 +58,7 @@ public class PlayerController extends JDController {
         playerView.render(batch, player.getPosition().x * PIXELS_TO_METERS, player.getPosition().y * PIXELS_TO_METERS);
     }
 
-    private void handleInput() {
+    public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (player.getState() == Player.State.RUNNING || player.getState() == Player.State.STANDING)) {
             player.jump();
         }

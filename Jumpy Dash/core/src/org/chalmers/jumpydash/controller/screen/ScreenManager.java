@@ -11,6 +11,9 @@ public class ScreenManager {
     // Game object reference
     private Game game;
 
+    // Current screen
+    private ScreenType currentScreen;
+
     private ScreenManager() {
     }
 
@@ -37,8 +40,23 @@ public class ScreenManager {
         setScreen(ScreenType.GAMEOVER, stage, uiStage);
     }
 
+    // PauseScreen
+    public void initPause(Stage stage, Stage uiStage) {
+        setScreen(ScreenType.PAUSE, stage, uiStage);
+    }
+
+    // Resume
+    public void initResume(Stage stage, Stage uiStage) {
+        setScreen(ScreenType.RESUME, stage, uiStage);
+    }
+
     // Set new screen
     private void setScreen(ScreenType type, Stage stage, Stage uiStage) {
-        game.setScreen(type.getScreen(stage, uiStage));
+        game.setScreen(type.setScreen(stage, uiStage));
+        currentScreen = type;
+    }
+
+    public ScreenType getScreen() {
+        return currentScreen;
     }
 }

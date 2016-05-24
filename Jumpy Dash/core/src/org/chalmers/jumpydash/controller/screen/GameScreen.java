@@ -1,5 +1,7 @@
 package org.chalmers.jumpydash.controller.screen;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import org.chalmers.jumpydash.controller.collision.CollisionListener;
@@ -102,18 +104,36 @@ public class GameScreen extends JDScreen {
         }
     }
 
+    private void handleInput() {
+        if (!getPaused()) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+                ScreenManager.getInstance().initPause(stage, uiStage);
+            }
+            // Prevent shooting when paused
+            playerController.handleInput();
+        }
+    }
+
+    private boolean getPaused() {
+        return ScreenManager.getInstance().getScreen().equals(ScreenType.PAUSE);
+    }
+
     @Override
     public void render(float delta) {
+        handleInput();
 
-        // Update box2D simulations and camera
-        box2D.update();
+        if (!getPaused()) {
+            // Update box2D simulations and camera
 
-        // Update gameView
-        gameView.update(Math.round(box2D.getCamera().position.x), playerController.getPlayer().getPoints(), playerController.getPlayer().getHealth());
+            box2D.update();
 
-        // Gameover
-        if (playerController.getPlayer().isDead()) {
-            ScreenManager.getInstance().initGameOver(stage, uiStage);
+            // Update gameView
+            gameView.update(Math.round(box2D.getCamera().position.x), playerController.getPlayer().getPoints(), playerController.getPlayer().getHealth());
+
+            // Gameover
+            if (playerController.getPlayer().isDead()) {
+                ScreenManager.getInstance().initGameOver(stage, uiStage);
+            }
         }
 
     }
