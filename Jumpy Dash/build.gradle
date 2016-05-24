@@ -74,14 +74,6 @@ project(":core") {
         testCompile 'junit:junit:4.12'
     }
 
-    sourceSets {
-        test {
-            java {
-                srcDirs = ["Jumpy Dash/core/src/test/org/chalmers/jumpydash/model"]
-            }
-        }
-    }
-
     project(":ios") {
         apply plugin: "java"
         apply plugin: "robovm"
