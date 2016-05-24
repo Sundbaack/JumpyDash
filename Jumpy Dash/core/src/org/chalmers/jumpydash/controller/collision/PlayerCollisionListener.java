@@ -55,21 +55,21 @@ public class PlayerCollisionListener extends JDCollision {
 
     // Determine who is colliding with who
     private void checkCollision(Body a, Body b) {
-        if ((playerA && platformB) ||
-                (platformA && playerB)) {
+        if (playerA && platformB ||
+                platformA && playerB) {
                 playerController.getPlayer().currentState = Player.State.RUNNING;
         }
         //Check collision between player and coin
-        if ((playerA && coinB)) {
+        if (playerA && coinB) {
             playerController.getPlayer().setPoints(Coin.getValue());
             b.setUserData(null);
-        } else if ((coinA && playerB)) {
+        } else if (coinA && playerB) {
             playerController.getPlayer().setPoints(Coin.getValue());
             a.setUserData(null);
         }
 
         //Check collision between player and soldier
-        if ((playerA && soldierB) || (soldierA && playerB)) {
+        if (playerA && soldierB || soldierA && playerB) {
             playerController.getPlayer().setDamage(1);
             playerController.getPlayer().applySoldierImpulse();
         }
@@ -89,16 +89,16 @@ public class PlayerCollisionListener extends JDCollision {
         }
 
 
-        if((playerA && sensorB) || (sensorA && playerB)){
+        if(playerA && sensorB || sensorA && playerB){
             MovingPlatform.movePlatforms = !MovingPlatform.movePlatforms;
         }
         //Check collision between player and SpeedUp
-        if ((playerA && speedUpB)) {
+        if (playerA && speedUpB) {
             playerController.getPlayer().playerSpeedUp();
             b.setUserData(null);
             powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
             powerUpSound.play(1);
-        } else if ((speedUpA && playerB)) {
+        } else if (speedUpA && playerB) {
             playerController.getPlayer().playerSpeedUp();
             a.setUserData(null);
             powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
