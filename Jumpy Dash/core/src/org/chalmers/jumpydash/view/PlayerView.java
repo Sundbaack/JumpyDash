@@ -64,6 +64,8 @@ public class PlayerView implements JDView {
     public void dispose() {
         background.dispose();
         textureAtlas.dispose();
-
+        playerTileFalling.dispose();
+        playerTileRunning.dispose();
+        playerTileStanding.dispose();
     }
 }

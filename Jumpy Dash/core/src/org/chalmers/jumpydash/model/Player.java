@@ -4,7 +4,7 @@ import javax.vecmath.Vector2f;
 
 public class Player extends JDModel {
 
-    public enum State {FALLING,STANDING,JUMPING,RUNNING};
+    public enum State {FALLING,STANDING,JUMPING,RUNNING}
     public State currentState;
     public State previousState;
     private float impulse;
@@ -29,7 +29,6 @@ public class Player extends JDModel {
             getJDBody().applyLinearImpulse(new Vector2f(0, getImpulse()), getJDBody().getWorldCenter(), true);
             currentState = State.JUMPING;
             previousState = State.RUNNING;
-
     }
 
     public boolean allowedToFire(){
@@ -63,15 +62,12 @@ public class Player extends JDModel {
     public State getState(){
         if(this.getJDBody().getLinearVelocity().y > 0){
             currentState = State.JUMPING;
-            //return State.JUMPING;
         }
         else if(this.getJDBody().getLinearVelocity().y < 0){
             currentState = State.FALLING;
-            //return State.FALLING;
         }
         else if(this.getJDBody().getLinearVelocity().x != 0){
             currentState = State.RUNNING;
-            //return State.RUNNING;
         }
         else{
             currentState = State.STANDING;
