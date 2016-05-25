@@ -30,6 +30,7 @@ public class PlayerCollisionListener extends JDCollision {
     private Sound powerUpSound;
     private Sound trampolineSound;
     private Sound sound;
+    private Sensor sensor;
 
     public PlayerCollisionListener(PlayerController playerController) {
         this.playerController = playerController;
@@ -102,7 +103,19 @@ public class PlayerCollisionListener extends JDCollision {
 
 
         if((playerA && sensorB) || (sensorA && playerB)){
-            MovingPlatform.movePlatforms = !MovingPlatform.movePlatforms;
+            if(sensorA){
+                sensor = ((Sensor) a.getUserData());
+                if(sensor.getType().equalsIgnoreCase("player")){
+                    MovingPlatform.movePlatforms = !MovingPlatform.movePlatforms;
+                }
+            }
+            else if(sensorB){
+                sensor = ((Sensor) b.getUserData());
+                if(sensor.getType().equalsIgnoreCase("player")){
+                    MovingPlatform.movePlatforms = !MovingPlatform.movePlatforms;
+                }
+            }
+
         }
         //Check collision between player and SpeedUp
         if ((playerA && speedUpB)) {

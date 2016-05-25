@@ -25,8 +25,10 @@ public class OptionScreen extends JDScreen {
         setListeners();
 
         // Check if sound and/or music is muted
-        if (!Options.getInstance().getSound() && !Options.getInstance().getMusic()) {
+        if (!Options.getInstance().getSound()) {
             optionView.getMuteSoundButton().setText("Unmute sound");
+        }
+        if (!Options.getInstance().getMusic()) {
             optionView.getMuteMusicButton().setText("Unmute music");
         }
     }

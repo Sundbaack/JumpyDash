@@ -25,6 +25,11 @@ public class Soldier extends Enemy {
         return count;
     }
 
+    public void jump(){
+        getJDBody().applyLinearImpulse(new Vector2f(0, 3f), getJDBody().getWorldCenter(), true);
+        System.out.println("working");
+    }
+
     public void move() {
         // Checks in what direction the soldier should move
         if(getDirection()){
