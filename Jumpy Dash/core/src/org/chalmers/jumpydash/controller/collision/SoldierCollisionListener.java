@@ -2,16 +2,12 @@ package org.chalmers.jumpydash.controller.collision;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
-import org.chalmers.jumpydash.controller.PlayerController;
 import org.chalmers.jumpydash.controller.SoldierController;
 import org.chalmers.jumpydash.model.Sensor;
 import org.chalmers.jumpydash.model.Soldier;
 
 import java.util.List;
 
-/**
- * Created by Oscar on 2016-05-25.
- */
 public class SoldierCollisionListener extends JDCollision {
 
 

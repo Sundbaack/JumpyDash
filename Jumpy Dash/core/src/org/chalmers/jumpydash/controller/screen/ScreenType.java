@@ -11,13 +11,11 @@ public enum ScreenType {
     },
     GAME {
         public JDScreen setScreen(Stage stage, Stage uiStage) {
-           if(gameScreen == null) {
-               gameScreen = new GameScreen(stage, uiStage);
-           }
-           return gameScreen;
+              return new GameScreen(stage, uiStage);
         }
     },
     PAUSE {
+        // Need fixes
         public JDScreen setScreen(Stage stage, Stage uiStage) {
             return new PauseScreen(stage, uiStage);
         }

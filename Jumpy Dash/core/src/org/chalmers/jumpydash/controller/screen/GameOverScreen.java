@@ -21,7 +21,7 @@ public class GameOverScreen extends JDScreen {
         getPoints();
         this.stage.clear();
         this.uiStage.clear();
-        gameOverView = new GameOverView(uiStage, playerController.getPlayer().getPoints());
+        gameOverView = new GameOverView(this.uiStage, playerController.getPlayer().getPoints());
 
         setListeners();
     }
