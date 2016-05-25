@@ -34,7 +34,7 @@ public class Player extends JDModel {
     public boolean allowedToFire(){
         long fireCooldown = 250;
         if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
-            previousFireTime = System.currentTimeMillis();
+            setPreviousFireTime(System.currentTimeMillis());
             return true;
         }
         setJumpState();
@@ -122,6 +122,10 @@ public class Player extends JDModel {
 
     public float getSpeed(){
         return playerSpeedX;
+    }
+
+    public void setPreviousFireTime(long time){
+        previousFireTime = time;
     }
 
 }
