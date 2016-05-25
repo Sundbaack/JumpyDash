@@ -6,18 +6,24 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class SensorView implements JDView {
 
-    private Texture abilityTile;
+    private Texture sensorTile;
 
-    public SensorView() {
-        abilityTile = new Texture(Gdx.files.internal("images/ability.png"));
+    public SensorView(String type) {
+        if(type.equalsIgnoreCase("player")){
+            sensorTile = new Texture(Gdx.files.internal("images/switchOff.png"));
+        }
+        else if(type.equalsIgnoreCase("soldier")){
+            sensorTile = new Texture(Gdx.files.internal("images/transparentTexture.png"));
+        }
+
     }
 
     public void render(Batch batch,float x, float y) {
-        batch.draw(abilityTile, x, y);
+        batch.draw(sensorTile, x, y);
     }
 
     public void dispose() {
-        abilityTile.dispose();
+        sensorTile.dispose();
     }
 
 }
