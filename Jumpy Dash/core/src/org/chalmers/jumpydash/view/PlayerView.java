@@ -24,7 +24,7 @@ public class PlayerView implements JDView {
         playerTileStanding = new Texture(Gdx.files.internal("images/rawSprites/player00.png"));
         playerTileRunning = new Texture(Gdx.files.internal("images/rawSprites/player00.png"));
         playerTileFalling = new Texture(Gdx.files.internal("images/rawSprites/player15.png"));
-        textureAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheet/playerAnimation.atlas"));
+        textureAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheets/playerAnimation.atlas"));
         animation = new Animation(1f / 40f, textureAtlas.getRegions());
 
     }
