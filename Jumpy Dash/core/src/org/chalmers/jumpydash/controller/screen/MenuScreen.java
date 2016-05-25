@@ -1,17 +1,16 @@
 package org.chalmers.jumpydash.controller.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import org.chalmers.jumpydash.controller.Options;
 import org.chalmers.jumpydash.view.screen.MenuView;
 
 public class MenuScreen extends JDScreen {
 
     private Stage stage;
     private Stage uiStage;
-    private Music music;
     private MenuView menuView;
 
     public MenuScreen(Stage stage, Stage uiStage) {
@@ -23,11 +22,6 @@ public class MenuScreen extends JDScreen {
 
         Gdx.input.setInputProcessor(uiStage);
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/getlucky.mp3"));
-        music.play();
-        music.setVolume(0.2f);
-        music.setLooping(true);
-
         setListeners();
     }
 
@@ -35,7 +29,15 @@ public class MenuScreen extends JDScreen {
         menuView.getPlayButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Switch to game
+                Options.getInstance().setMusic(false);
                 ScreenManager.getInstance().initGame(stage, uiStage);
+            }
+        });
+
+        menuView.getOptionButton().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                // Switch to options
+                ScreenManager.getInstance().initOption(stage, uiStage);
             }
         });
 
@@ -54,13 +56,12 @@ public class MenuScreen extends JDScreen {
 
     @Override
     public void hide() {
-        music.stop();
+
     }
 
     @Override
     public void dispose() {
         stage.dispose();
         uiStage.dispose();
-        music.dispose();
     }
 }

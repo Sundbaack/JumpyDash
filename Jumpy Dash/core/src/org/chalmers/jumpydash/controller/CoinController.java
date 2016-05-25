@@ -1,7 +1,5 @@
 package org.chalmers.jumpydash.controller;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.Coin;
 import org.chalmers.jumpydash.physics.IBox2D;
@@ -13,7 +11,6 @@ public class CoinController extends JDController {
 
     private JDView coinView;
     private Coin coin;
-    private Sound sound;
 
     public CoinController(IBox2D box2D, int x, int y, int mapHeight) {
         coinView = new CoinView();
@@ -25,9 +22,6 @@ public class CoinController extends JDController {
     @Override
     public void act(float Delta){
         if (!coin.getJDBody().isActive()) {
-            sound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
-            sound.play(1);
-
             this.remove();
         }
     }
@@ -40,6 +34,5 @@ public class CoinController extends JDController {
     @Override
     public void dispose() {
         coinView.dispose();
-        sound.dispose();
     }
 }

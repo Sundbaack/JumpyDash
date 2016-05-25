@@ -2,14 +2,17 @@ package org.chalmers.jumpydash;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import org.chalmers.jumpydash.controller.Options;
 import org.chalmers.jumpydash.controller.screen.ScreenManager;
 
 public class JumpyDash extends Game {
 
 	private Stage stage;
 	private Stage uiStage;
+	private Music music;
 
 	@Override
 	public void create() {
@@ -18,6 +21,16 @@ public class JumpyDash extends Game {
 
 		// Create a new Stage for UI
 		uiStage = new Stage();
+
+		// Set initial options
+		Options.getInstance().initialize(true, true);
+
+		// Background music
+		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/getlucky.mp3"));
+		music.play();
+		music.setVolume(0.2f);
+		music.setLooping(true);
+
 
 		// Switch to menu
 		ScreenManager.getInstance().initialize(this);
@@ -31,6 +44,14 @@ public class JumpyDash extends Game {
 
 		super.render();
 
+		if (!Options.getInstance().getMusic()) {
+			music.pause();
+		} else {
+			if (!music.isPlaying()) {
+				music.play();
+			}
+		}
+
 		// Update actors
 		stage.act();
 		stage.draw();
@@ -43,5 +64,6 @@ public class JumpyDash extends Game {
 		super.dispose();
 		stage.dispose();
 		uiStage.dispose();
+		music.dispose();
 	}
 }

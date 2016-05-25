@@ -25,17 +25,17 @@ public class ScreenManager {
         return instance;
     }
 
-    // MenuScreem
+    // MenuScreen
     public void initMenu(Stage stage, Stage uiStage) {
         setScreen(ScreenType.MENU, stage, uiStage);
     }
 
-    // GameScreem
+    // GameScreen
     public void initGame(Stage stage, Stage uiStage) {
         setScreen(ScreenType.GAME, stage, uiStage);
     }
 
-    // GameOverScreem
+    // GameOverScreen
     public void initGameOver(Stage stage, Stage uiStage) {
         setScreen(ScreenType.GAMEOVER, stage, uiStage);
     }
@@ -45,9 +45,9 @@ public class ScreenManager {
         setScreen(ScreenType.PAUSE, stage, uiStage);
     }
 
-    // Resume
-    public void initResume(Stage stage, Stage uiStage) {
-        setScreen(ScreenType.RESUME, stage, uiStage);
+    // Options
+    public void initOption(Stage stage, Stage uiStage) {
+        setScreen(ScreenType.OPTION, stage, uiStage);
     }
 
     // Set new screen

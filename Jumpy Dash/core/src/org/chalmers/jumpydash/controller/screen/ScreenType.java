@@ -11,8 +11,10 @@ public enum ScreenType {
     },
     GAME {
         public JDScreen setScreen(Stage stage, Stage uiStage) {
-            gameScreen = new GameScreen(stage, uiStage);
-            return gameScreen;
+           if(gameScreen == null) {
+               gameScreen = new GameScreen(stage, uiStage);
+           }
+           return gameScreen;
         }
     },
     PAUSE {
@@ -20,9 +22,10 @@ public enum ScreenType {
             return new PauseScreen(stage, uiStage);
         }
     },
-    RESUME {
+    OPTION {
         public JDScreen setScreen(Stage stage, Stage uiStage) {
-            return gameScreen;
+            uiStage.clear();
+            return new OptionScreen(stage, uiStage);
         }
     },
     GAMEOVER {

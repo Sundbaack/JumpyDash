@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
+import org.chalmers.jumpydash.controller.Options;
 import org.chalmers.jumpydash.controller.PlayerController;
 import org.chalmers.jumpydash.model.*;
 
@@ -28,9 +29,13 @@ public class PlayerCollisionListener extends JDCollision {
     private boolean sensorB;
     private Sound powerUpSound;
     private Sound trampolineSound;
+    private Sound sound;
 
     public PlayerCollisionListener(PlayerController playerController) {
         this.playerController = playerController;
+        trampolineSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/trampoline.wav"));
+        powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
     }
 
     // Determine type of the two colliding bodies
@@ -63,9 +68,15 @@ public class PlayerCollisionListener extends JDCollision {
         if ((playerA && coinB)) {
             playerController.getPlayer().setPoints(Coin.getValue());
             b.setUserData(null);
+            if (Options.getInstance().getSound()) {
+                sound.play(1);
+            }
         } else if ((coinA && playerB)) {
             playerController.getPlayer().setPoints(Coin.getValue());
             a.setUserData(null);
+            if (Options.getInstance().getSound()) {
+                sound.play(1);
+            }
         }
 
         //Check collision between player and soldier
@@ -79,8 +90,9 @@ public class PlayerCollisionListener extends JDCollision {
                 playerController.getPlayer().setJumpState();
             }
             playerController.getPlayer().applyTrampolineImpulse();
-            trampolineSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/trampoline.wav"));
-            trampolineSound.play(1);
+            if (Options.getInstance().getSound()) {
+                trampolineSound.play(1);
+            }
         }
 
         //Check collision between player and spike
@@ -96,13 +108,15 @@ public class PlayerCollisionListener extends JDCollision {
         if ((playerA && speedUpB)) {
             playerController.getPlayer().playerSpeedUp();
             b.setUserData(null);
-            powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
-            powerUpSound.play(1);
+            if (Options.getInstance().getSound()) {
+                powerUpSound.play(1);
+            }
         } else if ((speedUpA && playerB)) {
             playerController.getPlayer().playerSpeedUp();
             a.setUserData(null);
-            powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
-            powerUpSound.play(1);
+            if (Options.getInstance().getSound()) {
+                powerUpSound.play(1);
+            }
         }
     }
 

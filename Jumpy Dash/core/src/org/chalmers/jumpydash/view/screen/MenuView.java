@@ -19,6 +19,7 @@ public class MenuView {
     private Pixmap pixmap;
     private BitmapFont font;
     private TextButton playButton;
+    private TextButton optionButton;
     private TextButton quitButton;
 
     public MenuView(Stage uiStage) {
@@ -57,10 +58,16 @@ public class MenuView {
         playButton.setName("playButton");
         uiStage.addActor(playButton);
 
+        // Option button
+        optionButton = new TextButton("Options", textButtonStyle);
+        optionButton.setPosition(515, 250);
+        optionButton.setName("optionButton");
+        uiStage.addActor(optionButton);
+
         // Quit button
         quitButton = new TextButton("Quit", textButtonStyle);
-        quitButton.setPosition(515, 250);
-        playButton.setName("quitButton");
+        quitButton.setPosition(515, 150);
+        playButton.setName("Button");
         uiStage.addActor(quitButton);
 
     }
@@ -71,6 +78,10 @@ public class MenuView {
 
     public TextButton getQuitButton() {
         return this.quitButton;
+    }
+
+    public TextButton getOptionButton() {
+        return this.optionButton;
     }
 
     public void update() {

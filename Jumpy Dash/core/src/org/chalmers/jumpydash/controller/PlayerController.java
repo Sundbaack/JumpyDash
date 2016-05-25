@@ -3,9 +3,7 @@ package org.chalmers.jumpydash.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
@@ -24,8 +22,6 @@ public class PlayerController extends JDController {
     private Sound sound;
     private static final int CAMERA_UPDATE_POINT = 500;
 
-
-
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         player = new Player();
@@ -34,6 +30,7 @@ public class PlayerController extends JDController {
         player.setImpulse(player.getJDBody().getMass() * 4f);
         playerView = new PlayerView(player);
 
+        sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/gun.wav"));
     }
 
     @Override
@@ -63,20 +60,17 @@ public class PlayerController extends JDController {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (player.getState() == Player.State.RUNNING || player.getState() == Player.State.STANDING)) {
             player.jump();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F) && player.allowedToFire()) {;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F) && player.allowedToFire()) {
             BulletController bulletController = new BulletController(box2D, player.getPosition().x, player.getPosition().y,new Vector2f(12f + player.getJDBody().getLinearVelocity().x, 0));
             getStage().addActor(bulletController);
-            sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/gun.wav"));
-            sound.play(1);
+            if (Options.getInstance().getSound()) {
+                sound.play(1);
+            }
         }
     }
 
     public Player getPlayer() {
         return player;
-    }
-
-    public boolean hej(){
-        return true;
     }
 
     @Override
