@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
-import org.chalmers.jumpydash.controller.screen.ScreenManager;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.view.JDView;
@@ -36,7 +35,7 @@ public class PlayerController extends JDController {
 
     @Override
     public void act(float delta) {
-        if (!ScreenManager.getInstance().isPaused()) {
+        if (player.getJDBody().isAwake()) {
             handleInput();
             player.move();
         }

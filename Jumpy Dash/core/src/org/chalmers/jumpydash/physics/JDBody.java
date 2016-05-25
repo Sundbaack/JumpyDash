@@ -28,6 +28,10 @@ public class JDBody implements IJDBody {
         return body.isActive();
     }
 
+    public boolean isAwake() {
+        return body.isAwake();
+    }
+
     public void applyForceToCenter(Vector2f force, boolean wake) {
         body.applyForceToCenter(toVector2(force), wake);
     }

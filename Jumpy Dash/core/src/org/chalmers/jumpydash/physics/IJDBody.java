@@ -15,6 +15,8 @@ public interface IJDBody {
 
     boolean isActive();
 
+    boolean isAwake();
+
     void applyForceToCenter(Vector2f force, boolean wake);
 
     void setLinearVelocity(Vector2f v);

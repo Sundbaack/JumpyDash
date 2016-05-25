@@ -121,6 +121,7 @@ public class GameScreen extends JDScreen {
     private void handleInput() {
         if (!ScreenManager.getInstance().isPaused()) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+                box2D.setPause();
                 ScreenManager.getInstance().initPause(stage, uiStage);
             }
         }
@@ -129,10 +130,9 @@ public class GameScreen extends JDScreen {
     @Override
     public void render(float delta) {
         handleInput();
-
         if (!ScreenManager.getInstance().isPaused()) {
             // Update box2D simulations and camera
-
+            box2D.setResume();
             box2D.update();
 
             // Update gameView

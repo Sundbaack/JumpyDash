@@ -25,7 +25,9 @@ public class CannonController extends JDController {
 
     @Override
     public void act(float Delta){
-        fireCannon();
+        if (cannon.getJDBody().isAwake()) {
+            fireCannon();
+        }
         if (!cannon.getJDBody().isActive()) {
             this.remove();
         }

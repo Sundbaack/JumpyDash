@@ -7,6 +7,10 @@ public interface IBox2D {
 
     World getWorld();
 
+    void setPause();
+
+    void setResume();
+
     OrthographicCamera getCamera();
 
     JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost, boolean sensor);

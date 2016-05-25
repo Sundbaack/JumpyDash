@@ -25,7 +25,7 @@ public class SoldierController extends JDController {
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (!ScreenManager.getInstance().isPaused()) {
+                if (soldier.getJDBody().isAwake()) {
                     soldier.jump();
                 }
             }
@@ -34,10 +34,9 @@ public class SoldierController extends JDController {
 
     @Override
     public void act(float Delta){
-        if (!ScreenManager.getInstance().isPaused()) {
+        if (soldier.getJDBody().isAwake()) {
             soldier.move();
         }
-
         if (!soldier.getJDBody().isActive()) {
             this.remove();
         }

@@ -30,6 +30,22 @@ public class Box2D implements IBox2D {
         return this.world;
     }
 
+    public void setPause() {
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for (Body b : bodies) {
+            b.setAwake(false);
+        }
+    }
+
+    public void setResume() {
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for (Body b : bodies) {
+            b.setAwake(true);
+        }
+    }
+
     public OrthographicCamera getCamera() {
         return camera;
     }
