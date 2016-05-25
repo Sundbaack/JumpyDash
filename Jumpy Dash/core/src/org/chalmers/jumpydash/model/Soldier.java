@@ -5,9 +5,11 @@ import javax.vecmath.Vector2f;
 public class Soldier extends Enemy {
 
     private boolean directionRight;
+    private int count;
 
-    public Soldier() {
+    public Soldier(int count) {
         super(1,1);
+        this.count = count;
         directionRight = true;
     }
 
@@ -17,6 +19,10 @@ public class Soldier extends Enemy {
 
     public boolean getDirection(){
         return directionRight;
+    }
+
+    public int getCount(){
+        return count;
     }
 
     public void move() {

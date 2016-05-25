@@ -5,6 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import org.chalmers.jumpydash.controller.collision.CollisionListener;
+import org.chalmers.jumpydash.controller.collision.PlayerCollisionListener;
+import org.chalmers.jumpydash.controller.collision.SoldierCollisionListener;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.IReadFile;
@@ -13,6 +15,8 @@ import org.chalmers.jumpydash.controller.*;
 import org.chalmers.jumpydash.view.screen.GameView;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen extends JDScreen {
 
@@ -20,6 +24,7 @@ public class GameScreen extends JDScreen {
     private Stage uiStage;
     private IBox2D box2D;
     private PlayerController playerController;
+    private List<SoldierController> soldierControllerList = new ArrayList<SoldierController>();
     private GameView gameView;
 
     public GameScreen(Stage stage, Stage uiStage) {
@@ -40,7 +45,7 @@ public class GameScreen extends JDScreen {
             System.out.println("File not found");
         }
         // Set contact listener
-        box2D.getWorld().setContactListener(new CollisionListener(playerController));
+        //box2D.getWorld().setContactListener(new CollisionListener(playerController));
 
     }
 
@@ -73,7 +78,8 @@ public class GameScreen extends JDScreen {
                     stage.addActor(coinController);
                 }
                 if (level[y][x] == 'S') {
-                    SoldierController soldierController = new SoldierController(box2D, x, y, mapHeight);
+                    SoldierController soldierController = new SoldierController(box2D, x, y, mapHeight, soldierControllerList.size());
+                    soldierControllerList.add(soldierController);
                     stage.addActor(soldierController);
                 }
                 if (level[y][x] == 'A') {
@@ -102,6 +108,11 @@ public class GameScreen extends JDScreen {
                 }
             }
         }
+        addCollisionListener();
+    }
+
+    private void addCollisionListener(){
+        box2D.getWorld().setContactListener(new CollisionListener(playerController,soldierControllerList));
     }
 
     private void handleInput() {
