@@ -11,13 +11,21 @@ public enum ScreenType {
     },
     GAME {
         public JDScreen setScreen(Stage stage, Stage uiStage) {
-              return new GameScreen(stage, uiStage);
+            if (newGameInstance()) {
+                gameScreen = new GameScreen(stage, uiStage);
+                resetNewGameInstance();
+            }
+            return gameScreen;
         }
     },
     PAUSE {
-        // Need fixes
         public JDScreen setScreen(Stage stage, Stage uiStage) {
             return new PauseScreen(stage, uiStage);
+        }
+    },
+    RESUME {
+        public JDScreen setScreen(Stage stage, Stage uiStage) {
+            return gameScreen;
         }
     },
     OPTION {
@@ -28,11 +36,21 @@ public enum ScreenType {
     },
     GAMEOVER {
         public JDScreen setScreen(Stage stage, Stage uiStage) {
+            resetNewGameInstance();
             return new GameOverScreen(stage, uiStage);
         }
     };
 
     private static JDScreen gameScreen;
+    private static boolean newGameInstance = true;
+
+    private static boolean newGameInstance() {
+        return newGameInstance;
+    }
+
+    private static void resetNewGameInstance() {
+        newGameInstance = !newGameInstance;
+    }
 
     public abstract JDScreen setScreen(Stage stage, Stage uiStage);
 }

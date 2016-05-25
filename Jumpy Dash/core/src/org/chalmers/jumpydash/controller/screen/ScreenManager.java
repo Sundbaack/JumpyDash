@@ -45,6 +45,11 @@ public class ScreenManager {
         setScreen(ScreenType.PAUSE, stage, uiStage);
     }
 
+    // Resume
+    public void initResume(Stage stage, Stage uiStage) {
+        setScreen(ScreenType.RESUME, stage, uiStage);
+    }
+
     // Options
     public void initOption(Stage stage, Stage uiStage) {
         setScreen(ScreenType.OPTION, stage, uiStage);
