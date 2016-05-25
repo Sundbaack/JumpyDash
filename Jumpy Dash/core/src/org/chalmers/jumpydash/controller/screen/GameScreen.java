@@ -5,8 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import org.chalmers.jumpydash.controller.collision.CollisionListener;
-import org.chalmers.jumpydash.controller.collision.PlayerCollisionListener;
-import org.chalmers.jumpydash.controller.collision.SoldierCollisionListener;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.service.IReadFile;
@@ -121,24 +119,18 @@ public class GameScreen extends JDScreen {
     }
 
     private void handleInput() {
-        if (!getPaused()) {
+        if (!ScreenManager.getInstance().isPaused()) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
                 ScreenManager.getInstance().initPause(stage, uiStage);
             }
-            // Prevent shooting when paused
-            playerController.handleInput();
         }
-    }
-
-    private boolean getPaused() {
-        return ScreenManager.getInstance().getScreen().equals(ScreenType.PAUSE);
     }
 
     @Override
     public void render(float delta) {
         handleInput();
 
-        if (!getPaused()) {
+        if (!ScreenManager.getInstance().isPaused()) {
             // Update box2D simulations and camera
 
             box2D.update();

@@ -64,4 +64,8 @@ public class ScreenManager {
     public ScreenType getScreen() {
         return currentScreen;
     }
+
+    public boolean isPaused() {
+        return currentScreen.equals(ScreenType.PAUSE);
+    }
 }

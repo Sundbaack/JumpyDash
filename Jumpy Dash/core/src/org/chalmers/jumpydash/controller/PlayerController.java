@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
+import org.chalmers.jumpydash.controller.screen.ScreenManager;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.view.JDView;
@@ -35,7 +36,10 @@ public class PlayerController extends JDController {
 
     @Override
     public void act(float delta) {
-        player.move();
+        if (!ScreenManager.getInstance().isPaused()) {
+            handleInput();
+            player.move();
+        }
 
         // Check if player falls below map
         if(player.getPosition().y < (-TILE_SIZE/PIXELS_TO_METERS)){
@@ -48,7 +52,6 @@ public class PlayerController extends JDController {
             position.x = box2D.getCamera().position.x + SCREEN_WIDTH / PIXELS_TO_METERS + (player.getPosition().x * PIXELS_TO_METERS - box2D.getCamera().position.x) * 0.1f;
             box2D.getCamera().position.set(position);
         }
-
     }
 
     @Override
