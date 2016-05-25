@@ -9,11 +9,15 @@ public class Cannon extends Enemy {
     }
 
     public boolean allowedToFire(){
-        long fireCooldown = 5000;
+        long fireCooldown = 1;
         if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
-            previousFireTime = System.currentTimeMillis();
+            setPreviousFireTime(System.currentTimeMillis());
             return true;
         }
         return false;
+    }
+
+    public void setPreviousFireTime(long time){
+        previousFireTime = time;
     }
 }
