@@ -10,6 +10,13 @@ player00
   orig: 44, 44
   offset: 0, 0
   index: -1
+player15
+  rotate: false
+  xy: 1, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
 player01
   rotate: false
   xy: 47, 1
@@ -104,20 +111,6 @@ player13
 player14
   rotate: false
   xy: 645, 1
-  size: 44, 44
-  orig: 44, 44
-  offset: 0, 0
-  index: -1
-player15
-  rotate: false
-  xy: 691, 1
-  size: 44, 44
-  orig: 44, 44
-  offset: 0, 0
-  index: -1
-player16
-  rotate: false
-  xy: 737, 1
   size: 44, 44
   orig: 44, 44
   offset: 0, 0

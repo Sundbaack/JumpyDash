@@ -21,9 +21,9 @@ public class PlayerView implements JDView {
 
     public PlayerView(Player player) {
         this.player = player;
-        playerTileStanding = new Texture(Gdx.files.internal("images/playerStanding.png"));
-        playerTileRunning = new Texture(Gdx.files.internal("images/player.png"));
-        playerTileFalling = new Texture(Gdx.files.internal("images/rawSprites/player16.png"));
+        playerTileStanding = new Texture(Gdx.files.internal("images/rawSprites/player00.png"));
+        playerTileRunning = new Texture(Gdx.files.internal("images/rawSprites/player00.png"));
+        playerTileFalling = new Texture(Gdx.files.internal("images/rawSprites/player15.png"));
         textureAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheet/playerAnimation.atlas"));
         animation = new Animation(1f / 40f, textureAtlas.getRegions());
 
@@ -35,23 +35,23 @@ public class PlayerView implements JDView {
         switch (currentState) {
             case JUMPING:
                 if (elapsedTime >= animation.getAnimationDuration()) {
-                    batch.draw(playerTileRunning, x - 6, y);
+                    batch.draw(playerTileRunning, x-6 , y);
                     break;
                 } else {
                     elapsedTime += Gdx.graphics.getDeltaTime();
-                    batch.draw(animation.getKeyFrame(elapsedTime, true), x - 6, y);
+                    batch.draw(animation.getKeyFrame(elapsedTime, true), x -6, y);
                     break;
                 }
             case FALLING:
-                batch.draw(playerTileFalling, x - 6, y);
+                batch.draw(playerTileFalling, x -6, y);
                 elapsedTime = 0f;
                 break;
             case RUNNING:
-                batch.draw(playerTileRunning, x, y - 2);
+                batch.draw(playerTileRunning, x-6, y - 6);
                 elapsedTime = 0f;
                 break;
             default:
-                batch.draw(playerTileStanding, x, y - 2);
+                batch.draw(playerTileStanding, x-6, y - 6);
                 elapsedTime = 0f;
                 break;
         }
