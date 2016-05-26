@@ -90,7 +90,9 @@ public class GameView {
 
         // Update score label
         setScoreLabelText(points);
-
+        if(health == 3){
+            uiStage.addActor(health3);
+        }
         // Update health bar
         if (health == 2) {
             health3.remove();
