@@ -43,6 +43,7 @@ public class SpeedUpController extends JDController {
     @Override
     public void dispose() {
         speedUpView.dispose();
+        speedUpSound.dispose();
     }
 
 }

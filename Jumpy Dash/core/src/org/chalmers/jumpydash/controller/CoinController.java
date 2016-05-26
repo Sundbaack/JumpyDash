@@ -41,5 +41,6 @@ public class CoinController extends JDController {
     @Override
     public void dispose() {
         coinView.dispose();
+        coinSound.dispose();
     }
 }

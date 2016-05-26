@@ -168,5 +168,8 @@ public class Player extends JDModel {
         previousFireTime = time;
     }
 
+    public void dispose(){
+        trampolineSound.dispose();
+    }
 }
 
