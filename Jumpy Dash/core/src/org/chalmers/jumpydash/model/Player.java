@@ -1,5 +1,9 @@
 package org.chalmers.jumpydash.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+import org.chalmers.jumpydash.controller.Options;
+
 import javax.vecmath.Vector2f;
 
 public class Player extends JDModel {
@@ -14,6 +18,7 @@ public class Player extends JDModel {
     private long previousFireTime;
     private float playerSpeedX;
     private static final float MAX_SPEED_X = 3.5f;
+    private Sound trampolineSound;
 
     public Player() {
         this.points = 0;
@@ -23,15 +28,49 @@ public class Player extends JDModel {
         previousFireTime = 0;
         currentState = State.RUNNING;
         previousState = State.RUNNING;
+        trampolineSound = Gdx.audio.newSound(Gdx.files.internal("sounds/trampoline.wav"));
     }
 
 
     public void jump() {
-            getJDBody().applyLinearImpulse(new Vector2f(0, getImpulse()), getJDBody().getWorldCenter(), true);
-            currentState = State.JUMPING;
-            previousState = State.RUNNING;
+        getJDBody().applyLinearImpulse(new Vector2f(0, getImpulse()), getJDBody().getWorldCenter(), true);
+        currentState = State.JUMPING;
+        previousState = State.RUNNING;
     }
-
+    public void checkCollision(JDModel jDModelB){
+        if(this.getClass() == Player.class) {
+            if (jDModelB.getClass() == Soldier.class) {
+                this.setDamage(1);
+                this.applySoldierImpulse();
+            } else if (jDModelB.getClass() == Platform.class) {
+                this.currentState = State.RUNNING;
+            } else if (jDModelB.getClass() == Coin.class) {
+                this.setPoints(Coin.getValue());
+                jDModelB.userDataNull();
+            } else if (jDModelB.getClass() == Trampoline.class) {
+                if (Options.getInstance().getSound()) {
+                    trampolineSound.play(1);
+                }
+                this.applyTrampolineImpulse();
+            } else if (jDModelB.getClass() == Spike.class) {
+                this.setDamage(this.getHealth());
+            } else if (jDModelB.getClass() == Cannon.class) {
+                this.setDamage(1);
+            } else if (jDModelB.getClass() == SpeedUp.class) {
+                this.playerSpeedUp();
+                jDModelB.userDataNull();
+            } else if (jDModelB.getClass() == EnemyProjectile.class) {
+                this.setDamage(1);
+                this.applySoldierImpulse();
+                jDModelB.userDataNull();
+            } else if (jDModelB.getClass() == Sensor.class) {
+                Sensor sensor = ((Sensor) jDModelB);
+                if (sensor.getType().equalsIgnoreCase("player")) {
+                    MovingPlatform.movePlatforms = !MovingPlatform.movePlatforms;
+                }
+            }
+        }
+    }
     public boolean allowedToFire(){
         long fireCooldown = 250;
         if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {

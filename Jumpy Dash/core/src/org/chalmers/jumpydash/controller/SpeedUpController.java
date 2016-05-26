@@ -1,5 +1,7 @@
 package org.chalmers.jumpydash.controller;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.SpeedUp;
 import org.chalmers.jumpydash.physics.IBox2D;
@@ -12,17 +14,23 @@ public class SpeedUpController extends JDController {
 
     private SpeedUp speedUp;
     private JDView speedUpView;
+    private Sound speedUpSound;
 
     public SpeedUpController(IBox2D box2D, int x, int y, int mapHeight) {
         speedUpView = new SpeedUpView();
         speedUp = new SpeedUp();
         speedUp.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,false));
         speedUp.getJDBody().setUserData(speedUp);
+        speedUpSound = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup.wav"));
+
     }
 
     @Override
     public void act(float Delta) {
         if (!speedUp.getJDBody().isActive()) {
+            if (Options.getInstance().getSound()) {
+                speedUpSound.play(1);
+            }
             this.remove();
         }
     }

@@ -8,6 +8,21 @@ public class Cannon extends Enemy {
         super(1,1);
     }
 
+
+    public void checkCollision(JDModel jDModelB) {
+        if (this.getClass() == Cannon.class) {
+            if (jDModelB.getClass() == Bullet.class) {
+                if (this.isDead()) {
+                    this.getJDBody().setUserData(null);
+                    jDModelB.getJDBody().setUserData(null);
+                    this.userDataNull();
+                }
+                this.getJDBody().setUserData(null);
+                this.damageTaken();
+            }
+        }
+    }
+
     public boolean allowedToFire(){
         long fireCooldown = 2500;
         if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {

@@ -30,11 +30,17 @@ public abstract class JDModel {
 
     }
     public void checkCollision(JDModel jDModelB){
-        if(this == jDModelB){
-            System.out.println("colliding");
-        }
+
+
     }
 
+    public void userDataNull(){
+        this.getJDBody().setUserData(null);
+    }
+
+    public Object getUserData(){
+        return this.getUserData();
+    }
     @Override
     public int hashCode() {
         return jdBody != null ? (37 * jdBody.hashCode()) : 0;

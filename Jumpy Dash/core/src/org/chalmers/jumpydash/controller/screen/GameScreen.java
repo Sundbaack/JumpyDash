@@ -118,7 +118,7 @@ public class GameScreen extends JDScreen {
     }
 
     private void addCollisionListener(){
-        box2D.getWorld().setContactListener(new CollisionListener(playerController,soldierControllerList));
+        box2D.getWorld().setContactListener(new CollisionListener());
     }
 
     private void handleInput() {
