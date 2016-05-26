@@ -16,11 +16,9 @@ public class EnemyProjectileController extends JDController {
     private JDView enemyProjectileView;
     private EnemyProjectile enemyProjectile;
     private IBox2D box2D;
-    private Vector2f bulletDirection;
 
     public EnemyProjectileController(IBox2D box2D, float x, float y, Vector2f bulletDirection, int damage) {
         this.box2D = box2D;
-        this.bulletDirection = bulletDirection;
         enemyProjectileView = new EnemyProjectileView();
         enemyProjectile = new EnemyProjectile(damage);
         enemyProjectile.setJDBody(box2D.newBullet(x-(0.5f),y));
@@ -38,8 +36,7 @@ public class EnemyProjectileController extends JDController {
     @Override
     public void act(float delta) {
         updateProjectiles();
-        // Enable bullets to move when unpausing
-        enemyProjectile.getJDBody().setLinearVelocity(bulletDirection);
+
         if (!enemyProjectile.getJDBody().isActive()) {
             this.remove();
         }
