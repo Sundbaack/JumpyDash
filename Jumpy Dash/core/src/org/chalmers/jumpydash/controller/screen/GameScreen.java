@@ -107,7 +107,10 @@ public class GameScreen extends JDScreen {
                 if(level[y][x] == 's'){
                     SensorController sensorController = new SensorController(box2D, x, y, mapHeight,"player");
                     stage.addActor(sensorController);
-
+                }
+                if(level[y][x] == 'H'){
+                    HeartController heartController = new HeartController(box2D,x,y,mapHeight);
+                    stage.addActor(heartController);
                 }
             }
         }

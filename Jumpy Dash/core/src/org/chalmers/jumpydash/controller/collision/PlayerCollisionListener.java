@@ -35,6 +35,8 @@ public class PlayerCollisionListener extends JDCollision {
     private Sound trampolineSound;
     private Sound sound;
     private Sensor sensor;
+    private JDModel jDModelA;
+    private JDModel jdModelB;
 
     public PlayerCollisionListener(PlayerController playerController) {
         this.playerController = playerController;
@@ -47,8 +49,8 @@ public class PlayerCollisionListener extends JDCollision {
     private void checkInstance(Body a, Body b) {
         playerA = a.getUserData() instanceof Player;
         coinB = b.getUserData() instanceof Coin;
-        playerB = b.getUserData() instanceof Player;
         coinA = a.getUserData() instanceof Coin;
+        playerB = b.getUserData() instanceof Player;
         platformA = a.getUserData() instanceof Platform;
         platformB = b.getUserData() instanceof Platform;
         soldierA = a.getUserData() instanceof Soldier;
@@ -87,6 +89,7 @@ public class PlayerCollisionListener extends JDCollision {
                 sound.play(1);
             }
         }
+
 
         //Check collision between player and soldier
         if ((playerA && soldierB) || (soldierA && playerB)) {
@@ -142,7 +145,6 @@ public class PlayerCollisionListener extends JDCollision {
                     MovingPlatform.movePlatforms = !MovingPlatform.movePlatforms;
                 }
             }
-
         }
         //Check collision between player and SpeedUp
         if ((playerA && speedUpB)) {
@@ -160,10 +162,17 @@ public class PlayerCollisionListener extends JDCollision {
         }
     }
 
+    public void checkCollisions(JDModel b){
+
+    }
+
     @Override
     public void beginContact(Contact contact) {
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
+        jDModelA = ((JDModel) a.getUserData());
+        jdModelB = ((JDModel) b.getUserData());
+        jDModelA.checkCollision(jdModelB);
         checkInstance(a,b);
         checkCollision(a,b);
     }

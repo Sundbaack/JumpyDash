@@ -29,6 +29,11 @@ public abstract class JDModel {
         return jdBody != null ? jdBody.equals(jdModel.jdBody) : jdModel.jdBody == null;
 
     }
+    public void checkCollision(JDModel jDModelB){
+        if(this == jDModelB){
+            System.out.println("colliding");
+        }
+    }
 
     @Override
     public int hashCode() {

@@ -25,6 +25,7 @@ public class Player extends JDModel {
         previousState = State.RUNNING;
     }
 
+
     public void jump() {
             getJDBody().applyLinearImpulse(new Vector2f(0, getImpulse()), getJDBody().getWorldCenter(), true);
             currentState = State.JUMPING;
