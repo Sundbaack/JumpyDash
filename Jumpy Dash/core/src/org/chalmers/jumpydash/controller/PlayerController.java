@@ -30,7 +30,7 @@ public class PlayerController extends JDController {
         player.setImpulse(player.getJDBody().getMass() * 4f);
         playerView = new PlayerView(player);
 
-        sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/gun.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("sounds/gun.wav"));
     }
 
     @Override
