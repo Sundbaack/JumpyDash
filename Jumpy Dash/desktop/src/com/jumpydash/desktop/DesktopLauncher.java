@@ -2,7 +2,7 @@ package com.jumpydash.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import main.java.org.chalmers.jumpydash.JumpyDash;
+import org.chalmers.jumpydash.JumpyDash;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
