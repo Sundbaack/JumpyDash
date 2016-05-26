@@ -19,8 +19,6 @@ public class MenuScreen extends JDScreen {
         this.uiStage.clear();
         menuView = new MenuView(uiStage);
 
-        Gdx.input.setInputProcessor(uiStage);
-
         setListeners();
     }
 

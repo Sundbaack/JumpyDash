@@ -23,6 +23,7 @@ public class JumpyDash extends Game {
 
 		// Create a new Stage for UI
 		uiStage = new Stage();
+		Gdx.input.setInputProcessor(uiStage);
 
 		// Set initial options
 		Options.getInstance().initialize(true, true);
