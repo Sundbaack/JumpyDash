@@ -9,7 +9,7 @@ public class Cannon extends Enemy {
     }
 
     public boolean allowedToFire(){
-        long fireCooldown = 1;
+        long fireCooldown = 2500;
         if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
             setPreviousFireTime(System.currentTimeMillis());
             return true;

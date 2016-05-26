@@ -27,6 +27,10 @@ public class PlayerCollisionListener extends JDCollision {
     private boolean speedUpB;
     private boolean sensorA;
     private boolean sensorB;
+    private boolean enemyProjectileA;
+    private boolean enemyProjectileB;
+    private boolean cannonA;
+    private boolean cannonB;
     private Sound powerUpSound;
     private Sound trampolineSound;
     private Sound sound;
@@ -57,6 +61,10 @@ public class PlayerCollisionListener extends JDCollision {
         speedUpB = b.getUserData() instanceof SpeedUp;
         sensorA = a.getUserData() instanceof Sensor;
         sensorB = b.getUserData() instanceof  Sensor;
+        enemyProjectileA = a.getUserData() instanceof EnemyProjectile;
+        enemyProjectileB = b.getUserData() instanceof EnemyProjectile;
+        cannonA = b.getUserData() instanceof EnemyProjectile;
+        cannonB = b.getUserData() instanceof EnemyProjectile;
     }
 
     // Determine who is colliding with who
@@ -84,6 +92,25 @@ public class PlayerCollisionListener extends JDCollision {
         if ((playerA && soldierB) || (soldierA && playerB)) {
             playerController.getPlayer().setDamage(1);
             playerController.getPlayer().applySoldierImpulse();
+        }
+
+        //damage is not working properly here
+        //Check collision between player and cannon
+        if ((playerA && cannonB) || (cannonA && playerB)) {
+            playerController.getPlayer().setDamage(1);
+        }
+
+        //damage is not working properly here, projectile collision is triggering cannon collision
+        //Check collision between enemyprojectile and player
+        if ((playerA && enemyProjectileB) || (enemyProjectileA && playerB)) {
+            playerController.getPlayer().setDamage(1);
+            playerController.getPlayer().applySoldierImpulse();
+            if(enemyProjectileA){
+                b.setUserData(null);
+            }
+            else if(enemyProjectileB){
+                b.setUserData(null);
+            }
         }
         //Check collision between player and trampoline
         if (playerA && trampolineB || trampolineA && playerB) {

@@ -12,7 +12,6 @@ public abstract class Enemy extends JDModel {
 
     public void damageTaken(){
         healthPoints--;
-        isDead();
     }
 
     public int getDamage(){

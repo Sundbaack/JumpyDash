@@ -18,7 +18,7 @@ public class CannonController extends JDController {
     public CannonController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         cannon = new Cannon();
-        cannon.setJDBody(box2D.newBody(x, y, mapHeight, "dynamic", false,false));
+        cannon.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,false));
         cannon.getJDBody().setUserData(cannon);
         cannonView = new CannonView();
     }
@@ -26,17 +26,17 @@ public class CannonController extends JDController {
     @Override
     public void act(float Delta){
         if (cannon.getJDBody().isAwake()) {
-            fireCannon();
+            fireProjectile();
         }
         if (!cannon.getJDBody().isActive()) {
             this.remove();
         }
     }
 
-    public void fireCannon(){
+    public void fireProjectile(){
         if(cannon.allowedToFire()){
-            BulletController bulletController = new BulletController(box2D, cannon.getPosition().x, cannon.getPosition().y, new Vector2f(-5f, 0));
-            getStage().addActor(bulletController);
+            EnemyProjectileController enemyProjectileController = new EnemyProjectileController(box2D, cannon.getPosition().x, cannon.getPosition().y, new Vector2f(-2f, 0),1);
+            getStage().addActor(enemyProjectileController);
         }
     }
 

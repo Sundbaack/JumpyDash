@@ -18,6 +18,7 @@ public class BulletCollisionListener extends JDCollision {
     private boolean soldierA;
     private boolean soldierB;
     private Soldier soldier;
+    private Cannon cannon;
     private List<SoldierController> soldierControllerList;
 
 
@@ -39,7 +40,7 @@ public class BulletCollisionListener extends JDCollision {
     // Determine who is colliding with who
     private void checkCollision(Body a, Body b) {
         //Check collision between bullet and soldier
-        if (bulletB && soldierA || bulletA && soldierB) {
+        if ((bulletB && soldierA) || (bulletA && soldierB)) {
             if(soldierA){
                 System.out.println("soldiera remove");
                 soldier = ((Soldier) a.getUserData());
@@ -52,12 +53,25 @@ public class BulletCollisionListener extends JDCollision {
             b.setUserData(null);
 
         }
-
+        //not working cause cannon is static and bullet is kinematic
         //Check collision between bullet and cannon
-        if (bulletA && cannonB) {
-            b.setUserData(null);
-        } else if (bulletB && cannonA) {
-            a.setUserData(null);
+        if ((bulletB && cannonA) || (bulletA && cannonB)) {
+            if(cannonA){
+                cannon = ((Cannon) a.getUserData());
+                cannon.damageTaken();
+                if(cannon.isDead()){
+                    a.setUserData(null);
+                }
+                b.setUserData(null);
+            }
+            else if(cannonB){
+                cannon = ((Cannon) b.getUserData());
+                cannon.damageTaken();
+                if (cannon.isDead()){
+                    b.setUserData(null);
+                }
+                a.setUserData(null);
+            }
         }
     }
 
