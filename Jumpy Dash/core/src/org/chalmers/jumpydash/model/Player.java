@@ -67,6 +67,11 @@ public class Player extends JDModel {
                 if (sensor.getType().equalsIgnoreCase("player")) {
                     MovingPlatform.movePlatforms = !MovingPlatform.movePlatforms;
                 }
+            } else if(jDModel.getClass() == Heart.class){
+                if(health != 3){
+                    health += 1;
+                }
+                jDModel.userDataNull();
             }
         }
     }
