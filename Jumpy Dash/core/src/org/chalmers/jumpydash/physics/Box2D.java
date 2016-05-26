@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
+
 public class Box2D implements IBox2D {
 
     private OrthographicCamera camera;
@@ -52,10 +53,10 @@ public class Box2D implements IBox2D {
         return camera;
     }
 
-    public JDBody newBody(float x, float y, int mapHeight, Bodies body, boolean ghost,boolean sensor) {
+    public JDBody newBody(float x, float y, int mapHeight, BodyType BodyType, boolean ghost,boolean sensor) {
         BodyDef bodyDef = new BodyDef();
 
-        switch(body){
+        switch(BodyType){
             case KINEMATIC:
                 bodyDef.type = BodyDef.BodyType.KinematicBody;
                 break;

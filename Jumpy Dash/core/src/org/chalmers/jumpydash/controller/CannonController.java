@@ -2,6 +2,7 @@ package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.Cannon;
+import org.chalmers.jumpydash.physics.BodyType;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CannonView;
 import org.chalmers.jumpydash.view.JDView;
@@ -17,7 +18,7 @@ public class CannonController extends JDController {
     public CannonController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         cannon = new Cannon();
-        cannon.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,false));
+        cannon.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.STATIC, false,false));
         cannon.getJDBody().setUserData(cannon);
         cannonView = new CannonView();
     }

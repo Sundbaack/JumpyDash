@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.SpeedUp;
+import org.chalmers.jumpydash.physics.BodyType;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.util.Options;
 import org.chalmers.jumpydash.view.JDView;
@@ -19,7 +20,7 @@ public class SpeedUpController extends JDController {
     public SpeedUpController(IBox2D box2D, int x, int y, int mapHeight) {
         speedUpView = new SpeedUpView();
         speedUp = new SpeedUp();
-        speedUp.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,false));
+        speedUp.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.STATIC, false,false));
         speedUp.getJDBody().setUserData(speedUp);
         speedUpSound = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup.wav"));
     }

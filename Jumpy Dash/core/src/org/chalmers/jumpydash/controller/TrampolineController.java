@@ -2,6 +2,7 @@ package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.Trampoline;
+import org.chalmers.jumpydash.physics.BodyType;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.TrampolineView;
@@ -15,7 +16,7 @@ public class TrampolineController extends JDController {
     public TrampolineController(IBox2D box2D, int x, int y, int mapHeight) {
         trampolineView = new TrampolineView();
         trampoline = new Trampoline();
-        trampoline.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,false));
+        trampoline.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.STATIC, false,false));
         trampoline.getJDBody().setUserData(trampoline);
 
     }
