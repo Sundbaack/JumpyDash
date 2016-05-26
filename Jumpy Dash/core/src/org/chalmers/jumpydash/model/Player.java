@@ -3,11 +3,13 @@ package org.chalmers.jumpydash.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import org.chalmers.jumpydash.util.Options;
+
 import javax.vecmath.Vector2f;
 
 public class Player extends JDModel {
 
-    public enum State {FALLING,STANDING,JUMPING,RUNNING}
+    public enum State {FALLING, STANDING, JUMPING, RUNNING}
+
     public State currentState;
     public State previousState;
     private float impulse;
@@ -36,46 +38,48 @@ public class Player extends JDModel {
         previousState = State.RUNNING;
     }
 
-    public void checkCollision(JDModel jDModelB){
-        if(this.getClass() == Player.class) {
-            if (jDModelB.getClass() == Soldier.class) {
+    @Override
+    public void checkCollision(JDModel jDModel) {
+        if (this.getClass() == Player.class) {
+            if (jDModel.getClass() == Soldier.class) {
                 this.setDamage(1);
                 this.applySoldierImpulse();
-            } else if (jDModelB.getClass() == Platform.class) {
+            } else if (jDModel.getClass() == Platform.class) {
                 this.currentState = State.RUNNING;
-            } else if (jDModelB.getClass() == Coin.class) {
+            } else if (jDModel.getClass() == Coin.class) {
                 this.setPoints(Coin.getValue());
-                jDModelB.userDataNull();
-            } else if (jDModelB.getClass() == Trampoline.class) {
+                jDModel.userDataNull();
+            } else if (jDModel.getClass() == Trampoline.class) {
                 if (Options.getInstance().getSound()) {
                     trampolineSound.play(1);
                 }
                 this.applyTrampolineImpulse();
-            } else if (jDModelB.getClass() == Spike.class) {
+            } else if (jDModel.getClass() == Spike.class) {
                 this.setDamage(this.getHealth());
-            } else if (jDModelB.getClass() == Cannon.class) {
+            } else if (jDModel.getClass() == Cannon.class) {
                 this.setDamage(1);
-            } else if (jDModelB.getClass() == SpeedUp.class) {
+            } else if (jDModel.getClass() == SpeedUp.class) {
                 this.playerSpeedUp();
-                jDModelB.userDataNull();
-            } else if (jDModelB.getClass() == EnemyProjectile.class) {
+                jDModel.userDataNull();
+            } else if (jDModel.getClass() == EnemyProjectile.class) {
                 this.setDamage(1);
                 this.applySoldierImpulse();
-                jDModelB.userDataNull();
-            } else if (jDModelB.getClass() == Sensor.class) {
-                Sensor sensor = ((Sensor) jDModelB);
+                jDModel.userDataNull();
+            } else if (jDModel.getClass() == Sensor.class) {
+                Sensor sensor = ((Sensor) jDModel);
                 if (sensor.getType().equalsIgnoreCase("player")) {
                     MovingPlatform.movePlatforms = !MovingPlatform.movePlatforms;
                 }
-            } else if(jDModel.getClass() == Heart.class){
-                if(health != 3){
+            } else if (jDModel.getClass() == Heart.class) {
+                if (health != 3) {
                     health += 1;
                 }
                 jDModel.userDataNull();
             }
         }
     }
-    public boolean allowedToFire(){
+
+    public boolean allowedToFire() {
         long fireCooldown = 250;
         if (System.currentTimeMillis() - previousFireTime >= fireCooldown) {
             setPreviousFireTime(System.currentTimeMillis());
@@ -98,21 +102,18 @@ public class Player extends JDModel {
         getJDBody().applyLinearImpulse(new Vector2f(0, getImpulse() + 2.5f), getJDBody().getWorldCenter(), true);
     }
 
-    public void applySoldierImpulse(){
-        getJDBody().applyLinearImpulse(new Vector2f(-getImpulse(),0), getJDBody().getWorldCenter(), true);
+    public void applySoldierImpulse() {
+        getJDBody().applyLinearImpulse(new Vector2f(-getImpulse(), 0), getJDBody().getWorldCenter(), true);
     }
 
-    public State getState(){
-        if(this.getJDBody().getLinearVelocity().y > 0){
+    public State getState() {
+        if (this.getJDBody().getLinearVelocity().y > 0) {
             currentState = State.JUMPING;
-        }
-        else if(this.getJDBody().getLinearVelocity().y < 0){
+        } else if (this.getJDBody().getLinearVelocity().y < 0) {
             currentState = State.FALLING;
-        }
-        else if(this.getJDBody().getLinearVelocity().x != 0){
+        } else if (this.getJDBody().getLinearVelocity().x != 0) {
             currentState = State.RUNNING;
-        }
-        else{
+        } else {
             currentState = State.STANDING;
         }
         return currentState;
@@ -126,7 +127,7 @@ public class Player extends JDModel {
         setSpeed(100);
     }
 
-    public void setJumpState(){
+    public void setJumpState() {
         this.jumpFlag = !jumpFlag;
     }
 
@@ -154,19 +155,23 @@ public class Player extends JDModel {
         points += a;
     }
 
-    public int getHealth() { return health; }
+    public int getHealth() {
+        return health;
+    }
 
-    public void setDamage(int damage) { health = health - damage; }
+    public void setDamage(int damage) {
+        health = health - damage;
+    }
 
     private void setSpeed(float speedIncrease) {
         playerSpeedX += speedIncrease;
     }
 
-    public float getSpeed(){
+    public float getSpeed() {
         return playerSpeedX;
     }
 
-    public void setPreviousFireTime(long time){
+    public void setPreviousFireTime(long time) {
         previousFireTime = time;
     }
 
