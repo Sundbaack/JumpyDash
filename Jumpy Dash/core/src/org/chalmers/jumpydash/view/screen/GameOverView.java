@@ -96,6 +96,7 @@ public class GameOverView {
 
     public void dispose() {
         skin.dispose();
+        gameOverBg.dispose();
         pixmap.dispose();
         font.dispose();
         uiStage.dispose();

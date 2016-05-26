@@ -2,8 +2,7 @@ package org.chalmers.jumpydash.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import org.chalmers.jumpydash.controller.Options;
-
+import org.chalmers.jumpydash.util.Options;
 import javax.vecmath.Vector2f;
 
 public class Player extends JDModel {
@@ -31,12 +30,12 @@ public class Player extends JDModel {
         trampolineSound = Gdx.audio.newSound(Gdx.files.internal("sounds/trampoline.wav"));
     }
 
-
     public void jump() {
         getJDBody().applyLinearImpulse(new Vector2f(0, getImpulse()), getJDBody().getWorldCenter(), true);
         currentState = State.JUMPING;
         previousState = State.RUNNING;
     }
+
     public void checkCollision(JDModel jDModelB){
         if(this.getClass() == Player.class) {
             if (jDModelB.getClass() == Soldier.class) {
@@ -98,7 +97,6 @@ public class Player extends JDModel {
         getJDBody().applyLinearImpulse(new Vector2f(-getImpulse(),0), getJDBody().getWorldCenter(), true);
     }
 
-
     public State getState(){
         if(this.getJDBody().getLinearVelocity().y > 0){
             currentState = State.JUMPING;
@@ -114,7 +112,6 @@ public class Player extends JDModel {
         }
         return currentState;
     }
-
 
     public boolean isDead() {
         return health == 0;
@@ -168,7 +165,7 @@ public class Player extends JDModel {
         previousFireTime = time;
     }
 
-    public void dispose(){
+    public void dispose() {
         trampolineSound.dispose();
     }
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import org.chalmers.jumpydash.controller.Options;
 import org.chalmers.jumpydash.view.screen.MenuView;
 
 public class MenuScreen extends JDScreen {
@@ -43,7 +42,7 @@ public class MenuScreen extends JDScreen {
         menuView.getQuitButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Exit application
-                System.exit(0);
+                Gdx.app.exit();
             }
         });
     }
@@ -54,13 +53,9 @@ public class MenuScreen extends JDScreen {
     }
 
     @Override
-    public void hide() {
-
-    }
-
-    @Override
     public void dispose() {
         stage.dispose();
         uiStage.dispose();
+        menuView.dispose();
     }
 }

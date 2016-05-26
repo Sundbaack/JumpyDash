@@ -98,5 +98,6 @@ public class MenuView {
         skin.dispose();
         pixmap.dispose();
         font.dispose();
+        menuBg.dispose();
     }
 }

@@ -1,6 +1,7 @@
 package org.chalmers.jumpydash.model;
 
 public class EnemyProjectile extends JDModel {
+
     int damage;
 
     public EnemyProjectile(int damage) {

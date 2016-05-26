@@ -4,12 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-/**
- * Created by Oscar on 2016-05-26.
- */
 public class HeartView implements JDView {
-
-
 
     private Texture heartTile;
 

@@ -5,7 +5,6 @@ import org.chalmers.jumpydash.model.MovingPlatform;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.MovingPlatformView;
-
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
 public class MovingPlatformController extends JDController {

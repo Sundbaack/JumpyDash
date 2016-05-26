@@ -1,16 +1,11 @@
 package org.chalmers.jumpydash.controller.screen;
 
-
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import org.chalmers.jumpydash.controller.Options;
+import org.chalmers.jumpydash.util.Options;
 import org.chalmers.jumpydash.view.screen.OptionView;
 
-
-/**
- * Created by alexsundback on 2016-05-25.
- */
 public class OptionScreen extends JDScreen {
 
     private Stage stage;
@@ -77,5 +72,6 @@ public class OptionScreen extends JDScreen {
     public void dispose() {
         stage.dispose();
         uiStage.dispose();
+        optionView.dispose();
     }
 }

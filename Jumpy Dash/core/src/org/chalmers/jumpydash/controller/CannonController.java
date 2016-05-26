@@ -5,7 +5,6 @@ import org.chalmers.jumpydash.model.Cannon;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.CannonView;
 import org.chalmers.jumpydash.view.JDView;
-
 import javax.vecmath.Vector2f;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 
@@ -51,5 +50,3 @@ public class CannonController extends JDController {
         cannonView.dispose();
     }
 }
-    /*BulletController bulletController = new BulletController(box2D, player.getPosition().x, player.getPosition().y);
-    getStage().addActor(bulletController);*/

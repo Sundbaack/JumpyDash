@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.Coin;
 import org.chalmers.jumpydash.physics.IBox2D;
+import org.chalmers.jumpydash.util.Options;
 import org.chalmers.jumpydash.view.CoinView;
 import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.physics.Box2D;

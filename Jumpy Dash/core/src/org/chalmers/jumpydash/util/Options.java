@@ -1,8 +1,5 @@
-package org.chalmers.jumpydash.controller;
+package org.chalmers.jumpydash.util;
 
-/**
- * Created by alexsundback on 2016-05-25.
- */
 public class Options {
 
     // Singleton

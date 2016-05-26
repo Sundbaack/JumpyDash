@@ -1,11 +1,11 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import org.chalmers.jumpydash.model.Bullet;
 import org.chalmers.jumpydash.model.EnemyProjectile;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.EnemyProjectileView;
 import org.chalmers.jumpydash.view.JDView;
+
 import javax.vecmath.Vector2f;
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
 import static org.chalmers.jumpydash.physics.Box2D.SCREEN_WIDTH;

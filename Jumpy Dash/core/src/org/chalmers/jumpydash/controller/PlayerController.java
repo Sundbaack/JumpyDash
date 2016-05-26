@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
+import org.chalmers.jumpydash.util.Options;
 import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.PlayerView;
 import javax.vecmath.Vector2f;
@@ -59,11 +60,13 @@ public class PlayerController extends JDController {
     }
 
     public void handleInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (player.getState() == Player.State.RUNNING || player.getState() == Player.State.STANDING)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (player.getState() == Player.State.RUNNING
+                || player.getState() == Player.State.STANDING)) {
             player.jump();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F) && player.allowedToFire()) {
-            BulletController bulletController = new BulletController(box2D, player.getPosition().x, player.getPosition().y,new Vector2f(12f + player.getJDBody().getLinearVelocity().x, 0));
+            BulletController bulletController = new BulletController(box2D, player.getPosition().x,
+                    player.getPosition().y,new Vector2f(12f + player.getJDBody().getLinearVelocity().x, 0));
             getStage().addActor(bulletController);
             if (Options.getInstance().getSound()) {
                 sound.play(1);

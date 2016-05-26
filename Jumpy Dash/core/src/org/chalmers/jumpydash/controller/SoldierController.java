@@ -1,7 +1,6 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import org.chalmers.jumpydash.controller.screen.ScreenManager;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Soldier;
 import org.chalmers.jumpydash.view.JDView;
@@ -40,7 +39,6 @@ public class SoldierController extends JDController {
         if (!soldier.getJDBody().isActive()) {
             this.remove();
         }
-
     }
 
     @Override

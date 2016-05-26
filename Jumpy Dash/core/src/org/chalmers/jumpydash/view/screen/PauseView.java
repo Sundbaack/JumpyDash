@@ -22,7 +22,6 @@ public class PauseView {
         uiStage.getBatch().begin();
         uiStage.getBatch().draw(pauseBb, 0, 0);
         uiStage.getBatch().end();
-
     }
 
     public void dispose() {

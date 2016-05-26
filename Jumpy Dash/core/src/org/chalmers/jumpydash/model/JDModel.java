@@ -29,8 +29,8 @@ public abstract class JDModel {
         return jdBody != null ? jdBody.equals(jdModel.jdBody) : jdModel.jdBody == null;
 
     }
-    public void checkCollision(JDModel jDModelB){
 
+    public void checkCollision(JDModel jDModelB){
 
     }
 
@@ -41,6 +41,7 @@ public abstract class JDModel {
     public Object getUserData(){
         return this.getUserData();
     }
+
     @Override
     public int hashCode() {
         return jdBody != null ? (37 * jdBody.hashCode()) : 0;

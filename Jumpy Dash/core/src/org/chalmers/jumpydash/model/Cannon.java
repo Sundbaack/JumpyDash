@@ -8,7 +8,6 @@ public class Cannon extends Enemy {
         super(1,1);
     }
 
-
     public void checkCollision(JDModel jDModelB) {
         if (this.getClass() == Cannon.class) {
             if (jDModelB.getClass() == Bullet.class) {

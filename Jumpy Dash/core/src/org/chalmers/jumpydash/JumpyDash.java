@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import org.chalmers.jumpydash.controller.Options;
+import org.chalmers.jumpydash.util.Options;
 import org.chalmers.jumpydash.controller.screen.GameScreen;
 import org.chalmers.jumpydash.controller.screen.PauseScreen;
 import org.chalmers.jumpydash.controller.screen.ScreenManager;
@@ -44,6 +44,7 @@ public class JumpyDash extends Game {
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		super.render();
+		// Mute if option set to mute, pause screen or game screen
 		if (!Options.getInstance().getMusic() || getScreen().getClass() == GameScreen.class
 				|| getScreen().getClass() == PauseScreen.class) {
 					music.pause();

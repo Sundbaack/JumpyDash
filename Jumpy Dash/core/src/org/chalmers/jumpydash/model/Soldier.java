@@ -3,6 +3,7 @@ package org.chalmers.jumpydash.model;
 import javax.vecmath.Vector2f;
 
 public class Soldier extends Enemy {
+
     public enum State {RIGHT,LEFT}
     private State currentState;
     private boolean directionRight;
@@ -44,7 +45,7 @@ public class Soldier extends Enemy {
         return count;
     }
 
-    public void jump(){
+    public void jump() {
         getJDBody().applyLinearImpulse(new Vector2f(0, 3f), getJDBody().getWorldCenter(), true);
     }
 

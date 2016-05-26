@@ -42,9 +42,8 @@ public class GameScreen extends JDScreen {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
-        // Set contact listener
-        //box2D.getWorld().setContactListener(new CollisionListener(playerController));
 
+        addCollisionListener();
     }
 
     private void loadMap(char[][] level) {
@@ -114,7 +113,6 @@ public class GameScreen extends JDScreen {
                 }
             }
         }
-        addCollisionListener();
     }
 
     private void addCollisionListener(){
@@ -146,12 +144,12 @@ public class GameScreen extends JDScreen {
                 ScreenManager.getInstance().initGameOver(stage, uiStage);
             }
         }
-
     }
 
     @Override
     public void dispose() {
         stage.dispose();
         uiStage.dispose();
+        gameView.dispose();
     }
 }

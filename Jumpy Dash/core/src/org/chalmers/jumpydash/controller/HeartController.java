@@ -7,11 +7,7 @@ import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.HeartView;
 import org.chalmers.jumpydash.view.JDView;
 
-/**
- * Created by Oscar on 2016-05-26.
- */
 public class HeartController extends JDController {
-
 
     private JDView heartView;
     private Heart heart;

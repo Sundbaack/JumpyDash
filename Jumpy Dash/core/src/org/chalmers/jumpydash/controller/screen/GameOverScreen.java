@@ -58,5 +58,6 @@ public class GameOverScreen extends JDScreen {
     public void dispose() {
         stage.dispose();
         uiStage.dispose();
+        gameOverView.dispose();
     }
 }

@@ -1,6 +1,5 @@
 package org.chalmers.jumpydash.controller.collision;
 
-
 import com.badlogic.gdx.physics.box2d.Contact;
 import org.chalmers.jumpydash.model.JDModel;
 

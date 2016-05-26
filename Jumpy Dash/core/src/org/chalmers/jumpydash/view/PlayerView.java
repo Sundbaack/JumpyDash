@@ -9,7 +9,6 @@ import org.chalmers.jumpydash.model.Player;
 
 public class PlayerView implements JDView {
 
-
     private Texture playerTileRunning;
     private Texture playerTileStanding;
     private Texture playerTileFalling;
@@ -26,12 +25,12 @@ public class PlayerView implements JDView {
         playerTileFalling = new Texture(Gdx.files.internal("images/rawSprites/player15.png"));
         textureAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheets/playerAnimation.atlas"));
         animation = new Animation(1f / 40f, textureAtlas.getRegions());
-
     }
 
     public void render(Batch batch, float x, float y) {
         currentState = player.getState();
         //Fix magic values 6 and 2
+        // Animation
         switch (currentState) {
             case JUMPING:
                 if (elapsedTime >= animation.getAnimationDuration()) {

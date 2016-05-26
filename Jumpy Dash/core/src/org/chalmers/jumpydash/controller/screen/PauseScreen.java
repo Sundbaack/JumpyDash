@@ -33,6 +33,8 @@ public class PauseScreen extends JDScreen {
 
     @Override
     public void dispose() {
+        stage.dispose();
         uiStage.dispose();
+        pauseView.dispose();
     }
 }
