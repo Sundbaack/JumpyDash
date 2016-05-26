@@ -4,25 +4,27 @@ import javax.vecmath.Vector2f;
 
 public class Soldier extends Enemy {
 
-    public enum State {RIGHT,LEFT}
+    public enum State {RIGHT, LEFT}
+
     private State currentState;
     private boolean directionRight;
     private int count;
 
     public Soldier(int count) {
-        super(1,1);
+        super(1, 1);
         this.count = count;
         currentState = State.RIGHT;
         directionRight = true;
     }
 
-    public void setDirectionFlag(){
+    public void setDirectionFlag() {
         directionRight = !directionRight;
     }
 
-    public void checkCollision(JDModel jDModelB){
-        if(this.getClass() == Soldier.class) {
-            if (jDModelB.getClass() == Sensor.class) {
+    @Override
+    public void checkCollision(JDModel jDModel) {
+        if (this.getClass() == Soldier.class) {
+            if (jDModel.getClass() == Sensor.class) {
                 if (currentState == State.RIGHT) {
                     currentState = State.LEFT;
                     setDirectionFlag();
@@ -30,18 +32,19 @@ public class Soldier extends Enemy {
                     currentState = State.RIGHT;
                 }
             }
-            else if(jDModelB.getClass() == Bullet.class){
+            if (jDModel.getClass() == Bullet.class) {
                 this.userDataNull();
-                jDModelB.userDataNull();
+                jDModel.userDataNull();
+                System.out.println("bullet hit soldier");
             }
         }
     }
 
-    public boolean getDirection(){
+    public boolean getDirection() {
         return directionRight;
     }
 
-    public int getCount(){
+    public int getCount() {
         return count;
     }
 
@@ -51,10 +54,10 @@ public class Soldier extends Enemy {
 
     public void move() {
         // Checks in what direction the soldier should move
-        if(currentState == State.RIGHT){
-            getJDBody().applyForceToCenter(new Vector2f(2f,0), true);
-        } else{
-            getJDBody().applyForceToCenter(new Vector2f(-2f,0), true);
+        if (currentState == State.RIGHT) {
+            getJDBody().applyForceToCenter(new Vector2f(2f, 0), true);
+        } else {
+            getJDBody().applyForceToCenter(new Vector2f(-2f, 0), true);
         }
     }
 }
