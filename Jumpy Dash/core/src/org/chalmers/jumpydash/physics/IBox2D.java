@@ -13,7 +13,11 @@ public interface IBox2D {
 
     OrthographicCamera getCamera();
 
-    JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost, boolean sensor);
+    public enum BodyType {
+        KINEMATIC, DYNAMIC, STATIC
+    }
+
+    JDBody newBody(float x, float y, int mapHeight, BodyType bodyType , boolean ghost, boolean sensor);
 
     void setGhost(JDBody jdBody);
 

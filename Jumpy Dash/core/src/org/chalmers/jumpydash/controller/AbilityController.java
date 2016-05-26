@@ -15,7 +15,8 @@ public class AbilityController extends JDController {
 
     public AbilityController(IBox2D box2D, int x, int y, int mapHeight) {
         ability = new Ability();
-        ability.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,true));
+        BodyType bodyType = STATIC;
+        ability.setJDBody(box2D.newBody(x, y, mapHeight, STATIC, false,true));
         ability.getJDBody().setUserData(ability);
         abilityView = new AbilityView();
     }
