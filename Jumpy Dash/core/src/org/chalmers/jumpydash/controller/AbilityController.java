@@ -2,6 +2,7 @@ package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.Ability;
+import org.chalmers.jumpydash.physics.BodyType;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.AbilityView;
 import org.chalmers.jumpydash.view.JDView;
@@ -15,7 +16,7 @@ public class AbilityController extends JDController {
 
     public AbilityController(IBox2D box2D, int x, int y, int mapHeight) {
         ability = new Ability();
-        ability.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,true));
+        ability.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.STATIC, false,true));
         ability.getJDBody().setUserData(ability);
         abilityView = new AbilityView();
     }

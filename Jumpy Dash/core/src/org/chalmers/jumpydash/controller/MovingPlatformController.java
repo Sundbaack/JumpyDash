@@ -2,6 +2,7 @@ package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.MovingPlatform;
+import org.chalmers.jumpydash.physics.BodyType;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.MovingPlatformView;
@@ -15,7 +16,7 @@ public class MovingPlatformController extends JDController {
     public MovingPlatformController(IBox2D box2D, int x, int y, int mapHeight) {
         movingPlatformView = new MovingPlatformView();
         movingPlatform = new MovingPlatform();
-        movingPlatform.setJDBody(box2D.newBody(x, y, mapHeight, "kinematic", false,false));
+        movingPlatform.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.KINEMATIC, false,false));
         movingPlatform.getJDBody().setUserData(movingPlatform);
     }
 

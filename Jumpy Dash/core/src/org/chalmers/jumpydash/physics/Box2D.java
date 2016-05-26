@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
+
 public class Box2D implements IBox2D {
 
     private OrthographicCamera camera;
@@ -18,6 +19,8 @@ public class Box2D implements IBox2D {
     private static final int POS_ITERATIONS = 3;
     public static final int SCREEN_WIDTH = 1280;
     public static final int SCREEN_HEIGHT = 736;
+
+
 
     public Box2D() {
         world = new World(new Vector2(0, GRAVITY), true); //Create a world object with a gravity vector
@@ -50,15 +53,19 @@ public class Box2D implements IBox2D {
         return camera;
     }
 
-    public JDBody newBody(float x, float y, int mapHeight, String type, boolean ghost,boolean sensor) {
+    public JDBody newBody(float x, float y, int mapHeight, BodyType BodyType, boolean ghost,boolean sensor) {
         BodyDef bodyDef = new BodyDef();
 
-        if (type.equalsIgnoreCase("kinematic")) {
-            bodyDef.type = BodyDef.BodyType.KinematicBody;
-        } else if (type.equalsIgnoreCase("dynamic")) {
-            bodyDef.type = BodyDef.BodyType.DynamicBody;
-        } else if (type.equalsIgnoreCase("static")) {
-            bodyDef.type = BodyDef.BodyType.StaticBody;
+        switch(BodyType){
+            case KINEMATIC:
+                bodyDef.type = BodyDef.BodyType.KinematicBody;
+                break;
+            case DYNAMIC:
+                bodyDef.type = BodyDef.BodyType.DynamicBody;
+                break;
+            case STATIC:
+                bodyDef.type = BodyDef.BodyType.StaticBody;
+                break;
         }
 
         bodyDef.position.set((x * TILE_SIZE) / PIXELS_TO_METERS, ((mapHeight - 1 - y) * TILE_SIZE) / PIXELS_TO_METERS);
