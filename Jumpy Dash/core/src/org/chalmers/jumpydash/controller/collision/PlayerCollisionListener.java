@@ -38,8 +38,8 @@ public class PlayerCollisionListener extends JDCollision {
 
     public PlayerCollisionListener(PlayerController playerController) {
         this.playerController = playerController;
-        trampolineSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/trampoline.wav"));
-        powerUpSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/powerup.wav"));
+        trampolineSound = Gdx.audio.newSound(Gdx.files.internal("sounds/trampoline.wav"));
+        powerUpSound = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup.wav"));
         sound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
     }
 
