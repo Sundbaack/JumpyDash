@@ -26,6 +26,7 @@ public class PlayerController extends JDController {
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         player = new Player();
+        player.setSound();
 
         player.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.DYNAMIC, false,false));
 

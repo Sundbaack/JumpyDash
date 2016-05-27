@@ -33,7 +33,6 @@ public class Player extends JDModel {
         previousFireTime = 0;
         currentState = State.RUNNING;
         previousState = State.RUNNING;
-        trampolineSound = Gdx.audio.newSound(Gdx.files.internal("sounds/trampoline.wav"));
     }
 
     public void jump() {
@@ -59,7 +58,7 @@ public class Player extends JDModel {
                 this.setPoints(Coin.getValue());
                 jDModel.userDataNull();
             } else if (jDModel.getClass() == Trampoline.class) {
-                if (Options.getInstance().getSound()) {
+                if (Options.getInstance().getSound() && trampolineSound!=null) {
                     trampolineSound.play(1);
                 }
                 this.applyTrampolineImpulse();
@@ -221,6 +220,10 @@ public class Player extends JDModel {
 
     public void setPreviousFireTime(long time) {
         previousFireTime = time;
+    }
+
+    public void setSound(){
+        trampolineSound = Gdx.audio.newSound(Gdx.files.internal("sounds/trampoline.wav"));
     }
 
     public void dispose() {
