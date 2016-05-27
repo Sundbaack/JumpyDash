@@ -13,7 +13,6 @@ public class Player extends JDModel {
     public State currentState;
     public State previousState;
     private float impulse;
-    private boolean jumpFlag;
     private boolean invincible;
     private int points;
     private int health;
@@ -27,12 +26,12 @@ public class Player extends JDModel {
     public Player() {
         this.points = 0;
         playerSpeedX = 4;
-        jumpFlag = false;
         health = 3;
         keys = 0;
         previousFireTime = 0;
         currentState = State.RUNNING;
         previousState = State.RUNNING;
+        invincible=false;
     }
 
     public void jump() {
@@ -108,14 +107,18 @@ public class Player extends JDModel {
             }
             else if(jDModel.getClass() == Invincible.class){
                 jDModel.userDataNull();
-                invincible = true;
-                invinciblePickUpTime = System.currentTimeMillis();
+                setInvincible();
+                setInvinciblePickUpTime();
             }
         }
     }
 
     public long getInvinciblePickUpTime(){
         return invinciblePickUpTime;
+    }
+
+    public void setInvinciblePickUpTime(){
+        invinciblePickUpTime = System.currentTimeMillis();
     }
 
     public boolean isInvincible(){
@@ -132,7 +135,6 @@ public class Player extends JDModel {
             setPreviousFireTime(System.currentTimeMillis());
             return true;
         }
-        setJumpState();
         return false;
     }
 
@@ -174,14 +176,6 @@ public class Player extends JDModel {
         setSpeed(100);
     }
 
-    public void setJumpState() {
-        this.jumpFlag = !jumpFlag;
-    }
-
-    public boolean getJumpState() {
-        return this.jumpFlag;
-    }
-
     private float getMaxSpeedX() {
         return MAX_SPEED_X;
     }
@@ -212,10 +206,6 @@ public class Player extends JDModel {
 
     private void setSpeed(float speedIncrease) {
         playerSpeedX += speedIncrease;
-    }
-
-    public float getSpeed() {
-        return playerSpeedX;
     }
 
     public void setPreviousFireTime(long time) {
