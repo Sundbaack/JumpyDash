@@ -9,16 +9,12 @@ public class Cannon extends Enemy {
     }
 
     public void checkCollision(JDModel jDModelB) {
-        if (this.getClass() == Cannon.class) {
-            if (jDModelB.getClass() == Bullet.class) {
-                if (this.isDead()) {
-                    this.getJDBody().setUserData(null);
-                    jDModelB.getJDBody().setUserData(null);
-                    this.userDataNull();
-                }
-                this.getJDBody().setUserData(null);
-                this.damageTaken();
-            }
+        if (this.getClass() == Cannon.class && jDModelB.getClass() == Bullet.class && this.isDead()) {
+            this.getJDBody().setUserData(null);
+            jDModelB.getJDBody().setUserData(null);
+            this.userDataNull();
+            this.getJDBody().setUserData(null);
+            this.damageTaken();
         }
     }
 

@@ -43,10 +43,8 @@ public class PlayerController extends JDController {
             player.move();
         }
         System.out.println("State " + player.currentState);
-        if(player.isInvincible()) {
-            if (System.currentTimeMillis() - player.getInvinciblePickUpTime() >= 10000) {
-                player.setInvincible();
-            }
+        if (player.isInvincible() && (System.currentTimeMillis() - player.getInvinciblePickUpTime() >= 10000)) {
+            player.setInvincible();
         }
 
         // Check if player falls below map

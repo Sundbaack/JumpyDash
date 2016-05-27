@@ -20,8 +20,8 @@ allprojects {
         ignoreFailures = false
         effort = "max"
         reportLevel = "low"
-    }*/
-
+    }
+*/
     pmd {
         ignoreFailures = true
     }

@@ -38,10 +38,6 @@ public abstract class JDModel {
         this.getJDBody().setUserData(null);
     }
 
-    public Object getUserData(){
-        return this.getUserData();
-    }
-
     @Override
     public int hashCode() {
         return jdBody != null ? (37 * jdBody.hashCode()) : 0;

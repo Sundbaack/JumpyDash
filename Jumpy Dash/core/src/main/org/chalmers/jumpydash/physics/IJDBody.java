@@ -28,4 +28,6 @@ public interface IJDBody {
     Vector2f getWorldCenter();
 
     void setUserData(Object userData);
+
+    Object getUserData();
 }

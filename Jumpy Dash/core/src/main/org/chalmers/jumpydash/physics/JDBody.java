@@ -55,4 +55,8 @@ public class JDBody implements IJDBody {
     public void setUserData(Object userData){
         body.setUserData(userData);
     }
+
+    public Object getUserData() {
+        return body.getUserData();
+    }
 }

@@ -4,10 +4,10 @@ import javax.vecmath.Vector2f;
 
 public class MovingPlatform extends JDModel {
 
-    public static boolean movePlatforms;
+    public static boolean movePlatforms = false;
 
     public MovingPlatform() {
-        movePlatforms = false;
+
     }
 
     public void moveUp(){

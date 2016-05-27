@@ -35,11 +35,7 @@ public class PlayerView implements JDView {
         switch (currentState) {
             case JUMPING:
                 if (elapsedTime >= animation.getAnimationDuration()) {
-                    if(invincible){
-                        batch.draw(playerTileInvincible, x-6, y-6);
-                    }else{
-                        batch.draw(playerTileStandard, x-6 , y-6);
-                    }
+                    drawAnimation(batch, x, y);
                     break;
                 } else {
                     elapsedTime += Gdx.graphics.getDeltaTime();
@@ -47,21 +43,21 @@ public class PlayerView implements JDView {
                     break;
                 }
             case FALLING:
-                if(invincible){
-                    batch.draw(playerTileInvincible, x-6,y-6);
-                }else{
-                    batch.draw(playerTileStandard, x -6, y-6);
-                }
+                drawAnimation(batch, x, y);
                 elapsedTime = 0f;
                 break;
             default:
-                if(invincible){
-                    batch.draw(playerTileInvincible, x-6,y-6);
-                }else{
-                    batch.draw(playerTileStandard, x -6, y-6);
-                }
+                drawAnimation(batch, x, y);
                 elapsedTime = 0f;
                 break;
+        }
+    }
+
+    public void drawAnimation(Batch batch, float x, float y) {
+        if(invincible){
+            batch.draw(playerTileInvincible, x-6,y-6);
+        }else{
+            batch.draw(playerTileStandard, x -6, y-6);
         }
     }
 

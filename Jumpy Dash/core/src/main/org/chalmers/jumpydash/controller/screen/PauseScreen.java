@@ -18,10 +18,8 @@ public class PauseScreen extends JDScreen {
     }
 
     private void handleInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            if (ScreenManager.getInstance().isPaused()) {
-                ScreenManager.getInstance().initResume(stage, uiStage);
-            }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P) && ScreenManager.getInstance().isPaused()) {
+            ScreenManager.getInstance().initResume(stage, uiStage);
         }
     }
 

@@ -79,8 +79,7 @@ public class Player extends JDModel {
                 this.playerSpeedUp();
                 jDModel.userDataNull();
             } else if (jDModel.getClass() == EnemyProjectile.class) {
-                if(invincible){}
-                else {
+                if(!invincible){
                     this.setDamage(1);
                     this.applySoldierImpulse();
                 }

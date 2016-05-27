@@ -12,13 +12,11 @@ public class SensorController extends JDController {
 
     private JDView sensorView;
     private Sensor sensor;
-    private String type;
 
     public SensorController(IBox2D box2D, int x, int y, int mapHeight, String type) {
         sensor  = new Sensor(type);
         sensor.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.STATIC, false,true));
         sensor.getJDBody().setUserData(sensor);
-        this.type = type;
         sensorView = new SensorView(type);
         }
 

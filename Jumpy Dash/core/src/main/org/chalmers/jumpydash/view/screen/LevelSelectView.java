@@ -64,10 +64,6 @@ public class LevelSelectView {
         level2Button.setName("menuButton");
         uiStage.addActor(level2Button);
 
-        Label.LabelStyle style = new Label.LabelStyle();
-        style.fontColor = Color.DARK_GRAY;
-        style.font = skin.getFont("font");
-
     }
 
     public TextButton getLevel1Button() {

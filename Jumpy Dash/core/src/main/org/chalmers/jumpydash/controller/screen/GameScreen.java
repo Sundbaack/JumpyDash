@@ -32,7 +32,7 @@ public class GameScreen extends JDScreen {
         this.uiStage = uiStage;
         this.stage.clear();
         this.uiStage.clear();
-        this.level = level;
+        GameScreen.level = level;
         this.gameView = new GameView(uiStage);
 
         box2D = new Box2D();
@@ -41,7 +41,7 @@ public class GameScreen extends JDScreen {
         // Load the map
         try {
             IReadFile fileHandler = new ReadFile();
-            loadMap(fileHandler.fileToArray(new File("levels/level" + this.level + ".txt")));
+            loadMap(fileHandler.fileToArray(new File("levels/level" + level + ".txt")));
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -137,11 +137,9 @@ public class GameScreen extends JDScreen {
     public static int getLevel() { return level; }
 
     private void handleInput() {
-        if (!ScreenManager.getInstance().isPaused()) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-                box2D.setPause();
-                ScreenManager.getInstance().initPause(stage, uiStage);
-            }
+        if (!ScreenManager.getInstance().isPaused() && Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            box2D.setPause();
+            ScreenManager.getInstance().initPause(stage, uiStage);
         }
     }
 
