@@ -31,8 +31,8 @@ public class ScreenManager {
     }
 
     // GameScreen
-    public void initGame(Stage stage, Stage uiStage) {
-        setScreen(ScreenType.GAME, stage, uiStage);
+    public void initGame(Stage stage, Stage uiStage, int level) {
+        setScreenGame(ScreenType.GAME, stage, uiStage, level);
     }
 
     // GameOverScreen
@@ -52,7 +52,12 @@ public class ScreenManager {
 
     // WinScreen
     public void initWin(Stage stage, Stage uiStage) {
-        setScreen(ScreenType.OPTION, stage, uiStage);
+        setScreen(ScreenType.WIN, stage, uiStage);
+    }
+
+    // Level select screen
+    public  void initLevelSelect(Stage stage, Stage uiStage) {
+        setScreen(ScreenType.LEVEL, stage, uiStage);
     }
 
     // Options
@@ -63,6 +68,11 @@ public class ScreenManager {
     // Set new screen
     private void setScreen(ScreenType type, Stage stage, Stage uiStage) {
         game.setScreen(type.setScreen(stage, uiStage));
+        currentScreen = type;
+    }
+
+    private void setScreenGame(ScreenType type, Stage stage, Stage uiStage, int level) {
+        game.setScreen(type.setScreenGame(stage, uiStage, level));
         currentScreen = type;
     }
 

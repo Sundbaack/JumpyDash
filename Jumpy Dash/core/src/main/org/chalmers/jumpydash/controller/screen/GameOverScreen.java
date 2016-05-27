@@ -37,7 +37,7 @@ public class GameOverScreen extends JDScreen {
         gameOverView.getPlayButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Switch to game
-                ScreenManager.getInstance().initGame(stage, uiStage);
+                ScreenManager.getInstance().initGame(stage, uiStage, GameScreen.getLevel());
             }
         });
 

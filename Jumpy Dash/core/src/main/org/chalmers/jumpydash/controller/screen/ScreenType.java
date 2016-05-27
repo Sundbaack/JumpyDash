@@ -10,12 +10,9 @@ public enum ScreenType {
         }
     },
     GAME {
+        @Override
         public JDScreen setScreen(Stage stage, Stage uiStage) {
-            if (newGameInstance()) {
-                gameScreen = new GameScreen(stage, uiStage);
-                resetNewGameInstance();
-            }
-            return gameScreen;
+            return null;
         }
     },
     PAUSE {
@@ -45,6 +42,11 @@ public enum ScreenType {
             resetNewGameInstance();
             return new WinScreen(stage, uiStage);
         }
+    },
+    LEVEL {
+        public JDScreen setScreen(Stage stage, Stage uiStage) {
+            return new LevelSelectScreen(stage, uiStage);
+        }
     };
 
     private static JDScreen gameScreen;
@@ -59,4 +61,12 @@ public enum ScreenType {
     }
 
     public abstract JDScreen setScreen(Stage stage, Stage uiStage);
+
+    public JDScreen setScreenGame(Stage stage, Stage uiStage, int level) {
+        if (newGameInstance()) {
+            gameScreen = new GameScreen(stage, uiStage, level);
+            resetNewGameInstance();
+        }
+        return gameScreen;
+    }
 }

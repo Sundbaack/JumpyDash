@@ -25,12 +25,14 @@ public class GameScreen extends JDScreen {
     private PlayerController playerController;
     private List<SoldierController> soldierControllerList = new ArrayList<SoldierController>();
     private GameView gameView;
+    private static int level;
 
-    public GameScreen(Stage stage, Stage uiStage) {
+    public GameScreen(Stage stage, Stage uiStage, int level) {
         this.stage = stage;
         this.uiStage = uiStage;
         this.stage.clear();
         this.uiStage.clear();
+        this.level = level;
         this.gameView = new GameView(uiStage);
 
         box2D = new Box2D();
@@ -39,7 +41,7 @@ public class GameScreen extends JDScreen {
         // Load the map
         try {
             IReadFile fileHandler = new ReadFile();
-            loadMap(fileHandler.fileToArray(new File("levels/level1.txt")));
+            loadMap(fileHandler.fileToArray(new File("levels/level" + this.level + ".txt")));
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -131,6 +133,8 @@ public class GameScreen extends JDScreen {
     private void addCollisionListener(){
         box2D.getWorld().setContactListener(new CollisionListener());
     }
+
+    public static int getLevel() { return level; }
 
     private void handleInput() {
         if (!ScreenManager.getInstance().isPaused()) {

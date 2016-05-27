@@ -8,24 +8,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
-public class MenuView {
+public class LevelSelectView {
 
     private Stage uiStage;
-    private Texture menuBg;
+    private Texture winBg;
     private Skin skin;
     private Pixmap pixmap;
     private BitmapFont font;
-    private TextButton playButton;
-    private TextButton optionButton;
-    private TextButton quitButton;
-    private TextButton levelButton;
+    private TextButton level1Button;
+    private TextButton level2Button;
 
-    public MenuView(Stage uiStage) {
+    public LevelSelectView(Stage uiStage) {
         this.uiStage = uiStage;
-        menuBg = new Texture(Gdx.files.internal("images/menuBg.png"));
+        winBg = new Texture(Gdx.files.internal("images/menuBg.png"));
 
         loadUI();
     }
@@ -53,60 +52,47 @@ public class MenuView {
 
         skin.add("style", textButtonStyle);
 
-        // Play button
-        playButton = new TextButton("Play", textButtonStyle);
-        playButton.setPosition(515, 400);
-        playButton.setName("playButton");
-        uiStage.addActor(playButton);
+        // Level 1 button
+        level1Button = new TextButton("Level 1", textButtonStyle);
+        level1Button.setPosition(515, 350);
+        level1Button.setName("playButton");
+        uiStage.addActor(level1Button);
 
-        // Level button
-        levelButton = new TextButton("Select level", textButtonStyle);
-        levelButton.setPosition(515, 300);
-        levelButton.setName("levelButton");
-        uiStage.addActor(levelButton);
+        // Level 2 button
+        level2Button = new TextButton("Level 2", textButtonStyle);
+        level2Button.setPosition(515, 250);
+        level2Button.setName("menuButton");
+        uiStage.addActor(level2Button);
 
-        // Option button
-        optionButton = new TextButton("Options", textButtonStyle);
-        optionButton.setPosition(515, 200);
-        optionButton.setName("optionButton");
-        uiStage.addActor(optionButton);
-
-        // Quit button
-        quitButton = new TextButton("Quit", textButtonStyle);
-        quitButton.setPosition(515, 100);
-        playButton.setName("Button");
-        uiStage.addActor(quitButton);
+        Label.LabelStyle style = new Label.LabelStyle();
+        style.fontColor = Color.DARK_GRAY;
+        style.font = skin.getFont("font");
 
     }
 
-    public TextButton getPlayButton() {
-        return this.playButton;
+    public TextButton getLevel1Button() {
+        return this.level1Button;
     }
 
-    public TextButton getQuitButton() {
-        return this.quitButton;
+    public TextButton getLevel2Button() {
+        return this.level2Button;
     }
-
-    public TextButton getOptionButton() {
-        return this.optionButton;
-    }
-
-    public TextButton getLevelButton() { return this.levelButton; }
 
     public void update() {
         Gdx.gl20.glClearColor(0, 0, 0, 1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         uiStage.getBatch().begin();
-        uiStage.getBatch().draw(menuBg, 0, 0);
+        uiStage.getBatch().draw(winBg, 0, 0);
         uiStage.getBatch().end();
     }
 
     public void dispose() {
-        uiStage.dispose();
         skin.dispose();
+        winBg.dispose();
         pixmap.dispose();
         font.dispose();
-        menuBg.dispose();
+        uiStage.dispose();
     }
+
 }
