@@ -50,6 +50,11 @@ public class ScreenManager {
         setScreen(ScreenType.RESUME, stage, uiStage);
     }
 
+    // WinScreen
+    public void initWin(Stage stage, Stage uiStage) {
+        setScreen(ScreenType.OPTION, stage, uiStage);
+    }
+
     // Options
     public void initOption(Stage stage, Stage uiStage) {
         setScreen(ScreenType.OPTION, stage, uiStage);

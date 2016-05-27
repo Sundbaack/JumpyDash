@@ -39,6 +39,12 @@ public enum ScreenType {
             resetNewGameInstance();
             return new GameOverScreen(stage, uiStage);
         }
+    },
+    WIN {
+        public JDScreen setScreen(Stage stage, Stage uiStage) {
+            resetNewGameInstance();
+            return new WinScreen(stage, uiStage);
+        }
     };
 
     private static JDScreen gameScreen;
