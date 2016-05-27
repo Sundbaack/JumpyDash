@@ -119,6 +119,10 @@ public class GameScreen extends JDScreen {
                     LockedDoorController lockedDoorController = new LockedDoorController(box2D,x,y,mapHeight);
                     stage.addActor(lockedDoorController);
                 }
+                if(level[y][x] == 'I'){
+                    InvincibleController invincibleController = new InvincibleController(box2D,x,y,mapHeight);
+                    stage.addActor(invincibleController);
+                }
             }
         }
     }

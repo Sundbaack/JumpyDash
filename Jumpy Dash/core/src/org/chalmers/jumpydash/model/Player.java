@@ -14,10 +14,12 @@ public class Player extends JDModel {
     public State previousState;
     private float impulse;
     private boolean jumpFlag;
+    private boolean invincible;
     private int points;
     private int health;
     private int keys;
     private long previousFireTime;
+    private long invinciblePickUpTime;
     private float playerSpeedX;
     private static final float MAX_SPEED_X = 3.5f;
     private Sound trampolineSound;
@@ -44,8 +46,13 @@ public class Player extends JDModel {
     public void checkCollision(JDModel jDModel) {
         if (this.getClass() == Player.class) {
             if (jDModel.getClass() == Soldier.class) {
-                this.setDamage(1);
-                this.applySoldierImpulse();
+                if(invincible){
+                    jDModel.userDataNull();
+                }else{
+                    this.setDamage(1);
+                    this.applySoldierImpulse();
+                }
+
             } else if (jDModel.getClass() == Platform.class) {
                 this.currentState = State.RUNNING;
             } else if (jDModel.getClass() == Coin.class) {
@@ -57,15 +64,26 @@ public class Player extends JDModel {
                 }
                 this.applyTrampolineImpulse();
             } else if (jDModel.getClass() == Spike.class) {
-                this.setDamage(this.getHealth());
+                if(invincible){
+                    jDModel.userDataNull();
+                }else {
+                    this.setDamage(this.getHealth());
+                }
             } else if (jDModel.getClass() == Cannon.class) {
-                this.setDamage(1);
+                if(invincible){
+                    jDModel.userDataNull();
+                }else{
+                    this.setDamage(1);
+                }
             } else if (jDModel.getClass() == SpeedUp.class) {
                 this.playerSpeedUp();
                 jDModel.userDataNull();
             } else if (jDModel.getClass() == EnemyProjectile.class) {
-                this.setDamage(1);
-                this.applySoldierImpulse();
+                if(invincible){}
+                else {
+                    this.setDamage(1);
+                    this.applySoldierImpulse();
+                }
                 jDModel.userDataNull();
             } else if (jDModel.getClass() == Sensor.class) {
                 Sensor sensor = ((Sensor) jDModel);
@@ -90,7 +108,24 @@ public class Player extends JDModel {
                     System.out.println(keys);
                 }
             }
+            else if(jDModel.getClass() == Invincible.class){
+                jDModel.userDataNull();
+                invincible = true;
+                invinciblePickUpTime = System.currentTimeMillis();
+            }
         }
+    }
+
+    public long getInvinciblePickUpTime(){
+        return invinciblePickUpTime;
+    }
+
+    public boolean isInvincible(){
+        return invincible;
+    }
+
+    public void setInvincible(){
+        invincible = !invincible;
     }
 
     public boolean allowedToFire() {
