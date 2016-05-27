@@ -1,3 +1,3 @@
-# ProjectRolf
+# JumpyDash
 
-ProjectRolf is nice.
+2D platform game developed in libGDX
