@@ -111,6 +111,14 @@ public class GameScreen extends JDScreen {
                     HeartController heartController = new HeartController(box2D,x,y,mapHeight);
                     stage.addActor(heartController);
                 }
+                if(level[y][x] == 'K'){
+                    KeyController keyController = new KeyController(box2D,x,y,mapHeight);
+                    stage.addActor(keyController);
+                }
+                if(level[y][x] == 'L'){
+                    LockedDoorController lockedDoorController = new LockedDoorController(box2D,x,y,mapHeight);
+                    stage.addActor(lockedDoorController);
+                }
             }
         }
     }

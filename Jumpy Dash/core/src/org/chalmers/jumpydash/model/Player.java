@@ -16,6 +16,7 @@ public class Player extends JDModel {
     private boolean jumpFlag;
     private int points;
     private int health;
+    private int keys;
     private long previousFireTime;
     private float playerSpeedX;
     private static final float MAX_SPEED_X = 3.5f;
@@ -26,6 +27,7 @@ public class Player extends JDModel {
         playerSpeedX = 4;
         jumpFlag = false;
         health = 3;
+        keys = 0;
         previousFireTime = 0;
         currentState = State.RUNNING;
         previousState = State.RUNNING;
@@ -75,6 +77,18 @@ public class Player extends JDModel {
                     health += 1;
                 }
                 jDModel.userDataNull();
+            }
+            else if(jDModel.getClass() == Key.class){
+                this.keys += 1;
+                jDModel.userDataNull();
+                System.out.println(keys);
+            }
+            else if(jDModel.getClass() == LockedDoor.class){
+                if(keys != 0){
+                    jDModel.userDataNull();
+                    keys = keys - 1;
+                    System.out.println(keys);
+                }
             }
         }
     }
