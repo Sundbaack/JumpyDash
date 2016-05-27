@@ -1,6 +1,7 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import org.chalmers.jumpydash.physics.BodyType;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Soldier;
 import org.chalmers.jumpydash.view.JDView;
@@ -17,7 +18,7 @@ public class SoldierController extends JDController {
 
     public SoldierController(IBox2D box2D, int x, int y, int mapHeight, int count) {
         soldier = new Soldier(count);
-        soldier.setJDBody(box2D.newBody(x, y, mapHeight, "dynamic", false,false));
+        soldier.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.DYNAMIC, false,false));
         soldier.getJDBody().setUserData(soldier);
         soldierView = new SoldierView();
         time = new Timer();

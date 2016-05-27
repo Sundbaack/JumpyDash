@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
+import org.chalmers.jumpydash.physics.BodyType;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Player;
 import org.chalmers.jumpydash.util.Options;
@@ -26,7 +27,9 @@ public class PlayerController extends JDController {
     public PlayerController(IBox2D box2D, int x, int y, int mapHeight) {
         this.box2D = box2D;
         player = new Player();
-        player.setJDBody(box2D.newBody(x, y, mapHeight, "dynamic", false,false));
+
+        player.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.DYNAMIC, false,false));
+
         player.getJDBody().setUserData(player);
         player.setImpulse(player.getJDBody().getMass() * 4f);
         playerView = new PlayerView(player);

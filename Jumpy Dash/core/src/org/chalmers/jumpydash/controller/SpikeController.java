@@ -2,6 +2,7 @@ package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.Spike;
+import org.chalmers.jumpydash.physics.BodyType;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.SpikeView;
@@ -15,7 +16,7 @@ public class SpikeController extends JDController {
     public SpikeController(IBox2D box2D, int x, int y, int mapHeight) {
         spikeView = new SpikeView();
         spike = new Spike();
-        spike.setJDBody(box2D.newBody(x, y, mapHeight, "static", false,false));
+        spike.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.STATIC, false,false));
         spike.getJDBody().setUserData(spike);
     }
 

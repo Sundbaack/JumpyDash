@@ -1,6 +1,9 @@
 package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+
+import org.chalmers.jumpydash.physics.BodyType;
+
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.model.Platform;
 import org.chalmers.jumpydash.view.JDView;
@@ -15,7 +18,9 @@ public class PlatformController extends JDController {
     public PlatformController(IBox2D box2D, int x, int y, int mapHeight) {
         platformView = new PlatformView();
         platform = new Platform();
-        platform.setJDBody(box2D.newBody(x, y, mapHeight, "static", true,false));
+
+        platform.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.STATIC, true,false));
+
         platform.getJDBody().setUserData(platform);
     }
 

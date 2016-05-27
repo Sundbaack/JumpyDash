@@ -2,6 +2,7 @@ package org.chalmers.jumpydash.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.chalmers.jumpydash.model.Heart;
+import org.chalmers.jumpydash.physics.BodyType;
 import org.chalmers.jumpydash.physics.Box2D;
 import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.HeartView;
@@ -15,7 +16,7 @@ public class HeartController extends JDController {
     public HeartController(IBox2D box2D, int x, int y, int mapHeight) {
         heartView = new HeartView();
         heart = new Heart();
-        heart.setJDBody(box2D.newBody(x, y, mapHeight, "static", false, true));
+        heart.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.STATIC, false, true));
         heart.getJDBody().setUserData(heart);
     }
 
