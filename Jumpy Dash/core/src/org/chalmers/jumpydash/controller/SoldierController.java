@@ -7,6 +7,8 @@ import org.chalmers.jumpydash.model.Soldier;
 import org.chalmers.jumpydash.view.JDView;
 import org.chalmers.jumpydash.view.SoldierView;
 import org.chalmers.jumpydash.physics.Box2D;
+
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,6 +16,7 @@ public class SoldierController extends JDController {
 
     private Soldier soldier;
     private JDView soldierView;
+
     private Timer time;
 
     public SoldierController(IBox2D box2D, int x, int y, int mapHeight, int count) {
@@ -21,6 +24,9 @@ public class SoldierController extends JDController {
         soldier.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.DYNAMIC, false,false));
         soldier.getJDBody().setUserData(soldier);
         soldierView = new SoldierView();
+
+        //Random randomGenerator = new Random();
+        //long random = ((long) randomGenerator.nextDouble()*(10000-1000));
         time = new Timer();
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
