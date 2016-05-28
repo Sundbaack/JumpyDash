@@ -5,17 +5,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Johannes on 2016-05-28.
- */
 public class CannonTest {
     private Cannon cannon;
-    private Cannon cannon2;
 
     @Before
     public void setUp(){
         cannon = new Cannon();
-        cannon2 = new Cannon();
     }
 
     /*
@@ -25,12 +20,6 @@ public class CannonTest {
     Finally it tests so that two cannoncs does not have the same cooldown.
      */
 
-
-    @Test
-    public void checkCollision() throws Exception {
-
-    }
-
     @Test
     public void allowedToFire() throws Exception {
         assertEquals(cannon.allowedToFire(),true);
@@ -39,13 +28,11 @@ public class CannonTest {
         cannon.setPreviousFireTime(0);
         assertEquals(cannon.allowedToFire(),true);
 
-        assertEquals(cannon2.allowedToFire(),true);
+        cannon.setPreviousFireTime(System.currentTimeMillis()-2501);
+        assertEquals(cannon.allowedToFire(),true);
+
+        cannon.setPreviousFireTime(System.currentTimeMillis()-2000);
         assertEquals(cannon.allowedToFire(),false);
-    }
-
-    @Test
-    public void setPreviousFireTime() throws Exception {
-
     }
 
 }
