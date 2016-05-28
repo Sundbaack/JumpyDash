@@ -54,19 +54,19 @@ public class MenuView {
 
         // Play button
         playButton = new TextButton("Play", textButtonStyle);
-        playButton.setPosition(515, 400);
+        playButton.setPosition(515, 350);
         playButton.setName("playButton");
         uiStage.addActor(playButton);
 
         // Option button
         optionButton = new TextButton("Options", textButtonStyle);
-        optionButton.setPosition(515, 300);
+        optionButton.setPosition(515, 250);
         optionButton.setName("optionButton");
         uiStage.addActor(optionButton);
 
         // Quit button
         quitButton = new TextButton("Quit", textButtonStyle);
-        quitButton.setPosition(515, 200);
+        quitButton.setPosition(515, 150);
         playButton.setName("Button");
         uiStage.addActor(quitButton);
 

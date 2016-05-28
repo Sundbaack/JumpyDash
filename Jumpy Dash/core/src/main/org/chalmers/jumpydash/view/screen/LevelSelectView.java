@@ -54,19 +54,19 @@ public class LevelSelectView {
 
         // Menu button
         menuButton = new TextButton("Back to menu", textButtonStyle);
-        menuButton.setPosition(515, 400);
+        menuButton.setPosition(515, 350);
         menuButton.setName("menuButton");
         uiStage.addActor(menuButton);
 
         // Level 1 button
         level1Button = new TextButton("Level 1", textButtonStyle);
-        level1Button.setPosition(515, 300);
+        level1Button.setPosition(515, 250);
         level1Button.setName("playButton");
         uiStage.addActor(level1Button);
 
         // Level 2 button
         level2Button = new TextButton("Level 2", textButtonStyle);
-        level2Button.setPosition(515, 200);
+        level2Button.setPosition(515, 150);
         level2Button.setName("menuButton");
         uiStage.addActor(level2Button);
 
