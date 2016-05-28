@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
@@ -21,6 +20,7 @@ public class LevelSelectView {
     private BitmapFont font;
     private TextButton level1Button;
     private TextButton level2Button;
+    private TextButton menuButton;
 
     public LevelSelectView(Stage uiStage) {
         this.uiStage = uiStage;
@@ -52,18 +52,28 @@ public class LevelSelectView {
 
         skin.add("style", textButtonStyle);
 
+        // Menu button
+        menuButton = new TextButton("Back to menu", textButtonStyle);
+        menuButton.setPosition(515, 400);
+        menuButton.setName("menuButton");
+        uiStage.addActor(menuButton);
+
         // Level 1 button
         level1Button = new TextButton("Level 1", textButtonStyle);
-        level1Button.setPosition(515, 350);
+        level1Button.setPosition(515, 300);
         level1Button.setName("playButton");
         uiStage.addActor(level1Button);
 
         // Level 2 button
         level2Button = new TextButton("Level 2", textButtonStyle);
-        level2Button.setPosition(515, 250);
+        level2Button.setPosition(515, 200);
         level2Button.setName("menuButton");
         uiStage.addActor(level2Button);
 
+    }
+
+    public TextButton getMenuButton() {
+        return this.menuButton;
     }
 
     public TextButton getLevel1Button() {

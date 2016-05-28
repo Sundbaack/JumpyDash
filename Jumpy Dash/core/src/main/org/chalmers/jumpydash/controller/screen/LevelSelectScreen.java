@@ -23,6 +23,13 @@ public class LevelSelectScreen extends JDScreen {
     }
 
     private void setListeners() {
+        levelSelectView.getMenuButton().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                // Switch to level 2
+                ScreenManager.getInstance().initMenu(stage, uiStage);
+            }
+        });
+
         levelSelectView.getLevel1Button().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 // Switch to level 1
