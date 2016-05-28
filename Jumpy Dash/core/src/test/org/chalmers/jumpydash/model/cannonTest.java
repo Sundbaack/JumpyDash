@@ -2,9 +2,13 @@ package org.chalmers.jumpydash.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
-public class cannonTest {
+import static org.junit.Assert.*;
+
+/**
+ * Created by Johannes on 2016-05-28.
+ */
+public class CannonTest {
     private Cannon cannon;
     private Cannon cannon2;
 
@@ -20,9 +24,15 @@ public class cannonTest {
     After that it tests if the cannon is allowed to fire after timer reset, which is true.
     Finally it tests so that two cannoncs does not have the same cooldown.
      */
-    @Test
-    public void testallowedToFire() {
 
+
+    @Test
+    public void checkCollision() throws Exception {
+
+    }
+
+    @Test
+    public void allowedToFire() throws Exception {
         assertEquals(cannon.allowedToFire(),true);
         assertEquals(cannon.allowedToFire(),false);
 
@@ -32,5 +42,10 @@ public class cannonTest {
         assertEquals(cannon2.allowedToFire(),true);
         assertEquals(cannon.allowedToFire(),false);
     }
-}
 
+    @Test
+    public void setPreviousFireTime() throws Exception {
+
+    }
+
+}

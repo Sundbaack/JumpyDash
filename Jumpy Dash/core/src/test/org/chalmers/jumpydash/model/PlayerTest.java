@@ -2,8 +2,12 @@ package org.chalmers.jumpydash.model;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.*;
+
+/**
+ * Created by Johannes on 2016-05-28.
+ */
 public class PlayerTest {
 
     private static Player player;
@@ -26,18 +30,33 @@ public class PlayerTest {
         player.move();
         Vector2f positionAfter = player.getPosition();
         assertNotEquals(positionAfter,positionBefore);*/
+    }
+
+    @Test
+    public void checkCollision() throws Exception {
 
     }
 
     @Test
-    public void allowedToFire() throws Exception {
+    public void getInvinciblePickUpTime() throws Exception {
+        assertEquals(player.getInvinciblePickUpTime(),0);
+        player.setInvincible();
+    }
 
+    @Test
+    public void isInvincible() throws Exception {
+        assertFalse(player.isInvincible());
+        player.setInvincible();
+        assertTrue(player.isInvincible());
+    }
+
+    @Test
+    public void allowedToFire() throws Exception {
         assertEquals(player.allowedToFire(),true);
         assertEquals(player.allowedToFire(),false);
 
         player.setPreviousFireTime(0);
         assertEquals(player.allowedToFire(),true);
-
     }
 
     @Test
@@ -62,21 +81,13 @@ public class PlayerTest {
 
     @Test
     public void isDead() throws Exception {
-
+        assertFalse(player.isDead());
+        player.setDamage(3);
+        assertTrue(player.isDead());
     }
 
     @Test
     public void playerSpeedUp() throws Exception {
-
-    }
-
-    @Test
-    public void setJumpState() throws Exception {
-
-    }
-
-    @Test
-    public void getJumpState() throws Exception {
 
     }
 
@@ -106,12 +117,18 @@ public class PlayerTest {
     }
 
     @Test
-    public void getSpeed() throws Exception {
+    public void setPreviousFireTime() throws Exception {
 
     }
 
     @Test
-    public void testEquals() {
+    public void setSound() throws Exception {
 
     }
+
+    @Test
+    public void dispose() throws Exception {
+
+    }
+
 }
