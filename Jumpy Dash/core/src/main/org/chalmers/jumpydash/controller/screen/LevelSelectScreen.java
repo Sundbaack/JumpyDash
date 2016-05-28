@@ -25,14 +25,14 @@ public class LevelSelectScreen extends JDScreen {
     private void setListeners() {
         levelSelectView.getLevel1Button().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                // Switch to map 1
+                // Switch to level 1
                 ScreenManager.getInstance().initGame(stage, uiStage, 1);
             }
         });
 
         levelSelectView.getLevel2Button().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                // Switch to map 2
+                // Switch to level 2
                 ScreenManager.getInstance().initGame(stage, uiStage, 2);
             }
         });

@@ -25,14 +25,7 @@ public class MenuScreen extends JDScreen {
     private void setListeners() {
         menuView.getPlayButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                // Switch to game
-                ScreenManager.getInstance().initGame(stage, uiStage, 1);
-            }
-        });
-
-        menuView.getLevelButton().addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                // Switch to level
+                // Switch to select level
                 ScreenManager.getInstance().initLevelSelect(stage, uiStage);
             }
         });

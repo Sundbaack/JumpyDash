@@ -21,7 +21,6 @@ public class MenuView {
     private TextButton playButton;
     private TextButton optionButton;
     private TextButton quitButton;
-    private TextButton levelButton;
 
     public MenuView(Stage uiStage) {
         this.uiStage = uiStage;
@@ -59,21 +58,15 @@ public class MenuView {
         playButton.setName("playButton");
         uiStage.addActor(playButton);
 
-        // Level button
-        levelButton = new TextButton("Select level", textButtonStyle);
-        levelButton.setPosition(515, 300);
-        levelButton.setName("levelButton");
-        uiStage.addActor(levelButton);
-
         // Option button
         optionButton = new TextButton("Options", textButtonStyle);
-        optionButton.setPosition(515, 200);
+        optionButton.setPosition(515, 300);
         optionButton.setName("optionButton");
         uiStage.addActor(optionButton);
 
         // Quit button
         quitButton = new TextButton("Quit", textButtonStyle);
-        quitButton.setPosition(515, 100);
+        quitButton.setPosition(515, 200);
         playButton.setName("Button");
         uiStage.addActor(quitButton);
 
@@ -90,8 +83,6 @@ public class MenuView {
     public TextButton getOptionButton() {
         return this.optionButton;
     }
-
-    public TextButton getLevelButton() { return this.levelButton; }
 
     public void update() {
         Gdx.gl20.glClearColor(0, 0, 0, 1);
