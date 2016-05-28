@@ -103,28 +103,32 @@ public class GameScreen extends JDScreen {
                     stage.addActor(cannonController);
                 }
                 if(level[y][x] == '|'){
-                    SensorController sensorController = new SensorController(box2D, x, y, mapHeight,"soldier");
+                    SensorController sensorController = new SensorController(box2D, x, y, mapHeight, "soldier");
                     stage.addActor(sensorController);
                 }
                 if(level[y][x] == 's'){
-                    SensorController sensorController = new SensorController(box2D, x, y, mapHeight,"player");
+                    SensorController sensorController = new SensorController(box2D, x, y, mapHeight, "player");
                     stage.addActor(sensorController);
                 }
                 if(level[y][x] == 'H'){
-                    HeartController heartController = new HeartController(box2D,x,y,mapHeight);
+                    HeartController heartController = new HeartController(box2D, x, y, mapHeight);
                     stage.addActor(heartController);
                 }
                 if(level[y][x] == 'K'){
-                    KeyController keyController = new KeyController(box2D,x,y,mapHeight);
+                    KeyController keyController = new KeyController(box2D, x, y, mapHeight);
                     stage.addActor(keyController);
                 }
                 if(level[y][x] == 'L'){
-                    LockedDoorController lockedDoorController = new LockedDoorController(box2D,x,y,mapHeight);
+                    LockedDoorController lockedDoorController = new LockedDoorController(box2D, x, y, mapHeight);
                     stage.addActor(lockedDoorController);
                 }
                 if(level[y][x] == 'I'){
-                    InvincibleController invincibleController = new InvincibleController(box2D,x,y,mapHeight);
+                    InvincibleController invincibleController = new InvincibleController(box2D, x, y, mapHeight);
                     stage.addActor(invincibleController);
+                }
+                if(level[y][x] == 'Z'){
+                    BossController bossController = new BossController(box2D, x, y, mapHeight);
+                    stage.addActor(bossController);
                 }
             }
         }
