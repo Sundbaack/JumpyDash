@@ -63,6 +63,7 @@ project(":desktop") {
 
 project(":core") {
     apply plugin: "java"
+    apply plugin: "jacoco"
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -87,6 +88,20 @@ project(":core") {
             compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-ios"
         }
     }
+
+    jacoco {
+        toolVersion = "0.7.4+"
+        reportsDir = file("$buildDir/customJacocoReportDir")
+    }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled false
+            csv.enabled false
+            html.destination "${buildDir}/jacocoHtml"
+        }
+    }
+
 
     tasks.eclipse.doLast {
         delete ".project"
