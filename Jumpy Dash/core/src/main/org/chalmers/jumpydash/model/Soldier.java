@@ -7,18 +7,14 @@ public class Soldier extends Enemy {
     public enum State {RIGHT, LEFT}
 
     private State currentState;
-    private boolean directionRight;
+
     private int count;
 
     public Soldier(int count) {
         super(1, 1);
         this.count = count;
         currentState = State.RIGHT;
-        directionRight = true;
-    }
 
-    public void setDirectionFlag() {
-        directionRight = !directionRight;
     }
 
     @Override
@@ -27,8 +23,8 @@ public class Soldier extends Enemy {
             if (jDModel.getClass() == Sensor.class) {
                 if (currentState == State.RIGHT) {
                     currentState = State.LEFT;
-                    setDirectionFlag();
-                } else if (currentState == State.LEFT && getDirection()) {
+
+                } else if (currentState == State.LEFT) {
                     currentState = State.RIGHT;
                 }
             }
@@ -38,14 +34,6 @@ public class Soldier extends Enemy {
                 System.out.println("bullet hit soldier");
             }
         }
-    }
-
-    public boolean getDirection() {
-        return directionRight;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     public void jump() {

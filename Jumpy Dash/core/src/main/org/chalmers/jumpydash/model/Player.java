@@ -47,7 +47,7 @@ public class Player extends JDModel {
                 if(invincible){
                     jDModel.userDataNull();
                 }else{
-                    this.setDamage(1);
+                    this.setHealth(-1);
                     this.applySoldierImpulse();
                 }
 
@@ -65,20 +65,20 @@ public class Player extends JDModel {
                 if(invincible){
                     jDModel.userDataNull();
                 }else {
-                    this.setDamage(this.getHealth());
+                    this.setHealth(-(this.getHealth()));
                 }
             } else if (jDModel.getClass() == Cannon.class) {
                 if(invincible){
                     jDModel.userDataNull();
                 }else{
-                    this.setDamage(1);
+                    this.setHealth(-1);
                 }
             } else if (jDModel.getClass() == SpeedUp.class) {
                 this.playerSpeedUp();
                 jDModel.userDataNull();
             } else if (jDModel.getClass() == EnemyProjectile.class) {
                 if(!invincible){
-                    this.setDamage(1);
+                    this.setHealth(-1);
                     this.applySoldierImpulse();
                 }
                 jDModel.userDataNull();
@@ -200,12 +200,16 @@ public class Player extends JDModel {
         return health;
     }
 
-    public void setDamage(int damage) {
-        health = health - damage;
+    public void setHealth(int healthChange) {
+        health += healthChange;
     }
 
-    private void setSpeed(float speedIncrease) {
-        playerSpeedX += speedIncrease;
+    private void setSpeed(float speedChange) {
+        playerSpeedX += speedChange;
+    }
+
+    public float getSpeed(){
+        return playerSpeedX;
     }
 
     public void setPreviousFireTime(long time) {

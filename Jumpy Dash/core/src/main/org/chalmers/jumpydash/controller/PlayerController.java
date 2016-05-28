@@ -50,7 +50,7 @@ public class PlayerController extends JDController {
 
         // Check if player falls below map
         if(player.getPosition().y < (-Box2D.TILE_SIZE/ Box2D.PIXELS_TO_METERS)){
-            player.setDamage(player.getHealth());
+            player.setHealth(player.getHealth());
         }
 
         // Enable the camera to follow the player
