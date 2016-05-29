@@ -43,7 +43,6 @@ public class PlayerController extends JDController {
             handleInput();
             player.move();
         }
-        System.out.println("State " + player.currentState);
         if (player.isInvincible() && (System.currentTimeMillis() - player.getInvinciblePickUpTime() >= 10000)) {
             player.setInvincible();
         }
