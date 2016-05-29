@@ -18,7 +18,7 @@ import javax.vecmath.Vector2f;
 public class PlayerController extends JDController {
 
     private IBox2D box2D;
-    private Player player;
+    private static Player player;
     private JDView playerView;
     private Sound sound;
     private static final int CAMERA_UPDATE_POINT = 500;
@@ -80,7 +80,7 @@ public class PlayerController extends JDController {
         }
     }
 
-    public Player getPlayer() {
+    public static Player getPlayer() {
         return player;
     }
 

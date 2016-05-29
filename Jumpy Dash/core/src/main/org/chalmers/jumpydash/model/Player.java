@@ -109,6 +109,13 @@ public class Player extends JDModel {
                 jDModel.userDataNull();
                 setInvincible();
                 setInvinciblePickUpTime();
+            } else if (jDModel.getClass() == BossProjectile.class) {
+                if(invincible){
+                    jDModel.userDataNull();
+                }else{
+                    this.setHealth(-2);
+                }
+
             }
         }
     }
@@ -180,7 +187,7 @@ public class Player extends JDModel {
         return MAX_SPEED_X;
     }
 
-    private float getImpulse() {
+    public float getImpulse() {
         return this.impulse;
     }
 
@@ -204,7 +211,7 @@ public class Player extends JDModel {
         health += healthChange;
     }
 
-    private void setSpeed(float speedChange) {
+    public void setSpeed(float speedChange) {
         playerSpeedX += speedChange;
     }
 

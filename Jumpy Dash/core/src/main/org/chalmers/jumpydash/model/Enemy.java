@@ -10,10 +10,6 @@ public abstract class Enemy extends JDModel {
         this.damage = damage;
     }
 
-    public void damageTaken(){
-        healthPoints--;
-    }
-
     public int getDamage(){
         return damage;
     }
@@ -26,7 +22,7 @@ public abstract class Enemy extends JDModel {
         return healthPoints;
     }
 
-    public void dealDamage(int damage){
-        healthPoints=healthPoints-damage;
+    public void takeDamage(int damage){
+        healthPoints-=damage;
     }
 }

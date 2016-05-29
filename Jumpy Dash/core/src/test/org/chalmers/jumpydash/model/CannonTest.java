@@ -17,7 +17,8 @@ public class CannonTest {
     First tests if the cannon is allowed to fire, which should be allowed. Then test if it is allowed
     to fire again, which should not be allowed. After that the timer for firing is reset to 0.
     After that it tests if the cannon is allowed to fire after timer reset, which is true.
-    Finally it tests so that two cannoncs does not have the same cooldown.
+    Finally it tests two values that are close to the cooldown limit one inside
+    the limit, which should return false on fire, and one outside, which should allow fire.
      */
 
     @Test
