@@ -16,7 +16,7 @@ public class EnemyTest {
     public void isDead() throws Exception {
         assertFalse(enemy.isDead());
         assertEquals(enemy.getHealthPoints(),1);
-        enemy.damageTaken();
+        enemy.takeDamage(1);
         assertTrue(enemy.isDead());
     }
 

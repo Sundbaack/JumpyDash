@@ -7,6 +7,11 @@ import javax.vecmath.Vector2f;
 
 public class MockJDBody implements IJDBody {
     private Vector2f position;
+    private Vector2f forceToCenter;
+    private Vector2f velocity;
+    private Vector2f impulse;
+    private Object userData;
+
 
     public void setPosition(Vector2f position){
         this.position=position;
@@ -19,7 +24,11 @@ public class MockJDBody implements IJDBody {
 
     @Override
     public void applyLinearImpulse(Vector2f impulse, Vector2f point, boolean wake) {
+        this.impulse=impulse;
+    }
 
+    public Vector2f getImpulse(){
+        return impulse;
     }
 
     @Override
@@ -44,17 +53,21 @@ public class MockJDBody implements IJDBody {
 
     @Override
     public void applyForceToCenter(Vector2f force, boolean wake) {
+        forceToCenter=force;
+    }
 
+    public Vector2f getForceToCenter() {
+        return forceToCenter;
     }
 
     @Override
     public void setLinearVelocity(Vector2f v) {
-
+        velocity = v;
     }
 
     @Override
     public Vector2f getLinearVelocity() {
-        return null;
+        return velocity;
     }
 
     public Vector2f getPosition(){
@@ -68,12 +81,12 @@ public class MockJDBody implements IJDBody {
 
     @Override
     public void setUserData(Object userData) {
-
+        this.userData=userData;
     }
 
     @Override
     public Object getUserData() {
-        return null;
+        return userData;
     }
 
 
