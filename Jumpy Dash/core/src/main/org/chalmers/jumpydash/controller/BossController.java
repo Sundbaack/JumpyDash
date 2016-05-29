@@ -59,8 +59,8 @@ public class BossController extends JDController {
 
     public void fireProjectile(){
         if(boss.allowedToFire()){
-            EnemyProjectileController enemyProjectileController = new EnemyProjectileController(box2D, boss.getPosition().x, boss.getPosition().y, new Vector2f(-2f, 0),1);
-            getStage().addActor(enemyProjectileController);
+            BossProjectileController bossProjectileController = new BossProjectileController(box2D, boss.getPosition().x, boss.getPosition().y, new Vector2f(-2f, 0));
+            getStage().addActor(bossProjectileController);
         }
     }
 
