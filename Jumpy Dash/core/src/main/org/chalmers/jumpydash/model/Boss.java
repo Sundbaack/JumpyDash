@@ -25,9 +25,11 @@ public class Boss extends Enemy {
     public void checkCollision(JDModel jDModel) {
         if (this.getClass() == Boss.class) {
             if (jDModel.getClass() == Bullet.class) {
-                this.userDataNull();
+                this.takeDamage(1);
                 jDModel.userDataNull();
-                System.out.println("bullet hit boss");
+                if(isDead()){
+                    this.userDataNull();
+                }
             }
         }
     }
