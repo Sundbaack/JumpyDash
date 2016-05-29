@@ -7,13 +7,13 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class SoldierView implements JDView {
 
-    private TextureAtlas textureAtlas;
+    private TextureAtlas soldierAtlas;
     private Animation animation;
     private float elapsedTime = 0f;
 
     public SoldierView() {
-        textureAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheets/soldierAnimation.atlas"));
-        animation = new Animation(1f / 20f, textureAtlas.getRegions());
+        soldierAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheets/soldierAnimation.atlas"));
+        animation = new Animation(1f / 20f, soldierAtlas.getRegions());
     }
 
     public void render(Batch batch,float x, float y){
@@ -22,6 +22,6 @@ public class SoldierView implements JDView {
     }
 
     public void dispose(){
-        textureAtlas.dispose();
+        soldierAtlas.dispose();
     }
 }

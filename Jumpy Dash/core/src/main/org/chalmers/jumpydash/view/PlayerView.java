@@ -11,7 +11,7 @@ public class PlayerView implements JDView {
 
     private Texture playerTileStandard;
     private Texture playerTileInvincible;
-    private TextureAtlas textureAtlas;
+    private TextureAtlas playerAtlas;
     private boolean invincible;
     private Animation animation;
     private float elapsedTime = 0f;
@@ -23,19 +23,18 @@ public class PlayerView implements JDView {
         playerTileInvincible = new Texture(Gdx.files.internal("images/playerInvincible.png"));
         playerTileStandard = new Texture(Gdx.files.internal("images/rawSprites/player00.png"));
 
-        textureAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheets/playerAnimation.atlas"));
-        animation = new Animation(1f / 40f, textureAtlas.getRegions());
+        playerAtlas = new TextureAtlas(Gdx.files.internal("images/spriteSheets/playerAnimation.atlas"));
+        animation = new Animation(1f / 40f, playerAtlas.getRegions());
     }
 
     public void render(Batch batch, float x, float y) {
         currentState = player.getState();
         invincible = player.isInvincible();
-        //Fix magic values 6 and 2
         // Animation
         switch (currentState) {
             case JUMPING:
                 if (elapsedTime >= animation.getAnimationDuration()) {
-                    drawAnimation(batch, x, y);
+                    drawTile(batch, x, y);
                     break;
                 } else {
                     elapsedTime += Gdx.graphics.getDeltaTime();
@@ -43,17 +42,17 @@ public class PlayerView implements JDView {
                     break;
                 }
             case FALLING:
-                drawAnimation(batch, x, y);
+                drawTile(batch, x, y);
                 elapsedTime = 0f;
                 break;
             default:
-                drawAnimation(batch, x, y);
+                drawTile(batch, x, y);
                 elapsedTime = 0f;
                 break;
         }
     }
 
-    public void drawAnimation(Batch batch, float x, float y) {
+    public void drawTile(Batch batch, float x, float y) {
         if(invincible){
             batch.draw(playerTileInvincible, x-6,y-6);
         }else{
@@ -62,7 +61,7 @@ public class PlayerView implements JDView {
     }
 
     public void dispose() {
-        textureAtlas.dispose();
+        playerAtlas.dispose();
         playerTileStandard.dispose();
         playerTileInvincible.dispose();
     }

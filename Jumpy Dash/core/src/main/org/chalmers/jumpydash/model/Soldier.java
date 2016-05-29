@@ -7,12 +7,13 @@ public class Soldier extends Enemy {
     public enum State {RIGHT, LEFT}
 
     private State currentState;
+    private static final float MAX_SPEED_X = 3.5f;
+    private float soldierSpeedX;
 
-    private int count;
 
-    public Soldier(int count) {
+    public Soldier() {
         super(1, 1);
-        this.count = count;
+        soldierSpeedX = 4;
         currentState = State.RIGHT;
 
     }
@@ -42,10 +43,21 @@ public class Soldier extends Enemy {
 
     public void move() {
         // Checks in what direction the soldier should move
+        Vector2f speed = getJDBody().getLinearVelocity();
+        float speedX = speed.x;
+
         if (currentState == State.RIGHT) {
-            getJDBody().applyForceToCenter(new Vector2f(2f, 0), true);
+            if (speedX < getMaxSpeedX()) {
+                getJDBody().applyForceToCenter(new Vector2f(soldierSpeedX, 0), true);
+            }
         } else {
-            getJDBody().applyForceToCenter(new Vector2f(-2f, 0), true);
+            if (speedX < getMaxSpeedX()) {
+                getJDBody().applyForceToCenter(new Vector2f(-soldierSpeedX, 0), true);
+            }
         }
+
+    }
+    private float getMaxSpeedX() {
+        return MAX_SPEED_X;
     }
 }

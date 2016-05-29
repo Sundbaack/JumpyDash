@@ -6,17 +6,17 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class MovingPlatformView implements JDView {
 
-    private Texture platformTile;
+    private Texture movingPlatformTile;
 
     public MovingPlatformView(){
-        platformTile = new Texture(Gdx.files.internal("images/movingPlatform.png"));
+        movingPlatformTile = new Texture(Gdx.files.internal("images/movingPlatform.png"));
     }
 
     public void render(Batch batch,float x, float y){
-        batch.draw(platformTile, x, y);
+        batch.draw(movingPlatformTile, x, y);
     }
 
     public void dispose(){
-        platformTile.dispose();
+        movingPlatformTile.dispose();
     }
 }

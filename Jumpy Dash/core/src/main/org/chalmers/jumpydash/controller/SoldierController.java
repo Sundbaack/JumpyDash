@@ -18,8 +18,8 @@ public class SoldierController extends JDController {
 
     private Timer time;
 
-    public SoldierController(IBox2D box2D, int x, int y, int mapHeight, int count) {
-        soldier = new Soldier(count);
+    public SoldierController(IBox2D box2D, int x, int y, int mapHeight) {
+        soldier = new Soldier();
         soldier.setJDBody(box2D.newBody(x, y, mapHeight, BodyType.DYNAMIC, false,false));
         soldier.getJDBody().setUserData(soldier);
         soldierView = new SoldierView();

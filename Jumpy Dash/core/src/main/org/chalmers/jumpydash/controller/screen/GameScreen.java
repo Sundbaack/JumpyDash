@@ -23,7 +23,6 @@ public class GameScreen extends JDScreen {
     private Stage uiStage;
     private IBox2D box2D;
     private PlayerController playerController;
-    private List<SoldierController> soldierControllerList = new ArrayList<SoldierController>();
     private GameView gameView;
     private static int level;
 
@@ -46,7 +45,7 @@ public class GameScreen extends JDScreen {
             System.out.println("File not found");
         }
 
-        addCollisionListener();
+        addContactListener();
     }
 
     private void loadMap(char[][] level) {
@@ -78,8 +77,7 @@ public class GameScreen extends JDScreen {
                     stage.addActor(coinController);
                 }
                 if (level[y][x] == 'S') {
-                    SoldierController soldierController = new SoldierController(box2D, x, y, mapHeight, soldierControllerList.size());
-                    soldierControllerList.add(soldierController);
+                    SoldierController soldierController = new SoldierController(box2D, x, y, mapHeight);
                     stage.addActor(soldierController);
                 }
                 if (level[y][x] == 'A') {
@@ -134,7 +132,7 @@ public class GameScreen extends JDScreen {
         }
     }
 
-    private void addCollisionListener(){
+    private void addContactListener(){
         box2D.getWorld().setContactListener(new CollisionListener());
     }
 
