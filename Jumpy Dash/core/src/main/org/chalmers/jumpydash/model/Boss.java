@@ -5,7 +5,7 @@ public class Boss extends Enemy {
     private long previousFireTime = 0;
 
     public Boss() {
-        super(10,2);
+        super(4,2);
     }
 
     public boolean allowedToFire(){
@@ -19,6 +19,17 @@ public class Boss extends Enemy {
 
     public void setPreviousFireTime(long time){
         previousFireTime = time;
+    }
+
+    @Override
+    public void checkCollision(JDModel jDModel) {
+        if (this.getClass() == Boss.class) {
+            if (jDModel.getClass() == Bullet.class) {
+                this.userDataNull();
+                jDModel.userDataNull();
+                System.out.println("bullet hit boss");
+            }
+        }
     }
 
 }
