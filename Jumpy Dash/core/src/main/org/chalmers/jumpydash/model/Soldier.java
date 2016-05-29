@@ -21,17 +21,14 @@ public class Soldier extends Enemy {
     public void checkCollision(JDModel jDModel) {
         if (this.getClass() == Soldier.class) {
             if (jDModel.getClass() == Sensor.class) {
-                if (currentState == State.RIGHT) {
-                    currentState = State.LEFT;
-
-                } else if (currentState == State.LEFT) {
-                    currentState = State.RIGHT;
-                }
+                setCurrentState();
             }
             if (jDModel.getClass() == Bullet.class) {
-                this.userDataNull();
+                this.takeDamage(1);
                 jDModel.userDataNull();
-                System.out.println("bullet hit soldier");
+                if(isDead()){
+                    this.userDataNull();
+                }
             }
         }
     }
@@ -46,6 +43,15 @@ public class Soldier extends Enemy {
             getJDBody().applyForceToCenter(new Vector2f(2f, 0), true);
         } else {
             getJDBody().applyForceToCenter(new Vector2f(-2f, 0), true);
+        }
+    }
+
+    public void setCurrentState(){
+        if (currentState == State.RIGHT) {
+            currentState = State.LEFT;
+
+        } else if (currentState == State.LEFT) {
+            currentState = State.RIGHT;
         }
     }
 }

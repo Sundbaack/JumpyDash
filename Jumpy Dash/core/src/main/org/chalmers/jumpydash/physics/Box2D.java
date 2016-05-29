@@ -52,7 +52,7 @@ public class Box2D implements IBox2D {
         return camera;
     }
 
-    public JDBody newBody(float x, float y, int mapHeight, BodyType BodyType, boolean ghost,boolean sensor) {
+    public IJDBody newBody(float x, float y, int mapHeight, BodyType BodyType, boolean ghost,boolean sensor) {
         BodyDef bodyDef = new BodyDef();
 
         switch(BodyType){

@@ -17,4 +17,8 @@ public class MovingPlatform extends JDModel {
             getJDBody().setLinearVelocity(new Vector2f(0, 0));
         }
     }
+
+    public static void setMovePlatforms(){
+        movePlatforms = !movePlatforms;
+    }
 }

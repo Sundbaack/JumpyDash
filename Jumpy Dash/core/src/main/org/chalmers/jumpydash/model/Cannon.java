@@ -14,7 +14,7 @@ public class Cannon extends Enemy {
             jDModelB.getJDBody().setUserData(null);
             this.userDataNull();
             this.getJDBody().setUserData(null);
-            this.damageTaken();
+            this.takeDamage(1);
         }
     }
 

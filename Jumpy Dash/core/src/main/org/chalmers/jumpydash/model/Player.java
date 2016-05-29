@@ -180,7 +180,7 @@ public class Player extends JDModel {
         return MAX_SPEED_X;
     }
 
-    private float getImpulse() {
+    public float getImpulse() {
         return this.impulse;
     }
 
@@ -204,7 +204,7 @@ public class Player extends JDModel {
         health += healthChange;
     }
 
-    private void setSpeed(float speedChange) {
+    public void setSpeed(float speedChange) {
         playerSpeedX += speedChange;
     }
 
