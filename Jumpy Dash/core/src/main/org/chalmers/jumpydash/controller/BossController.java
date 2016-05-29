@@ -8,6 +8,7 @@ import org.chalmers.jumpydash.physics.IBox2D;
 import org.chalmers.jumpydash.view.BossView;
 import org.chalmers.jumpydash.view.JDView;
 
+import javax.swing.*;
 import javax.vecmath.Vector2f;
 
 import static org.chalmers.jumpydash.physics.Box2D.PIXELS_TO_METERS;
@@ -20,6 +21,8 @@ public class BossController extends JDController {
     private IBox2D box2D;
     private static final float BOSS_MAX_LIMIT = 635.33307f;
     private static final float BOSS_MIN_LIMIT = 48.666862f;
+    private float bossSpeedY = 2f;
+    private float bossSpeedX = 0;
 
     public BossController(IBox2D box2D, int x, int y, int mapHeight) {
         bossView = new BossView();
@@ -35,19 +38,25 @@ public class BossController extends JDController {
 
         if (!boss.getJDBody().isAwake()) {
             boss.getJDBody().setLinearVelocity(new Vector2f(0, 2f));
+        } else {
+            boss.getJDBody().setLinearVelocity(new Vector2f(bossSpeedX, bossSpeedY));
         }
 
         if (boss.getJDBody().isAwake()) {
             fireProjectile();
         }
 
+        if (PlayerController.getPlayer().getPosition().x * Box2D.PIXELS_TO_METERS > 7570) {
+            bossSpeedX = 4f;
+        }
+
         if (((boss.getPosition().y * Box2D.PIXELS_TO_METERS) == BOSS_MAX_LIMIT) && isMovingUp) {
-            boss.getJDBody().setLinearVelocity(new Vector2f(0, -2f));
+            bossSpeedY = (-2);
             isMovingUp = !isMovingUp;
         }
 
         if (((boss.getPosition().y * Box2D.PIXELS_TO_METERS) == BOSS_MIN_LIMIT) && !isMovingUp) {
-            boss.getJDBody().setLinearVelocity(new Vector2f(0, 2f));
+            bossSpeedY = (2f);
             isMovingUp = !isMovingUp;
         }
 

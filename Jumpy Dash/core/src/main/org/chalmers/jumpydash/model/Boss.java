@@ -5,7 +5,7 @@ public class Boss extends Enemy {
     private long previousFireTime = 0;
 
     public Boss() {
-        super(4,2);
+        super(3,2);
     }
 
     public boolean allowedToFire(){

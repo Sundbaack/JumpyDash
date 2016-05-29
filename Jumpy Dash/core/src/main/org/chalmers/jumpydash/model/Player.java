@@ -109,6 +109,13 @@ public class Player extends JDModel {
                 jDModel.userDataNull();
                 setInvincible();
                 setInvinciblePickUpTime();
+            } else if (jDModel.getClass() == BossProjectile.class) {
+                if(invincible){
+                    jDModel.userDataNull();
+                }else{
+                    this.setHealth(-2);
+                }
+
             }
         }
     }
