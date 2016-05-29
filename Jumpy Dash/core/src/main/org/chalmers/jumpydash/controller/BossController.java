@@ -46,8 +46,8 @@ public class BossController extends JDController {
             fireProjectile();
         }
 
-        if (PlayerController.getPlayer().getPosition().x * Box2D.PIXELS_TO_METERS > 7570) {
-            bossSpeedX = 4f;
+        if (PlayerController.getPlayer().getPosition().x * Box2D.PIXELS_TO_METERS > 7470) {
+            bossSpeedX = 3.8f;
         }
 
         if (((boss.getPosition().y * Box2D.PIXELS_TO_METERS) == BOSS_MAX_LIMIT) && isMovingUp) {
