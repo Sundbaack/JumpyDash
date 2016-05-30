@@ -41,7 +41,7 @@ public class PlayerController extends JDController {
     public void act(float delta) {
         if (player.getJDBody().isAwake()) {
             handleInput();
-            player.move();
+            //player.move();
         }
         if (player.isInvincible() && (System.currentTimeMillis() - player.getInvinciblePickUpTime() >= 10000)) {
             player.setInvincible();
@@ -70,6 +70,10 @@ public class PlayerController extends JDController {
                 || player.getState() == Player.State.STANDING)) {
             player.jump();
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.getJDBody().isAwake()) {
+            player.move();
+        }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.F) && player.allowedToFire()) {
             BulletController bulletController = new BulletController(box2D, player.getPosition().x,
                     player.getPosition().y,new Vector2f(12f + player.getJDBody().getLinearVelocity().x, 0));

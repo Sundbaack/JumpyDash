@@ -17,17 +17,6 @@ public class PauseScreen extends JDScreen {
         this.stage = stage;
         this.uiStage = uiStage;
         this.pauseView = new PauseView(uiStage);
-
-        setListeners();
-    }
-
-    private void setListeners() {
-        pauseView.getMenuButton().addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                // Switch to menu
-                ScreenManager.getInstance().initMenu(stage, uiStage);
-            }
-        });
     }
 
     private void handleInput() {

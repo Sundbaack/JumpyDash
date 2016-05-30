@@ -83,7 +83,7 @@ public class Box2D implements IBox2D {
                 polygon.setAsBox((TILE_SIZE / 2) / PIXELS_TO_METERS, (TILE_SIZE / 2) / PIXELS_TO_METERS, vCenter, 0);
                 FixtureDef fixtureDef = new FixtureDef();
                 fixtureDef.shape = polygon;
-                fixtureDef.friction = 0;
+                fixtureDef.friction = 0.1f;
 
                 // Attach fixture to the body
                 jdBody.body.createFixture(fixtureDef);

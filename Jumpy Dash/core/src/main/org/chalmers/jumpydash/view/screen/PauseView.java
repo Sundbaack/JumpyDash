@@ -18,7 +18,6 @@ public class PauseView {
     private Skin skin;
     private Pixmap pixmap;
     private BitmapFont font;
-    private TextButton menuButton;
 
     public PauseView(Stage uiStage) {
         this.uiStage = uiStage;
@@ -49,15 +48,7 @@ public class PauseView {
         textButtonStyle.font = skin.getFont("font");
 
         skin.add("style", textButtonStyle);
-
-        // Menu button
-        menuButton = new TextButton("Back to menu", textButtonStyle);
-        menuButton.setPosition(515, 50);
-        menuButton.setName("menuButton");
-        uiStage.addActor(menuButton);
     }
-
-    public TextButton getMenuButton() { return this.menuButton; }
 
     public void update() {
         Gdx.gl20.glClearColor(0, 0, 0, 1);
