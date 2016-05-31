@@ -16,11 +16,13 @@ public class EnemyProjectileController extends JDController {
     private JDView enemyProjectileView;
     private EnemyProjectile enemyProjectile;
     private IBox2D box2D;
+    private Vector2f bulletDirection;
 
     public EnemyProjectileController(IBox2D box2D, float x, float y, Vector2f bulletDirection, int damage) {
         this.box2D = box2D;
         enemyProjectileView = new EnemyProjectileView();
         enemyProjectile = new EnemyProjectile(damage);
+        this.bulletDirection = bulletDirection;
         enemyProjectile.setJDBody(box2D.newBullet(x-(0.5f),y));
         enemyProjectile.getJDBody().setLinearVelocity(bulletDirection);
         enemyProjectile.getJDBody().setUserData(enemyProjectile);
@@ -39,6 +41,9 @@ public class EnemyProjectileController extends JDController {
 
         if (!enemyProjectile.getJDBody().isActive()) {
             this.remove();
+        }
+        if(enemyProjectile.getJDBody().isAwake()) {
+            enemyProjectile.getJDBody().setLinearVelocity(bulletDirection);
         }
     }
 

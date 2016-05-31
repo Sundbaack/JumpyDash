@@ -14,11 +14,13 @@ public class BulletController extends JDController {
     private JDView bulletView;
     private Bullet bullet;
     private IBox2D box2D;
+    private Vector2f bulletDirection;
 
     public BulletController(IBox2D box2D, float x, float y, Vector2f bulletDirection) {
         this.box2D = box2D;
         bulletView = new BulletView();
         bullet = new Bullet();
+        this.bulletDirection = bulletDirection;
         bullet.setJDBody(box2D.newBullet(x,y));
         bullet.getJDBody().setLinearVelocity(bulletDirection);
         bullet.getJDBody().setUserData(bullet);
@@ -37,6 +39,10 @@ public class BulletController extends JDController {
 
         if (!bullet.getJDBody().isActive()) {
             this.remove();
+        }
+
+        if(bullet.getJDBody().isAwake()) {
+            bullet.getJDBody().setLinearVelocity(bulletDirection);
         }
     }
 
